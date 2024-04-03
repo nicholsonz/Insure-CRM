@@ -1,7 +1,6 @@
 <?php 
     include('../functions.php');
-    //Get the listid from URL
-    
+
     $list_id_url = $_GET['list_id'];
 ?>
 <?=template_header('Task List')?>

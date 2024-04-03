@@ -1,5 +1,6 @@
 <?php 
     include('functions.php');
+
 ?>
 
 <?=template_header('Task Mngr')?>

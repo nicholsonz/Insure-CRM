@@ -2,13 +2,7 @@
 include 'functions.php';
 $pdo = pdo_connect_mysql();
 $msg = '';
-// We need to use sessions, so you should always start sessions using the below code.
-session_start();
-// If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.php');
-	exit;
-}
+
 // Check that the contact ID exists
 if (isset($_GET['name'])) {
     // Select the record that is going to be deleted

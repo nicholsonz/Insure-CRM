@@ -1,5 +1,4 @@
 <?php 
-
 include('../functions.php');
     
     //Check task_id in URL

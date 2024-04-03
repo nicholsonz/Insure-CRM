@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once "config.php";
+require_once "functions.php";
 
 // Try and connect using the info above.
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);

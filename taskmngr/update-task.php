@@ -1,8 +1,6 @@
 <?php 
     include('../functions.php');
     
-    //Check the Task ID in URL
-    
     if(isset($_GET['task_id']))
     {
         //Get the Values from DAtabase

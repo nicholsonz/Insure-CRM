@@ -1,9 +1,20 @@
 <?php
+
+// We need to use sessions, so you should always start sessions using the below code.
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+  header("location: index.php");
+  exit;
+}
 function pdo_connect_mysql() {
     $DATABASE_HOST = 'localhost';
-    $DATABASE_USER = '';
-    $DATABASE_PASS = '';
-    $DATABASE_NAME = '';
+    $DATABASE_USER = 'clients';
+    $DATABASE_PASS = 'clients!@#456';
+    $DATABASE_NAME = 'clientdb';
     try {
     	return new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASS);
     } catch (PDOException $exception) {

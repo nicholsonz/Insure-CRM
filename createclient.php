@@ -1,14 +1,8 @@
 <?php
-include 'functions.php';
+include './functions.php';
 $pdo = pdo_connect_mysql();
 $msg = '';
-// We need to use sessions, so you should always start sessions using the below code.
-session_start();
-// If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.php');
-	exit;
-}
+
 // Check that POST data is not empty
 if (!empty($_POST)) {
     // Post data not empty insert a new record
