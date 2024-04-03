@@ -6,9 +6,9 @@
  */
 
 $host       = "localhost";
-$username   = "clients";
-$password   = "clients!@#456";
-$dbname     = "clients";
+$username   = "";
+$password   = "";
+$dbname     = "";
 $dsn        = "mysql:host=$host;dbname=$dbname";
 $options    = array(
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION

@@ -1,9 +1,9 @@
 <?php
 // Change this to your connection info.
 $DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'admin';
-$DATABASE_PASS = 'nich4893';
-$DATABASE_NAME = 'clients';
+$DATABASE_USER = '';
+$DATABASE_PASS = '';
+$DATABASE_NAME = '';
 // Try and connect using the info above.
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if (mysqli_connect_errno()) {
