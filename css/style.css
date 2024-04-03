@@ -1,0 +1,537 @@
+* {
+  	box-sizing: border-box;
+  	font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
+  	font-size: 16px;
+  	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+}
+body {
+  	background-color: rgb(39, 37, 37);
+  	margin: 0;
+}
+
+textarea {
+	width: 550px;
+	height: 150px
+}
+.textbox {
+	height: 150px;
+  }
+.contentview table {
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+tr {
+	text-align: left;
+	border: 1px solid black;
+}
+.chart-style {
+	width: 350px;
+	height: 250px;
+}
+.contentview td {
+	text-align: left;
+	padding: 20px;
+	width: 250px;
+	word-wrap: break-word;
+}
+.signup {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	padding: 4px;
+	margin: 2px;
+	text-align: center;
+}
+.navtop {
+  	background-color: #3f69a8;
+  	position: sticky;
+  	top: 0;
+  	height: 60px;
+  	width: 100%;
+  	border: 0;
+}
+.navtop div {
+  	display: flex;
+  	margin: 0 auto;
+  	width: 1300px;
+  	height: 100%;
+}
+.navtop div h1, .navtop div a {
+  	display: inline-flex;
+  	align-items: center;
+}
+.navtop div h1 {
+  	flex: 1;
+  	font-size: 24px;
+  	padding: 0;
+  	margin: 0;
+  	color: #ecf0f6;
+  	font-weight: normal;
+}
+.navtop div a {
+  	padding: 0 20px;
+  	text-decoration: none;
+  	color: #c5d2e5;
+  	font-weight: bold;
+}
+.navtop div a i {
+  	padding: 2px 8px 0 0;
+}
+.navtop div a:hover {
+  	color: #ecf0f6;
+}
+
+body.loggedin {
+	background-color: #f3f4f7;
+}
+.contentview {
+	width: 1000px;
+	margin: 10px auto;
+}
+.contentview > div p {
+	padding: 1px;
+	margin: 1px 1px 0 0;
+}
+.contentview > p, .contentview > div {
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+	margin: 15px 0;
+	padding: 5px;
+	background-color: #fff;
+}
+.content {
+	width: 1000px;
+	margin: 0 auto;
+}
+.content h1 {
+	margin: 0;
+	padding: 25px 0;
+	font-size: 22px;
+	border-bottom: 1px solid #e0e0e3;
+	color: #4a536e;
+}
+.contentview h1 {
+	margin: 0;
+	padding: 25px 0;
+	font-size: 22px;
+	border-bottom: 1px solid #e0e0e3;
+	color: #4a536e;
+}
+.content > p, .content > div {
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+	margin: 25px 0;
+	padding: 25px;
+	background-color: #131212;
+	color: whitesmoke;
+}
+.content > p table td, .content > div table td {
+	padding: 5px;
+	color: whitesmoke;
+}
+.content > p table td:first-child, .content > div table td:first-child {
+	font-weight: bold;
+	color: #4a536e;
+	padding-right: 15px;
+}
+.content > div p {
+	padding: 5px;
+	margin: 0 0 10px 0;
+}
+
+.content h2 {
+  	margin: 0;
+  	padding: 25px 0;
+  	font-size: 22px;
+  	color: #666666;
+}
+.read .create-contact {
+  	display: inline-block;
+  	text-decoration: none;
+  	background-color: #38b673;
+  	font-weight: bold;
+  	font-size: 14px;
+  	color: #FFFFFF;
+  	padding: 10px 15px;
+  	margin: 15px 0;
+}
+.read .create-contact:hover {
+  	background-color: #32a367;
+}
+.center {
+	text-align: center;
+}
+.pagination a {
+	color: rgb(243, 248, 250);
+	float: center;
+	padding: 1px 6px;
+	text-decoration: none;
+	transition: background-color .3s;
+}
+.pagination a.active {
+	background-color: #4CAF50;
+	color: #2f3947;
+}
+.pagination a:hover:not(.active) {
+  	background-color: #2f3947;
+}
+.read table {
+  	width: 100%;
+  	padding-top: 30px;
+  	border-collapse: collapse;
+}
+.read table thead {
+  	background-color: #203c53;
+  	border-bottom: 1px solid #d3dae0;
+	  color: white;
+}
+.read table thead td {
+  	padding: 10px;
+  	font-weight: bold;
+  	color: #34d6d6;
+  	font-size: 14px;
+}
+.read table tbody tr {
+  	border-bottom: 1px solid #d3dae0;
+}
+.read table tbody tr:nth-child(even) {
+  	background-color: #202020;
+}
+.read table tbody tr:hover {
+  	background-color: #164d72;
+}
+.read table tbody tr:hover td {
+  	color: #8dc2e6;
+}
+.read table tbody tr:hover td:nth-child(1) {
+  	color: #19bee7;
+}
+.read table tbody tr td {
+  	padding: 10px;
+	color: whitesmoke;
+}
+.read table tbody tr td:nth-child(1) {
+  	color: #48b1ee;
+}
+.read table tbody tr td.actions {
+  	padding: 8px;
+  	text-align: right;
+}
+.read table tbody tr td.actions .edit, .read table tbody tr td.actions .trash, .read table tbody tr td.actions .view, .read table tbody tr td.actions .convert {
+  	display: inline-flex;
+  	text-align: right;
+  	text-decoration: none;
+  	color: #FFFFFF;
+  	padding: 10px 12px;
+}
+.read table tbody tr td.actions .trash {
+  	background-color: #b73737;
+}
+.read table tbody tr td.actions .trash:hover {
+  	background-color: #a33131;
+}
+.read table tbody tr td.actions .edit {
+  	background-color: #ff9800;
+}
+.read table tbody tr td.actions .edit:hover {
+  	background-color: coral;
+}
+.read table tbody tr td.actions .view {
+	background-color: green;
+}
+.read table tbody tr td.actions .view:hover {
+	background-color: darkgreen;
+}
+.read table tbody tr td.actions .convert {
+	background-color: green;
+}
+.read table tbody tr td.actions .convert:hover {
+	background-color: darkgreen;
+}
+.update form {
+  	padding: 15px 0;
+  	display: flex;
+  	flex-flow: column wrap;
+	flex: 200px;
+}
+.update form label {
+  	display: inline-flex;
+  	width: 100px;
+  	padding: 5px 0;
+  	margin-right: auto;
+  	color: white;
+}
+.update form input {
+  	padding: 10px;
+  	width: 300px;
+  	margin-right: 25px;
+  	margin-bottom: 15px;
+  	border: 1px solid #cccccc;
+	box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+.update form select {
+	padding: 10px;
+	width: 300px;
+	margin-right: 25px;
+	margin-bottom: 15px;
+	border: 1px solid #cccccc;
+}
+.update form input[type="submit"] {
+  	display: block;
+  	background-color: #38b673;
+  	border: 0;
+  	font-weight: bold;
+  	font-size: 14px;
+  	color: #FFFFFF;
+  	cursor: pointer;
+  	width: 200px;
+	margin-top: 15px;
+}
+.update form input[type="submit"]:hover {
+  	background-color: #32a367;
+}
+.delete .yesno {
+  	display: flex;
+}
+.delete .yesno a {
+  	display: inline-block;
+  	text-decoration: none;
+  	background-color: #38b673;
+  	font-weight: bold;
+  	color: #FFFFFF;
+  	padding: 10px 15px;
+  	margin: 15px 10px 15px 0;
+}
+.delete .yesno a:hover {
+  	background-color: #32a367;
+}
+.update .yesno {
+  	display: flex;
+}
+.update .yesno a {
+  	display: inline-block;
+  	text-decoration: none;
+  	background-color: #38b673;
+  	font-weight: bold;
+  	color: #FFFFFF;
+  	padding: 10px 15px;
+  	margin: 15px 10px 15px 0;
+}
+.update .yesno a:hover {
+  	background-color: #32a367;
+}
+.back {
+	display: flex;
+}
+.back a {
+	display: inline-block;
+	text-decoration: none;
+	background-color: #38b673;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding: 10px 15px;
+	margin: 15px 10px 15px 0;
+}
+.back a:hover {
+	background-color: #32a367;
+}
+.print {
+	transition-duration: 0.4s;
+  }
+  
+  .print:hover {
+	background-color: #4CAF50; /* Green */
+	color: white;
+  }
+/* login page styling */
+
+*{
+  	box-sizing: border-box;
+  	font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
+  	font-size: 16px;
+  	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+}
+.logincolor {
+	background-color: #2f3947;
+}
+.login {
+  	width: 400px;
+  	background-color: #ffffff;
+  	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+  	margin: 100px auto;
+}
+.login h1 {
+  	text-align: center;
+  	color: #5b6574;
+  	font-size: 24px;
+  	padding: 20px 0 20px 0;
+  	border-bottom: 1px solid #dee0e4;
+}
+.login form {
+  	display: flex;
+  	flex-wrap: wrap;
+  	justify-content: center;
+  	padding-top: 20px;
+}
+.login form label {
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	width: 50px;
+  	height: 50px;
+  	background-color: #3274d6;
+  	color: #ffffff;
+}
+.login form input[type="password"], .login form input[type="text"] {
+  	width: 310px;
+  	height: 50px;
+  	border: 1px solid #dee0e4;
+  	margin-bottom: 20px;
+  	padding: 0 15px;
+	box-shadow:0 0 5px 4px rgba(0,0,0,0.06);
+}
+.login form input[type="submit"] {
+  	width: 100%;
+  	padding: 15px;
+ 	margin-top: 20px;
+  	background-color: #3274d6;
+  	border: 0;
+  	cursor: pointer;
+  	font-weight: bold;
+  	color: #ffffff;
+  	transition: background-color 0.2s;
+}
+.login form input[type="submit"]:hover {
+	background-color: #2868c7;
+  	transition: background-color 0.2s;
+}
+
+.navtop {
+	background-color: #2f3947;
+	height: 60px;
+	width: 100%;
+	border: 0;
+}
+.navtop div {
+	display: flex;
+	margin: 0 auto;
+	width: 1300px;
+	height: 100%;
+}
+.navtop div h1, .navtop div a {
+	display: inline-flex;
+	align-items: center;
+}
+.navtop div h1 {
+	flex: 1;
+	font-size: 24px;
+	padding: 0;
+	margin: 0;
+	color: #eaebed;
+	font-weight: normal;
+}
+.navtop div a {
+	padding: 0 20px;
+	text-decoration: none;
+	color: #c1c4c8;
+	font-weight: bold;
+}
+.navtop div a i {
+	padding: 2px 8px 0 0;
+}
+.navtop div a:hover {
+	color: #eaebed;
+}
+body.loggedin {
+	background-color: #f3f4f7;
+}
+.content {
+	width: 1500px;
+	margin: 0 auto;
+}
+.content h2 {
+	margin: 0;
+	padding: 25px 0;
+	font-size: 22px;
+	color: #4a536e;
+}
+.content > p, .content > div {
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+	margin: 25px 0;
+	padding: 25px;
+	background-color: #201f1f;
+}
+.content > p table td, .content > div table td {
+	padding: 5px;
+}
+.content > p table td:first-child, .content > div table td:first-child {
+	font-weight: bold;
+	color: #4a536e;
+	padding-right: 15px;
+}
+.content > div p {
+	padding: 5px;
+	margin: 0 0 10px 0;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.regcolor {
+	background-color: #435165;
+	margin: 0;
+}
+.register {
+	width: 400px;
+	background-color: #ffffff;
+	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+	margin: 100px auto;
+}
+.register h1 {
+	text-align: center;
+	color: #5b6574;
+	font-size: 24px;
+	padding: 20px 0 20px 0;
+	border-bottom: 1px solid #dee0e4;
+}
+.register form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding-top: 20px;
+}
+.register form label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+    height: 50px;
+	background-color: #3274d6;
+	color: #ffffff;
+}
+.register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
+	width: 310px;
+	height: 50px;
+	border: 1px solid #dee0e4;
+	margin-bottom: 20px;
+	padding: 0 15px;
+	box-shadow:0 0 5px 4px rgba(0,0,0,0.06);
+}
+.register form input[type="submit"] {
+	width: 100%;
+	padding: 15px;
+	margin-top: 20px;
+	background-color: #3274d6;
+    border: 0;
+	cursor: pointer;
+	font-weight: bold;
+	color: #ffffff;
+	transition: background-color 0.2s;
+}
+.register form input[type="submit"]:hover {
+  background-color: #2868c7;
+	transition: background-color 0.2s;
+}
