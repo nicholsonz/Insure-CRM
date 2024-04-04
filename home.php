@@ -25,7 +25,7 @@
 	$db_select = mysqli_select_db($con, DB_NAME) or die();
 			
 	//Create SQL Query to Get DAta from Databse
-	$sql = "SELECT * FROM tbl_tasks";
+	$sql = "SELECT * FROM tbl_tasks ORDER BY deadline";
 		
 	//Execute Query
 	$res = mysqli_query($con, $sql);
