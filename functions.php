@@ -28,7 +28,7 @@ echo <<<EOT
 	<body>
     <nav class="navtop">
     	<div>
-    		<h1>Ipe Financial & Insurance Services LLC</h1>
+    		<h1>Company Name</h1>
 			<a href="home.php"><i class="fas fa-home"></i>Home</a>
 			<a href="taskmngr.php"><i class="fas fa-hourglass"></i>Tasks</a>
 			<a href="clients.php"><i class="fas fa-address-book"></i>Clients</a>
