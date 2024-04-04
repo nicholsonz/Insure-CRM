@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
         $address = (isset($_POST['address']) && !empty($_POST['address']) ? $_POST['address'] : '');
         $city = (isset($_POST['city']) && !empty($_POST['city']) ? $_POST['city'] : '');
         $state = (isset($_POST['state']) && !empty($_POST['state']) ? $_POST['state'] : '');
-        $zip = (isset($_POST['zip']) && !empty($_POST['zip']) ? $_POST[''] : 'zip');
+        $zip = (isset($_POST['zip']) && !empty($_POST['zip']) ? $_POST['zip'] : '');
         $county = (isset($_POST['county']) && !empty($_POST['county']) ? $_POST['county'] : '');
         $birthdate = (isset($_POST['birthdate']) && !empty($_POST['birthdate']) ? $_POST['birthdate'] : NULL);
         $email = (isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : '');
