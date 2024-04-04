@@ -1,5 +1,5 @@
 <?php 
-    include('./functions.php');
+    require_once('./functions.php');
     //echo "Delete List Page";
     
     //Check whether the list_id is assigned or not

@@ -1,7 +1,7 @@
 <?php 
 
-include('./functions.php');
-    
+require_once('./functions.php');
+
     
     //Get the Current Values of Selected List
     if(isset($_GET['list_id']))

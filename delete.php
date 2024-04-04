@@ -1,5 +1,6 @@
 <?php
-include './functions.php';
+    require_once('./functions.php');
+
 $pdo = pdo_connect_mysql();
 $msg = '';
 

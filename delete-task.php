@@ -1,6 +1,6 @@
 <?php 
 
-include('./functions.php');
+require_once('./functions.php');
     
     //Check task_id in URL
     if(isset($_GET['task_id']))

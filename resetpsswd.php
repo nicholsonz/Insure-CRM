@@ -1,7 +1,7 @@
 <?php
 
 // Include config file
-require_once "functions.php";
+require_once('./functions.php');
  
 // Define variables and initialize with empty values
 $new_password = $confirm_password = "";

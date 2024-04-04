@@ -1,5 +1,6 @@
 <?php
-include 'functions.php';
+    require_once('./functions.php');
+
 $pdo = pdo_connect_mysql();
 $msg = '';
 // Check if the contact phone exists, for example update.php?name=1 will get the contact with the phone number
