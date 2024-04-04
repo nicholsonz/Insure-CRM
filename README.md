@@ -24,6 +24,6 @@ Then
     FLUSH PRIVILEGES;
     EXIT;
 
-Next, import the financial.sql file
+Next, import the clientdb.sql file
 
-    sudo mysql financial < clientdb.sql
+    sudo mysql clientdb < clientdb.sql
