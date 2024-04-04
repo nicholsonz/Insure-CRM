@@ -2,8 +2,8 @@
 // PDO db creds
 function pdo_connect_mysql() {
     $DATABASE_HOST = 'localhost';
-    $DATABASE_USER = '';
-    $DATABASE_PASS = '';
+    $DATABASE_USER = 'clients';
+    $DATABASE_PASS = 'clients!@#456';
     $DATABASE_NAME = 'clientdb';
     try {
     	return new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASS);
@@ -15,8 +15,8 @@ function pdo_connect_mysql() {
 
 // mysqli db creds
 define('LOCALHOST', 'localhost');
-define('DB_USERNAME', '');
-define('DB_PASSWORD', '');
+define('DB_USERNAME', 'clients');
+define('DB_PASSWORD', 'clients!@#456');
 define('DB_NAME', 'clientdb');
 
 $con = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
