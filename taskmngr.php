@@ -18,18 +18,15 @@
         <a href="./taskmngr.php">Home</a>
         
         <?php 
-            
-            //Comment Displaying Lists From Database in ourMenu
-            $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-            
+                        
             //SELECT DATABASE
-            $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
+            $db_select2 = mysqli_select_db($con, DB_NAME) or die();
             
             //Query to Get the Lists from database
             $sql2 = "SELECT * FROM tbl_lists";
             
             //Execute Query
-            $res2 = mysqli_query($conn2, $sql2);
+            $res2 = mysqli_query($con, $sql2);
             
             //CHeck whether the query executed or not
             if($res2==true)
@@ -98,6 +95,7 @@
             <tr>
                 <th>S.N.</th>
                 <th>Task Name</th>
+                <th>Details</th>
                 <th>Priority</th>
                 <th>Deadline</th>
                 <th>Actions</th>
@@ -132,6 +130,7 @@
                         {
                             $task_id = $row['task_id'];
                             $task_name = $row['task_name'];
+                            $descr = $row['task_description'];
                             $priority = $row['priority'];
                             $deadline = $row['deadline'];
                             ?>
@@ -139,10 +138,11 @@
                             <tr>
                                 <td><?php echo $sn++; ?>. </td>
                                 <td><?php echo $task_name; ?></td>
+                                <td><?php echo $descr; ?></td>
                                 <td><?php echo $priority; ?></td>
                                 <td><?php echo $deadline; ?></td>
                                 <td>
-                                    <a href="./update-task.php?task_id=<?php echo $task_id; ?>">Update </a>
+                                    <a href="./update-task.php?task_id=<?php echo $task_id; ?>">Update</a>
                                     
                                     <a href="./delete-task.php?task_id=<?php echo $task_id; ?>">Delete</a>
                                 
