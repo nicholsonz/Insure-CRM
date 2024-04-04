@@ -1,22 +1,19 @@
 <?php 
-    include('../functions.php');
+  require_once('../functions.php');
     
     if(isset($_GET['task_id']))
     {
         //Get the Values from DAtabase
         $task_id = $_GET['task_id'];
-        
-        //Connect Database
-        $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-        
+               
         //Select Database
-        $db_select = mysqli_select_db($conn, DB_NAME) or die();
+        $db_select = mysqli_select_db($con, DB_NAME) or die();
         
         //SQL Query to Get the detail of selected task
         $sql = "SELECT * FROM tbl_tasks WHERE task_id=$task_id";
         
         //Execute Query
-        $res = mysqli_query($conn, $sql);
+        $res = mysqli_query($con, $sql);
         
         //Check if the query executed successfully or not
         if($res==true)
@@ -85,17 +82,16 @@
                         <select name="list_id">
                             
                             <?php 
-                                //Connect Database
-                                $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
+                               
                                 
                                 //SElect Database
-                                $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
+                                $db_select2 = mysqli_select_db($con, DB_NAME) or die();
                                 
                                 //SQL Query to GET Lists
                                 $sql2 = "SELECT * FROM tbl_lists";
                                 
                                 //Execute Query
-                                $res2 = mysqli_query($conn2, $sql2);
+                                $res2 = mysqli_query($con, $sql2);
                                 
                                 //Check if executed successfully or not
                                 if($res2==true)
@@ -178,11 +174,8 @@
         $priority = htmlspecialchars($_POST['priority']);
         $deadline = htmlspecialchars($_POST['deadline']);
         
-        //Connect Database
-        $conn3 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-        
         //SElect Database
-        $db_select3 = mysqli_select_db($conn3, DB_NAME) or die();
+        $db_select3 = mysqli_select_db($con, DB_NAME) or die();
         
         //CREATE SQL QUery to Update TAsk
         $sql3 = "UPDATE tbl_tasks SET 
@@ -195,7 +188,7 @@
                 task_id = $task_id";
         
         //Execute Query
-        $res3 = mysqli_query($conn3, $sql3);
+        $res3 = mysqli_query($con, $sql3);
         
         //CHeck whether the Query Executed of Not
         if($res3==true)

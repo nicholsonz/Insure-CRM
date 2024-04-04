@@ -1,5 +1,5 @@
 <?php 
-    include('../functions.php');
+    require_once('../functions.php');
 
 ?>
 
@@ -48,17 +48,14 @@
                             
                             <?php 
                                 
-                                //Connect Database
-                                $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-                                
                                 //SElect Database
-                                $db_select = mysqli_select_db($conn, DB_NAME) or die();
+                                $db_select = mysqli_select_db($con, DB_NAME) or die();
                                 
                                 //SQL query to get the list from table
                                 $sql = "SELECT * FROM tbl_lists";
                                 
                                 //Execute Query
-                                $res = mysqli_query($conn, $sql);
+                                $res = mysqli_query($con, $sql);
                                 
                                 //Check whether the query executed or not
                                 if($res==true)
@@ -138,11 +135,8 @@
         $priority = htmlspecialchars($_POST['priority']);
         $deadline = htmlspecialchars($_POST['deadline']);
         
-        //Connect Database
-        $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-        
         //SElect Database
-        $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
+        $db_select2 = mysqli_select_db($con, DB_NAME) or die();
         
         //CReate SQL Query to INSERT DATA into DAtabase
         $sql2 = "INSERT INTO tbl_tasks SET 
@@ -153,7 +147,7 @@
             deadline = '$deadline'";
         
         //Execute Query
-        $res2 = mysqli_query($conn2, $sql2);
+        $res2 = mysqli_query($con, $sql2);
         
         //Check whetehre the query executed successfully or not
         if($res2==true)

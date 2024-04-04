@@ -1,24 +1,21 @@
 <?php 
 
-include('../functions.php');
+require_once('../functions.php');
     
     //Get the Current Values of Selected List
     if(isset($_GET['list_id']))
     {
         //Get the List ID value
         $list_id = $_GET['list_id'];
-        
-        //Connect to Database
-        $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-        
+             
         //SElect DAtabase
-        $db_select = mysqli_select_db($conn, DB_NAME) or die();
+        $db_select = mysqli_select_db($con, DB_NAME) or die();
         
         //Query to Get the Values from Database
         $sql = "SELECT * FROM tbl_lists WHERE list_id=$list_id";
         
         //Execute Query
-        $res = mysqli_query($conn, $sql);
+        $res = mysqli_query($con, $sql);
         
         //CHekc whether the query executed successfully or not
         if($res==true)
@@ -114,12 +111,9 @@ include('../functions.php');
         //Get the Updated Values from our Form
         $list_name = $_POST['list_name'];
         $list_description = $_POST['list_description'];
-        
-        //Connect Database
-        $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-        
+              
         //SElect the Database
-        $db_select2 = mysqli_select_db($conn2, DB_NAME);
+        $db_select2 = mysqli_select_db($con, DB_NAME);
         
         //QUERY to Update List
         $sql2 = "UPDATE tbl_lists SET 
@@ -129,7 +123,7 @@ include('../functions.php');
         ";
         
         //Execute the Query
-        $res2 = mysqli_query($conn2, $sql2);
+        $res2 = mysqli_query($con, $sql2);
         
         //Check whether the query executed successfully or not
         if($res2==true)

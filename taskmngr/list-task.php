@@ -1,5 +1,5 @@
 <?php 
-    include('../functions.php');
+        require_once('../functions.php');
 
     $list_id_url = $_GET['list_id'];
 ?>
@@ -16,18 +16,15 @@
             <a href="./taskmngr.php">Home</a>
             
             <?php 
-                
-                //Comment Displaying Lists From Database in ourMenu
-                $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-                
+                                
                 //SELECT DATABASE
-                $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
+                $db_select2 = mysqli_select_db($con, DB_NAME) or die();
                 
                 //Query to Get the Lists from database
                 $sql2 = "SELECT * FROM tbl_lists";
                 
                 //Execute Query
-                $res2 = mysqli_query($conn2, $sql2);
+                $res2 = mysqli_query($con, $sql2);
                 
                 //CHeck whether the query executed or not
                 if($res2==true)
@@ -72,15 +69,14 @@
                 
                 <?php 
                 
-                    $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-                    
-                    $db_select = mysqli_select_db($conn, DB_NAME) or die();
+                                       
+                    $db_select = mysqli_select_db($con, DB_NAME) or die();
                     
                     //SQL QUERY to display tasks by list selected
                     $sql = "SELECT * FROM tbl_tasks WHERE list_id=$list_id_url";
                     
                     //Execute Query
-                    $res = mysqli_query($conn, $sql);
+                    $res = mysqli_query($con, $sql);
                     
                     if($res==true)
                     {

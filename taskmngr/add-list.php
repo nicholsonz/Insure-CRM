@@ -1,5 +1,5 @@
 <?php 
-    include('../functions.php');
+    require_once('../functions.php');
 
 ?>
 
@@ -72,35 +72,17 @@
         //Get the values from form and save it in variables
         $list_name = htmlspecialchars($_POST['list_name']);
         $list_description = htmlspecialchars($_POST['list_description']);
-        
-        //Connect Database
-        $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-        
-        //Check whether the database connected or not
-        /*
-        if($conn==true)
-        {
-            echo "Database Connected";
-        }
-        */
-        
+           
         //SElect Database
-        $db_select = mysqli_select_db($conn, DB_NAME);
+        $db_select = mysqli_select_db($con, DB_NAME);
         
-        //Check whether database is connected or not
-        /*
-        if($db_select==true)
-        {
-            echo "Database SElected";
-        }
-        */
         //SQL Query to Insert data into database
         $sql = "INSERT INTO tbl_lists SET 
             list_name = '$list_name',
             list_description = '$list_description'";
         
         //Execute Query and Insert into Database
-        $res = mysqli_query($conn, $sql);
+        $res = mysqli_query($con, $sql);
         
         //Check whether the query executed successfully or not
         if($res==true)

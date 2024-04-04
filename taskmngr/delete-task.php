@@ -1,5 +1,5 @@
 <?php 
-include('../functions.php');
+    require_once('../functions.php');
     
     //Check task_id in URL
     if(isset($_GET['task_id']))
@@ -7,18 +7,15 @@ include('../functions.php');
         //Delete the Task from Database
         //Get the Task ID
         $task_id = $_GET['task_id'];
-        
-        //Connect Databaes
-        $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-        
+                       
         //SElect Database
-        $db_select = mysqli_select_db($conn, DB_NAME) or die();
+        $db_select = mysqli_select_db($con, DB_NAME) or die();
         
         //SQL Query to DELETE TASK
         $sql = "DELETE FROM tbl_tasks WHERE task_id=$task_id";
         
         //Execute Query
-        $res = mysqli_query($conn, $sql);
+        $res = mysqli_query($con, $sql);
         
         //CHeck if the Query Executed Successfully or Not
         if($res==true)

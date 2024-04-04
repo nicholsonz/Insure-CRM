@@ -66,18 +66,15 @@ include('../functions.php');
                 
                 
                 <?php 
-                
-                    //Connect the DAtabase
-                    $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-                    
+                                    
                     //Select Database
-                    $db_select = mysqli_select_db($conn, DB_NAME) or die();
+                    $db_select = mysqli_select_db($con, DB_NAME) or die();
                     
                     //SQl Query to display all data fromo database
                     $sql = "SELECT * FROM tbl_lists";
                     
                     //Execute the Query
-                    $res = mysqli_query($conn, $sql);
+                    $res = mysqli_query($con, $sql);
                     
                     //CHeck whether the query executed executed successfully or not
                     if($res==true)

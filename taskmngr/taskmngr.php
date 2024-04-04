@@ -1,5 +1,5 @@
 <?php
-    include('../functions.php');
+        require_once('../functions.php');
 // Home Page template below.
 ?>
 
@@ -19,17 +19,15 @@
         
         <!-- <?php 
             
-            //Comment Displaying Lists From Database in ourMenu
-            $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-            
+                      
             //SELECT DATABASE
-            $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
+            $db_select2 = mysqli_select_db($con, DB_NAME) or die();
             
             //Query to Get the Lists from database
             $sql2 = "SELECT * FROM tbl_lists";
             
             //Execute Query
-            $res2 = mysqli_query($conn2, $sql2);
+            $res2 = mysqli_query($con, $sql2);
             
             //CHeck whether the query executed or not
             if($res2==true)
@@ -106,19 +104,16 @@
             </tr>
             
             <?php 
-            
-                //Connect Database
-                $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-                
+                            
                 //Select Database
-                $db_select = mysqli_select_db($conn, DB_NAME) or die();
+                $db_select = mysqli_select_db($con, DB_NAME) or die();
                 
                 //Create SQL Query to Get DAta from Databse
                 $sql = "SELECT *, tl.list_name as tlname FROM tbl_tasks AS tt
                         LEFT JOIN tbl_lists AS tl ON tl.list_id = tt.list_id";
                 
                 //Execute Query
-                $res = mysqli_query($conn, $sql);
+                $res = mysqli_query($con, $sql);
                 
                 //CHeck whether the query execueted o rnot
                 if($res==true)
