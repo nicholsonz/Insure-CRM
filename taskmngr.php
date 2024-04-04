@@ -104,18 +104,15 @@
             </tr>
             
             <?php 
-            
-                //Connect Database
-                $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
                 
                 //Select Database
-                $db_select = mysqli_select_db($conn, DB_NAME) or die();
+                $db_select = mysqli_select_db($con, DB_NAME) or die();
                 
                 //Create SQL Query to Get DAta from Databse
                 $sql = "SELECT * FROM tbl_tasks";
                 
                 //Execute Query
-                $res = mysqli_query($conn, $sql);
+                $res = mysqli_query($con, $sql);
                 
                 //CHeck whether the query execueted o rnot
                 if($res==true)
