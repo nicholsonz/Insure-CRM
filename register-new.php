@@ -59,8 +59,8 @@ if(empty($username_err) && empty($email_err) && empty($password_err) && empty($c
 	// Update the activation variable below
 		$activate_link = 'http://example.net/clients/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
 		$message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
-		mail($_POST['email'], $subject, $message, $headers);
-		echo 'Please check your email to activate your account!';
+		mail($_POST['email'], $subject, $message, $headers);	
+		echo '<script>alert("Account created succesfully! Please check your email for activation link.")</script>';	
 		header('Refresh:3; url=./index.php');
 	} else {
 		// Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
@@ -83,6 +83,7 @@ $con->close();
 		<title>Register</title>
 		<link rel="stylesheet" href="./fontawesome/css/all.css">
         <link href="./css/style.css" rel="stylesheet" type="text/css">
+        <script src="./js/alertify.min.js"></script>
 	</head>
 	<body class="regcolor">
 		<div class="register">
@@ -119,7 +120,7 @@ $con->close();
 					<i class="fas fa-envelope"></i>
 				</label>
 				<input type="email" name="email" placeholder="Email" id="email" required>
-				<input type="submit" value="Register">
+				<input type="submit" value="Submit">
 				<p>Already have an account? <a href="index.php">Login here</a>.</p>
 			</form>
 		</div>

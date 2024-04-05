@@ -24,6 +24,7 @@ echo <<<EOT
 		<link rel="stylesheet" href="./fontawesome/css/all.css">
 		<script src="./js/jquery-3.7.1.min.js"></script>		
         <script src="./js/chart.min.js"></script>
+        <script src="./js/alertify.min.js"></script>
 	</head>
 	<body>
     <nav class="navtop">
