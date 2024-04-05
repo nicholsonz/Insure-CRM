@@ -3,12 +3,12 @@
 include('dbconfig.php');
 
 // Now we check if the data was submitted, isset() function will check if the data exists.
-if (!isset($_POST['username'], $_POST['password'], $_POST['email'])) {
+if (!isset($_POST['username'], $_POST['password'], $_POST['confirm_password'], $_POST['email'])) {
 	// Could not get the data that should have been sent.
 	exit('Please complete the registration form!');
 }
 // Make sure the submitted registration values are not empty.
-if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['confirm_password']) || empty($_POST['email'])) {
 	// One or more values are empty.
 	exit('Please complete the registration form');
 }
@@ -18,8 +18,22 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) == 0) {
     exit('Username is not valid!');
 }
-if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
-	exit('Password must be between 5 and 20 characters long!');
+if(empty(trim($_POST["password"]))){
+	$password_err = "Please enter a password.";     
+} elseif(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,32}$/',trim($_POST["password"]))) {
+	$password_err = "Password must be between 8 - 32 characters and include letters, numbers, and at least one special character ! @ # $ %";
+} else{
+	$password = trim($_POST["password"]);
+}
+
+// Validate confirm password
+if(empty(trim($_POST["confirm_password"]))){
+	$confirm_password_err = "Please confirm password.";     
+} else{
+	$confirm_password = trim($_POST["confirm_password"]);
+	if(empty($password_err) && ($password != $confirm_password)){
+		$confirm_password_err = "Password did not match.";
+	}
 }
 // We need to check if the account with that username exists.
 if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
