@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once "dbconfig.php";
+include('dbconfig.php');
 
 // Now we check if the data was submitted, isset() function will check if the data exists.
 if (!isset($_POST['username'], $_POST['password'], $_POST['email'])) {
@@ -43,10 +43,11 @@ if ($stmt = $con->prepare('INSERT INTO accounts (username, password, email, acti
     $subject = 'Account Activation Required';
     $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
 // Update the activation variable below
-    $activate_link = 'http://example.net/clientDB/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
+    $activate_link = 'http://example.net/clients/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
     $message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
     mail($_POST['email'], $subject, $message, $headers);
     echo 'Please check your email to activate your account!';
+	header('Refrech:3; url=./index.php');
 } else {
 	// Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
 	echo 'Could not prepare statement!';
