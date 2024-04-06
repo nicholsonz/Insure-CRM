@@ -18,7 +18,7 @@ if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) == 0) {
 if(empty(trim($_POST["password"]))){
 	$password_err = "Please enter a password.";     
 } elseif(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,32}$/',trim($_POST["password"]))) {
-	$password_err = "Password must be between 8 - 32 characters and include letters, numbers, and at least one special character ! @ # $ %";
+	$password_err = "Password must be between 8 - 32 characters and include one upper-case letter, numbers, and at least one special character ! @ # $ %";
 } else{
 	$password = trim($_POST["password"]);
 }
