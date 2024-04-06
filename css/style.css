@@ -30,10 +30,13 @@ tr {
 	text-align: left;
 	border: 1px solid black;
 }
+/* chart style */
 .chart-style {
-	width: 350px;
-	height: 250px;
-}
+	max-height: 450px; 
+	display: inline-block;
+	position: relative;
+	width: 100%;
+  }
 .contentview td {
 	text-align: left;
 	padding: 20px;

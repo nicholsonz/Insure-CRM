@@ -6,7 +6,7 @@
 
 <?=template_header('Home')?>
 
-<div class="content">
+<div class="content w3-mobile">
  <h1><?php echo date('M d, Y'); ?></h1>
    <div class="w3-col s12 m4 l4 w3-margin">
     <div class="">
