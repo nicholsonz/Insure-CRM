@@ -67,7 +67,7 @@
 		//No data in Database
 	?>					
 	<tr>
-	 <td colspan="5">No Task Added Yet.</td>
+	 <td colspan="5">No tasks ...</td>
 	</tr>					
 	<?php
 			}
