@@ -91,8 +91,6 @@ $con->close();
 			<?php 
             if(!empty($password_err)){
                 echo '<div class="alert">' . $password_err . '</div>';
-            } elseif(!empty($empty_err)){
-                echo '<div class="alert">' . $empty_err . '</div>';
             } elseif(!empty($username_err)){
                 echo '<div class="alert">' . $username_err . '</div>';
             } elseif(!empty($confirm_password_err)){
