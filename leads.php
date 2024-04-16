@@ -25,6 +25,7 @@ $num_leads = $pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn();
 <div class="content read">
 	<h2>Leads</h2>
 	<a href="createlead.php" class="create-contact">Create Lead</a>
+	<a href="impleads.php" class="create-contact">Import Leads</a>
     <div class="w3-right w3-padding">      
          <input id="tableSrch" type="text" placeholder="Filter..">
     </div> 
