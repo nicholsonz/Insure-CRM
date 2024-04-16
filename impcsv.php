@@ -42,15 +42,15 @@ if(isset($_POST['importSubmit'])){
                 $created  = $line[17];
                 
                 // Check whether member already exists in the database with the same email
-                $prevQuery = "SELECT * FROM leads WHERE name = '".$line[0]."'";
+                $prevQuery = "SELECT * FROM leads WHERE name = '$line[0]'";
                 $prevResult = $con->query($prevQuery);
                 
                 if($prevResult->num_rows > 0){
                     // Update member data in the database
-                    $con->query("UPDATE leads SET name = '".$name."', phone = '".$phone."', status = '".$status."', modified = NOW() WHERE email = '".$email."'");
+                    $con->query("UPDATE leads SET name = '$name', phone = '$phone', status = '$status', modified = NOW() WHERE email = '$email'");
                 }else{
                     // Insert member data in the database
-                    $con->query("INSERT INTO leads (name, address, city, state, zip, county, birthdate, phone, phone_sec, email, partA_date, partB_date, medicare_number, policy, insurer, appstatus, notes, created) VALUES ('".$name."', '".$address."', '".$city."', '".$state."', '".$zip."', '".$county."', '".$birthdate."', '".$phone."', '".$phone_sec."', '".$email."', '".$partA_date."', '".$partB_date."', '".$medicare_number."', '".$policy."', '".$insurer."', '".$appstatus."', '".$notes."', NOW()");
+                    $con->query("INSERT INTO leads (name, address, city, state, zip, county, birthdate, phone, phone_sec, email, partA_date, partB_date, medicare_number, policy, insurer, appstatus, notes, created) VALUES ('$name', '$address', '$city', '$state', '$zip', '$county', '$birthdate', '$phone', '$phone_sec', '$email', '$partA_date', '$partB_date', '$medicare_number', '$policy', '$insurer', '$appstatus', '$notes', NOW())");
                 }
             }
             
@@ -67,5 +67,5 @@ if(isset($_POST['importSubmit'])){
 }
 
 // Redirect to the listing page
-header("Location: index.php".$qstring);
+header("Location: index.php");
 ?>
