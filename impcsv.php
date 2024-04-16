@@ -67,5 +67,5 @@ if(isset($_POST['importSubmit'])){
 }
 
 // Redirect to the listing page
-header("Location: index.php");
+header("Location: leads.php");
 ?>
