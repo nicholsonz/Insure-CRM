@@ -25,7 +25,7 @@
 		<h4>Clients - <?= $convleads?></h4>
 	</div>
 	<div>
-		<h4><?php echo date('F'); ?> Conversion = <?= $convperc * 100; ?> %</h4>
+		<h4><?php echo date('F'); ?> Conversion = <?= number_format($convperc * 100); ?> %</h4>
 	</div> 
     </div>
     <div class="">
@@ -43,7 +43,7 @@
 	 <h4>Clients - <?= $convleads?></h4>
         </div>
 	<div>
-		<h4><?php echo date('Y'); ?> Conversion = <?= $convperc * 100; ?> %</h4>
+		<h4><?php echo date('Y'); ?> Conversion = <?= number_format($convperc * 100); ?> %</h4>
 	</div> 
    </div>
     <div class="">
