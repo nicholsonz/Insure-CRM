@@ -15,41 +15,8 @@
     <!-- Menu Starts Here -->
     <div class="">
     
-        <a href="./taskmngr.php">Home</a>
-        
-        <?php 
-                        
-            //SELECT DATABASE
-            $db_select2 = mysqli_select_db($con, DB_NAME) or die();
-            
-            //Query to Get the Lists from database
-            $sql2 = "SELECT * FROM tbl_lists";
-            
-            //Execute Query
-            $res2 = mysqli_query($con, $sql2);
-            
-            //CHeck whether the query executed or not
-            if($res2==true)
-            {
-                //Display the lists in menu
-                while($row2=mysqli_fetch_assoc($res2))
-                {
-                    $list_id = $row2['list_id'];
-                    $list_name = $row2['list_name'];
-                    ?>
-                    
-                    <a href="./list-task.php?list_id=<?php echo $list_id; ?>"><?php echo $list_name; ?></a>
-                    
-                    <?php
-                    
-                }
-            }
-            
-        ?>
-        
-        
-        
-        <a href="./manage-list.php">Manage Lists</a>
+        <a href="./taskmngr.php" class="task-mngr">Home</a>                
+        <a href="./manage-list.php" class="task-mngr">Manage Lists</a>
     </div>
     <!-- Menu Ends Here -->
     
@@ -88,26 +55,29 @@
     
     <div class="">
         
-        <a class="btn-primary" href="./add-task.php">Add Task</a>
+        <a href="./add-task.php" class="add-task">Add Task</a>
         
         <table class="w3-table w3-bordered">
-        
+         <thead>
             <tr>
                 <th>S.N.</th>
                 <th>Task Name</th>
                 <th>Details</th>
+                <th>Task List</th>
                 <th>Priority</th>
                 <th>Deadline</th>
-                <th>Actions</th>
+                <th></th>
             </tr>
-            
+         </thead>
             <?php 
                 
                 //Select Database
                 $db_select = mysqli_select_db($con, DB_NAME) or die();
                 
                 //Create SQL Query to Get DAta from Databse
-                $sql = "SELECT * FROM tbl_tasks ORDER BY deadline";
+                $sql = "SELECT *, tbll.list_name FROM tbl_tasks AS tblt
+                        LEFT JOIN tbl_lists AS tbll ON tbll.list_id = tblt.list_id
+                         ORDER BY deadline";
                 
                 //Execute Query
                 $res = mysqli_query($con, $sql);
@@ -116,7 +86,6 @@
                 if($res==true)
                 {
                     //DIsplay the Tasks from DAtabase
-                    //Dount the Tasks on Database first
                     $count_rows = mysqli_num_rows($res);
                     
                     //Create Serial Number Variable
@@ -131,24 +100,23 @@
                             $task_id = $row['task_id'];
                             $task_name = $row['task_name'];
                             $descr = $row['task_description'];
+                            $list_name = $row['list_name'];
                             $priority = $row['priority'];
                             $deadline = $row['deadline'];
                             ?>
-                            
                             <tr>
-                                <td><?php echo $sn++; ?>. </td>
+                                <td><?php echo $sn++; ?></td>
                                 <td><?php echo $task_name; ?></td>
                                 <td><?php echo $descr; ?></td>
+                                <td><?php echo $list_name; ?></td>
                                 <td><?php echo $priority; ?></td>
                                 <td><?php echo $deadline; ?></td>
-                                <td>
-                                    <a href="./update-task.php?task_id=<?php echo $task_id; ?>">Update</a>
-                                    
-                                    <a href="./delete-task.php?task_id=<?php echo $task_id; ?>">Delete</a>
+                                <td class="actions">
+                                    <a href="./update-task.php?task_id=<?php echo $task_id; ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                                    
+                                    <a href="./delete-task.php?task_id=<?php echo $task_id; ?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
                                 
                                 </td>
                             </tr>
-                            
                             <?php
                         }
                     }

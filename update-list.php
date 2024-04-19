@@ -44,21 +44,14 @@ require_once('./functions.php');
 <?=template_header('Task Mngr')?>
         
         
+        <div class="content">       
+        
         <div class="wrapper">
-        
-        
-        <h1>TASK MANAGER</h1>
-        
-        
-            
-            <a class="btn-secondary" href="./taskmngr.php">Home</a>
-            <a class="btn-secondary" href="./manage-list.php">Manage Lists</a>
-            
-       
-        
-        
-        <h3>Update List Page</h3>
-        
+        <h1>UPDATE TASK LIST</h1>
+        <p>
+            <a href="./taskmngr.php" class="task-mngr">Home</a>
+            <a href="./manage-list.php" class="task-mngr">Manage Lists</a>
+        </p>
         <p>
             <?php 
                 //Check whether the session is set or not
@@ -69,7 +62,6 @@ require_once('./functions.php');
                 }
             ?>
         </p>
-        
         <form method="POST" action="">
         
             <table class="tbl-half">
@@ -81,14 +73,13 @@ require_once('./functions.php');
                 <tr>
                     <td>List Description: </td>
                     <td>
-                        <textarea name="list_description">
-                            <?php echo $list_description; ?>
-                        </textarea>
+                        <textarea type="text" name="list_description"><?=$list_description; ?></textarea>
                     </td>
                 </tr>
                 
                 <tr>
-                    <td><input class="btn-lg btn-primary" type="submit" name="submit" value="UPDATE" /></td>
+                    <td><input class="w3-button" type="submit" name="submit" value="UPDATE" /></td>
+                    <td><a href="./manage-list.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
                 </tr>
             </table>
             

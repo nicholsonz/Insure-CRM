@@ -41,15 +41,13 @@
 <?=template_header('Task Mngr')?>
     
     <div class="content">
-        <div class="wrapper">
+        <div class="">
         
-        <h1>TASK MANAGER</h1>
+        <h1>UPDATE TASK</h1>
         
         <p>
-            <a class="btn-secondary" href="./taskmngr.php">Home</a>
+            <a href="./taskmngr.php" class="task-mngr">Home</a>
         </p>
-        
-        <h3>Update Task Page</h3>
         
         <p>
             <?php 
@@ -72,9 +70,7 @@
                 <tr>
                     <td>Task Description: </td>
                     <td>
-                        <textarea name="task_description">
-                        <?php echo $task_description; ?>
-                        </textarea>
+                        <textarea  type="text" name="task_description"><?=$task_description; ?></textarea>
                     </td>
                 </tr>
                 
@@ -150,7 +146,8 @@
                 </tr>
                 
                 <tr>
-                    <td><input class="btn-primary btn-lg" type="submit" name="submit" value="UPDATE" /></td>
+                    <td><input class="w3-button" type="submit" name="submit" value="UPDATE" /></td>
+                    <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
                 </tr>
                 
             </table>

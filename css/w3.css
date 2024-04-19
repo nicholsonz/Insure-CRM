@@ -191,9 +191,6 @@ legend {
     white-space: normal
 }
 
-textarea {
-    overflow: auto
-}
 
 [type=checkbox],
 [type=radio] {
@@ -410,8 +407,8 @@ a {
     vertical-align: middle;
     overflow: hidden;
     text-decoration: none;
-    color: inherit;
-    background-color: inherit;
+    color: white;
+  	background-color: #38b673;
     text-align: center;
     cursor: pointer;
     white-space: nowrap
@@ -854,6 +851,10 @@ a {
 
     .w3-col.l6 {
         width: 49.99999%
+    }
+
+    .w3-col.l6-6 {
+        width: 52%
     }
 
     .w3-col.l7 {

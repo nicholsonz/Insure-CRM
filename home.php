@@ -8,44 +8,7 @@
 
 <div class="content w3-mobile">
  <h1><?php echo date('M d, Y'); ?></h1>
-   <div class="w3-col s12 m4 l4 w3-margin">
-	<div class="w3-padding">
-		<h2><?php echo date('F'); ?> Activity</h2>
-		<?php
-			$pdo = pdo_connect_mysql();
-			$newleads = $pdo->query('SELECT COUNT(*) FROM leads WHERE MONTH(created) = MONTH(now())')->fetchColumn();
-			$convleads = $pdo->query('SELECT COUNT(*) FROM clients WHERE MONTH(created) = MONTH(now())')->fetchColumn();
-			$convperc = $convleads / $newleads;
-
-		?>
-	<div>
-		<h4>Leads - <?= $newleads?></h4>
-	</div>
-	<div>
-		<h4>Clients - <?= $convleads?></h4>
-	</div>
-	<div>
-		<h4><?php echo date('F'); ?> Conversion = <?= number_format($convperc * 100); ?> %</h4>
-	</div> 
-    </div>
-    <div class="">
-		<h2><?php echo date('Y'); ?> Activity</h2>
-		<?php
-			$pdo = pdo_connect_mysql();
-			$newleads = $pdo->query('SELECT COUNT(*) FROM leads WHERE YEAR(created) = YEAR(now())')->fetchColumn();
-			$convleads = $pdo->query('SELECT COUNT(*) FROM clients WHERE YEAR(created) = YEAR(now())')->fetchColumn();
-			$convperc = $convleads / $newleads;
-		?>
-       <div>
-	 <h4>Leads - <?= $newleads?></h4>
-	</div>
-        <div>
-	 <h4>Clients - <?= $convleads?></h4>
-        </div>
-	<div>
-		<h4><?php echo date('Y'); ?> Conversion = <?= number_format($convperc * 100); ?> %</h4>
-	</div> 
-   </div>
+   <div class="w3-col s12 m5 l5 w3-margin">
     <div class="">
      <h2>Tasks</h2>
      <table class="w3-table">        
@@ -120,8 +83,46 @@
      </table>
 	</div>
  </div>
- <div class="w3-col s12 m12 l7 w3-margin">
-	<div class="w3-padding">
+</div>
+ <div class="content w3-mobile">
+	<div class="w3-col s12 m12 l3 w3-margin">
+		<h2><?php echo date('F'); ?> Activity</h2>
+		<?php
+			$pdo = pdo_connect_mysql();
+			$newleads = $pdo->query('SELECT COUNT(*) FROM leads WHERE MONTH(created) = MONTH(now())')->fetchColumn();
+			$convleads = $pdo->query('SELECT COUNT(*) FROM clients WHERE MONTH(created) = MONTH(now())')->fetchColumn();
+			$convperc = $convleads / $newleads;
+
+		?>
+	<div>
+		<h4>Leads - <?= $newleads?></h4>
+	</div>
+	<div>
+		<h4>Clients - <?= $convleads?></h4>
+	</div>
+	<div>
+		<h4><?php echo date('F'); ?> Conversion = <?= number_format($convperc * 100); ?> %</h4>
+	</div> 
+    </div>
+	<div class="w3-col s12 m12 l3 w3-margin">
+		<h2><?php echo date('Y'); ?> Activity</h2>
+		<?php
+			$pdo = pdo_connect_mysql();
+			$newleads = $pdo->query('SELECT COUNT(*) FROM leads WHERE YEAR(created) = YEAR(now())')->fetchColumn();
+			$convleads = $pdo->query('SELECT COUNT(*) FROM clients WHERE YEAR(created) = YEAR(now())')->fetchColumn();
+			$convperc = $convleads / $newleads;
+		?>
+       <div>
+	 <h4>Leads - <?= $newleads?></h4>
+	</div>
+        <div>
+	 <h4>Clients - <?= $convleads?></h4>
+        </div>
+	<div>
+		<h4><?php echo date('Y'); ?> Conversion = <?= number_format($convperc * 100); ?> %</h4>
+	</div> 
+   </div>
+ <div class="w3-col s12 m6-6 l6-6 w3-margin w3-padding">
 	<h2><?php echo date('Y'); ?> Activity</h2>
 	<?php
 		$pdo = pdo_connect_mysql();

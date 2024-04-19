@@ -161,6 +161,26 @@ body.loggedin {
   	padding: 10px 15px;
   	margin: 15px 0;
 }
+.task-mngr {
+	display: inline-block;
+	text-decoration: none;
+	background-color: #3892b6;
+	font-weight: bold;
+	font-size: 14px;
+	color: #FFFFFF;
+	padding: 10px 15px;
+	margin: 15px 0;
+}
+.add-task {
+	display: inline-block;
+	text-decoration: none;
+	background-color: #38b673;
+	font-weight: bold;
+	font-size: 14px;
+	color: #FFFFFF;
+	padding: 10px 15px;
+	margin: 15px 0;
+}
 .read .create-contact:hover {
   	background-color: #32a367;
 }

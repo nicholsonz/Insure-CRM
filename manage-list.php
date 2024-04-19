@@ -7,15 +7,12 @@ require_once('./functions.php');
 <?=template_header('Task Mngr')?>
         
     <div class="content">
-        <div class="reader">
+        <div class="read">
         
-        <h1>TASK MANAGER</h1>
+        <h1>TASK LIST MANAGER</h1>
         
         
-        <a class="btn-secondary" href="./taskmngr.php">Home</a>
-        
-        <h3>Manage Lists Page</h3>
-        
+        <a href="./taskmngr.php" class="task-mngr">Home</a>        
         <p>
             <?php 
             
@@ -54,17 +51,19 @@ require_once('./functions.php');
         </p>
         
         <!-- Table to display lists starts here -->
-        <div class="all-lists">
+        <div class="">
             
-            <a class="btn-primary" href="./add-list.php">Add List</a>
+            <a href="./add-list.php" class="add-task">Add List</a>
             
             <table class="w3-table w3-bordered">
+             <thead>
                 <tr>
                     <th>S.N.</th>
                     <th>List Name</th>
-                    <th>Actions</th>
+                    <th>Description</th>
+                    <th></th>
                 </tr>
-                
+             </thead>
                 
                 <?php 
                 
@@ -102,14 +101,16 @@ require_once('./functions.php');
                                 //Getting the data from database
                                 $list_id = $row['list_id'];
                                 $list_name = $row['list_name'];
+                                $description = $row['list_description']
                                 ?>
                                 
                                 <tr>
                                     <td><?php echo $sn++; ?>. </td>
                                     <td><?php echo $list_name; ?></td>
-                                    <td>
-                                        <a href="./update-list.php?list_id=<?php echo $list_id; ?>">Update</a> 
-                                        <a href="./delete-list.php?list_id=<?php echo $list_id; ?>">Delete</a>
+                                    <td><?php echo $description; ?></td>
+                                    <td class="actions">
+                                        <a href="./update-list.php?list_id=<?php echo $list_id; ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>   
+                                        <a href="./delete-list.php?list_id=<?php echo $list_id; ?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
                                     </td>
                                 </tr>
                                 
