@@ -85,7 +85,7 @@
  </div>
 </div>
  <div class="content w3-mobile">
-	<div class="w3-col s12 m12 l3 w3-margin">
+	<div class="w3-col s12 m3 l3 w3-margin">
 		<h2><?php echo date('F'); ?> Activity</h2>
 		<?php
 			$pdo = pdo_connect_mysql();
@@ -104,13 +104,15 @@
 		<h4><?php echo date('F'); ?> Conversion = <?= number_format($convperc * 100); ?> %</h4>
 	</div> 
     </div>
-	<div class="w3-col s12 m12 l3 w3-margin">
+	<div class="w3-col s12 m3 l3 w3-margin">
 		<h2><?php echo date('Y'); ?> Activity</h2>
 		<?php
 			$pdo = pdo_connect_mysql();
 			$newleads = $pdo->query('SELECT COUNT(*) FROM leads WHERE YEAR(created) = YEAR(now())')->fetchColumn();
 			$convleads = $pdo->query('SELECT COUNT(*) FROM clients WHERE YEAR(created) = YEAR(now())')->fetchColumn();
-			$convperc = $convleads / $newleads;
+			if($convleads > 0){
+				$convperc = $convleads / $newleads;
+			}
 		?>
        <div>
 	 <h4>Leads - <?= $newleads?></h4>
