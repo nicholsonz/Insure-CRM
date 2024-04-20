@@ -11,7 +11,7 @@
    <div class="w3-col s12 m5 l5 w3-margin">
     <div class="read">
      <h2>Tasks</h2>
-     <table class="w3-table w3-bordered">     
+     <table class="w3-table w3-bordered w3-hoverable">     
 	  <thead>   
 		<tr>
 		<th>#</th>
