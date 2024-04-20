@@ -2,7 +2,7 @@
 // PDO db creds
 function pdo_connect_mysql() {
     $DATABASE_HOST = 'localhost';
-    $DATABASE_USER = '';
+    $DATABASE_USER = 'qwqe';
     $DATABASE_PASS = '';
     $DATABASE_NAME = 'clientdb';
     try {
