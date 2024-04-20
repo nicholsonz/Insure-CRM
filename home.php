@@ -9,9 +9,10 @@
 <div class="content w3-mobile">
  <h1><?php echo date('M d, Y'); ?></h1>
    <div class="w3-col s12 m5 l5 w3-margin">
-    <div class="">
+    <div class="read">
      <h2>Tasks</h2>
-     <table class="w3-table">        
+     <table class="w3-table w3-bordered">     
+	  <thead>   
 		<tr>
 		<th>#</th>
 		<th>Task Name</th>
@@ -19,7 +20,7 @@
 		<th>Task List</th>
 		<th>Deadline</th>
 		</tr>
-		
+     </thead>
 		<?php 
 			
 		//Select Database
