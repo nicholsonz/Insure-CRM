@@ -95,7 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <tr>
              <td>
                 <input type="submit" class="w3-button" value="Submit">
-                <a class="w3-button" href="index.php">Cancel</a>
+                <a class="w3-button" href="./home.php">Cancel</a>
              </td>
             </tr>
          </table>
