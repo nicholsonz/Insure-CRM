@@ -23,7 +23,7 @@ $num_leads = $pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn();
 <?=template_header('Leads')?>
 
 <div class="content read">
-	<h2>Leads</h2>
+	<h1>LEADS</h1>
 	<a href="createlead.php" class="create-contact">Create Lead</a>
 	<a href="impleads.php" class="create-contact">Import Leads</a>
     <div class="w3-right w3-padding">      
