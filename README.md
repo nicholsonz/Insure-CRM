@@ -9,9 +9,9 @@
 
 ## Installation
 
-No fancy package managers are needed here. Just create the "clientdb" database and then import the clientdb.sql file into your database, and then edit the dbconfig.php file for your database variables. 
+You don't need any fancy package managers here. Just create the "clientdb" database, import the clientdb.sql file into your database, and then edit the dbconfig.php file for your database variables. 
 
-Create a user and assign a password for the database. Be sure to change the user and password for your system.
+Create a user and assign a password for the database. Be sure to change the username and password for your system.
 
 (MySQL/MariaDB)
 
@@ -27,4 +27,8 @@ Then
 
 Next, import the clientdb.sql file
 
-    sudo mysql clientdb < clientdb.sql
+    sudo mysql clientdb < clientdb.sqlf
+
+Visit the login page and select SignUp at the bottom. You will be  greeted with a new user registration page.
+
+That's it!
