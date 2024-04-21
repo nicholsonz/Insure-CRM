@@ -1,37 +1,31 @@
 <?php
     require_once('./functions.php');
 
-// Connect to MySQL database
-$pdo = pdo_connect_mysql();
+
 // We don't have the password or email info stored in sessions so instead we can get the results from the database.
-$stmt = $pdo->prepare('SELECT password, email FROM accounts WHERE id = ?');
+$stmt = "SELECT username, email FROM accounts WHERE id = '$acct_id'";
 // In this case we can use the account ID to get the account info.
-
-// MISSING SQL INFO HERE
-
+//Execute Query
+        $res = mysqli_query($con, $stmt);
+        
+        //Check if the query executed successfully or not
+        if($res==true)
+        {
+            //Query <br />Executed
+            $row = mysqli_fetch_assoc($res);
+            
+            //Get the Individual Value
+			$acct_name = $row['username'];
+			$email = $row['email'];
+        } else
+			{
+				//Redirect to Homepage
+				header('location: ./home.php');
+		}
 
 ?>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Profile Page</title>
-		<link href="./css/style.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="./fontawesome/css/all.css">
-	</head>
-	<body>
-		<nav class="navtop">
-			<div>
-            <h1>Ipe Financial & Insurance Services LLC</h1>
-			<a href="home.php"><i class="fas fa-home"></i>Home</a>
-			<a href="clients.php"><i class="fas fa-address-book"></i>Clients</a>
-            <a href="leads.php"><i class="fas fa-address-book"></i>Leads</a>
-			<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-        
-			</div>
-		</nav>
+<?=template_header('Profile')?>
 		<div class="content">
 			<h2>Profile Page</h2>
 			<div>
@@ -39,21 +33,19 @@ $stmt = $pdo->prepare('SELECT password, email FROM accounts WHERE id = ?');
 				<table>
 					<tr>
 						<td>Username:</td>
-						<td><?=$_SESSION['name']?></td>
-					</tr>
-					<tr>
-						<td>Password:</td>
-						<td><?=$password?></td>
+						<td><?=$acct_name?></td>
 					</tr>
 					<tr>
 						<td>Email:</td>
 						<td><?=$email?></td>
 					</tr>
 					<tr>
-						<td> <a href="resetpsswd.php" class="btn btn-warning">Reset Your Password</a></td>
+						<td> <a href="resetpsswd.php" class="w3-button">Reset Password</a></td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</body>
 </html>
+
+<?=template_footer()?>
