@@ -7,7 +7,7 @@ $msg = '';
 if (isset($_GET['name'])) {
     if (!empty($_POST)) {
         // This part is similar to the create.php, but instead we update a record and not insert
-  	$name = (isset($_POST['name']) && !empty($_POST['name']) ? $_POST['name'] : '');
+  	    $name = (isset($_POST['name']) && !empty($_POST['name']) ? $_POST['name'] : '');
         $address = (isset($_POST['address']) && !empty($_POST['address']) ? $_POST['address'] : '');
         $city = (isset($_POST['city']) && !empty($_POST['city']) ? $_POST['city'] : '');
         $state = (isset($_POST['state']) && !empty($_POST['state']) ? $_POST['state'] : '');
