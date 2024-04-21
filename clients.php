@@ -15,9 +15,10 @@ $stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
 $stmt->execute();
 // Fetch the records so we can display them in our template.
 $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 // Get the total number of clients, this is so we can determine whether there should be a next and previous button
 $num_clients = $pdo->query('SELECT COUNT(*) FROM clients')->fetchColumn();
+
+
 ?>
 
 <?=template_header('Clients')?>
@@ -44,7 +45,7 @@ $num_clients = $pdo->query('SELECT COUNT(*) FROM clients')->fetchColumn();
         <tbody id="tblSrch">
             <?php foreach ($clients as $client): ?>
             <tr>
-                <td><?=$client['name']?></td>
+                <td><a href="./view.php?id=<?=$client['id']; ?>" target="_blank"><?=$client['name']?></a></td>
                 <td><?=$client['birthdate']?></td>
                 <td><?=$client['phone']?></td>
                 <td><?=$client['policy']?></td>

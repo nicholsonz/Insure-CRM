@@ -43,7 +43,7 @@ $num_leads = $pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn();
         <tbody id="tblSrch">
             <?php foreach ($leads as $lead): ?>
 	    <tr>
-                <td><?=$lead['name']?></td>
+                <td><a href="./updatelead.php?name=<?=$lead['name']; ?>" target="_blank"><?=$lead['name']?></td>
                 <td><?=$lead['email']?></td>
                 <td><?=$lead['phone']?></td>
                 <td><?=$lead['notes']?></td>

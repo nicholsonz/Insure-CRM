@@ -43,6 +43,7 @@ tr {
 	padding: 20px;
 	width: 250px;
 	word-wrap: break-word;
+	color: black;
 }
 .signup {
 	font-family: Arial, Helvetica, sans-serif;
