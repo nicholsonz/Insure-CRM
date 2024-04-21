@@ -46,7 +46,7 @@ if (isset($_GET['name'])) {
 
 <?=template_header('Read')?>
 
-<div class="contentview update">
+<div class="content update">
 	<h1><?=$contact['name']?></h1>
     <form action="updatelead.php?name=<?=$contact['name']?>" method="post">
     <table>
@@ -57,7 +57,7 @@ if (isset($_GET['name'])) {
     <td><label>Email</label>
         <input type="text" name="email" placeholder="Email" value="<?=$contact['email']?>" id="email">
     </td>
-    <td><label>DOB</label>
+    <td><label>Birthdate</label>
         <input type="date" name="birthdate" placeholder="Birthdate" value="<?=$contact['birthdate']?>" id="birthdate">
     </td>
 </tr>

@@ -35,13 +35,17 @@ if (!empty($_POST)) {
 
 <?=template_header('Create')?>
 
-<div class="contentview update">
-	<h2>Create Client</h2>
+<div class="content update">
+	<h1>Create Client</h1>
     <form action="createclient.php" method="post">
 <table>
     <tr>
         <td>
         <input type="text" name="name" placeholder="Full Name" id="name">
+        </td>
+        <td>
+            <label>Birth Date</label>
+            <input type="date" name="birthdate" id="birthdate">
         </td>
    </tr>
     <tr>
@@ -63,9 +67,6 @@ if (!empty($_POST)) {
 <td>
         <input type="text" name="county" placeholder="County" id="county">
 </td>
-<td>
-        <input type="date" name="birthdate" id="birthdate">
-</td>
 </tr>
 <tr>
     <td>
@@ -79,15 +80,17 @@ if (!empty($_POST)) {
 </td>
 </tr>
 <tr>
-    <td>        
-        <input type="date" name="partA_date" placeholder="" id="partA_date">
-</td>
-<td>
-        <input type="date" name="partB_date" placeholder="" id="partB_date">
-</td>
-<td>
-        <input type="text" name="medicare_number" placeholder="Medicare #" id="medicare_number">
-</td>
+    <td>
+        <label>Part A Date</label>        
+        <input type="date" name="partA_date" placeholder="Part A Date" id="partA_date">
+    </td>
+    <td>
+        <label>Part B Date</label>
+        <input type="date" name="partB_date" placeholder="Part B Date" id="partB_date">
+    </td>
+    <td>
+        <input type="text" name="medicare_number" placeholder="Medicare Number" id="medicare_number">
+    </td>
 </tr>
 <tr>
     <td>    

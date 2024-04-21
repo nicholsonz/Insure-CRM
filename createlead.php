@@ -35,13 +35,17 @@ if (!empty($_POST)) {
 
 <?=template_header('Create')?>
 
-<div class="contentview update">
-	<h2>Create Lead</h2>
+<div class="content update">
+	<h1>Create Lead</h1>
     <form action="createlead.php" method="post">
 <table>
     <tr>
         <td>
         <input type="text" name="name" placeholder="Name" id="name">
+        </td>
+        <td>
+            <label>Birth Date</label>
+            <input type="date" name="birthdate" id="birthdate">
         </td>
    </tr>
     <tr>
@@ -63,10 +67,6 @@ if (!empty($_POST)) {
 <td>
         <input type="text" name="county" placeholder="County" id="county">
 </td>
-    <td>
-        <label>Birth Date</label>
-        <input type="date" name="birthdate" id="birthdate">
-    </td>
 </tr>
 <tr>
     <td>
