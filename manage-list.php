@@ -55,7 +55,7 @@ require_once('./functions.php');
             
             <a href="./add-list.php" class="add-task">Add List</a>
             
-            <table class="w3-table w3-bordered w3-hoverable">
+            <table class="w3-table w3-hoverable">
              <thead>
                 <tr>
                     <th>S.N.</th>
