@@ -27,9 +27,9 @@ $stmt = "SELECT username, email FROM accounts WHERE id = '$acct_id'";
 
 <?=template_header('Profile')?>
 		<div class="content">
-			<h2>Profile Page</h2>
-			<div>
-				<p>Your account details are below:</p>
+			<h1>Profile Page</h1>
+			<div class="">
+				<h2>Account Details</h2>
 				<table>
 					<tr>
 						<td>Username:</td>
@@ -45,7 +45,5 @@ $stmt = "SELECT username, email FROM accounts WHERE id = '$acct_id'";
 				</table>
 			</div>
 		</div>
-	</body>
-</html>
 
 <?=template_footer()?>
