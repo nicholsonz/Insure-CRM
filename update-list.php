@@ -46,13 +46,16 @@ require_once('./functions.php');
         
         <div class="content">       
         
-        <div class="wrapper">
         <h1>UPDATE TASK LIST</h1>
-        <p>
-            <a href="./taskmngr.php" class="task-mngr">Home</a>
+        
+            <!-- Menu Starts Here -->
+        <div class="">
+        
+            <a href="./taskmngr.php" class="task-mngr">Home</a>                
             <a href="./manage-list.php" class="task-mngr">Manage Lists</a>
-        </p>
-        <p>
+        </div>
+            <!-- Menu Ends Here -->
+  
             <?php 
                 //Check whether the session is set or not
                 if(isset($_SESSION['update_fail']))
@@ -61,7 +64,7 @@ require_once('./functions.php');
                     unset($_SESSION['update_fail']);
                 }
             ?>
-        </p>
+    
         <form method="POST" action="">
         
             <table class="tbl-half">

@@ -7,13 +7,14 @@ require_once('./functions.php');
 <?=template_header('Task Mngr')?>
         
     <div class="content">
-        <div class="read">
         
         <h1>TASK LIST MANAGER</h1>
-        
-        
-        <a href="./taskmngr.php" class="task-mngr">Home</a>        
-        <p>
+    <!-- Menu Starts Here -->
+    <div class="">
+            
+        <a href="./taskmngr.php" class="task-mngr">Home</a>              
+    </div>
+        <!-- Menu Ends Here -->
             <?php 
             
                 //Check if the session is set
@@ -48,14 +49,13 @@ require_once('./functions.php');
                 }
             
             ?>
-        </p>
-        
+             
         <!-- Table to display lists starts here -->
-        <div class="">
+        <div class="read">
             
             <a href="./add-list.php" class="add-task">Add List</a>
             
-            <table class="w3-table w3-bordered">
+            <table class="w3-table w3-bordered w3-hoverable">
              <thead>
                 <tr>
                     <th>S.N.</th>

@@ -7,7 +7,6 @@
 <?=template_header('Task Mngr')?>
 
 <div class="content read">
-<div class="">
     
     <h1>TASK MANAGER</h1>
     
@@ -21,8 +20,7 @@
     <!-- Menu Ends Here -->
     
     <!-- Tasks Starts Here -->
-    
-    <p>
+   
         <?php 
         
             if(isset($_SESSION['add']))
@@ -51,17 +49,18 @@
             }
         
         ?>
-    </p>
+   
     
     <div class="">
         
         <a href="./add-task.php" class="add-task">Add Task</a>
         
-        <table class="w3-table w3-bordered">
+        <table class="w3-table w3-bordered w3-hoverable">
          <thead>
             <tr>
                 <th>S.N.</th>
                 <th>Task Name</th>
+                <th>Lead Name</th>
                 <th>Details</th>
                 <th>Task List</th>
                 <th>Priority</th>
@@ -99,6 +98,7 @@
                         {
                             $task_id = $row['task_id'];
                             $task_name = $row['task_name'];
+                            $lead_name = $row['lead_name'];
                             $descr = $row['task_description'];
                             $list_name = $row['list_name'];
                             $priority = $row['priority'];
@@ -107,6 +107,7 @@
                             <tr>
                                 <td><?php echo $sn++; ?></td>
                                 <td><?php echo $task_name; ?></td>
+                                <td><?php echo $lead_name; ?></td>
                                 <td><?php echo $descr; ?></td>
                                 <td><?php echo $list_name; ?></td>
                                 <td><?php echo $priority; ?></td>

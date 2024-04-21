@@ -1,43 +1,49 @@
 <?php 
     require_once('./functions.php');
+    
+    if (isset($_GET['name'])) {
+        $lead_name = ($_GET['name']);
+    }else{
+        $lead_name = "";
+    }
 ?>
 
 
 <?=template_header('Task Mngr')?>
     
-    <body>
-    
         <div class="content">
         
-        <h1>TASK MANAGER</h1>
-        
-        <a class="btn-secondary" href="./taskmngr.php">Home</a>
-        
-        <h3>Add Task Page</h3>
-        
-        <p>
-            <?php 
-            
+        <h1>ADD TASK</h1>
+   
+            <!-- Menu Starts Here -->
+        <div class="">            
+            <a href="./taskmngr.php" class="task-mngr">Home</a>             
+        </div>
+<!-- Menu Ends Here -->
+  
+            <?php             
                 if(isset($_SESSION['add_fail']))
                 {
                     echo $_SESSION['add_fail'];
                     unset($_SESSION['add_fail']);
-                }
-            
+                }            
             ?>
-        </p>
         
         <form method="POST" action="">
             
-            <table class="tbl-half">
+            <table class="">
                 <tr>
                     <td>Task Name: </td>
-                    <td><input type="text" name="task_name" placeholder="Type your Task Name" required="required" /></td>
+                    <td><input type="text" name="task_name" placeholder="Task Name" required="required" value="<?= $task_name;?>"/></td>
+                </tr>
+                <tr>
+                    <td>Lead Name: </td>
+                    <td><input type="text" name="lead_name" placeholder="Lead Name" value="<?= $lead_name;?>"/></td>
                 </tr>
                 
                 <tr>
                     <td>Task Description: </td>
-                    <td><textarea name="task_description" placeholder="Type Task Description"></textarea></td>
+                    <td><textarea type="text" name="task_description" placeholder="Type Task Description"></textarea></td>
                 </tr>
                 
                 <tr>
@@ -111,16 +117,15 @@
                 </tr>
                 
                 <tr>
-                    <td><input class="btn-primary btn-lg" type="submit" name="submit" value="SAVE" /></td>
+                    <td><input class="w3-button" type="submit" name="submit" value="SAVE" /></td>
+                    <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
                 </tr>
                 
             </table>
             
-        </form>
-        
+         </form>
         </div>
     </body>
-    
 </html>
 
 
@@ -132,6 +137,7 @@
         //echo "Button Clicked";
         //Get all the Values from Form
         $task_name = htmlspecialchars($_POST['task_name']);
+        $lead_name = htmlspecialchars($_POST['lead_name']);
         $task_description = htmlspecialchars($_POST['task_description']);
         $list_id = htmlspecialchars($_POST['list_id']);
         $priority = htmlspecialchars($_POST['priority']);
@@ -146,6 +152,7 @@
         //CReate SQL Query to INSERT DATA into DAtabase
         $sql2 = "INSERT INTO tbl_tasks SET 
             task_name = '$task_name',
+            lead_name = '$lead_name',
             task_description = '$task_description',
             list_id = $list_id,
             priority = '$priority',

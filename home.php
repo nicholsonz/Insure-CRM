@@ -15,9 +15,10 @@
 	  <thead>   
 		<tr>
 		<th>#</th>
-		<th>Task Name</th>
+		<th>Task</th>
+		<th>Lead</th>
 		<th>Priority</th>
-		<th>Task List</th>
+		<!-- <th>Task List</th> -->
 		<th>Deadline</th>
 		</tr>
      </thead>
@@ -27,11 +28,12 @@
 		$db_select = mysqli_select_db($con, DB_NAME) or die();
 				
 		//Create SQL Query to Get DAta from Databse
-		$sql = "SELECT *, tbll.list_name 
+		$sql = "SELECT task_id, task_name, lead_name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tbll.list_name 
 				FROM tbl_tasks AS tblt
 				LEFT JOIN tbl_lists AS tbll ON tblt.list_id = tbll.list_id
 				ORDER BY deadline";
-			
+		
+
 		//Execute Query
 		$res = mysqli_query($con, $sql);
 				
@@ -53,19 +55,26 @@
 				{
 				$task_id = $row['task_id'];
 				$task_name = $row['task_name'];
+				$lead_name = $row['lead_name'];
 				$priority = $row['priority'];
-				$list_name = $row['list_name'];
+				// $list_name = $row['list_name'];
 				$deadline = $row['deadline'];
-		?>
-							
+
+		
+				$sql2 = "SELECT name FROM leads WHERE name LIKE '$lead_name%'";
+				$result = mysqli_query($con, $sql2);
+				while($row=mysqli_fetch_assoc($result)){
+					$name = $row['name'];
+				}
+		?>				
 		<tr>
-		<td><?php echo $sn++; ?>. </td>
-		<td><?php echo $task_name; ?></td>
+		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $sn++; ?></a></td>
+		<td><?php echo $task_name;?></td>
+		<td><a href="./updatelead.php?name=<?= $name; ?>"><?php echo $lead_name; ?></a></td>
 		<td><?php echo $priority; ?></td>
-		<td><?php echo $list_name; ?></td>
+		<!-- <td><?php echo $list_name; ?></td> -->
 		<td><?php echo $deadline; ?></td>
-		</tr>
-							
+		</tr>			
 		<?php
 				}
 			}

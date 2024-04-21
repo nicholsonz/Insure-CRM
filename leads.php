@@ -48,8 +48,9 @@ $num_leads = $pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn();
                 <td><?=$lead['phone']?></td>
                 <td><?=$lead['notes']?></td>
                 <td><?=$lead['created']?></td>
-                <td class="actions">
-                <a href="convertlead.php?name=<?=$lead['name']?>" class="convert"><i class="fas fa-archive fa-xs"></i></a>
+                <td class="actions">          
+                    <a href="add-task.php?name=<?=$lead['name']?>" class="task"><i class="fas fa-tasks fa-xs"></i></a>
+                    <a href="convertlead.php?name=<?=$lead['name']?>" class="convert"><i class="fas fa-archive fa-xs"></i></a>
                     <a href="updatelead.php?name=<?=$lead['name']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                    
                     <a href="deletelead.php?name=<?=$lead['name']?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
                    

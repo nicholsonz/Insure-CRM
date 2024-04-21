@@ -6,19 +6,15 @@
 <?=template_header('Task Mngr')?>
 
 <div class="content">
+            
+        <h1>ADD TASK LIST</h1>
         
-        <div class="">
-    
-        <h1>TASK MANAGER</h1>
-        
-        <a class="btn-secondary" href="./taskmngr.php">Home</a>
-        <a class="btn-secondary" href="./manage-list.php">Manage Lists</a>
-        
-        
-        <h3>Add List Page</h3>
-        
-        <p>
-        
+        <!-- Menu Starts Here -->
+        <div class="">            
+            <a href="./taskmngr.php" class="task-mngr">Home</a>                
+            <a href="./manage-list.php" class="task-mngr">Manage Lists</a>            
+        </div>
+        <!-- Menu Ends Here -->
         <?php 
         
             //Check whether the session is created or not
@@ -32,13 +28,11 @@
         
         ?>
         
-        </p>
-        
         <!-- Form to Add List Starts Here -->
         
         <form method="POST" action="">
             
-            <table class="tbl-half">
+            <table class="">
                 <tr>
                     <td>List Name: </td>
                     <td><input type="text" name="list_name" placeholder="Type list name here" required="required" /></td>
@@ -49,7 +43,8 @@
                 </tr>
                 
                 <tr>
-                    <td><input class="btn-primary btn-lg" type="submit" name="submit" value="SAVE" /></td>
+                    <td><input class="w3-button" type="submit" name="submit" value="SAVE" /></td>
+                    <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
                 </tr>
                 
             </table>

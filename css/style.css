@@ -29,6 +29,7 @@ textarea {
 tr {
 	text-align: left;
 	border: 1px solid black;
+	color: white
 }
 /* chart style */
 .chart-style {
@@ -243,7 +244,7 @@ body.loggedin {
   	padding: 8px;
   	text-align: right;
 }
-.read table tbody tr td.actions .edit, .read table tbody tr td.actions .trash, .read table tbody tr td.actions .view, .read table tbody tr td.actions .convert {
+.read table tbody tr td.actions .edit, .read table tbody tr td.actions .trash, .read table tbody tr td.actions .task, .read table tbody tr td.actions .view, .read table tbody tr td.actions .convert {
   	display: inline-flex;
   	text-align: right;
   	text-decoration: none;
@@ -273,6 +274,12 @@ body.loggedin {
 }
 .read table tbody tr td.actions .convert:hover {
 	background-color: darkgreen;
+}
+.read table tbody tr td.actions .task{
+	background-color: blue;
+}
+.read table tbody tr td.actions .task:hover {
+	background-color: darkblue;
 }
 .update form {
   	padding: 15px 0;

@@ -52,8 +52,8 @@ let ldlbls = [];
     ldlbls.push(...Object.values(i))
   }
 
-console.log(cllbls);
-console.log(ldlbls);
+// console.log(cllbls);
+// console.log(ldlbls);
 
 new Chart(document.getElementById("activityChart"), {
   type: "bar",

@@ -25,6 +25,7 @@
             
             //Get the Individual Value
             $task_name = $row['task_name'];
+            $lead_name = $row['lead_name'];
             $task_description = $row['task_description'];
             $list_id = $row['list_id'];
             $priority = $row['priority'];
@@ -41,15 +42,14 @@
 <?=template_header('Task Mngr')?>
     
     <div class="content">
-        <div class="">
         
-        <h1>UPDATE TASK</h1>
+        <h1>UPDATE TASK</h1>        
         
-        <p>
-            <a href="./taskmngr.php" class="task-mngr">Home</a>
-        </p>
-        
-        <p>
+            <!-- Menu Starts Here -->
+            <div class="">            
+                <a href="./taskmngr.php" class="task-mngr">Home</a>             
+            </div>
+            <!-- Menu Ends Here -->
             <?php 
                 if(isset($_SESSION['update_fail']))
                 {
@@ -57,21 +57,22 @@
                     unset($_SESSION['update_fail']);
                 }
             ?>
-        </p>
-        
+     
         <form method="POST" action="">
         
-            <table class="tbl-half">
+            <table class="">
                 <tr>
                     <td>Task Name: </td>
                     <td><input type="text" name="task_name" value="<?php echo $task_name; ?>" required="required" /></td>
                 </tr>
+                <tr>
+                    <td>Lead Name: </td>
+                    <td><input type="text" name="lead_name" value="<?php echo $lead_name; ?>" /></td>
+                </tr>
                 
                 <tr>
                     <td>Task Description: </td>
-                    <td>
-                        <textarea  type="text" name="task_description"><?=$task_description; ?></textarea>
-                    </td>
+                    <td><textarea  type="text" name="task_description"><?=$task_description; ?></textarea></td>
                 </tr>
                 
                 <tr>
@@ -167,6 +168,7 @@
         
         //Get the CAlues from Form
         $task_name = htmlspecialchars($_POST['task_name']);
+        $lead_name = htmlspecialchars($_POST['lead_name']);
         $task_description = htmlspecialchars($_POST['task_description']);
         $list_id = htmlspecialchars($_POST['list_id']);
         $priority = htmlspecialchars($_POST['priority']);
@@ -178,6 +180,7 @@
         //CREATE SQL QUery to Update TAsk
         $sql3 = "UPDATE tbl_tasks SET 
                 task_name = '$task_name',
+                lead_name = '$lead_name',
                 task_description = '$task_description',
                 list_id = '$list_id',
                 priority = '$priority',
