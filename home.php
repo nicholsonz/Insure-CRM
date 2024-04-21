@@ -68,8 +68,8 @@
 				}
 		?>				
 		<tr>
-		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $sn++; ?></a></td>
-		<td><?php echo $task_name;?></td>
+		<td><?php echo $sn++; ?></td>
+		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name;?></a></td>
 		<td><a href="./updatelead.php?name=<?= $name; ?>"><?php echo $lead_name; ?></a></td>
 		<td><?php echo $priority; ?></td>
 		<!-- <td><?php echo $list_name; ?></td> -->
