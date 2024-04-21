@@ -11,7 +11,7 @@
         
         <!-- Menu Starts Here -->
         <div class="">            
-            <a href="./taskmngr.php" class="task-mngr">Home</a>                
+            <a href="./taskmngr.php" class="task-mngr">Tasks</a>                
             <a href="./manage-list.php" class="task-mngr">Manage Lists</a>            
         </div>
         <!-- Menu Ends Here -->
