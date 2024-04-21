@@ -13,7 +13,6 @@ if (!empty($_POST)) {
     $state = isset($_POST['state']) ? $_POST['state'] : '';
     $zip = isset($_POST['zip']) ? $_POST['zip'] : '';
     $county = isset($_POST['county']) ? $_POST['county'] : '';
-    $birthdate = isset($_POST['birthdate']) ? $_POST['birthdate'] : '';
     $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
     $phone2 = isset($_POST['phone_sec']) ? $_POST['phone_sec'] : '';
     $email = isset($_POST['email']) ? $_POST['email'] : '';
