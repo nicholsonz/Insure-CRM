@@ -25,7 +25,7 @@ $num_clients = $pdo->query('SELECT COUNT(*) FROM clients')->fetchColumn();
 
 <div class="content read">
 	<h2>Current Clients</h2>
-	<a href="createclient.php" class="create-contact">Create Client</a>
+	<a href="./createclient.php" class="create-contact">Create Client</a>
     <div class="w3-right w3-padding">      
          <input id="tableSrch" type="text" placeholder="Filter..">
        </div> 

@@ -126,7 +126,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                         </tr>
                         <tr>
                          <td colspan="3"><b><label>Notes</label></b>
-                             <p><?php echo $row["notes"]; ?></p>
+                             <textarea><?php echo $row["notes"]; ?></textarea>
                          </td>
                          <td><b><label>Created</label></b>
                              <p><?php echo $row["created"]; ?></p>

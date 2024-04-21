@@ -116,6 +116,9 @@ if (!empty($_POST)) {
     <td>
         <input type="submit" value="Create">
 </td>
+<td>
+    <a href="./leads.php" class="w3-button w3-orange w3-hover-amber">Cancel</a>
+</td>
 </tr>
 </table>
     </form>
