@@ -37,7 +37,7 @@ $num_leads = $pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn();
                 <th>Primary Phone</th>
                 <th>Notes</th>
                 <th><a href="javascript:SortTable(4,'D','ymd h:m:s');">Created <i class="fa fa-sort"></th>
-                <th>Action</th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="tblSrch">

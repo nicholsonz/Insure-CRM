@@ -78,13 +78,13 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 <body>
     <div class="contentview">
         <div>
-                    <h1 class="">Record for <?php echo $row["name"]; ?></h1>
+                    <h1 class=""><?php echo $row["name"]; ?></h1>
                     <table>
                         <tr>
                          <td colspan="2"><b><label>Name & Address</label></b>
                              <p><?php echo $row["name"]; ?>
                              <p><?php echo $row["address"]; ?>
-                             <p><?php echo $row["city"]; ?>, <?php echo $row["state"]; ?>  <?php echo $row["zip"]; ?></p>
+                             <p><?php echo $row["city"]; ?> <?php echo $row["state"]; ?>  <?php echo $row["zip"]; ?></p>
                          </td>
                          <td><b><label>County</label></b>
                              <p><?php echo $row["county"]; ?></p>
