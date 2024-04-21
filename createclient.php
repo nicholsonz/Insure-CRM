@@ -6,22 +6,24 @@ $msg = '';
 // Check that POST data is not empty
 if (!empty($_POST)) {
     // Post data not empty insert a new record
-    
-    $name = isset($_POST['name']) ? $_POST['name'] : '';
-    $address = isset($_POST['address']) ? $_POST['address'] : '';
-    $city = isset($_POST['city']) ? $_POST['city'] : '';
-    $state = isset($_POST['state']) ? $_POST['state'] : '';
-    $zip = isset($_POST['zip']) ? $_POST['zip'] : '';
-    $county = isset($_POST['county']) ? $_POST['county'] : '';
-    $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
-    $phone2 = isset($_POST['phone_sec']) ? $_POST['phone_sec'] : '';
-    $email = isset($_POST['email']) ? $_POST['email'] : '';
-    $medicare_number = isset($_POST['medicare_number']) ? $_POST['medicare_number'] : '';
-    $policy = isset($_POST['policy']) ? $_POST['policy'] : '';
-    $insurer = isset($_POST['insurer']) ? $_POST['insurer'] : '';
-    $appstatus = isset($_POST['appstatus']) ? $_POST['appstatus'] : '';
-    $notes = isset($_POST['notes']) ? $_POST['notes'] : '';
-    $created = isset($_POST['created']) ? $_POST['created'] : date('Y-m-d H:i:s');
+    $name = (isset($_POST['name']) && !empty($_POST['name']) ? $_POST['name'] : '');
+    $address = (isset($_POST['address']) && !empty($_POST['address']) ? $_POST['address'] : '');
+    $city = (isset($_POST['city']) && !empty($_POST['city']) ? $_POST['city'] : '');
+    $state = (isset($_POST['state']) && !empty($_POST['state']) ? $_POST['state'] : '');
+    $zip = (isset($_POST['zip']) && !empty($_POST['zip']) ? $_POST['zip'] : '');
+    $county = (isset($_POST['county']) && !empty($_POST['county']) ? $_POST['county'] : '');
+    $birthdate = (isset($_POST['birthdate']) && !empty($_POST['birthdate']) ? $_POST['birthdate'] : NULL);
+    $email = (isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : '');
+    $phone = (isset($_POST['phone']) && !empty($_POST['phone']) ? $_POST['phone'] : '');
+    $phone2 = (isset($_POST['phone_sec']) && !empty($_POST['phone_sec']) ? $_POST['phone_sec'] : '');
+    $partA_date = (isset($_POST['partA_date']) && !empty($_POST['partA_date']) ? $_POST['partA_date'] : NULL);
+    $partB_date = (isset($_POST['partB_date']) && !empty($_POST['partB_date']) ? $_POST['partB_date'] : NULL);
+    $medicare_number = (isset($_POST['medicare_number']) && !empty($_POST['medicare_number']) ? $_POST['medicare_number'] : '');
+    $policy = (isset($_POST['policy']) && !empty($_POST['policy']) ? $_POST['policy'] : '');
+    $insurer = (isset($_POST['insurer']) && !empty($_POST['insurer']) ? $_POST['insurer'] : '');
+    $appstatus = (isset($_POST['appstatus']) && !empty($_POST['appstatus']) ? $_POST['appstatus'] : '');
+    $notes = (isset($_POST['notes']) && !empty($_POST['notes']) ? $_POST['notes'] : '');
+    $created = (isset($_POST['created']) && !empty($_POST['created']) ? $_POST['created'] : date('Y-m-d H:i:s'));    
     // Insert new record into the clients table
     $stmt = $pdo->prepare('INSERT INTO clients VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute([$id, $name, $address, $city, $state, $zip, $county, $birthdate, $phone, $phone2, $email, $partA_date, $partB_date, $medicare_number, $policy, $insurer, $appstatus, $notes, $created]);
