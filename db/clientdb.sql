@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 03, 2024 at 07:36 PM
+-- Generation Time: Apr 21, 2024 at 12:08 AM
 -- Server version: 10.11.6-MariaDB-0+deb12u1-log
--- PHP Version: 8.2.7
+-- PHP Version: 8.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -95,12 +95,25 @@ CREATE TABLE `leads` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tally`
+--
+
+CREATE TABLE `tally` (
+  `id` int(11) NOT NULL,
+  `date` date DEFAULT NULL,
+  `clients` int(6) DEFAULT NULL,
+  `leads` int(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_events`
 --
 
 CREATE TABLE `tbl_events` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `title` varchar(255) NOT NULL,
   `start` datetime NOT NULL,
   `end` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -126,6 +139,7 @@ CREATE TABLE `tbl_lists` (
 CREATE TABLE `tbl_tasks` (
   `task_id` int(10) UNSIGNED NOT NULL,
   `task_name` varchar(150) NOT NULL,
+  `lead_name` varchar(75) DEFAULT NULL,
   `task_description` text NOT NULL,
   `list_id` int(11) NOT NULL,
   `priority` varchar(10) NOT NULL,
@@ -153,6 +167,12 @@ ALTER TABLE `clients`
 --
 ALTER TABLE `leads`
   ADD PRIMARY KEY (`name`);
+
+--
+-- Indexes for table `tally`
+--
+ALTER TABLE `tally`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_events`
@@ -187,6 +207,12 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tally`
+--
+ALTER TABLE `tally`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

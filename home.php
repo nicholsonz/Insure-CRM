@@ -18,7 +18,6 @@
 		<th>Task</th>
 		<th>Lead</th>
 		<th>Priority</th>
-		<!-- <th>Task List</th> -->
 		<th>Deadline</th>
 		</tr>
      </thead>
@@ -72,7 +71,6 @@
 		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name;?></a></td>
 		<td><a href="./updatelead.php?name=<?= $name; ?>"><?php echo $lead_name; ?></a></td>
 		<td><?php echo $priority; ?></td>
-		<!-- <td><?php echo $list_name; ?></td> -->
 		<td><?php echo $deadline; ?></td>
 		</tr>			
 		<?php
@@ -111,7 +109,7 @@
 		<h4>Clients - <?= $convleads?></h4>
 	</div>
 	<div>
-		<h4><?php echo date('F'); ?> Conversion = <?= number_format($convperc * 100); ?> %</h4>
+		<h4>Conversion = <?= number_format($convperc * 100); ?> %</h4>
 	</div> 
     </div>
 	<div class="w3-col s12 m3 l3 w3-margin">
@@ -131,7 +129,7 @@
 	 <h4>Clients - <?= $convleads?></h4>
         </div>
 	<div>
-		<h4><?php echo date('Y'); ?> Conversion = <?= number_format($convperc * 100); ?> %</h4>
+		<h4>Conversion = <?= number_format($convperc * 100); ?> %</h4>
 	</div> 
    </div>
  <div class="w3-col s12 m6-6 l6-6 w3-margin w3-padding">
