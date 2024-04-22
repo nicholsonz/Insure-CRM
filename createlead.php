@@ -96,6 +96,7 @@ if (!empty($_POST)) {
     <td>    
         <select name="policy" id="policy">
             <option value="Policy" disabled selected>Policy</option>
+            <option value="Health">Health</option>
             <option value="Life">Life</option>
             <option value="Med Supp">Med Supp</option>
             <option value="Med Adv">Med Adv</option>

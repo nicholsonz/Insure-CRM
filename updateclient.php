@@ -119,6 +119,7 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
     <td><label>Policy</label>
         <select id="policy" name="policy">
             <option value="Policy" disabled selected>Policy</option>
+            <option <?php if($client["policy"] == "Health"){ echo "selected"; } ?>>Health</option>
             <option <?php if($client["policy"] == "Life"){ echo "selected"; } ?>>Life</option>
             <option <?php if($client["policy"] == "Med Supp"){ echo "selected"; } ?>>Med Supp</option>
             <option <?php if($client["policy"] == "Med Adv"){ echo "selected"; } ?>>Med Adv</option>
