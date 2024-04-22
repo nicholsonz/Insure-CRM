@@ -39,7 +39,7 @@ tr {
 }
 /* chart style */
 .chart-style {
-	max-height: 450px; 
+	max-height: 350px; 
 	display: inline-block;
 	position: relative;
 	width: 100%;
