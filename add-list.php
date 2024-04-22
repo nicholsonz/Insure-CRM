@@ -90,7 +90,7 @@
         }
         */
         //SQL Query to Insert data into database
-        $sql = "INSERT INTO tbl_lists SET 
+        $sql = "INSERT INTO task_lists SET 
             list_name = '$list_name',
             list_description = '$list_description'";
         

@@ -18,7 +18,7 @@
         $db_select = mysqli_select_db($conn, DB_NAME) or die();
         
         //Write the Query to DELETE List from DAtabase
-        $sql = "DELETE FROM tbl_lists WHERE list_id=$list_id";
+        $sql = "DELETE FROM task_lists WHERE list_id=$list_id";
         
         //Execute The Query
         $res = mysqli_query($conn, $sql);

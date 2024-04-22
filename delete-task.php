@@ -16,7 +16,7 @@ require_once('./functions.php');
         $db_select = mysqli_select_db($conn, DB_NAME) or die();
         
         //SQL Query to DELETE TASK
-        $sql = "DELETE FROM tbl_tasks WHERE task_id=$task_id";
+        $sql = "DELETE FROM tasks WHERE task_id=$task_id";
         
         //Execute Query
         $res = mysqli_query($conn, $sql);
