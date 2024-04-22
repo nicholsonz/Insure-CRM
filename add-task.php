@@ -1,6 +1,11 @@
 <?php 
     require_once('./functions.php');
-    
+
+    if (isset($_GET['task_name'])) {
+        $name = ($_GET['task_name']);
+    }else{
+        $task_name = "";
+    }
     if (isset($_GET['name'])) {
         $name = ($_GET['name']);
     }else{
