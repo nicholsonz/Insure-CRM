@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 21, 2024 at 12:08 AM
+-- Generation Time: Apr 22, 2024 at 12:54 AM
 -- Server version: 10.11.6-MariaDB-0+deb12u1-log
 -- PHP Version: 8.2.18
 
@@ -108,42 +108,30 @@ CREATE TABLE `tally` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_events`
+-- Table structure for table `tasks`
 --
 
-CREATE TABLE `tbl_events` (
-  `id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `start` datetime NOT NULL,
-  `end` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_lists`
---
-
-CREATE TABLE `tbl_lists` (
-  `list_id` int(10) UNSIGNED NOT NULL,
-  `list_name` varchar(50) NOT NULL,
-  `list_description` varchar(150) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_tasks`
---
-
-CREATE TABLE `tbl_tasks` (
+CREATE TABLE `tasks` (
   `task_id` int(10) UNSIGNED NOT NULL,
   `task_name` varchar(150) NOT NULL,
-  `lead_name` varchar(75) DEFAULT NULL,
+  `name` varchar(75) DEFAULT NULL,
   `task_description` text NOT NULL,
   `list_id` int(11) NOT NULL,
   `priority` varchar(10) NOT NULL,
-  `deadline` date NOT NULL
+  `deadline` date NOT NULL,
+  `type` enum('Lead','Client','Other') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task_lists`
+--
+
+CREATE TABLE `task_lists` (
+  `list_id` int(10) UNSIGNED NOT NULL,
+  `list_name` varchar(50) NOT NULL,
+  `list_description` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -175,23 +163,17 @@ ALTER TABLE `tally`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_events`
+-- Indexes for table `tasks`
 --
-ALTER TABLE `tbl_events`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_lists`
---
-ALTER TABLE `tbl_lists`
-  ADD PRIMARY KEY (`list_id`);
-
---
--- Indexes for table `tbl_tasks`
---
-ALTER TABLE `tbl_tasks`
+ALTER TABLE `tasks`
   ADD PRIMARY KEY (`task_id`),
   ADD KEY `list_id` (`list_id`);
+
+--
+-- Indexes for table `task_lists`
+--
+ALTER TABLE `task_lists`
+  ADD PRIMARY KEY (`list_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -216,22 +198,16 @@ ALTER TABLE `tally`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tbl_events`
+-- AUTO_INCREMENT for table `tasks`
 --
-ALTER TABLE `tbl_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_lists`
---
-ALTER TABLE `tbl_lists`
-  MODIFY `list_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_tasks`
---
-ALTER TABLE `tbl_tasks`
+ALTER TABLE `tasks`
   MODIFY `task_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `task_lists`
+--
+ALTER TABLE `task_lists`
+  MODIFY `list_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

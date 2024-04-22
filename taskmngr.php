@@ -60,11 +60,12 @@
             <tr>
                 <th>S.N.</th>
                 <th>Task Name</th>
-                <th>Lead Name</th>
+                <th>Name</th>
                 <th>Details</th>
                 <th>Task List</th>
                 <th>Priority</th>
                 <th>Deadline</th>
+                <th>Type</th>
                 <th></th>
             </tr>
          </thead>
@@ -74,8 +75,8 @@
                 $db_select = mysqli_select_db($con, DB_NAME) or die();
                 
                 //Create SQL Query to Get DAta from Databse
-                $sql = "SELECT *, tbll.list_name FROM tbl_tasks AS tblt
-                        LEFT JOIN tbl_lists AS tbll ON tbll.list_id = tblt.list_id
+                $sql = "SELECT *, tl.list_name FROM tasks AS t
+                        LEFT JOIN task_lists AS tl ON tl.list_id = t.list_id
                          ORDER BY deadline";
                 
                 //Execute Query
@@ -98,20 +99,22 @@
                         {
                             $task_id = $row['task_id'];
                             $task_name = $row['task_name'];
-                            $lead_name = $row['lead_name'];
+                            $name = $row['name'];
                             $descr = $row['task_description'];
                             $list_name = $row['list_name'];
                             $priority = $row['priority'];
                             $deadline = $row['deadline'];
+                            $type = $row['type'];
                             ?>
                             <tr>
                                 <td><?php echo $sn++; ?></td>
                                 <td><?php echo $task_name; ?></td>
-                                <td><?php echo $lead_name; ?></td>
+                                <td><?php echo $name; ?></td>
                                 <td><?php echo $descr; ?></td>
                                 <td><?php echo $list_name; ?></td>
                                 <td><?php echo $priority; ?></td>
                                 <td><?php echo $deadline; ?></td>
+                                <td><?php echo $type; ?></td>
                                 <td class="actions">
                                     <a href="./update-task.php?task_id=<?php echo $task_id; ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                                    
                                     <a href="./delete-task.php?task_id=<?php echo $task_id; ?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>

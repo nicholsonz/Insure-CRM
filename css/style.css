@@ -290,10 +290,10 @@ body.loggedin {
 	background-color: darkgreen;
 }
 .read table tbody tr td.actions .task{
-	background-color: blue;
+	background-color: rgb(0, 110, 255);
 }
 .read table tbody tr td.actions .task:hover {
-	background-color: darkblue;
+	background-color: rgb(0, 81, 255);
 }
 .update form {
   	padding: 15px 0;

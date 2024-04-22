@@ -52,7 +52,8 @@ $num_clients = $pdo->query('SELECT COUNT(*) FROM clients')->fetchColumn();
                 <td><?=$client['insurer']?></td>
                 <td><?=$client['appstatus']?></td>
                 <td><?=$client['created']?></td>
-                <td class="actions">
+                <td class="actions">       
+                    <a href="add-task.php?name=<?=$client['name']?>&&type=<?="Client";?>" class="task"><i class="fas fa-tasks fa-xs"></i></a>
                     <a href="view.php?id=<?=$client['id']?>" class="view" target="_blank"><i class="fas fa-eye fa-xs"></i></a>
                     <a href="updateclient.php?id=<?=$client['id']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                    
                     <a href="delete.php?name=<?=$client['name']?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>

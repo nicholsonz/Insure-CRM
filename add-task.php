@@ -2,9 +2,14 @@
     require_once('./functions.php');
     
     if (isset($_GET['name'])) {
-        $lead_name = ($_GET['name']);
+        $name = ($_GET['name']);
     }else{
-        $lead_name = "";
+        $name = "";
+    }
+    if(isset($_GET['type'])){
+        $type = ($_GET['type']);
+    }else{
+        $type = "";
     }
 ?>
 
@@ -37,8 +42,8 @@
                     <td><input type="text" name="task_name" placeholder="Task Name" required="required" value="<?= $task_name;?>"/></td>
                 </tr>
                 <tr>
-                    <td>Lead Name: </td>
-                    <td><input type="text" name="lead_name" placeholder="Lead Name" value="<?= $lead_name;?>"/></td>
+                    <td>Name: </td>
+                    <td><input type="text" name="name" placeholder="Name" value="<?= $name;?>"/></td>
                 </tr>
                 
                 <tr>
@@ -60,7 +65,7 @@
                                 $db_select = mysqli_select_db($conn, DB_NAME) or die();
                                 
                                 //SQL query to get the list from table
-                                $sql = "SELECT * FROM tbl_lists";
+                                $sql = "SELECT * FROM task_lists";
                                 
                                 //Execute Query
                                 $res = mysqli_query($conn, $sql);
@@ -115,6 +120,16 @@
                     <td>Deadline: </td>
                     <td><input type="date" name="deadline" /></td>
                 </tr>
+                <tr>
+                    <td>Type: </td>
+                    <td>
+                        <select name="type">
+                            <option <?php if($type=="Lead"){echo "selected='selected'";} ?> value="Lead">Lead</option>
+                            <option <?php if($type=="Client"){echo "selected='selected'";} ?> value="Client">Client</option>
+                            <option <?php if($type=="Other"){echo "selected='selected'";} ?> value="Other">Other</option>
+                        </select>
+                    </td>
+                </tr>
                 
                 <tr>
                     <td><input class="w3-button" type="submit" name="submit" value="SAVE" /></td>
@@ -137,11 +152,12 @@
         //echo "Button Clicked";
         //Get all the Values from Form
         $task_name = htmlspecialchars($_POST['task_name']);
-        $lead_name = htmlspecialchars($_POST['lead_name']);
+        $name = htmlspecialchars($_POST['name']);
         $task_description = htmlspecialchars($_POST['task_description']);
         $list_id = htmlspecialchars($_POST['list_id']);
         $priority = htmlspecialchars($_POST['priority']);
         $deadline = htmlspecialchars($_POST['deadline']);
+        $type = htmlspecialchars($_POST['type']);
         
         //Connect Database
         $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
@@ -150,13 +166,14 @@
         $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
         
         //CReate SQL Query to INSERT DATA into DAtabase
-        $sql2 = "INSERT INTO tbl_tasks SET 
+        $sql2 = "INSERT INTO tasks SET 
             task_name = '$task_name',
-            lead_name = '$lead_name',
+            name = '$name',
             task_description = '$task_description',
             list_id = $list_id,
             priority = '$priority',
-            deadline = '$deadline'";
+            deadline = '$deadline',
+            type = '$type'";
         
         //Execute Query
         $res2 = mysqli_query($conn2, $sql2);

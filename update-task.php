@@ -12,7 +12,7 @@
         $db_select = mysqli_select_db($con, DB_NAME) or die();
         
         //SQL Query to Get the detail of selected task
-        $sql = "SELECT * FROM tbl_tasks WHERE task_id=$task_id";
+        $sql = "SELECT * FROM tasks WHERE task_id=$task_id";
         
         //Execute Query
         $res = mysqli_query($con, $sql);
@@ -25,11 +25,12 @@
             
             //Get the Individual Value
             $task_name = $row['task_name'];
-            $lead_name = $row['lead_name'];
+            $name = $row['name'];
             $task_description = $row['task_description'];
             $list_id = $row['list_id'];
             $priority = $row['priority'];
             $deadline = $row['deadline'];
+            $type = $row['type'];
         }
     }
     else
@@ -66,8 +67,8 @@
                     <td><input type="text" name="task_name" value="<?php echo $task_name; ?>" required="required" /></td>
                 </tr>
                 <tr>
-                    <td>Lead Name: </td>
-                    <td><input type="text" name="lead_name" value="<?php echo $lead_name; ?>" /></td>
+                    <td>Name: </td>
+                    <td><input type="text" name="name" value="<?php echo $name; ?>" /></td>
                 </tr>
                 
                 <tr>
@@ -86,7 +87,7 @@
                                 $db_select2 = mysqli_select_db($con, DB_NAME) or die();
                                 
                                 //SQL Query to GET Lists
-                                $sql2 = "SELECT * FROM tbl_lists";
+                                $sql2 = "SELECT * FROM task_lists";
                                 
                                 //Execute Query
                                 $res2 = mysqli_query($con, $sql2);
@@ -145,6 +146,16 @@
                     <td>Deadline: </td>
                     <td><input type="date" name="deadline" value="<?php echo $deadline; ?>" /></td>
                 </tr>
+                <tr>
+                    <td>Type: </td>
+                    <td>
+                        <select name="type">
+                            <option <?php if($type=="Lead"){echo "selected='selected'";} ?> value="Lead">Lead</option>
+                            <option <?php if($type=="Client"){echo "selected='selected'";} ?> value="Client">Client</option>
+                            <option <?php if($type=="Other"){echo "selected='selected'";} ?> value="Other">Other</option>
+                        </select>
+                    </td>
+                </tr>
                 
                 <tr>
                     <td><input class="w3-button" type="submit" name="submit" value="UPDATE" /></td>
@@ -168,23 +179,25 @@
         
         //Get the CAlues from Form
         $task_name = htmlspecialchars($_POST['task_name']);
-        $lead_name = htmlspecialchars($_POST['lead_name']);
+        $name = htmlspecialchars($_POST['name']);
         $task_description = htmlspecialchars($_POST['task_description']);
         $list_id = htmlspecialchars($_POST['list_id']);
         $priority = htmlspecialchars($_POST['priority']);
         $deadline = htmlspecialchars($_POST['deadline']);
+        $type = htmlspecialchars($_POST['type']);
         
         //SElect Database
         $db_select3 = mysqli_select_db($con, DB_NAME) or die();
         
         //CREATE SQL QUery to Update TAsk
-        $sql3 = "UPDATE tbl_tasks SET 
+        $sql3 = "UPDATE tasks SET 
                 task_name = '$task_name',
-                lead_name = '$lead_name',
+                name = '$name',
                 task_description = '$task_description',
                 list_id = '$list_id',
                 priority = '$priority',
-                deadline = '$deadline'
+                deadline = '$deadline',
+                type = '$type'
                 WHERE 
                 task_id = $task_id";
         

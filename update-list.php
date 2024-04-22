@@ -13,7 +13,7 @@ require_once('./functions.php');
         $db_select = mysqli_select_db($con, DB_NAME) or die();
         
         //Query to Get the Values from Database
-        $sql = "SELECT * FROM tbl_lists WHERE list_id=$list_id";
+        $sql = "SELECT * FROM task_lists WHERE list_id=$list_id";
         
         //Execute Query
         $res = mysqli_query($con, $sql);
@@ -111,7 +111,7 @@ require_once('./functions.php');
         $db_select2 = mysqli_select_db($con, DB_NAME);
         
         //QUERY to Update List
-        $sql2 = "UPDATE tbl_lists SET 
+        $sql2 = "UPDATE task_lists SET 
             list_name = '$list_name',
             list_description = '$list_description' 
             WHERE list_id=$list_id
