@@ -57,12 +57,13 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
 
 <div class="content update">
 	<h1><?=$client['name']?></h1>
-        <!-- Client file upload -- Needs editing to produce specific folders for each client with appropriate access rights --
+<!-- Client file upload -- Needs editing to produce specific folders for each client with appropriate access rights 
             <form action="upld.php" method="post" enctype="multipart/form-data">
             Select file to upload:
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Upload File" name="submit">
-        </form> -->
+        </form>
+-->
     <form action="updateclient.php?id=<?=$client['id']?>" method="post">
     <table>
 <tr>
