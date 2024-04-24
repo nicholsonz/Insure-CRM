@@ -23,7 +23,7 @@
  	<h5>Tasks - Clients <?= number_format($clients);?> | Leads <?= number_format($leads);?> | Others <?= number_format($other);?></h5>
    <div class="w3-col s12 m5 l5 w3-margin">
     <div class="read">
-     <h2>Client Tasks</h2>
+     <h2>Tasks: Clients</h2>
      <table class="w3-table w3-hoverable">     
 	  <thead>   
 		<tr>
@@ -104,7 +104,7 @@
      </table>
 	</div> 
    <div class="read">
-     <h2>Lead Tasks</h2>
+     <h2>Tasks: Leads</h2>
      <table class="w3-table w3-hoverable">     
 	  <thead>   
 		<tr>
@@ -186,7 +186,7 @@
      </table>
 	</div>
    <div class="read">
-     <h2>Other Tasks</h2>
+     <h2>Tasks: Other</h2>
      <table class="w3-table w3-hoverable">     
 	  <thead>   
 		<tr>
