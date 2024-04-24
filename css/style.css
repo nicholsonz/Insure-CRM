@@ -127,9 +127,23 @@ body.loggedin {
 }
 .content h2 {
 	margin: 0;
-	padding: 25px 0;
+	padding: 15px 0;
 	font-size: 22px;
 	color: #4accec;
+}
+.content h3 {
+	margin: 0;
+	padding: 5px 0;
+	font-size: 18px;
+	color: #39bce0;
+	text-align: left;
+}
+.content h5 {
+	margin: 0;
+	padding: 5px 0;
+	font-size: 16px;
+	color: #89a7af;
+	text-align: left;
 }
 .contentview h1 {
 	margin: 0;

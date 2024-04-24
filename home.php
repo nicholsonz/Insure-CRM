@@ -5,11 +5,24 @@
 ?>
 
 <?=template_header('Home')?>
-
+<?php
+		$sql = "SELECT COUNT(*) as clients, 
+				(SELECT COUNT(*) FROM tasks WHERE type = 'Lead') as leads,
+				(SELECT COUNT(*) FROM tasks WHERE type = 'Other') as other
+				FROM tasks 
+				WHERE type = 'Clients'";
+			$res = mysqli_query($con, $sql);
+			while($row=mysqli_fetch_assoc($res)){
+				$clients = $row['clients'];
+				$leads = $row['leads'];
+				$other = $row['other'];
+			}
+	?>
 <div class="content w3-mobile">
  <h1><?php echo date('M d, Y'); ?></h1>
+ 	<h5>Tasks - Clients <?= number_format($clients);?> | Leads <?= number_format($leads);?> | Others <?= number_format($other);?></h5>
    <div class="w3-col s12 m5 l5 w3-margin">
-   <div class="read">
+    <div class="read">
      <h2>Client Tasks</h2>
      <table class="w3-table w3-hoverable">     
 	  <thead>   
@@ -36,19 +49,18 @@
 
 		//Execute Query
 		$res = mysqli_query($con, $sql);
-				
-		//CHeck whether the query execueted o rnot
+     		//CHeck whether the query execueted o rnot
 			if($res==true)
 			{
 			//DIsplay the Tasks from DAtabase
-			//Dount the Tasks on Database first
-			$count_rows = mysqli_num_rows($res);
-					
+			//Count the Tasks on Database first
+			$count_clients = mysqli_num_rows($res);
+			
 			//Create Serial Number Variable
 			$sn=1;
 					
 			//Check whether there is task on database or not
-			if($count_rows>0)
+			if($count_clients>0)
 			{
 			//Data is in Database
 				while($row=mysqli_fetch_assoc($res))
@@ -123,14 +135,14 @@
 			if($res==true)
 			{
 			//DIsplay the Tasks from DAtabase
-			//Dount the Tasks on Database first
-			$count_rows = mysqli_num_rows($res);
+			//Count the Tasks on Database first
+			$count_leads = mysqli_num_rows($res);
 					
 			//Create Serial Number Variable
 			$sn=1;
 					
 			//Check whether there is task on database or not
-			if($count_rows>0)
+			if($count_leads>0)
 			{
 			//Data is in Database
 				while($row=mysqli_fetch_assoc($res))
@@ -206,13 +218,13 @@
 			{
 			//DIsplay the Tasks from DAtabase
 			//Dount the Tasks on Database first
-			$count_rows = mysqli_num_rows($res);
+			$count_other = mysqli_num_rows($res);
 					
 			//Create Serial Number Variable
 			$sn=1;
 					
 			//Check whether there is task on database or not
-			if($count_rows>0)
+			if($count_other>0)
 			{
 			//Data is in Database
 				while($row=mysqli_fetch_assoc($res))
