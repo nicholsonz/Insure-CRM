@@ -22,8 +22,19 @@ textarea {
 	box-sizing: border-box;
 	border: 2px solid #ccc;
 	border-radius: 4px;
-	background-color: #f8f8f8;
+	background-color: white;
 	font-size: 16px;
+}
+.contentview textarea {
+	width: 650px;
+	height: 150px;
+	padding: 12px 20px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #1d1c1c;
+	font-size: 16px;
+	color: white
 }
 .textbox {
 	height: 150px;
@@ -49,7 +60,7 @@ tr {
 	padding: 20px;
 	width: 250px;
 	word-wrap: break-word;
-	color: black;
+	color: white;
 }
 .signup {
 	font-family: Arial, Helvetica, sans-serif;
@@ -112,7 +123,7 @@ body.loggedin {
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 	margin: 15px 0;
 	padding: 5px;
-	background-color: #fff;
+	background-color: #1d1c1c;
 }
 .content {
 	width: 1000px;
