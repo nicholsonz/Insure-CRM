@@ -76,7 +76,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
    
 </head>
 <body>
-    <div class="contentview view">
+    <div class="contentview">
         <div>
                     <h1 class=""><?php echo $row["name"]; ?></h1>
                     <table>
