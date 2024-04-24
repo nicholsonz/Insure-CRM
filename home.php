@@ -19,7 +19,7 @@
 			}
 	?>
 <div class="content w3-mobile">
- <h1><?php echo date('M d, Y'); ?></h1>
+ <h1><?php echo date('M d, Y') . "&nbsp" . date('   g:i a');?></h1>
  	<h5>Tasks - Clients <?= number_format($clients);?> | Leads <?= number_format($leads);?> | Others <?= number_format($other);?></h5>
    <div class="w3-col s12 m5 l5 w3-margin">
     <div class="read">
