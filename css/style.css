@@ -15,10 +15,15 @@ body {
 	color: white;
 }
 
+input, label {
+    display:block;
+	float: left;
+}
+
 textarea {
 	width: 650px;
 	height: 150px;
-	padding: 12px 20px;
+	padding: 5px 5px;
 	box-sizing: border-box;
 	border: 2px solid #ccc;
 	border-radius: 4px;
