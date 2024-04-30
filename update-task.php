@@ -177,7 +177,7 @@
     {
         //echo "Clicked";
         
-        //Get the CAlues from Form
+        //Get the values from Form
         $task_name = htmlspecialchars($_POST['task_name']);
         $name = htmlspecialchars($_POST['name']);
         $task_description = htmlspecialchars($_POST['task_description']);
@@ -203,15 +203,16 @@
         
         //Execute Query
         $res3 = mysqli_query($con, $sql3);
-        
+
+
         //CHeck whether the Query Executed of Not
         if($res3==true)
         {
             //Query Executed and Task Updated
             $_SESSION['update'] = "Task Updated Successfully.";
-            
+                    
             //Redirect to Home Page
-            header('location: ./taskmngr.php');
+            header('Refresh:0');
         }
         else
         {
@@ -219,7 +220,7 @@
             $_SESSION['update_fail'] = "Failed to Update Task";
             
             //Redirect to this Page
-            header('location: ./update-task.php?task_id='.$task_id);
+            header('Location: ./update-task.php?task_id='.$task_id);
         }
         
         
