@@ -38,8 +38,49 @@ require_once('./functions.php');
         }
     }
 
-?>
 
+    //Check whether the Update is Clicked or Not
+    if(isset($_POST['submit']))
+    {
+        //echo "Button Clicked";
+        
+        //Get the Updated Values from our Form
+        $list_name = $_POST['list_name'];
+        $list_description = $_POST['list_description'];
+        
+        //SElect the Database
+        $db_select2 = mysqli_select_db($con, DB_NAME);
+        
+        //QUERY to Update List
+        $sql2 = "UPDATE task_lists SET 
+                list_name = '$list_name',
+                list_description = '$list_description' 
+                WHERE list_id=$list_id";
+        
+        //Execute the Query
+        $res2 = mysqli_query($con, $sql2);
+        
+        //Check whether the query executed successfully or not
+        if($res2==true)
+        {
+            //Update Successful
+            //SEt the Message
+            $_SESSION['update'] = "List Updated Successfully";
+            
+            //Redirect to Manage List PAge
+            header('location: ./manage-list.php');
+        }
+        else
+        {
+            //FAiled to Update
+            //SEt Session Message
+            $_SESSION['update_fail'] = "Failed to Update List";
+            //Redirect to the Update List PAge
+            header('location: ./update-list.php?list_id='.$list_id);
+        }
+        
+    }
+?>
 
 <?=template_header('Task Mngr')?>
         
@@ -96,51 +137,6 @@ require_once('./functions.php');
 </html>
 
 
-<?php 
-
-    //Check whether the Update is Clicked or Not
-    if(isset($_POST['submit']))
-    {
-        //echo "Button Clicked";
-        
-        //Get the Updated Values from our Form
-        $list_name = $_POST['list_name'];
-        $list_description = $_POST['list_description'];
-        
-        //SElect the Database
-        $db_select2 = mysqli_select_db($con, DB_NAME);
-        
-        //QUERY to Update List
-        $sql2 = "UPDATE task_lists SET 
-            list_name = '$list_name',
-            list_description = '$list_description' 
-            WHERE list_id=$list_id
-        ";
-        
-        //Execute the Query
-        $res2 = mysqli_query($con, $sql2);
-        
-        //Check whether the query executed successfully or not
-        if($res2==true)
-        {
-            //Update Successful
-            //SEt the Message
-            $_SESSION['update'] = "List Updated Successfully";
-            
-            //Redirect to Manage List PAge
-            header('location: ./manage-list.php');
-        }
-        else
-        {
-            //FAiled to Update
-            //SEt Session Message
-            $_SESSION['update_fail'] = "Failed to Update List";
-            //Redirect to the Update List PAge
-            header('location: ./update-list.php?list_id='.$list_id);
-        }
-        
-    }
-?>
 
 
 

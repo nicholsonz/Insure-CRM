@@ -382,6 +382,14 @@ a {
     text-align: center
 }
 
+
+.w3-table th {
+    min-width: 120px;
+}
+.w3-table td {
+    max-width: 350px;
+}
+
 .w3-table td,
 .w3-table th,
 .w3-table-all td,
@@ -389,7 +397,7 @@ a {
     padding: 8px 8px;
     display: table-cell;
     text-align: left;
-    vertical-align: top
+    vertical-align: top;
 }
 
 .w3-table th:first-child,

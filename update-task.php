@@ -38,7 +38,63 @@
         //Redirect to Homepage
         header('location: ./taskmngr.php');
     }
-?>
+                           
+
+    //Check if the button is clicked
+    if(isset($_POST['submit']))
+    {
+        //echo "Clicked";
+        
+        //Get the values from Form
+        $task_name = htmlspecialchars($_POST['task_name']);
+        $name = htmlspecialchars($_POST['name']);
+        $task_description = htmlspecialchars($_POST['task_description']);
+        $list_id = htmlspecialchars($_POST['list_id']);
+        $priority = htmlspecialchars($_POST['priority']);
+        $deadline = htmlspecialchars($_POST['deadline']);
+        $type = htmlspecialchars($_POST['type']);
+        
+        //SElect Database
+        $db_select3 = mysqli_select_db($con, DB_NAME) or die();
+        
+        //CREATE SQL QUery to Update TAsk
+        $sql3 = "UPDATE tasks SET 
+                task_name = '$task_name',
+                name = '$name',
+                task_description = '$task_description',
+                list_id = '$list_id',
+                priority = '$priority',
+                deadline = '$deadline',
+                type = '$type'
+                WHERE 
+                task_id = $task_id";
+        
+        //Execute Query
+        $res3 = mysqli_query($con, $sql3);
+    
+    
+        //CHeck whether the Query Executed of Not
+        if($res3==true)
+        {
+            //Query Executed and Task Updated
+            $_SESSION['update'] = "Task Updated Successfully";
+                    
+            //Redirect to Home Page
+            header('location: ./taskmngr.php');
+        }
+        else
+        {
+            //FAiled to Update Task
+            $_SESSION['update_fail'] = "Failed to Update Task";
+            
+            //Redirect to this Page
+            header('Location: ./update-task.php?task_id='.$task_id);
+        }
+        
+        
+    }
+    
+    ?>
 
 <?=template_header('Task Mngr')?>
     
@@ -126,7 +182,6 @@
                                 }
                             ?>
                             
-                            
                         </select>
                     </td>
                 </tr>
@@ -170,63 +225,6 @@
 </html>
 
 
-<?php 
-
-    //Check if the button is clicked
-    if(isset($_POST['submit']))
-    {
-        //echo "Clicked";
-        
-        //Get the values from Form
-        $task_name = htmlspecialchars($_POST['task_name']);
-        $name = htmlspecialchars($_POST['name']);
-        $task_description = htmlspecialchars($_POST['task_description']);
-        $list_id = htmlspecialchars($_POST['list_id']);
-        $priority = htmlspecialchars($_POST['priority']);
-        $deadline = htmlspecialchars($_POST['deadline']);
-        $type = htmlspecialchars($_POST['type']);
-        
-        //SElect Database
-        $db_select3 = mysqli_select_db($con, DB_NAME) or die();
-        
-        //CREATE SQL QUery to Update TAsk
-        $sql3 = "UPDATE tasks SET 
-                task_name = '$task_name',
-                name = '$name',
-                task_description = '$task_description',
-                list_id = '$list_id',
-                priority = '$priority',
-                deadline = '$deadline',
-                type = '$type'
-                WHERE 
-                task_id = $task_id";
-        
-        //Execute Query
-        $res3 = mysqli_query($con, $sql3);
-
-
-        //CHeck whether the Query Executed of Not
-        if($res3==true)
-        {
-            //Query Executed and Task Updated
-            $_SESSION['update'] = "Task Updated Successfully.";
-                    
-            //Redirect to Home Page
-            header('Refresh:0');
-        }
-        else
-        {
-            //FAiled to Update Task
-            $_SESSION['update_fail'] = "Failed to Update Task";
-            
-            //Redirect to this Page
-            header('Location: ./update-task.php?task_id='.$task_id);
-        }
-        
-        
-    }
-
-?>
 
 
 

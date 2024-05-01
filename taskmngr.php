@@ -8,9 +8,7 @@
 
 <div class="content read">
     
-    <h1>TASK MANAGER</h1>
-    
-    
+    <h1>TASK MANAGER</h1>    
     <!-- Menu Starts Here -->
     <div class="">
     
@@ -55,20 +53,21 @@
         
         <a href="./add-task.php" class="add-task">Add Task</a>
         
-        <table class="w3-table w3-hoverable">
+        <table class="w3-table w3-hoverable" id="srtTable">
          <thead>
             <tr>
                 <th>S.N.</th>
                 <th>Task Name</th>
                 <th>Name</th>
                 <th>Details</th>
-                <th>Task List</th>
+                <th><a href="javascript:SortTable(4,'T');">Task List <i class="fa fa-sort"></a></th>
                 <th>Priority</th>
                 <th>Deadline</th>
-                <th>Type</th>
+                <th><a href="javascript:SortTable(7,'T');">Type <i class="fa fa-sort"></a></th>
                 <th></th>
             </tr>
          </thead>
+        <tbody id="tblSrch">
             <?php 
                 
                 //Select Database
@@ -139,11 +138,9 @@
             
             ?>
             
-            
+        </tbody>
         
         </table>
-    
-    </div>
     
     <!-- Tasks Ends Here -->
     </div>
