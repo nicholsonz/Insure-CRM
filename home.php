@@ -32,7 +32,7 @@
      <table class="w3-table w3-hoverable">     
 	  <thead>   
 		<tr>
-		<th>#</th>
+		<!-- <th>#</th> -->
 		<th>Task</th>
 		<th>Client</th>
 		<th>Priority</th>
@@ -85,7 +85,7 @@
 				}
 		?>				
 		<tr>
-		<td><?php echo $sn++; ?></td>
+		<!-- <td><?php echo $sn++; ?></td> -->
 		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name;?></a></td>
 		<td><a href="./updateclient.php?name=<?= $name; ?>"><?php echo $name; ?></a></td>
 		<td><?php echo $priority; ?></td>
@@ -113,7 +113,7 @@
      <table class="w3-table w3-hoverable" id="srtTable">     
 	  <thead>   
 		<tr>
-		<th>#</th>
+		<!-- <th>#</th> -->
 		<th>Task</th>
 		<th>Lead</th>
 		<th>Priority</th>
@@ -184,7 +184,7 @@
 	  <tbody id="tblSrch">
 		<?php foreach ($clients as $client): ?>
 		<tr>
-		<td><?php echo $sn++; ?></td>
+		<!-- <td><?php echo $sn++; ?></td> -->
 		<td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['task_name'];?></a></td>
 		<td><a href="./updatelead.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
 		<td><?= $client['priority']; ?></td>
@@ -220,7 +220,7 @@
      <table class="w3-table w3-hoverable">     
 	  <thead>   
 		<tr>
-		<th>#</th>
+		<!-- <th>#</th> -->
 		<th>Task</th>
 		<th>Name</th>
 		<th>Priority</th>
@@ -274,7 +274,7 @@
 				}
 		?>				
 		<tr>
-		<td><?php echo $sn++; ?></td>
+		<!-- <td><?php echo $sn++; ?></td> -->
 		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name;?></a></td>
 		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name; ?></a></td>
 		<td><?php echo $priority; ?></td>
