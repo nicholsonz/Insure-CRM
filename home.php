@@ -7,9 +7,6 @@
 	// Number of records to show on each page
 	$records_per_page = 6;
 	
-	
-
-// Home Page template below.
 ?>
 
 <?=template_header('Home')?>
@@ -126,10 +123,10 @@
 		<?php 
 			// Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
 			$stmt = $pdo->prepare('SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, "%m-%d-%Y") AS deadline, tl.list_name 
-			FROM tasks AS t
-			LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-			WHERE t.type = "Lead"
-			ORDER BY deadline LIMIT :current_page, :record_per_page');
+									FROM tasks AS t
+									LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+									WHERE t.type = "Lead"
+									ORDER BY deadline LIMIT :current_page, :record_per_page');
 			$stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
 			$stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
 			$stmt->execute();
