@@ -1,6 +1,14 @@
 <?php
     require_once('./functions.php');
 
+	// Connect to MySQL database
+	$pdo = pdo_connect_mysql();
+	$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+	// Number of records to show on each page
+	$records_per_page = 6;
+	
+	
+
 // Home Page template below.
 ?>
 
@@ -105,18 +113,33 @@
 	</div> 
    <div class="read">
      <h2>Tasks: Leads</h2>
-     <table class="w3-table w3-hoverable">     
+     <table class="w3-table w3-hoverable" id="srtTable">     
 	  <thead>   
 		<tr>
 		<th>#</th>
 		<th>Task</th>
 		<th>Lead</th>
 		<th>Priority</th>
-		<th>Deadline</th>
+		<th><a href="javascript:SortTable(4,'D','dmyy');">Deadline <i class="fa fa-sort"></a></th>
 		</tr>
      </thead>
 		<?php 
-			
+			// Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
+			$stmt = $pdo->prepare('SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, "%m-%d-%Y") AS deadline, tl.list_name 
+			FROM tasks AS t
+			LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+			WHERE t.type = "Lead"
+			ORDER BY deadline LIMIT :current_page, :record_per_page');
+			$stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
+			$stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
+			$stmt->execute();
+			// Fetch the records so we can display them in our template.
+			$clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			// Get the total number of clients, this is so we can determine whether there should be a next and previous button
+			$num_clients = $pdo->query('SELECT COUNT(*) FROM tasks AS t
+			LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+			WHERE t.type = "Lead"')->fetchColumn();
+
 		//Select Database
 		$db_select = mysqli_select_db($con, DB_NAME) or die();
 				
@@ -131,7 +154,7 @@
 		//Execute Query
 		$res = mysqli_query($con, $sql);
 				
-		//CHeck whether the query execueted o rnot
+		//Check whether the query execueted or not
 			if($res==true)
 			{
 			//DIsplay the Tasks from DAtabase
@@ -145,31 +168,34 @@
 			if($count_leads>0)
 			{
 			//Data is in Database
-				while($row=mysqli_fetch_assoc($res))
-				{
-				$task_id = $row['task_id'];
-				$task_name = $row['task_name'];
-				$name = $row['name'];
-				$priority = $row['priority'];
-				// $list_name = $row['list_name'];
-				$deadline = $row['deadline'];
+				// while($row=mysqli_fetch_assoc($res))
+				// {
+				// $task_id = $row['task_id'];
+				// $task_name = $row['task_name'];
+				// $name = $row['name'];
+				// $priority = $row['priority'];
+				// // $list_name = $row['list_name'];
+				// $deadline = $row['deadline'];
 
 		
-				$sql2 = "SELECT name FROM leads WHERE name LIKE '$name%'";
-				$result = mysqli_query($con, $sql2);
-				while($row=mysqli_fetch_assoc($result)){
-					$name = $row['name'];
-				}
-		?>				
+				// $sql2 = "SELECT name FROM leads WHERE name LIKE '$name%'";
+				// $result = mysqli_query($con, $sql2);
+				// while($row=mysqli_fetch_assoc($result)){
+				// 	$name = $row['name'];
+				// }
+		?>
+	  <tbody id="tblSrch">
+		<?php foreach ($clients as $client): ?>
 		<tr>
 		<td><?php echo $sn++; ?></td>
-		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name;?></a></td>
-		<td><a href="./updatelead.php?name=<?= $name; ?>"><?php echo $name; ?></a></td>
-		<td><?php echo $priority; ?></td>
-		<td><?php echo $deadline; ?></td>
-		</tr>			
+		<td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['task_name'];?></a></td>
+		<td><a href="./updatelead.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
+		<td><?= $client['priority']; ?></td>
+		<td><?= $client['deadline']; ?></td>
+		</tr>	
+		<?php endforeach; ?>		
 		<?php
-				}
+				
 			}
 			else
 			{
@@ -184,6 +210,13 @@
 		
 		?>	
      </table>
+	</div><div class="center pagination">
+		<?php if ($page > 1): ?>
+		<a href="home.php?page=<?=$page-1?>"><i class="fas fa-angle-double-left fa-lg"></i></a>
+		<?php endif; ?>
+		<?php if ($page*$records_per_page < $num_clients): ?>
+		<a href="home.php?page=<?=$page+1?>"><i class="fas fa-angle-double-right fa-lg"></i></a>
+		<?php endif; ?>
 	</div>
    <div class="read">
      <h2>Tasks: Other</h2>

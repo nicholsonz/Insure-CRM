@@ -33,12 +33,12 @@ $num_clients = $pdo->query('SELECT COUNT(*) FROM clients')->fetchColumn();
         <thead>
             <tr>
                 <th>Name</th>
-                <th><a href="javascript:SortTable(1,'D','ymd');">Birth Date <i class="fa fa-sort"></th>
+                <th><a href="javascript:SortTable(1,'D','ymd');">Birth Date <i class="fa fa-sort"></a></th>
                 <th>Primary Phone</th>
                 <th>Policy</th>
                 <th><a href="javascript:SortTable(4,'T');">Insurer <i class="fa fa-sort"></a></th>
                 <th>App Status</th>
-                <th><a href="javascript:SortTable(6,'D','ymd h:m:s');">Created <i class="fa fa-sort"></th>
+                <th><a href="javascript:SortTable(6,'D','ymd h:m:s');">Created <i class="fa fa-sort"></a></th>
                 <th></th>
             </tr>
         </thead>
