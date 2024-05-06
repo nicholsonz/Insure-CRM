@@ -56,7 +56,7 @@
         <table class="w3-table w3-hoverable" id="srtTable">
          <thead>
             <tr>
-                <th>S.N.</th>
+                <!-- <th>S.N.</th> -->
                 <th>Task Name</th>
                 <th>Name</th>
                 <th>Details</th>
@@ -106,7 +106,7 @@
                             $type = $row['type'];
                             ?>
                             <tr>
-                                <td><?php echo $sn++; ?></td>
+                                <!-- <td><?php echo $sn++; ?></td> -->
                                 <td><?php echo $task_name; ?></td>
                                 <td><?php echo $name; ?></td>
                                 <td><?php echo $descr; ?></td>

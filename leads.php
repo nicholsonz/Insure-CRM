@@ -6,7 +6,7 @@ $pdo = pdo_connect_mysql();
 // Get the page via GET request (URL param: page), if non exists default the page to 1
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
 // Number of records to show on each page
-$records_per_page = 20;
+$records_per_page = 12;
 
 // Prepare the SQL statement and get records from our leads table, LIMIT will determine the page
 $stmt = $pdo->prepare('SELECT * FROM leads ORDER BY phone LIMIT :current_page, :record_per_page');
