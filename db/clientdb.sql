@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 22, 2024 at 12:54 AM
+-- Generation Time: May 07, 2024 at 12:48 PM
 -- Server version: 10.11.6-MariaDB-0+deb12u1-log
 -- PHP Version: 8.2.18
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `clientdb`
 --
-CREATE DATABASE IF NOT EXISTS `clientdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `clientdb`;
 
 -- --------------------------------------------------------
 
@@ -208,6 +206,14 @@ ALTER TABLE `tasks`
 --
 ALTER TABLE `task_lists`
   MODIFY `list_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`zach`@`localhost` EVENT `AnnualReview` ON SCHEDULE EVERY 1 YEAR STARTS '2024-10-15 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO `tasks`(`task_name`, `name`, `task_description`, `list_id`, `priority`, `deadline`, `type`) SELECT 'Call', name, 'Annual Review', '3', 'Medium', DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH), 'Client' FROM clients WHERE policy = ('Med Adv') OR policy = ('Med Supp')$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
