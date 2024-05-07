@@ -1,268 +1,281 @@
-How to Implement Ajax-Based Pagination?
+<html>   
 
-Pagination in PHP can also be done using an Ajax-based method. Using Ajax, you don’t have to refresh the page every time you go to a different page. So, for example, if you have your data divided into 4 pages. Then you can visit any page without refreshing it. In this method, you need to create the following three files:
+  <head>   
 
-    index.php
-    database.php
-    pagination.php
+    <title>Pagination in PHP</title>   
 
-Step 1: Create an index.php file
+    <link rel="stylesheet"  
 
-Create an index.php file to include AJAX which will allow you to visit a page without refreshing it. It will trigger the click event and load the page without refreshing it. This also makes the loading of the web pages faster. Insert the following code into the index.php file.
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">   
 
-<?php
+    <style>   
 
-include('database.php'); 
+    table {  
 
-$limit = 4;
+        border-collapse: collapse;  
 
-$query = "SELECT COUNT(*) FROM items";  
+    }  
 
-$result = mysqli_query($conn, $query);  
+        .inline{   
 
-$row = mysqli_fetch_row($result);  
+            display: inline-block;   
 
-$total_rows = $row[0];  
+            float: right;   
 
-$total_pages = ceil($total_rows / $limit); 
+            margin: 20px 0px;   
 
-?>
+        }            
 
-<!DOCTYPE html>
+        input, button{   
 
-<html lang="en">
+            height: 34px;   
 
-<head>
+        }    
 
-<meta charset="utf-8">
+    .items {   
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        display: inline-block;   
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    }   
 
-<title>PHP Pagination AJAX</title>
+    .items a {   
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+        font-weight:bold;   
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        font-size:18px;   
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        color: black;   
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        float: left;   
 
-<link rel="stylesheet" href="css/style.css">
+        padding: 8px 16px;   
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        text-decoration: none;   
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        border:1px solid black;  
 
-</head>
+        margin: 2px; 
 
-<body>
+    }   
 
-    <div class="container">
+    .items a.active {   
 
-        <div class="table-wrapper">
+            background-color: rgba(175, 201, 244, 0.97);   
 
-            <div class="table-title">
+    }   
 
-                <div class="row">
+    .items a:hover:not(.active) {   
 
-                    <div class="col-sm-12">
+        background-color: #87ceeb;   
 
-                       <h2 align = "center">Pagination in PHP using AJAX</h2>               
+    }   
 
-                    </div>
+        </style>   
 
-                </div>
+  </head> 
 
-            </div>
+  <body>   
 
-            <div id="target-content">loading...</div>           
+  <center>  
 
-            <div class="clearfix">              
+    <?php      
 
-                    <ul class="pagination">
+        // Connect to the database
 
-                    <?php 
+        $conn = mysqli_connect('localhost', 'root', '');  
 
-                    if(!empty($total_pages)){
+        if (! $conn) {  
 
-                        for($i=1; $i<=$total_pages; $i++){
+            die("Connection failed" . mysqli_connect_error());  
 
-                                if($i == 1){
+            }  
 
-                                    ?>
+                else {  
 
-                                <li class="pageitem active" id="<?php echo $i;?>"><a href="JavaScript:Void(0);" data-id="<?php echo $i;?>" class="page-link" ><?php echo $i;?></a></li>                                                           
+            mysqli_select_db($conn, 'myDatabase');  
 
-                                <?php 
+        }       
 
-                                }
+        // variable to store number of rows per page
 
-                                else{
+        $limit = 5;    
 
-                                    ?>
+        // update the active page number
 
-                                <li class="pageitem" id="<?php echo $i;?>"><a href="JavaScript:Void(0);" class="page-link" data-id="<?php echo $i;?>"><?php echo $i;?></a></li>
+        if (isset($_GET["page"])) {    
 
-                                <?php
+            $page_number  = $_GET["page"];    
 
-                                }
+        }    
 
-                        }
+        else {    
 
-                    }
+          $page_number=1;    
 
-                                ?>
+        }       
 
-                    </ul>
+        // get the initial page number
 
-               
+        $initial_page = ($page_number-1) * $limit;       
 
-            </div>
+        // get data of selected rows per page 
 
-        </div>
+        $getQuery = "SELECT * FROM items LIMIT $initial_page, $limit";     
 
-    </div>
+        $result = mysqli_query ($conn, $getQuery);    
 
-    <script>
+    ?>     
 
-    $(document).ready(function() {
+    <div class="container">   
 
-        $("#target-content").load("pagination.php?page=1");
+      <br>   
 
-        $(".page-link").click(function(){
+      <div>   
 
-            var id = $(this).attr("data-id");
+        <h1> Pagination in PHP </h1>    
 
-            var select_id = $(this).parent().attr("id");
+        <table class="table table-striped table-condensed    
 
-            $.ajax({
+                                          table-bordered">   
 
-                url: "pagination.php",
+          <thead>   
 
-                type: "GET",
+            <tr>   
 
-                data: {
+              <th width="10%">ID</th>   
 
-                    page : id
+              <th>Name</th>   
 
-                },
+              <th>Category</th>   
 
-                cache: false,
+              <th>Price</th>   
 
-                success: function(dataResult){
+            </tr>   
 
-                    $("#target-content").html(dataResult);
+          </thead>   
 
-                    $(".pageitem").removeClass("active");
+          <tbody>   
 
-                    $("#"+select_id).addClass("active");                  
+    <?php     
 
-                }
+            while ($row = mysqli_fetch_array($result)) {    
 
-            });
+                  // Table head
 
-        });
+            ?>     
 
-    });
+            <tr>     
 
-</script>
+            <td><?php echo $row["ID"]; ?></td>     
 
-</body>
+            <td><?php echo $row["Name"]; ?></td>   
 
-</html>
-Step 2: Create a database.php file
+            <td><?php echo $row["Category"]; ?></td>   
 
-Create a file to connect your PHP files to the database “myDatabase”. It creates a separate file, to simply import it into all other files instead of inserting the connection code in each file. Insert the following code into this file and save it.
+            <td><?php echo $row["Price"]; ?></td>                                           
 
-<?php
+            </tr>     
 
-    $server_name = "localhost";
+            <?php     
 
-    $user_name = "root";
+                };    
 
-    $password = "";
+            ?>     
 
-    $db="myDatabase";
+          </tbody>   
 
-    $conn = mysqli_connect($server_name, $user_name, $password,$db);
+        </table>    
 
-    if (!$conn) {
+     <div class="Items">    
 
-        die("Connection failed: " . mysqli_connect_error());
+      <?php  
 
-    }
+        $getQuery = "SELECT COUNT(*) FROM Items";     
 
-?>
-Step 3: Create a pagination.php file
+        $result = mysqli_query($conn, $getQuery);     
 
-Create a pagination.php file which will contain the code to fetch the table records and paginate them to display the data into multiple pages. Insert the following code into this file:
+        $row = mysqli_fetch_row($result);     
 
-<?php
+        $total_rows = $row[0];              
 
-include('database.php');
+    echo "</br>";            
 
-$limit = 5;  
+        // get the required number of pages
 
-if (isset($_GET["page"])) { $page_number  = $_GET["page"]; } else { $page_number=1; };  
+        $total_pages = ceil($total_rows / $limit);     
 
-$initial_page = ($page_number-1) * $limit;  
+        $pageURL = "";             
 
-$sql = "SELECT * FROM items LIMIT $initial_page, $limit";  
+        if($page_number>=2){   
 
-$result = mysqli_query($conn, $sql);  
+            echo "<a href='index.php?page=".($page_number-1)."'>  Prev </a>";   
 
-?>
+        }                          
 
-<table class="table table-bordered table-striped">  
+        for ($i=1; $i<=$total_pages; $i++) {   
 
-<thead>  
+          if ($i == $page_number) {   
 
-<tr>  
+              $pageURL .= "<a class = 'active' href='index.php?page="  
 
-<th>ID</th>  
+                                                .$i."'>".$i." </a>";   
 
-<th>Name</th>  
+          }               
 
-<th>Category</th>  
+          else  {   
 
-<th>Price</th>  
+              $pageURL .= "<a href='index.php?page=".$i."'>   
 
-</tr>  
+                                                ".$i." </a>";     
 
-</thead>  
+          }   
 
-<tbody>  
+        };     
 
-<?php  
+        echo $pageURL;    
 
-while ($row = mysqli_fetch_array($result)) {  
+        if($page_number<$total_pages){   
 
-?>  
+            echo "<a href='index.php?page=".($page_number+1)."'>  Next </a>";   
 
-            <tr>  
+        }     
 
-            <td><?php echo $row["ID"]; ?></td>  
+      ?>    
 
-            <td><?php echo $row["Name"]; ?></td>
+      </div>    
 
-            <td><?php echo $row["Category"]; ?></td>
+      <div class="inline">   
 
-            <td><?php echo $row["Price"]; ?></td>
+      <input id="page" type="number" min="1" max="<?php echo $total_pages?>"   
 
-            </tr>  
+      placeholder="<?php echo $page_number."/".$total_pages; ?>" required>   
 
-<?php  
+      <button onClick="go2Page();">Go</button>   
 
-};  
+     </div>    
 
-?>  
+    </div>   
 
-</tbody>  
+  </div>  
 
-</table>      
+</center>   
 
-To display the output in a webpage, save all these files in a project folder and run the “index.php” file in a localhost server. 
-Output
+  <script>   
+
+    function go2Page()   
+
+    {   
+
+        var page = document.getElementById("page").value;   
+
+        page = ((page><?php echo $total_pages; ?>)?<?php echo $total_pages; ?>:((page<1)?1:page));   
+
+        window.location.href = 'index.php?page='+page;   
+
+    }   
+
+  </script>  
+
+  </body>   
+
+</html>  
