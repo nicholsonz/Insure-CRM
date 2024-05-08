@@ -39,61 +39,64 @@ if (!empty($_POST)) {
 	<h1>Create Lead</h1>
     <form action="createlead.php" method="post">
 <table>
-    <tr>
-        <td>
+<tr>
+    <td><label>Name</label>
         <input type="text" name="name" placeholder="Name" id="name">
-        </td>
-        <td>
-            <input type="text" name="email" placeholder="Email" id="email">
-        </td>
-        <td>
-            <label>Birth Date</label>
-            <input type="date" name="birthdate" id="birthdate">
-        </td>
-   </tr>
-    <tr>
-        <td>
+    </td>
+    <td><label>Email</label>
+        <input type="text" name="email" placeholder="Email" id="email">
+    </td>
+    <td><label>Birthdate</label>
+        <input type="date" name="birthdate" placeholder="Birthdate" id="birthdate">
+    </td>
+</tr>
+<tr>
+    <td><label>Address</label>
         <input type="text" name="address" placeholder="Street Address" id="address">
-        </td>
-    </tr>
-    <tr>
-        <td>
+    </td>
+</tr>
+<tr>
+    <td><label>City</label>
         <input type="text" name="city" placeholder="City" id="city">
-        </td>
-        <td>
+</td>
+    <td>    <label>State</label>
         <input type="text" name="state" placeholder="State" id="state">
-        </td>
-        <td>
+    </td>
+    <td><label>Zip</label>
         <input type="text" name="zip" placeholder="Zip" id="zip">
-</td>
+    </td>
 </tr>
-<td>
+<tr>
+    <td><label>County</label>
         <input type="text" name="county" placeholder="County" id="county">
-</td>
-</tr>
-<tr>
-    <td>
-        <input type="text" name="phone" placeholder="Primary Phone" id="phone">
-    </td>
-    <td>
-        <input type="text" name="phone_sec" placeholder="Secondary Phone" id="phone_sec">
     </td>
 </tr>
 <tr>
-    <td>
-        <label>Part A Date</label>        
+    <td><label>Home</label>
+        <input type="text" name="phone" placeholder="Home Phone" id="phone">
+    </td>
+    <td><label>Mobile</label>
+        <input type="text" name="phone_sec" placeholder="Mobile Phone" id="phone_sec">
+    </td>
+</tr>
+<tr>
+    <td><label>Part A</label>
         <input type="date" name="partA_date" placeholder="Part A Date" id="partA_date">
-</td>
-    <td>
-        <label>Part B Date</label>
+    </td>
+<td><label>Part B</label>
         <input type="date" name="partB_date" placeholder="Part B Date" id="partB_date">
-    </td>
-    <td>
+</td>
+<td><label>Medicare</label>
         <input type="text" name="medicare_number" placeholder="Medicare Number" id="medicare_number">
-    </td>
+        
+</td>
 </tr>
 <tr>
-    <td>    
+<td>
+	<label>Insurer</label>
+        <input type="text" name="insurer" placeholder="Insurer" id="insurer">
+</td>
+    <td><label>Policy</label>
         <select name="policy" id="policy">
             <option value="Policy" disabled selected>Policy</option>
             <option value="Health">Health</option>
@@ -106,6 +109,18 @@ if (!empty($_POST)) {
             <option value="DVH">DVH</option>
         </select>
     </td>
+<td><label>Status</label>
+        <select id="appstatus" name="appstatus">
+            <option value="Status" disabled selected>Status</option>
+            <option value="Active Lead">Active Lead</option>
+            <option value="Lost Lead">Lost Lead</option>
+            <option value="Enrolled">Enrolled</option>
+            <option value="Pending">Pending</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Denied">Denied</option>
+            <option value="Cancelled">Cancelled</option>
+        </select>
+</td>
 </tr>
 <tr>
 <td colspan="2">

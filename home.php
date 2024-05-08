@@ -15,7 +15,7 @@
 				(SELECT COUNT(*) FROM tasks WHERE type = 'Lead') as leads,
 				(SELECT COUNT(*) FROM tasks WHERE type = 'Other') as other
 				FROM tasks 
-				WHERE type = 'Clients'";
+				WHERE type = 'Client'";
 			$res = mysqli_query($con, $sql);
 			while($row=mysqli_fetch_assoc($res)){
 				$clients = $row['clients'];
