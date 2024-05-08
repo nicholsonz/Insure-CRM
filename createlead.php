@@ -44,6 +44,9 @@ if (!empty($_POST)) {
         <input type="text" name="name" placeholder="Name" id="name">
         </td>
         <td>
+            <input type="text" name="email" placeholder="Email" id="email">
+        </td>
+        <td>
             <label>Birth Date</label>
             <input type="date" name="birthdate" id="birthdate">
         </td>
@@ -74,9 +77,6 @@ if (!empty($_POST)) {
     </td>
     <td>
         <input type="text" name="phone_sec" placeholder="Secondary Phone" id="phone_sec">
-    </td>
-    <td>
-        <input type="text" name="email" placeholder="Email" id="email">
     </td>
 </tr>
 <tr>
