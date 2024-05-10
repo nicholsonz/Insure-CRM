@@ -5,7 +5,6 @@ $msg = '';
 // Check that POST data is not empty
 if (!empty($_POST)) {
     // Post data not empty insert a new record
-
     $name = (isset($_POST['name']) && !empty($_POST['name']) ? $_POST['name'] : '');
     $address = (isset($_POST['address']) && !empty($_POST['address']) ? $_POST['address'] : '');
     $city = (isset($_POST['city']) && !empty($_POST['city']) ? $_POST['city'] : '');
@@ -25,8 +24,8 @@ if (!empty($_POST)) {
     $notes = (isset($_POST['notes']) && !empty($_POST['notes']) ? $_POST['notes'] : '');
     $created = (isset($_POST['created']) && !empty($_POST['created']) ? $_POST['created'] : date('Y-m-d H:i:s'));    
     // Insert new record into the leads table
-    $stmt = $pdo->prepare('INSERT INTO leads VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute([$name, $address, $city, $state, $zip, $county, $birthdate, $phone, $phone2, $email, $partA_date, $partB_date, $medicare_number, $policy, $insurer, $appstatus, $notes, $created]);
+    $stmt = $pdo->prepare('INSERT INTO leads VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute([$acct_id, $name, $address, $city, $state, $zip, $county, $birthdate, $phone, $phone2, $email, $partA_date, $partB_date, $medicare_number, $policy, $insurer, $appstatus, $notes, $created]);
     // Output message
     $msg = 'Created Successfully!';
     header('Location: ./leads.php');

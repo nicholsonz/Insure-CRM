@@ -12,10 +12,10 @@
 <?=template_header('Home')?>
 <?php
 		$sql = "SELECT COUNT(*) as clients, 
-				(SELECT COUNT(*) FROM tasks WHERE type = 'Lead') as leads,
-				(SELECT COUNT(*) FROM tasks WHERE type = 'Other') as other
+				(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Lead') as leads,
+				(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Other') as other
 				FROM tasks 
-				WHERE type = 'Client'";
+				WHERE acct_id = '$acct_id' AND type = 'Client'";
 			$res = mysqli_query($con, $sql);
 			while($row=mysqli_fetch_assoc($res)){
 				$clients = $row['clients'];
@@ -48,7 +48,7 @@
 		$sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name 
 				FROM tasks AS t
 				LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-				WHERE t.type = 'Client'
+				WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
 				ORDER BY deadline";
 		
 
@@ -78,7 +78,7 @@
 				$deadline = $row['deadline'];
 
 		
-				$sql2 = "SELECT name FROM clients WHERE name LIKE '$name%'";
+				$sql2 = "SELECT name FROM clients WHERE acct_id = '$acct_id' AND name LIKE '$name%'";
 				$result = mysqli_query($con, $sql2);
 				while($row=mysqli_fetch_assoc($result)){
 					$name = $row['name'];
@@ -122,20 +122,20 @@
      </thead>
 		<?php 
 			// Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
-			$stmt = $pdo->prepare('SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, "%m-%d-%Y") AS deadline, tl.list_name 
+			$stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name 
 									FROM tasks AS t
 									LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-									WHERE t.type = "Lead"
-									ORDER BY deadline LIMIT :current_page, :record_per_page');
+									WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
+									ORDER BY deadline LIMIT :current_page, :record_per_page");
 			$stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
 			$stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
 			$stmt->execute();
 			// Fetch the records so we can display them in our template.
 			$clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			// Get the total number of clients, this is so we can determine whether there should be a next and previous button
-			$num_clients = $pdo->query('SELECT COUNT(*) FROM tasks AS t
+			$num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
 			LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-			WHERE t.type = "Lead"')->fetchColumn();
+			WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'")->fetchColumn();
 
 		//Select Database
 		$db_select = mysqli_select_db($con, DB_NAME) or die();
@@ -144,7 +144,7 @@
 		$sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name 
 				FROM tasks AS t
 				LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-				WHERE t.type = 'Lead'
+				WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
 				ORDER BY deadline";
 		
 
@@ -236,7 +236,7 @@
 		$sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name 
 				FROM tasks AS t
 				LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-				WHERE t.type = 'Other'
+				WHERE t.acct_id = '$acct_id' AND t.type = 'Other'
 				ORDER BY deadline";
 		
 
@@ -304,8 +304,8 @@
 		<h2><?php echo date('F'); ?> Activity</h2>
 		<?php
 			$pdo = pdo_connect_mysql();
-			$newleads = $pdo->query('SELECT COUNT(*) FROM leads WHERE MONTH(created) = MONTH(now())')->fetchColumn();
-			$convleads = $pdo->query('SELECT COUNT(*) FROM clients WHERE MONTH(created) = MONTH(now())')->fetchColumn();
+			$newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND MONTH(created) = MONTH(now())")->fetchColumn();
+			$convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND MONTH(created) = MONTH(now())")->fetchColumn();
 			if($convleads == "0"){
 				$convperc = "0";
 			}else{
@@ -326,8 +326,8 @@
 		<h2><?php echo date('Y'); ?> Activity</h2>
 		<?php
 			$pdo = pdo_connect_mysql();
-			$newleads = $pdo->query('SELECT COUNT(*) FROM leads WHERE YEAR(created) = YEAR(now())')->fetchColumn();
-			$convleads = $pdo->query('SELECT COUNT(*) FROM clients WHERE YEAR(created) = YEAR(now())')->fetchColumn();
+			$newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
+			$convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
 			if($convleads > 0){
 				$convperc = $convleads / $newleads;
 			}else{
@@ -348,8 +348,8 @@
 	<h2><?php echo date('Y'); ?> Activity</h2>
 	<?php
 		$pdo = pdo_connect_mysql();
-		$mnthleads = $pdo->query('SELECT DATE_FORMAT(created, "%b") as monthname, COUNT(*) as leadnum FROM leads WHERE YEAR(created) = YEAR(now()) GROUP BY monthname')->fetchAll(PDO::FETCH_OBJ);
-		$mnthclients = $pdo->query('SELECT DATE_FORMAT(created, "%b") as monthname, COUNT(*) as clientnum FROM clients WHERE YEAR(created) = YEAR(now()) GROUP BY monthname')->fetchAll(PDO::FETCH_OBJ);
+		$mnthleads = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as leadnum FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
+		$mnthclients = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as clientnum FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
 	?>
 
 	<canvas id="activityChart" class="chart-style"></canvas>

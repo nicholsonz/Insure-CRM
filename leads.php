@@ -9,7 +9,7 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] :
 $records_per_page = 12;
 
 // Prepare the SQL statement and get records from our leads table, LIMIT will determine the page
-$stmt = $pdo->prepare('SELECT * FROM leads ORDER BY created DESC LIMIT :current_page, :record_per_page');
+$stmt = $pdo->prepare("SELECT * FROM leads WHERE acct_id = '$acct_id' ORDER BY created DESC LIMIT :current_page, :record_per_page");
 $stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
 $stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
 $stmt->execute();
@@ -33,10 +33,11 @@ $num_leads = $pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn();
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Email</th>
+                <th><a href="javascript:SortTable(1,'D','ymd h:m:s');">Birthdate <i class="fa fa-sort"></th>
                 <th>Primary Phone</th>
+                <th>Email</th>
                 <th>Notes</th>
-                <th><a href="javascript:SortTable(4,'D','ymd h:m:s');">Created <i class="fa fa-sort"></th>
+                <th><a href="javascript:SortTable(5,'D','ymd h:m:s');">Created <i class="fa fa-sort"></th>
                 <th></th>
             </tr>
         </thead>
@@ -44,8 +45,9 @@ $num_leads = $pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn();
             <?php foreach ($leads as $lead): ?>
 	    <tr>
                 <td><a href="./updatelead.php?name=<?=$lead['name']; ?>"><?=$lead['name']?></td>
-                <td><?=$lead['email']?></td>
+                <td><?=$lead['birthdate']?></td>
                 <td><?=$lead['phone']?></td>
+                <td><?=$lead['email']?></td>
                 <td><?=$lead['notes']?></td>
                 <td><?=$lead['created']?></td>
                 <td class="actions">          

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 07, 2024 at 12:48 PM
+-- Generation Time: May 09, 2024 at 07:33 PM
 -- Server version: 10.11.6-MariaDB-0+deb12u1-log
 -- PHP Version: 8.2.18
 
@@ -43,6 +43,7 @@ CREATE TABLE `accounts` (
 
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
+  `acct_id` int(11) NOT NULL,
   `name` varchar(55) NOT NULL,
   `address` varchar(55) DEFAULT NULL,
   `city` varchar(25) DEFAULT NULL,
@@ -70,6 +71,7 @@ CREATE TABLE `clients` (
 --
 
 CREATE TABLE `leads` (
+  `acct_id` int(11) NOT NULL,
   `name` varchar(55) NOT NULL,
   `address` varchar(55) DEFAULT NULL,
   `city` varchar(25) DEFAULT NULL,
@@ -111,6 +113,7 @@ CREATE TABLE `tally` (
 
 CREATE TABLE `tasks` (
   `task_id` int(10) UNSIGNED NOT NULL,
+  `acct_id` int(11) NOT NULL,
   `task_name` varchar(150) NOT NULL,
   `name` varchar(75) DEFAULT NULL,
   `task_description` text NOT NULL,
@@ -128,6 +131,7 @@ CREATE TABLE `tasks` (
 
 CREATE TABLE `task_lists` (
   `list_id` int(10) UNSIGNED NOT NULL,
+  `acct_id` int(11) NOT NULL,
   `list_name` varchar(50) NOT NULL,
   `list_description` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -140,19 +144,22 @@ CREATE TABLE `task_lists` (
 -- Indexes for table `accounts`
 --
 ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`) USING BTREE;
 
 --
 -- Indexes for table `clients`
 --
 ALTER TABLE `clients`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `acct_id` (`acct_id`) USING BTREE;
 
 --
 -- Indexes for table `leads`
 --
 ALTER TABLE `leads`
-  ADD PRIMARY KEY (`name`);
+  ADD PRIMARY KEY (`name`),
+  ADD KEY `acct_id` (`acct_id`) USING BTREE;
 
 --
 -- Indexes for table `tally`
@@ -165,13 +172,15 @@ ALTER TABLE `tally`
 --
 ALTER TABLE `tasks`
   ADD PRIMARY KEY (`task_id`),
-  ADD KEY `list_id` (`list_id`);
+  ADD KEY `list_id` (`list_id`),
+  ADD KEY `acct_id` (`acct_id`);
 
 --
 -- Indexes for table `task_lists`
 --
 ALTER TABLE `task_lists`
-  ADD PRIMARY KEY (`list_id`);
+  ADD PRIMARY KEY (`list_id`),
+  ADD KEY `acct_id` (`acct_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -206,6 +215,34 @@ ALTER TABLE `tasks`
 --
 ALTER TABLE `task_lists`
   MODIFY `list_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `clients`
+--
+ALTER TABLE `clients`
+  ADD CONSTRAINT `clients_ibfk_1` FOREIGN KEY (`acct_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `leads`
+--
+ALTER TABLE `leads`
+  ADD CONSTRAINT `leads_ibfk_1` FOREIGN KEY (`acct_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`acct_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `task_lists`
+--
+ALTER TABLE `task_lists`
+  ADD CONSTRAINT `task_lists_ibfk_1` FOREIGN KEY (`acct_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 DELIMITER $$
 --

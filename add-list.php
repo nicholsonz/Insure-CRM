@@ -91,6 +91,7 @@
         */
         //SQL Query to Insert data into database
         $sql = "INSERT INTO task_lists SET 
+            acct_id = '$acct_id',
             list_name = '$list_name',
             list_description = '$list_description'";
         

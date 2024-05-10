@@ -70,7 +70,7 @@
                                 $db_select = mysqli_select_db($conn, DB_NAME) or die();
                                 
                                 //SQL query to get the list from table
-                                $sql = "SELECT * FROM task_lists";
+                                $sql = "SELECT * FROM task_lists WHERE acct_id = '$acct_id'";
                                 
                                 //Execute Query
                                 $res = mysqli_query($conn, $sql);
@@ -172,6 +172,7 @@
         
         //CReate SQL Query to INSERT DATA into DAtabase
         $sql2 = "INSERT INTO tasks SET 
+            acct_id = '$acct_id',
             task_name = '$task_name',
             name = '$name',
             task_description = '$task_description',

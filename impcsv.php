@@ -1,7 +1,20 @@
 <?php
 // Load the database configuration file
 include_once 'dbconfig.php';
+// We need to use sessions, so you should always start sessions using the below code.
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
 
+  // Set some global variables 
+$acct_id = $_SESSION["id"];
+
+
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+  header("location: index.php");
+  exit;
+}
 if(isset($_POST['importSubmit'])){
     
     // Allowed mime types
@@ -50,7 +63,7 @@ if(isset($_POST['importSubmit'])){
                     $con->query("UPDATE leads SET name = '$name', phone = '$phone', status = '$status', modified = NOW() WHERE email = '$email'");
                 }else{
                     // Insert member data in the database
-                    $con->query("INSERT INTO leads (name, address, city, state, zip, county, birthdate, phone, phone_sec, email, partA_date, partB_date, medicare_number, policy, insurer, appstatus, notes, created) VALUES ('$name', '$address', '$city', '$state', '$zip', '$county', '$birthdate', '$phone', '$phone_sec', '$email', '$partA_date', '$partB_date', '$medicare_number', '$policy', '$insurer', '$appstatus', '$notes', NOW())");
+                    $con->query("INSERT INTO leads (acct_id, name, address, city, state, zip, county, birthdate, phone, phone_sec, email, partA_date, partB_date, medicare_number, policy, insurer, appstatus, notes, created) VALUES ('$acct_id', '$name', '$address', '$city', '$state', '$zip', '$county', '$birthdate', '$phone', '$phone_sec', '$email', '$partA_date', '$partB_date', '$medicare_number', '$policy', '$insurer', '$appstatus', '$notes', NOW())");
                 }
             }
             

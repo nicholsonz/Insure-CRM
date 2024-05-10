@@ -76,7 +76,8 @@
                 //Create SQL Query to Get DAta from Databse
                 $sql = "SELECT *, tl.list_name FROM tasks AS t
                         LEFT JOIN task_lists AS tl ON tl.list_id = t.list_id
-                         ORDER BY deadline";
+                        WHERE t.acct_id = '$acct_id' 
+                        ORDER BY deadline";
                 
                 //Execute Query
                 $res = mysqli_query($con, $sql);

@@ -8,7 +8,7 @@ $pdo = pdo_connect_mysql();
 if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 
     // Prepare a select statement
-    $sql = "SELECT * FROM clients WHERE id = :id";
+    $sql = "SELECT * FROM clients WHERE acct_id = '$acct_id' AND id = :id";
     
     if($stmt = $pdo->prepare($sql)){
         // Bind variables to the prepared statement as parameters

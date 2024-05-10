@@ -25,8 +25,8 @@ if (!empty($_POST)) {
     $notes = (isset($_POST['notes']) && !empty($_POST['notes']) ? $_POST['notes'] : '');
     $created = (isset($_POST['created']) && !empty($_POST['created']) ? $_POST['created'] : date('Y-m-d H:i:s'));    
     // Insert new record into the clients table
-    $stmt = $pdo->prepare('INSERT INTO clients VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute([$name, $address, $city, $state, $zip, $county, $birthdate, $phone, $phone2, $email, $partA_date, $partB_date, $medicare_number, $policy, $insurer, $appstatus, $notes, $created]);
+    $stmt = $pdo->prepare('INSERT INTO clients VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute([$acct_id, $name, $address, $city, $state, $zip, $county, $birthdate, $phone, $phone2, $email, $partA_date, $partB_date, $medicare_number, $policy, $insurer, $appstatus, $notes, $created]);
     // Output message
     $msg = 'Created Successfully!';
     header('Location: ./clients.php');

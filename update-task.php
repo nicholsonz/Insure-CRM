@@ -12,7 +12,7 @@
         $db_select = mysqli_select_db($con, DB_NAME) or die();
         
         //SQL Query to Get the detail of selected task
-        $sql = "SELECT * FROM tasks WHERE task_id=$task_id";
+        $sql = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND task_id = '$task_id'";
         
         //Execute Query
         $res = mysqli_query($con, $sql);
@@ -66,8 +66,8 @@
                 priority = '$priority',
                 deadline = '$deadline',
                 type = '$type'
-                WHERE 
-                task_id = $task_id";
+                WHERE acct_id = '$acct_id' 
+                AND task_id = '$task_id'";
         
         //Execute Query
         $res3 = mysqli_query($con, $sql3);
@@ -143,7 +143,7 @@
                                 $db_select2 = mysqli_select_db($con, DB_NAME) or die();
                                 
                                 //SQL Query to GET Lists
-                                $sql2 = "SELECT * FROM task_lists";
+                                $sql2 = "SELECT * FROM task_lists WHERE acct_id = '$acct_id' ";
                                 
                                 //Execute Query
                                 $res2 = mysqli_query($con, $sql2);

@@ -74,7 +74,7 @@ require_once('./functions.php');
                     $db_select = mysqli_select_db($conn, DB_NAME) or die();
                     
                     //SQl Query to display all data fromo database
-                    $sql = "SELECT * FROM task_lists";
+                    $sql = "SELECT * FROM task_lists WHERE acct_id = '$acct_id'";
                     
                     //Execute the Query
                     $res = mysqli_query($conn, $sql);

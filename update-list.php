@@ -13,7 +13,7 @@ require_once('./functions.php');
         $db_select = mysqli_select_db($con, DB_NAME) or die();
         
         //Query to Get the Values from Database
-        $sql = "SELECT * FROM task_lists WHERE list_id=$list_id";
+        $sql = "SELECT * FROM task_lists WHERE acct_id = '$acct_id' AND list_id=$list_id";
         
         //Execute Query
         $res = mysqli_query($con, $sql);
@@ -55,7 +55,7 @@ require_once('./functions.php');
         $sql2 = "UPDATE task_lists SET 
                 list_name = '$list_name',
                 list_description = '$list_description' 
-                WHERE list_id=$list_id";
+                WHERE acct_id = '$acct_id' AND list_id = '$list_id'";
         
         //Execute the Query
         $res2 = mysqli_query($con, $sql2);
