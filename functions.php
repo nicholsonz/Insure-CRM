@@ -39,9 +39,9 @@ echo <<<EOT
 			<a href="clients.php"><i class="fas fa-address-book"></i>Clients</a>
             <a href="leads.php"><i class="fas fa-address-book"></i>Leads</a>
 			<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-        
-    	</div>
+			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>        
+			<a href="#"><i class="fas fa-bell"></i>Notifications</a>
+		</div>
     </nav>
 EOT;
 }

@@ -188,7 +188,7 @@
         if($res2==true)
         {
             //Query Executed and Task Inserted Successfully
-            $_SESSION['add'] = "Task Added Successfully.";
+            // $_SESSION['add'] = "Task Added Successfully.";
             
             //Redirect to Homepage
             header('location: ./taskmngr.php');
@@ -197,7 +197,7 @@
         else
         {
             //FAiled to Add TAsk
-            $_SESSION['add_fail'] = "Failed to Add Task";
+            // $_SESSION['add_fail'] = "Failed to Add Task";
             //Redirect to Add TAsk Page
             header('location: ./add-task.php');
         }
