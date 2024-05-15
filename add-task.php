@@ -16,6 +16,59 @@
     }else{
         $type = "";
     }
+
+//Check whether the SAVE button is clicked or not
+if(isset($_POST['submit']))
+{
+    //echo "Button Clicked";
+    //Get all the Values from Form
+    $task_name = htmlspecialchars($_POST['task_name']);
+    $name = htmlspecialchars($_POST['name']);
+    $task_description = htmlspecialchars($_POST['task_description']);
+    $list_id = htmlspecialchars($_POST['list_id']);
+    $priority = htmlspecialchars($_POST['priority']);
+    $deadline = htmlspecialchars($_POST['deadline']);
+    $type = htmlspecialchars($_POST['type']);
+    
+    //Connect Database
+    $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
+    
+    //SElect Database
+    $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
+    
+    //CReate SQL Query to INSERT DATA into DAtabase
+    $sql2 = "INSERT INTO tasks SET 
+        acct_id = '$acct_id',
+        task_name = '$task_name',
+        name = '$name',
+        task_description = '$task_description',
+        list_id = $list_id,
+        priority = '$priority',
+        deadline = '$deadline',
+        type = '$type'";
+    
+    //Execute Query
+    $res2 = mysqli_query($conn2, $sql2);
+    
+    //Check whetehre the query executed successfully or not
+    if($res2==true)
+    {
+        //Query Executed and Task Inserted Successfully
+        $_SESSION['add'] = "Task Added Successfully.";
+        
+        //Redirect to Homepage
+        header('location: ./taskmngr.php');
+        
+    }
+    else
+    {
+        //FAiled to Add TAsk
+        $_SESSION['add_fail'] = "Failed to Add Task";
+        //Redirect to Add TAsk Page
+        header('location: ./add-task.php');
+    }
+}
+
 ?>
 
 
@@ -148,62 +201,6 @@
     </body>
 </html>
 
-
-<?php 
-
-    //Check whether the SAVE button is clicked or not
-    if(isset($_POST['submit']))
-    {
-        //echo "Button Clicked";
-        //Get all the Values from Form
-        $task_name = htmlspecialchars($_POST['task_name']);
-        $name = htmlspecialchars($_POST['name']);
-        $task_description = htmlspecialchars($_POST['task_description']);
-        $list_id = htmlspecialchars($_POST['list_id']);
-        $priority = htmlspecialchars($_POST['priority']);
-        $deadline = htmlspecialchars($_POST['deadline']);
-        $type = htmlspecialchars($_POST['type']);
-        
-        //Connect Database
-        $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-        
-        //SElect Database
-        $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
-        
-        //CReate SQL Query to INSERT DATA into DAtabase
-        $sql2 = "INSERT INTO tasks SET 
-            acct_id = '$acct_id',
-            task_name = '$task_name',
-            name = '$name',
-            task_description = '$task_description',
-            list_id = $list_id,
-            priority = '$priority',
-            deadline = '$deadline',
-            type = '$type'";
-        
-        //Execute Query
-        $res2 = mysqli_query($conn2, $sql2);
-        
-        //Check whetehre the query executed successfully or not
-        if($res2==true)
-        {
-            //Query Executed and Task Inserted Successfully
-            // $_SESSION['add'] = "Task Added Successfully.";
-            
-            //Redirect to Homepage
-            header('location: ./taskmngr.php');
-            
-        }
-        else
-        {
-            //FAiled to Add TAsk
-            // $_SESSION['add_fail'] = "Failed to Add Task";
-            //Redirect to Add TAsk Page
-            header('location: ./add-task.php');
-        }
-    }
-
-?>
 
 
 

@@ -6,7 +6,7 @@
 	$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
 	// Number of records to show on each page
 	$records_per_page = 6;
-	
+
 ?>
 
 <?=template_header('Home')?>

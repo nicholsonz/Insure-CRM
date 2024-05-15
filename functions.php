@@ -14,7 +14,11 @@ $acct_id = $_SESSION["id"];
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   header("location: index.php");
   exit;
-}
+ }
+
+$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND DATEDIFF(deadline, NOW()) < 15";
+$res = mysqli_query($con, $sql_tasks);
+$num_tasks = mysqli_num_rows($res);
 
 function template_header($title) {
 echo <<<EOT
@@ -30,6 +34,9 @@ echo <<<EOT
         <script src="./js/chart.min.js"></script>
         <script src="./js/alertify.min.js"></script>
 	</head>
+EOT;
+}
+?>
 	<body>
     <nav class="navtop">
     	<div>
@@ -39,13 +46,22 @@ echo <<<EOT
 			<a href="clients.php"><i class="fas fa-address-book"></i>Clients</a>
             <a href="leads.php"><i class="fas fa-address-book"></i>Leads</a>
 			<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>        
-			<a href="#"><i class="fas fa-bell"></i>Notifications</a>
+			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
+			<a href="#" class="notification"><i class="fas fa-bell"></i><span>Notifications</span> <span class="badge"><?= number_format($num_tasks)?></span></a>
+
+				<?php 
+					while($row = mysqli_fetch_assoc($res)){
+						$names = $row['name'];
+						$task_id = $row['task_id'];
+					}
+				?>
+			<div class="notification-content">
+				<a href="update-task.php?task_id=<?= $task_id;?>"><?= $names;?></a>
+			</div>
 		</div>
     </nav>
-EOT;
-}
-function template_footer() {
+<?php
+function template_footer(){
 echo <<<EOT
 <script src="./js/srtable.js"></script>
     </body>
