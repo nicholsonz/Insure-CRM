@@ -52,9 +52,20 @@ EOT;
 
 	while($row = mysqli_fetch_assoc($res)){
 		$names = $row['name'];
-		$task_id = $row['task_id'];
+		$task_id = $row['task_id'];	
+		
+		echo "<a href='update-task.php?task_id=$task_id'><?= $names;?></a>";
+	}
+		
+	$sql_tasks2 = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND deadline < CURDATE()";
+	$res2 = mysqli_query($con, $sql_tasks2);
+	$num_tasks2 = mysqli_num_rows($res2);
 
-	echo "<a href='update-task.php?task_id=$task_id'><?= $names;?></a>";
+	while($row2 = mysqli_fetch_assoc($res2)){
+		$names2 = $row2['name'];
+		$task_id2 = $row2['task_id'];
+		
+		echo "<a href='update-task.php?task_id=$task_id2'><?= $names2;?></a>";
 	}
 ?>
 <body>
@@ -69,10 +80,15 @@ EOT;
 			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			<button id="listTasks" class="w3-button w3-custom-blue w3-round"><i class="fas fa-bell"></i><span> Tasks Due</span> 
 			<?php 
-			if($num_tasks < 1){
+			if($num_tasks > 1 && $num_tasks2 > 1){
+				echo "<span class='badgecur'>". number_format($num_tasks) ."</span></button>";
+				echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></button>";
+			}elseif($num_tasks > 1 && $num_tasks2 < 1){
+				echo "<span class='badgecur'>". number_format($num_tasks) ."</span></button>";
+			}elseif($num_tasks2 > 1 && $num_tasks < 1){
+				echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></button>";
+			}else{				
 				echo "<span></span>";
-			}else{
-				echo "<span class='badge'>". number_format($num_tasks) ."</span></button>";
 			}
 			?>
 		</div>

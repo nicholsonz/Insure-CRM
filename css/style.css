@@ -27,11 +27,21 @@ button:hover {
 	background: rgb(29, 157, 243);
 }
 
-button .badge {
+button .badgecur {
 	position:relative;
 	top: -5px;
 	right: -10px;
-	padding: 5px 10px;
+	padding: 5px 5px;
+	border-radius: 50%;
+	background: rgb(255, 145, 0);
+	color: white;
+}
+
+button .badgepas {
+	position:relative;
+	top: 15px;
+	right: -10px;
+	padding: 5px 5ch;
 	border-radius: 50%;
 	background: red;
 	color: white;
