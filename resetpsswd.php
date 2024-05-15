@@ -101,4 +101,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          </table>
         </form>
     </div>    
-    <?=template_footer()?>
+
+    <?php require_once('./footer.php');?>

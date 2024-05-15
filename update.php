@@ -54,4 +54,4 @@ if (isset($_GET['id'])) {
     <?php endif; ?>
 </div>
 
-<?=template_footer()?>
+<?php require_once('./footer.php');?>

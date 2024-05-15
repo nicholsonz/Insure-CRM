@@ -73,4 +73,4 @@ $num_clients = $pdo->query('SELECT COUNT(*) FROM clients')->fetchColumn();
 	</div>
 </div>
 
-<?=template_footer()?>
+<?php require_once('./footer.php');?>

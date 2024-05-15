@@ -144,4 +144,4 @@ if (!empty($_POST)) {
     <?php endif; ?>
 </div>
 
-<?=template_footer()?>
+<?php require_once('./footer.php');?>

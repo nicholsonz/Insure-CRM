@@ -170,4 +170,4 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
     </form>
 </div>
 
-<?=template_footer()?>
+<?php require_once('./footer.php');?>

@@ -157,4 +157,4 @@ if (isset($_GET['name'])) {
     <?php endif; ?>
 </div>
 
-<?=template_footer()?>
+<?php require_once('./footer.php');?>

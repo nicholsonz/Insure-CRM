@@ -362,4 +362,4 @@
 </script>
 <script src="./js/activity.js"></script>
 
-<?=template_footer()?>
+<?php require_once './footer.php';?>

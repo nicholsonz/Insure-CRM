@@ -71,4 +71,5 @@ $num_leads = $pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn();
 		<?php endif; ?>
 	</div>
 </div>
-<?=template_footer()?>
+
+<?php require_once('./footer.php');?>

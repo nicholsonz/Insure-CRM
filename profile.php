@@ -46,4 +46,4 @@ $stmt = "SELECT username, email FROM accounts WHERE id = '$acct_id'";
 			</div>
 		</div>
 
-<?=template_footer()?>
+		<?php require_once('./footer.php');?>

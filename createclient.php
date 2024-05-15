@@ -142,4 +142,4 @@ if (!empty($_POST)) {
     </form>
 </div>
 
-<?=template_footer()?>
+<?php require_once('./footer.php');?>
