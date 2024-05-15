@@ -47,16 +47,16 @@ EOT;
             <a href="leads.php"><i class="fas fa-address-book"></i>Leads</a>
 			<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-			<a href="#" class="notification"><i class="fas fa-bell"></i><span>Notifications</span> <span class="badge"><?= number_format($num_tasks)?></span></a>
-
+			<a href="#" class="notification"><i class="fas fa-bell"></i><span>Tasks Due</span> <span class="badge"><?= number_format($num_tasks)?></span></a>
+			<div class="notification-content">
 				<?php 
 					while($row = mysqli_fetch_assoc($res)){
 						$names = $row['name'];
 						$task_id = $row['task_id'];
+		
+				echo "<a href='update-task.php?task_id=<?= $task_id;?>'><?= $names;?></a>";
 					}
 				?>
-			<div class="notification-content">
-				<a href="update-task.php?task_id=<?= $task_id;?>"><?= $names;?></a>
 			</div>
 		</div>
     </nav>
