@@ -37,7 +37,7 @@ body {
 	color: white;
 }
 
-.navtop .notification-content {
+/* .navtop .notification-content {
 	display: none;
 	position: absolute;
 	background-color: #f1f1f1;
@@ -55,7 +55,7 @@ body {
 
 .navtop .notification-content a:hover {background-color: #ddd;}
 
-.navtop .notification:hover .notification-content {display: block;}
+.navtop .notification:hover .notification-content {display: block;} */
 
 input, label {
     display:block;
