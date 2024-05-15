@@ -34,8 +34,8 @@ EOT;
 }
 
 ?>
-<div id="myModal" class="w3-modal">
 <!-- Modal content -->
+<div id="myModal" class="w3-modal">
   <div class="w3-modal-content">
 	<div class="w3-container">
 		<span class="w3-button w3-display-topright close">&times;</span>
@@ -45,19 +45,19 @@ EOT;
   </div>
 </div>
 <?php 
-		
-		$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND DATEDIFF(deadline, NOW()) < 15";
-		$res = mysqli_query($con, $sql_tasks);
-		$num_tasks = mysqli_num_rows($res);
+	
+	$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (deadline = CURDATE() OR deadline < CURDATE())";
+	$res = mysqli_query($con, $sql_tasks);
+	$num_tasks = mysqli_num_rows($res);
 
-		while($row = mysqli_fetch_assoc($res)){
-			$names = $row['name'];
-			$task_id = $row['task_id'];
+	while($row = mysqli_fetch_assoc($res)){
+		$names = $row['name'];
+		$task_id = $row['task_id'];
 
-		echo "<a href='update-task.php?task_id=$task_id'><?= $names;?></a>";
-		}
-	?>
-	<body>
+	echo "<a href='update-task.php?task_id=$task_id'><?= $names;?></a>";
+	}
+?>
+<body>
     <nav class="navtop">
     	<div>
     		<h1>Simple CRM</h1>
@@ -67,7 +67,14 @@ EOT;
             <a href="leads.php"><i class="fas fa-address-book"></i>Leads</a>
 			<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-			<button id="listTasks" class="w3-button w3-blue-grey w3-round"><i class="fas fa-bell"></i><span> Tasks Due</span> <span class="badge"><?= number_format($num_tasks)?></span></button>
+			<button id="listTasks" class="w3-button w3-custom-blue w3-round"><i class="fas fa-bell"></i><span> Tasks Due</span> 
+			<?php 
+			if($num_tasks < 1){
+				echo "<span></span>";
+			}else{
+				echo "<span class='badge'>". number_format($num_tasks) ."</span></button>";
+			}
+			?>
 		</div>
     </nav>
 	
