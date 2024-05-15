@@ -29,8 +29,8 @@ button:hover {
 
 button .badgecur {
 	position:relative;
-	top: -5px;
-	right: -10px;
+	top: -15px;
+	right: 2px;
 	padding: 5px 5px;
 	border-radius: 50%;
 	background: rgb(255, 145, 0);
@@ -38,10 +38,10 @@ button .badgecur {
 }
 
 button .badgepas {
-	position:relative;
+	position: relative;
 	top: 15px;
-	right: -10px;
-	padding: 5px 5ch;
+	right: -5px;
+	padding: 5px 5px;
 	border-radius: 50%;
 	background: red;
 	color: white;

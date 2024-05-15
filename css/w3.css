@@ -411,13 +411,14 @@ a {
 .w3-button {
     border: none;
     display: inline-block;
-    padding: 8px 16px;
+    padding: 8px 8px;
+    width: 200px;
     vertical-align: middle;
     overflow: hidden;
     text-decoration: none;
     color: white;
   	background-color: #38b673;
-    text-align: center;
+    text-align: left;
     cursor: pointer;
     white-space: nowrap
 }
