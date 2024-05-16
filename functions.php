@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
   }
 
   // Set some global variables 
-$acct_id = $_SESSION["id"];
+$acct_id = $_SESSION['id'];
 
 
 // Check if the user is logged in, if not then redirect him to login page
@@ -38,9 +38,11 @@ EOT;
 <div id="myModal" class="w3-modal">
   <div class="w3-modal-content">
 	<div class="w3-container">
-		<span class="w3-button w3-display-topright close">&times;</span>
 		<p>Some text in the Modal..</p>
-      <p>Some text in the Modal..</p>			  
+      <p>Some text in the Modal..</p>
+	<div class="w3-modal-footer">		
+	<button type="w3-button" class="w3-btn close" data-dismiss="myModal">Close</button>
+	</div>			  
 	</div>
   </div>
 </div>
@@ -78,7 +80,7 @@ EOT;
             <a href="leads.php"><i class="fas fa-address-book"></i>Leads</a>
 			<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-			<button id="listTasks" class="w3-button w3-custom-blue w3-round"><i class="fas fa-bell"></i><span> Tasks Due</span> 
+			<button id="listTasks" class="w3-task-btn w3-custom-blue w3-round"><i class="fas fa-bell"></i><span> Tasks Due</span> 
 			<?php 
 			if($num_tasks >= 1 && $num_tasks2 >= 1){
 				echo "<span class='badgecur'>". number_format($num_tasks) ."</span>";

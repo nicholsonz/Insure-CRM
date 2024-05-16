@@ -412,6 +412,19 @@ a {
     border: none;
     display: inline-block;
     padding: 8px 8px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+  	background-color: #38b673;
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap
+}
+.w3-task-btn {
+    border: none;
+    display: inline-block;
+    padding: 8px 8px;
     width: 200px;
     vertical-align: middle;
     overflow: hidden;
