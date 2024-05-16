@@ -9,20 +9,22 @@
 
 ?>
 
-<?=template_header('Home')?>
 <?php
-		$sql = "SELECT COUNT(*) as clients, 
-				(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Lead') as leads,
-				(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Other') as other
-				FROM tasks 
-				WHERE acct_id = '$acct_id' AND type = 'Client'";
-			$res = mysqli_query($con, $sql);
-			while($row=mysqli_fetch_assoc($res)){
-				$clients = $row['clients'];
-				$leads = $row['leads'];
-				$other = $row['other'];
-			}
-	?>
+$sql = "SELECT COUNT(*) as clients, 
+		(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Lead') as leads,
+		(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Other') as other
+		FROM tasks 
+		WHERE acct_id = '$acct_id' AND type = 'Client'";
+	$res = mysqli_query($con, $sql);
+	while($row=mysqli_fetch_assoc($res)){
+		$clients = $row['clients'];
+		$leads = $row['leads'];
+		$other = $row['other'];
+	}
+?>
+
+<?=template_header('Home')?>
+
 <div class="content w3-mobile">
  <h1><?php echo date('M d, Y') . "&nbsp" . date('   g:i a');?></h1>
  	<h5>Tasks - Clients <?= number_format($clients);?> | Leads <?= number_format($leads);?> | Others <?= number_format($other);?></h5>

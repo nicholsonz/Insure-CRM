@@ -9,7 +9,7 @@ var btn = document.getElementById("listTasks");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-btn.onclick = function() {
+tasksbtn.onclick = function() {
   modal.style.display = "block";
 }
 

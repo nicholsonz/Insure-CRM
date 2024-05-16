@@ -37,7 +37,7 @@ EOT;
 <!-- Modal content -->
 <div id="myModal" class="w3-modal">
   <div class="w3-modal-content">
-	<div class="w3-container">
+	<div class="w3-container" id="display_details">
 		<p>Some text in the Modal..</p>
       <p>Some text in the Modal..</p>
 	<div class="w3-modal-footer">		
@@ -80,7 +80,7 @@ EOT;
             <a href="leads.php"><i class="fas fa-address-book"></i>Leads</a>
 			<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-			<button id="listTasks" class="w3-task-btn w3-custom-blue w3-round"><i class="fas fa-bell"></i><span> Tasks Due</span> 
+			<button id="tasksbtn" class="w3-task-btn w3-custom-blue w3-round"><i class="fas fa-bell"></i><span> Tasks Due</span> 
 			<?php 
 			if($num_tasks >= 1 && $num_tasks2 >= 1){
 				echo "<span class='badgecur'>". number_format($num_tasks) ."</span>";
