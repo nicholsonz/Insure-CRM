@@ -65,109 +65,111 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
         </form>
 -->
     <form action="updateclient.php?id=<?=$client['id']?>" method="post">
-    <table>
-<tr>
-    <td><label>Name</label>
-        <input type="text" name="name" placeholder="Name" value="<?=$client['name']?>" id="name">
-    </td>
-    <td><label>Email</label>
-        <input type="text" name="email" placeholder="Email" value="<?=$client['email']?>" id="email">
-    </td>
-    <td><label>Birthdate</label>
-        <input type="date" name="birthdate" placeholder="Birthdate" value="<?=$client['birthdate']?>" id="birthdate">
-    </td>
-</tr>
-<tr>
-    <td><label>Address</label>
-        <input type="text" name="address" placeholder="Street Address" value="<?=$client['address']?>" id="address">
-    </td>
-</tr>
-<tr>
-    <td><label>City</label>
-        <input type="text" name="city" placeholder="City" value="<?=$client['city']?>" id="city">
-</td>
-    <td>    <label>State</label>
-        <input type="text" name="state" placeholder="State" value="<?=$client['state']?>" id="state">
-    </td>
-    <td><label>Zip</label>
-        <input type="text" name="zip" placeholder="Zip" value="<?=$client['zip']?>" id="zip">
-    </td>
-</tr>
-<tr>
-    <td><label>County</label>
-        <input type="text" name="county" placeholder="County" value="<?=$client['county']?>" id="county">
-    </td>
-</tr>
-<tr>
-    <td><label>Home</label>
-        <input type="text" name="phone" placeholder="Home Phone" value="<?=$client['phone']?>" id="phone">
-    </td>
-    <td><label>Mobile</label>
-        <input type="text" name="phone_sec" placeholder="Mobile Phone" value="<?=$client['phone_sec']?>" id="phone_sec">
-    </td>
-</tr>
-<tr>
-    <td><label>Part A</label>
-        <input type="date" name="partA_date" placeholder="Part A Date" value="<?=$client['partA_date']?>" id="partA_date">
-    </td>
-<td><label>Part B</label>
-        <input type="date" name="partB_date" placeholder="Part B Date" value="<?=$client['partB_date']?>" id="partB_date">
-</td>
-<td><label>Medicare</label>
-        <input type="text" name="medicare_number" placeholder="Medicare Number" value="<?=$client['medicare_number']?>" id="medicare_number">
-        
-</td>
-</tr>
-<tr>
-<td>
-	<label>Insurer</label>
-        <input type="text" name="insurer" placeholder="Insurer" value="<?=$client['insurer']?>" id="insurer">
-</td>
-    <td><label>Policy</label>
-        <select id="policy" name="policy">
-            <option value="Policy" disabled selected>Policy</option>
-            <option <?php if($client["policy"] == "Health"){ echo "selected"; } ?>>Health</option>
-            <option <?php if($client["policy"] == "Life"){ echo "selected"; } ?>>Life</option>
-            <option <?php if($client["policy"] == "Med Supp"){ echo "selected"; } ?>>Med Supp</option>
-            <option <?php if($client["policy"] == "Med Adv"){ echo "selected"; } ?>>Med Adv</option>
-            <option <?php if($client["policy"] == "Final Exp"){ echo "selected"; } ?>>Final Exp</option>
-            <option <?php if($client["policy"] == "Hospital Ind"){ echo "selected"; } ?>>Hospital Ind</option>
-            <option <?php if($client["policy"] == "Annuity"){ echo "selected"; } ?>>Annuity</option>
-            <option <?php if($client["policy"] == "DVH"){ echo "selected"; } ?>>DVH</option>
-        </select>
-</td>
-<td><label>Status</label>
-        <select id="appstatus" name="appstatus">
-            <option value="Status" disabled selected>Status</option>
-            <option value="Active Lead" <?php if($client["appstatus"] == "Active Lead"){ echo "selected"; } ?>>Active Lead</option>
-            <option value="Lost Lead" <?php if($client["appstatus"] == "Lost Lead"){ echo "selected"; } ?>>Lost Lead</option>
-            <option value="Enrolled" <?php if($client["appstatus"] == "Enrolled"){ echo "selected"; } ?>>Enrolled</option>
-            <option value="Pending" <?php if($client["appstatus"] == "Pending"){ echo "selected"; } ?>>Pending</option>
-            <option value="Accepted" <?php if($client["appstatus"] == "Accepted"){ echo "selected"; } ?>>Accepted</option>
-            <option value="Denied" <?php if($client["appstatus"] == "Denied"){ echo "selected"; } ?>>Denied</option>
-            <option value="Cancelled" <?php if($client["appstatus"] == "Cancelled"){ echo "selected"; } ?>>Cancelled</option>
-        </select>
-</td>
-</tr>
-<tr>
-    <td colspan="2"><label>Notes</label>
-        <textarea type="text" name="notes" placeholder="Notes" id="notes"><?=$client['notes']?></textarea>
-</td>
-<td>
-	<label>Created</label>
-        <input type="datetime-local" name="created" value="<?=date('Y-m-d\TH:i', strtotime($client['created']))?>" id="created">
-</td>
-</tr>
-<tr>
-<td>
-        <input type="submit" value="Update">
-</td>
-<td>
-       <a href="./clients.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
-</td>
-</tr>
-</table>
+      <table>
+        <tr>
+            <td><label>Name</label>
+                <input type="text" name="name" placeholder="Name" value="<?=$client['name']?>" id="name">
+            </td>
+            <td><label>Email</label>
+                <input type="text" name="email" placeholder="Email" value="<?=$client['email']?>" id="email">
+            </td>
+            <td><label>Birthdate</label>
+                <input type="date" name="birthdate" placeholder="Birthdate" value="<?=$client['birthdate']?>" id="birthdate">
+            </td>
+        </tr>
+        <tr>
+            <td><label>Address</label>
+                <input type="text" name="address" placeholder="Street Address" value="<?=$client['address']?>" id="address">
+            </td>
+        </tr>
+        <tr>
+            <td><label>City</label>
+                <input type="text" name="city" placeholder="City" value="<?=$client['city']?>" id="city">
+        </td>
+            <td>    <label>State</label>
+                <input type="text" name="state" placeholder="State" value="<?=$client['state']?>" id="state">
+            </td>
+            <td><label>Zip</label>
+                <input type="text" name="zip" placeholder="Zip" value="<?=$client['zip']?>" id="zip">
+            </td>
+        </tr>
+        <tr>
+            <td><label>County</label>
+                <input type="text" name="county" placeholder="County" value="<?=$client['county']?>" id="county">
+            </td>
+        </tr>
+        <tr>
+            <td><label>Home</label>
+                <input type="text" name="phone" placeholder="Home Phone" value="<?=$client['phone']?>" id="phone">
+            </td>
+            <td><label>Mobile</label>
+                <input type="text" name="phone_sec" placeholder="Mobile Phone" value="<?=$client['phone_sec']?>" id="phone_sec">
+            </td>
+        </tr>
+        <tr>
+            <td><label>Part A</label>
+                <input type="date" name="partA_date" placeholder="Part A Date" value="<?=$client['partA_date']?>" id="partA_date">
+            </td>
+        <td><label>Part B</label>
+                <input type="date" name="partB_date" placeholder="Part B Date" value="<?=$client['partB_date']?>" id="partB_date">
+        </td>
+        <td><label>Medicare</label>
+                <input type="text" name="medicare_number" placeholder="Medicare Number" value="<?=$client['medicare_number']?>" id="medicare_number">
+                
+        </td>
+        </tr>
+        <tr>
+        <td>
+            <label>Insurer</label>
+                <input type="text" name="insurer" placeholder="Insurer" value="<?=$client['insurer']?>" id="insurer">
+        </td>
+            <td><label>Policy</label>
+                <select id="policy" name="policy">
+                    <option value="Policy" disabled selected>Policy</option>
+                    <option <?php if($client["policy"] == "Health"){ echo "selected"; } ?>>Health</option>
+                    <option <?php if($client["policy"] == "Life"){ echo "selected"; } ?>>Life</option>
+                    <option <?php if($client["policy"] == "Med Supp"){ echo "selected"; } ?>>Med Supp</option>
+                    <option <?php if($client["policy"] == "Med Adv"){ echo "selected"; } ?>>Med Adv</option>
+                    <option <?php if($client["policy"] == "Final Exp"){ echo "selected"; } ?>>Final Exp</option>
+                    <option <?php if($client["policy"] == "Hospital Ind"){ echo "selected"; } ?>>Hospital Ind</option>
+                    <option <?php if($client["policy"] == "Annuity"){ echo "selected"; } ?>>Annuity</option>
+                    <option <?php if($client["policy"] == "DVH"){ echo "selected"; } ?>>DVH</option>
+                </select>
+        </td>
+        <td><label>Status</label>
+                <select id="appstatus" name="appstatus">
+                    <option value="Status" disabled selected>Status</option>
+                    <option value="Active Lead" <?php if($client["appstatus"] == "Active Lead"){ echo "selected"; } ?>>Active Lead</option>
+                    <option value="Lost Lead" <?php if($client["appstatus"] == "Lost Lead"){ echo "selected"; } ?>>Lost Lead</option>
+                    <option value="Enrolled" <?php if($client["appstatus"] == "Enrolled"){ echo "selected"; } ?>>Enrolled</option>
+                    <option value="Pending" <?php if($client["appstatus"] == "Pending"){ echo "selected"; } ?>>Pending</option>
+                    <option value="Accepted" <?php if($client["appstatus"] == "Accepted"){ echo "selected"; } ?>>Accepted</option>
+                    <option value="Denied" <?php if($client["appstatus"] == "Denied"){ echo "selected"; } ?>>Denied</option>
+                    <option value="Cancelled" <?php if($client["appstatus"] == "Cancelled"){ echo "selected"; } ?>>Cancelled</option>
+                </select>
+        </td>
+        </tr>
+        <tr>
+            <td colspan="2"><label>Notes</label>
+                <textarea type="text" name="notes" placeholder="Notes" id="notes"><?=$client['notes']?></textarea>
+        </td>
+        <td>
+            <label>Created</label>
+                <input type="datetime-local" name="created" value="<?=date('Y-m-d\TH:i', strtotime($client['created']))?>" id="created">
+        </td>
+        </tr>
+        <tr>
+        <td>
+                <input type="submit" value="Update">
+        </td>
+        </tr>
+     </table>
     </form>
+       <a href="./clients.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
+
+    <?php if ($msg): ?>
+    <p><?=$msg?></p>
+    <?php endif; ?>
 </div>
 
 <?php require_once('./footer.php');?>
