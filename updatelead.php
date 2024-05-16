@@ -3,7 +3,7 @@
 
 $pdo = pdo_connect_mysql();
 $msg = '';
-// Check if the lead phone exists, for example update.php?name=1 will get the lead with the phone number
+// Check if the lead exists
 if (isset($_GET['name'])) {
     if (!empty($_POST)) {
         // This part is similar to the create.php, but instead we update a record and not insert
@@ -146,12 +146,12 @@ if (isset($_GET['name'])) {
 <td>
         <input type="submit" value="Update">
 </td>
-<td>
-    <a href="./leads.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
-</td>
 </tr>
 </table>
     </form>
+
+    <a href="./leads.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
+
     <?php if ($msg): ?>
     <p><?=$msg?></p>
     <?php endif; ?>
