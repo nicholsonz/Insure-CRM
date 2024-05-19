@@ -14,18 +14,6 @@ body {
 	background-color: #f44336;
 	color: white;
 }
-button {
-	color: white;
-	text-decoration: none;
-	padding: 20px 26px;
-	position: relative;
-	display: inline-block;
-	border-radius: 2px;
-}
-
-button:hover {
-	background: rgb(29, 157, 243);
-}
 
 button .badgecur {
 	position:relative;
@@ -107,42 +95,40 @@ tr {
 	text-align: center;
 }
 .navtop {
-  	background-color: #3f69a8;
   	position: sticky;
   	top: 0;
-  	height: 60px;
+  	height: 80px;
   	width: 100%;
-  	border: 0;
+  	border: 0;	
+	background-color: #2f3947;
+}
+
+.navtop h1 {
+	flex: 1;
+	font-size: 24px;
+	padding: 30px;
+	margin: 0;
+	color: #eaebed;
+	font-weight: normal;	
+	display: inline-flex;
 }
 .navtop div {
-  	display: flex;
-  	margin: 0 auto;
-  	width: 1300px;
-  	height: 100%;
+	display:flexbox;
+	margin: 0 auto;
+	width: auto;
+	height: 100%;
 }
-.navtop div h1, .navtop div a {
-  	display: inline-flex;
-  	align-items: center;
-}
-.navtop div h1 {
-  	flex: 1;
-  	font-size: 24px;
-  	padding: 0;
-  	margin: 0;
-  	color: #ecf0f6;
-  	font-weight: normal;
-}
+
 .navtop div a {
-  	padding: 0 20px;
-  	text-decoration: none;
-  	color: #c5d2e5;
-  	font-weight: bold;
+	padding: 0 20px;
+	text-decoration: none;
+	color: #c1c4c8;
+	font-weight: bold;
+	display: inline-flex;
+	align-items: right;
 }
 .navtop div a i {
-  	padding: 2px 8px 0 0;
-}
-.navtop div a:hover {
-  	color: #ecf0f6;
+	padding: 2px 8px 0 0;
 }
 
 body.loggedin {
@@ -516,42 +502,6 @@ body.loggedin {
   	transition: background-color 0.2s;
 }
 
-.navtop {
-	background-color: #2f3947;
-	height: 60px;
-	width: 100%;
-	border: 0;
-}
-.navtop div {
-	display: flex;
-	margin: 0 auto;
-	width: 1300px;
-	height: 100%;
-}
-.navtop div h1, .navtop div a {
-	display: inline-flex;
-	align-items: center;
-}
-.navtop div h1 {
-	flex: 1;
-	font-size: 24px;
-	padding: 0;
-	margin: 0;
-	color: #eaebed;
-	font-weight: normal;
-}
-.navtop div a {
-	padding: 0 20px;
-	text-decoration: none;
-	color: #c1c4c8;
-	font-weight: bold;
-}
-.navtop div a i {
-	padding: 2px 8px 0 0;
-}
-.navtop div a:hover {
-	color: #eaebed;
-}
 body.loggedin {
 	background-color: #f3f4f7;
 }

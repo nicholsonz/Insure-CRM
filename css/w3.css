@@ -427,13 +427,10 @@ a {
     padding: 8px 8px;
     width: 200px;
     vertical-align: middle;
-    overflow: hidden;
     text-decoration: none;
     color: white;
-  	background-color: #38b673;
     text-align: left;
-    cursor: pointer;
-    white-space: nowrap
+    cursor: pointer
 }
 
 .w3-btn:hover {
@@ -534,8 +531,11 @@ a {
 
 .w3-dropdown-click,
 .w3-dropdown-hover {
-    position: relative;
+    position: absolute;
     display: inline-block;
+    top: 15px;
+    height: 45px;
+    width: 150px;
     cursor: pointer
 }
 
@@ -545,23 +545,24 @@ a {
 
 .w3-dropdown-hover:first-child,
 .w3-dropdown-click:hover {
-    background-color: #ccc;
-    color: #000
+    background-color: #1a1919;
+    color: #fff;
 }
 
 .w3-dropdown-hover:hover>.w3-button:first-child,
 .w3-dropdown-click:hover>.w3-button:first-child {
-    background-color: #ccc;
-    color: #000
+    background-color: #1a1919;
+    color: #fff;
 }
 
 .w3-dropdown-content {
     cursor: auto;
-    color: #000;
-    background-color: #fff;
+    color: #fff;
+    background-color: #1a1919;
     display: none;
     position: absolute;
     min-width: 160px;
+    max-width: 230px;
     margin: 0;
     padding: 0;
     z-index: 1
