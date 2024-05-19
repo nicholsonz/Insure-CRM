@@ -15,26 +15,6 @@ body {
 	color: white;
 }
 
-button .badgecur {
-	position:relative;
-	top: -15px;
-	right: 2px;
-	padding: 5px 5px;
-	border-radius: 50%;
-	background: rgb(255, 145, 0);
-	color: white;
-}
-
-button .badgepas {
-	position: relative;
-	top: 15px;
-	right: -5px;
-	padding: 5px 5px;
-	border-radius: 50%;
-	background: red;
-	color: white;
-}
-
 input, label {
     display:block;
 	float: left;
@@ -101,34 +81,52 @@ tr {
   	width: 100%;
   	border: 0;	
 	background-color: #2f3947;
+	align-content: center;
 }
 
 .navtop h1 {
 	flex: 1;
 	font-size: 24px;
-	padding: 30px;
-	margin: 0;
+	padding: 10px 100px 10px 10px;
 	color: #eaebed;
 	font-weight: normal;	
 	display: inline-flex;
 }
 .navtop div {
-	display:flexbox;
 	margin: 0 auto;
-	width: auto;
+	width: 80%;
 	height: 100%;
 }
 
 .navtop div a {
-	padding: 0 20px;
+	padding: 5px 25px;
 	text-decoration: none;
 	color: #c1c4c8;
 	font-weight: bold;
-	display: inline-flex;
-	align-items: right;
+	align-content: right;
 }
 .navtop div a i {
 	padding: 2px 8px 0 0;
+}
+
+.badgecur {
+	position:relative;
+	top: -15px;
+	right: 2px;
+	padding: 5px 5px;
+	border-radius: 50%;
+	background: rgb(255, 145, 0);
+	color: white;
+}
+
+.badgepas {
+	position: relative;
+	top: 15px;
+	right: -5px;
+	padding: 5px 5px;
+	border-radius: 50%;
+	background: red;
+	color: white;
 }
 
 body.loggedin {

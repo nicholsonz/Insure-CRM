@@ -421,18 +421,6 @@ a {
     cursor: pointer;
     white-space: nowrap
 }
-.w3-task-btn {
-    border: none;
-    display: inline-block;
-    padding: 8px 8px;
-    width: 200px;
-    vertical-align: middle;
-    text-decoration: none;
-	font-weight: bold;
-	color: #c1c4c8;
-    text-align: left;
-    cursor: pointer
-}
 
 .w3-btn:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
@@ -534,7 +522,7 @@ a {
 .w3-dropdown-hover {
     position: absolute;
     display: inline-block;
-    top: 15px;
+    top: 25px;
     height: 45px;
     width: 150px;
     cursor: pointer

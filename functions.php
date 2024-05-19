@@ -59,15 +59,15 @@ $num_tasks2 = mysqli_num_rows($res2);
 			<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a> 
 			<div class="w3-dropdown-hover">
-				<button id="listTasks" class="w3-task-btn w3-custom-blue w3-round"><i class="fas fa-bell"></i>  Tasks Due 
+				<a href=""><i class="fas fa-bell"></i>  Tasks Due 
 				<?php 			
 				if($num_tasks >= 1 && $num_tasks2 >= 1){
 					echo "<span class='badgecur'>". number_format($num_tasks) ."</span>";
-					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></button>";
+					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></a>";
 				}elseif($num_tasks >= 1 && $num_tasks2 < 1){
-					echo "<span class='badgecur'>". number_format($num_tasks) ."</span></button>";
+					echo "<span class='badgecur'>". number_format($num_tasks) ."</span></a>";
 				}elseif($num_tasks2 >= 1 && $num_tasks < 1){
-					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></button>";
+					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></a>";
 				}else{				
 					echo "<span></span>";
 				}
