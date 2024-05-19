@@ -33,29 +33,12 @@ echo <<<EOT
 EOT;
 }
 
-<<<<<<< HEAD
-?>
-<!-- Modal content -->
-<div id="myModal" class="w3-modal">
-  <div class="w3-modal-content">
-	<div class="w3-container" id="display_details">
-		<p>Some text in the Modal..</p>
-      <p>Some text in the Modal..</p>
-	<div class="w3-modal-footer">		
-	<button type="w3-button" class="w3-btn close" data-dismiss="myModal">Close</button>
-	</div>			  
-	</div>
-  </div>
-</div>
-<?php 
-=======
 
 $sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() BETWEEN DATE(deadline) AND DATE_ADD(DATE(deadline), INTERVAL 14 DAY))";
 $res = mysqli_query($con, $sql_tasks);
 $num_tasks = mysqli_num_rows($res);
 
 
->>>>>>> 8819346 (	modified:   css/style.css)
 	
 $sql_tasks2 = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() > DATE_ADD(DATE(deadline), INTERVAL 10 DAY))";
 $res2 = mysqli_query($con, $sql_tasks2);
@@ -74,22 +57,6 @@ $num_tasks2 = mysqli_num_rows($res2);
 			<a href="clients.php"><i class="fas fa-address-book"></i>Clients</a>
             <a href="leads.php"><i class="fas fa-address-book"></i>Leads</a>
 			<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-<<<<<<< HEAD
-			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-			<button id="tasksbtn" class="w3-task-btn w3-custom-blue w3-round"><i class="fas fa-bell"></i><span> Tasks Due</span> 
-			<?php 
-			if($num_tasks >= 1 && $num_tasks2 >= 1){
-				echo "<span class='badgecur'>". number_format($num_tasks) ."</span>";
-				echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></button>";
-			}elseif($num_tasks >= 1 && $num_tasks2 < 1){
-				echo "<span class='badgecur'>". number_format($num_tasks) ."</span></button>";
-			}elseif($num_tasks2 >= 1 && $num_tasks < 1){
-				echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></button>";
-			}else{				
-				echo "<span></span>";
-			}
-			?>
-=======
 			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a> 
 			<div class="w3-dropdown-hover">
 				<button id="listTasks" class="w3-task-btn w3-custom-blue w3-round"><i class="fas fa-bell"></i> Tasks Due 
@@ -137,7 +104,6 @@ $num_tasks2 = mysqli_num_rows($res2);
 					
 				</div>
 			</div>
->>>>>>> 8819346 (	modified:   css/style.css)
 		</div>
     </nav>
 	
