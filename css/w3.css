@@ -428,7 +428,8 @@ a {
     width: 200px;
     vertical-align: middle;
     text-decoration: none;
-    color: white;
+	font-weight: bold;
+	color: #c1c4c8;
     text-align: left;
     cursor: pointer
 }
