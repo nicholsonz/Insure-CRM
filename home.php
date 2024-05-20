@@ -27,10 +27,9 @@ $sql = "SELECT COUNT(*) as clients,
 
 <div class="content w3-mobile">
  <h1><?php echo date('M d, Y') . "&nbsp" . date('   g:i a');?></h1>
- 	<h5>Tasks - Clients <?= number_format($clients);?> | Leads <?= number_format($leads);?> | Others <?= number_format($other);?></h5>
    <div class="w3-col s12 m5 l5 w3-margin">
     <div class="read">
-     <h2>Tasks: Clients</h2>
+     <h2>Tasks: Clients <?= number_format($clients);?></h2>
      <table class="w3-table w3-hoverable">     
 	  <thead>   
 		<tr>
@@ -111,7 +110,7 @@ $sql = "SELECT COUNT(*) as clients,
      </table>
 	</div> 
    <div class="read">
-     <h2>Tasks: Leads</h2>
+     <h2>Tasks: Leads <?= number_format($leads);?></h2>
      <table class="w3-table w3-hoverable" id="srtTable">     
 	  <thead>   
 		<tr>
@@ -218,7 +217,7 @@ $sql = "SELECT COUNT(*) as clients,
 		<?php endif; ?>
 	</div>
    <div class="read">
-     <h2>Tasks: Other</h2>
+     <h2>Tasks: Other <?= number_format($other);?></h2>
      <table class="w3-table w3-hoverable">     
 	  <thead>   
 		<tr>
