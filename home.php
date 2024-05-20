@@ -278,7 +278,7 @@ $sql = "SELECT COUNT(*) as clients,
 		<tr>
 		<!-- <td><?php echo $sn++; ?></td> -->
 		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name;?></a></td>
-		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name; ?></a></td>
+		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $name; ?></a></td>
 		<td><?php echo $priority; ?></td>
 		<td><?php echo $deadline; ?></td>
 		</tr>			
