@@ -50,7 +50,7 @@ $num_tasks2 = mysqli_num_rows($res2);
 </div>
 <body>
     <nav class="navtop">
-    	<div>
+    	<div class="mobile">
     		<h1>Simple CRM</h1>
 			<a href="home.php"><i class="fas fa-home"></i>Home</a>
 			<a href="taskmngr.php"><i class="fas fa-hourglass"></i>Tasks</a>

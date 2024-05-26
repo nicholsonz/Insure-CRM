@@ -7,10 +7,8 @@
 	// Number of records to show on each page
 	$records_per_page = 6;
 
-?>
 
-<?php
-$sql = "SELECT COUNT(*) as clients, 
+	$sql = "SELECT COUNT(*) as clients, 
 		(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Lead') as leads,
 		(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Other') as other
 		FROM tasks 
@@ -21,6 +19,17 @@ $sql = "SELECT COUNT(*) as clients,
 		$leads = $row['leads'];
 		$other = $row['other'];
 	}
+
+// PHP Calendar for lead count
+	$time = time();
+	$mnthyr = date('F Y');
+	$numDay = date('d', $time);
+	$numMonth = date('m', $time);
+	$strMonth = date('F', $time);
+	$numYear = date('Y', $time);
+	$firstDay = mktime(0,0,0,$numMonth,1,$numYear);
+	$daysInMonth = cal_days_in_month(0, $numMonth, $numYear);
+	$dayOfWeek = date('w', $firstDay);
 ?>
 
 <?=template_header('Home')?>
@@ -301,7 +310,7 @@ $sql = "SELECT COUNT(*) as clients,
  </div>
 </div>
  <div class="content w3-mobile">
-	<div class="w3-col s12 m3 l3 w3-margin">
+	<div class="w3-col s12 m2 l2 w3-margin-right">
 		<h2><?php echo date('F'); ?> Activity</h2>
 		<?php
 			$pdo = pdo_connect_mysql();
@@ -313,38 +322,80 @@ $sql = "SELECT COUNT(*) as clients,
 			$convperc = $convleads / $newleads;
 			}
 		?>
-	<div>
-		<h4>Leads - <?= $newleads?></h4>
-	</div>
-	<div>
-		<h4>Clients - <?= $convleads?></h4>
-	</div>
-	<div>
-		<h4>Conversion = <?= number_format($convperc * 100); ?> %</h4>
-	</div> 
+		<table>
+			<tr>
+				<td><h3>Leads</h3></td>
+				<td><?= $newleads?></td>
+			</tr>
+			<tr>
+				<td><h3>Clients</h3></td>
+				<td><?= $convleads?></td>
+			</tr>
+			<tr>
+				<td><h3>Conversion</h3></td>
+				<td><?= number_format($convperc * 100); ?> %</td>
+			</tr>
+		</table>       
     </div>
-	<div class="w3-col s12 m3 l3 w3-margin">
+	<div class="w3-col s12 m2 l2 w3-margin-right">
 		<h2><?php echo date('Y'); ?> Activity</h2>
-		<?php
-			$pdo = pdo_connect_mysql();
-			$newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
-			$convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
-			if($convleads > 0){
-				$convperc = $convleads / $newleads;
-			}else{
-				$convperc = "0";
-			}
-		?>
-       <div>
-	 <h4>Leads - <?= $newleads?></h4>
+			<?php
+				$pdo = pdo_connect_mysql();
+				$newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
+				$convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
+				if($convleads > 0){
+					$convperc = $convleads / $newleads;
+				}else{
+					$convperc = "0";
+				}
+			?>
+		<table>
+			<tr>
+				<td><h3>Leads</h3></td>
+				<td><?= $newleads?></td>
+			</tr>
+			<tr>
+				<td><h3>Clients</h3></td>
+				<td><?= $convleads?></td>
+			</tr>
+			<tr>
+				<td><h3>Conversion</h3></td>
+				<td><?= number_format($convperc * 100); ?> %</td>
+			</tr>
+		</table>       
+    </div>
+	<div class="w3-col s12 m2 l2 w3-margin-right">	
+		<table>
+	  <caption><?php echo($mnthyr); ?></caption>	
+			<thead>
+				<tr>
+					<th abbr="Sunday" scope="col" title="Sunday">S</th>
+					<th abbr="Monday" scope="col" title="Monday">M</th>
+					<th abbr="Tuesday" scope="col" title="Tuesday">T</th>
+					<th abbr="Wednesday" scope="col" title="Wednesday">W</th>
+					<th abbr="Thursday" scope="col" title="Thursday">T</th>
+					<th abbr="Friday" scope="col" title="Friday">F</th>
+					<th abbr="Saturday" scope="col" title="Saturday">S</th>
+				</tr>
+			</thead>
+		<tbody>
+			<tr>
+				<?php
+				if(0 != $dayOfWeek) { echo('<td colspan="'.$dayOfWeek.'"> </td>'); }
+				for($i=1;$i<=$daysInMonth;$i++) {
+
+				if($i == $numDay) { echo('<td class="today">'); } else { echo("<td>"); }
+				echo($i);
+				echo("</td>");
+				if(date('w', mktime(0,0,0,$numMonth, $i, $numYear)) == 6) {
+				echo("</tr><tr>");
+				}
+				}
+				?>
+			</tr>
+		</tbody>
+		</table>
 	</div>
-        <div>
-	 <h4>Clients - <?= $convleads?></h4>
-        </div>
-	<div>
-		<h4>Conversion = <?= number_format($convperc * 100); ?> %</h4>
-	</div> 
-   </div>
  <div class="w3-col s12 m6-6 l6-6 w3-margin w3-padding">
 	<h2><?php echo date('Y'); ?> Activity</h2>
 	<?php
