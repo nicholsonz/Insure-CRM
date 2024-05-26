@@ -310,7 +310,7 @@
  </div>
 </div>
  <div class="content w3-mobile">
-	<div class="w3-col s12 m2 l2 w3-margin-right">
+	<div class="w3-col s12 m2 l2 w3-margin-left">
 		<h2><?php echo date('F'); ?> Activity</h2>
 		<?php
 			$pdo = pdo_connect_mysql();
@@ -337,7 +337,7 @@
 			</tr>
 		</table>       
     </div>
-	<div class="w3-col s12 m2 l2 w3-margin-right">
+	<div class="w3-col s12 m2 l2 w3-margin-left">
 		<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
 				$pdo = pdo_connect_mysql();
@@ -364,9 +364,9 @@
 			</tr>
 		</table>       
     </div>
-	<div class="w3-col s12 m2 l2 w3-margin-right">	
+	<div class="w3-col s12 m2 l2 w3-margin-left">	
 		<table>
-	  <caption><?php echo($mnthyr); ?></caption>	
+	  	 <caption><?php echo($mnthyr); ?></caption>	
 			<thead>
 				<tr>
 					<th abbr="Sunday" scope="col" title="Sunday">S</th>
