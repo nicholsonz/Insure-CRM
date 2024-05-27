@@ -1,5 +1,6 @@
 <?php
-require_once('./functions.php');
+require_once("./functions.php");
+
 $pdo = pdo_connect_mysql();
 $msg = '';
 // Check that POST data is not empty
@@ -31,69 +32,67 @@ if (!empty($_POST)) {
     header('Location: ./leads.php');
 }
 ?>
-
-<?=template_header('Create')?>
-
+<?php template_header('Create'); ?>
 <div class="content update">
 	<h1>Create Lead</h1>
     <form action="createlead.php" method="post">
 <table>
 <tr>
     <td><label>Name</label>
-        <input type="text" name="name" placeholder="Name" id="name">
+        <input type="text" name="name" placeholder="Name" id="name" />
     </td>
     <td><label>Email</label>
-        <input type="text" name="email" placeholder="Email" id="email">
+        <input type="text" name="email" placeholder="Email" id="email"  />
     </td>
     <td><label>Birthdate</label>
-        <input type="date" name="birthdate" placeholder="Birthdate" id="birthdate">
+        <input type="date" name="birthdate" placeholder="Birthdate" id="birthdate" />
     </td>
 </tr>
 <tr>
     <td><label>Address</label>
-        <input type="text" name="address" placeholder="Street Address" id="address">
+        <input type="text" name="address" placeholder="Street Address" id="address" />
     </td>
 </tr>
 <tr>
     <td><label>City</label>
-        <input type="text" name="city" placeholder="City" id="city">
+        <input type="text" name="city" placeholder="City" id="city" />
 </td>
     <td>    <label>State</label>
-        <input type="text" name="state" placeholder="State" id="state">
+        <input type="text" name="state" placeholder="State" id="state" />
     </td>
     <td><label>Zip</label>
-        <input type="text" name="zip" placeholder="Zip" id="zip">
+        <input type="text" name="zip" placeholder="Zip" id="zip" />
     </td>
 </tr>
 <tr>
     <td><label>County</label>
-        <input type="text" name="county" placeholder="County" id="county">
+        <input type="text" name="county" placeholder="County" id="county" />
     </td>
 </tr>
 <tr>
     <td><label>Home</label>
-        <input type="text" name="phone" placeholder="Home Phone" id="phone">
+        <input type="text" name="phone" placeholder="Home Phone" id="phone" />
     </td>
     <td><label>Mobile</label>
-        <input type="text" name="phone_sec" placeholder="Mobile Phone" id="phone_sec">
+        <input type="text" name="phone_sec" placeholder="Mobile Phone" id="phone_sec" />
     </td>
 </tr>
 <tr>
     <td><label>Part A</label>
-        <input type="date" name="partA_date" placeholder="Part A Date" id="partA_date">
+        <input type="date" name="partA_date" placeholder="Part A Date" id="partA_date" />
     </td>
 <td><label>Part B</label>
-        <input type="date" name="partB_date" placeholder="Part B Date" id="partB_date">
+        <input type="date" name="partB_date" placeholder="Part B Date" id="partB_date" />
 </td>
 <td><label>Medicare</label>
-        <input type="text" name="medicare_number" placeholder="Medicare Number" id="medicare_number">
+        <input type="text" name="medicare_number" placeholder="Medicare Number" id="medicare_number" />
         
 </td>
 </tr>
 <tr>
 <td>
 	<label>Insurer</label>
-        <input type="text" name="insurer" placeholder="Insurer" id="insurer">
+        <input type="text" name="insurer" placeholder="Insurer" id="insurer" />
 </td>
     <td><label>Policy</label>
         <select name="policy" id="policy">
@@ -126,12 +125,12 @@ if (!empty($_POST)) {
         <textarea type="text" name="notes" placeholder="Notes" id="notes"></textarea>
 </td>
 <td>
-        <input type="datetime-local" name="created" value="<?=date('Y-m-d\TH:i')?>" id="created">
+        <input type="datetime-local" name="created" value="<?=date('Y-m-d\TH:i')?>" id="created" />
 </td>
 </tr>
 <tr>
     <td>
-        <input type="submit" value="Create">
+        <input type="submit" value="Create" />
 </td>
 <td>
     <a href="./leads.php" class="w3-button w3-orange w3-hover-amber">Cancel</a>
@@ -144,4 +143,4 @@ if (!empty($_POST)) {
     <?php endif; ?>
 </div>
 
-<?php require_once('./footer.php');?>
+<?php require_once("./footer.php");?>
