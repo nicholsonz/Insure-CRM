@@ -203,6 +203,7 @@ body.loggedin {
 	padding: 5px;
 	color: whitesmoke;
 }
+
 .content > p table td:first-child, .content > div table td:first-child {
 	font-weight: bold;
 	color: #097baf;

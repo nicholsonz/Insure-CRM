@@ -381,10 +381,10 @@
 		<tbody>
 			<tr>
 				<?php
-				if(0 != $dayOfWeek) { echo('<td colspan="'.$dayOfWeek.'"> </td>'); }
+				if(0 != $dayOfWeek) { echo("<td colspan='$dayOfWeek'> </td>"); }
 				for($i=1;$i<=$daysInMonth;$i++) {
 
-				if($i == $numDay) { echo('<td class="today">'); } else { echo("<td>"); }
+				if($i == $numDay) { echo("<td class='today' style='color: black;'>"); } else { echo("<td>"); }
 				echo($i);
 				echo("</td>");
 				if(date('w', mktime(0,0,0,$numMonth, $i, $numYear)) == 6) {
