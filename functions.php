@@ -41,18 +41,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a> 
 			<div class="w3-dropdown-hover">
 				<a href=""><i class="fas fa-bell"></i>  Tasks Due 
-				<?php 			
-				if($num_tasks >= 1 && $num_tasks2 >= 1){
-					echo "<span class='badgecur'>". number_format($num_tasks) ."</span></a>";
-					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></a>";
-				}elseif($num_tasks >= 1 && $num_tasks2 < 1){
-					echo "<span class='badgecur'>". number_format($num_tasks) ."</span></a>";
-				}elseif($num_tasks2 >= 1 && $num_tasks < 1){
-					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></a>";
-				}else{				
-					echo "<span></span></a>";
-				}
-				?>
 				<?php
 				$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() BETWEEN DATE(deadline) AND DATE_ADD(DATE(deadline), INTERVAL 14 DAY))";
 				$res = mysqli_query($con, $sql_tasks);
@@ -63,7 +51,18 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 				$sql_tasks2 = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() > DATE_ADD(DATE(deadline), INTERVAL 10 DAY))";
 				$res2 = mysqli_query($con, $sql_tasks2);
 				$num_tasks2 = mysqli_num_rows($res2);
-
+				 			
+				if($num_tasks >= 1 && $num_tasks2 >= 1){
+					echo "<span class='badgecur'>". number_format($num_tasks) ."</span></a>";
+					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></a>";
+				}elseif($num_tasks >= 1 && $num_tasks2 < 1){
+					echo "<span class='badgecur'>". number_format($num_tasks) ."</span></a>";
+				}elseif($num_tasks2 >= 1 && $num_tasks < 1){
+					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></a>";
+				}else{				
+					echo "<span></span></a>";
+				}
+			
 				if($num_tasks >= 1 || $num_tasks2 >= 1) { ?>
 				<div class="w3-dropdown-content">
 					<table class="w3-table">
