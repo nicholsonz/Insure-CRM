@@ -24,23 +24,22 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 			<?php function template_header($title) {echo "<title>" . $title . "</title>";}?>
 			<link rel="stylesheet" href="./css/style.css">
 			<link rel="stylesheet" href="./css/w3.css">
-			<link rel="stylesheet" href="./fontawesome/css/all.css">
+			<link rel="stylesheet" href="../fontawesome/css/all.css">
 			<script src="./js/jquery-3.7.1.min.js"></script>		
 			<script src="./js/chart.min.js"></script>
 			<script src="./js/alertify.min.js"></script>
 		</head>
 <body>
-    <nav class="navtop">
-    	<div class="mobile">
-    		<h1>Simple CRM</h1>
-			<a href="home.php"><i class="fas fa-home"></i>Home</a>
-			<a href="taskmngr.php"><i class="fas fa-hourglass"></i>Tasks</a>
-			<a href="clients.php"><i class="fas fa-address-book"></i>Clients</a>
-            <a href="leads.php"><i class="fas fa-address-book"></i>Leads</a>
-			<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-			<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a> 
+    <div class="w3-top">
+    	<div class="w3-bar w3-black">
+			<a href="home.php" class="w3-bar-logo w3-padding-large"><i class="fas fa-home w3-margin-right"></i> Simple CRM</a>
+			<a href="taskmngr.php" class="w3-bar-item w3-padding-large"><i class="fas fa-hourglass w3-margin-right"></i> Tasks</a>
+			<a href="clients.php" class="w3-bar-item w3-padding-large"><i class="fas fa-address-book w3-margin-right"></i> Clients</a>
+            <a href="leads.php" class="w3-bar-item w3-padding-large"><i class="fas fa-address-book w3-margin-right"></i> Leads</a>
+			<a href="profile.php" class="w3-bar-item w3-padding-large"><i class="fas fa-user-circle w3-margin-right"></i> Profile</a>
+			<a href="logout.php" class="w3-bar-item w3-padding-large"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a> 
 			<div class="w3-dropdown-hover">
-				<a href=""><i class="fas fa-bell"></i>  Tasks Due 
+				<a href="" class="task-mngr w3-bar-item w3-padding-large"><i class="fas fa-bell w3-margin-right"></i> Tasks Due 
 				<?php
 				$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() BETWEEN DATE(deadline) AND DATE_ADD(DATE(deadline), INTERVAL 14 DAY))";
 				$res = mysqli_query($con, $sql_tasks);
@@ -65,12 +64,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 			
 				if($num_tasks >= 1 || $num_tasks2 >= 1) { ?>
 				<div class="w3-dropdown-content">
-					<table class="w3-table">
 						 <?php
 							while($row = mysqli_fetch_assoc($res)){
 								$names = $row['name'];
 								$task_id = $row['task_id'];	
 								
+								echo "<table class='w3-table'>";
 								echo "<tr>";
 								echo "<td>";
 								echo "<a href='update-task.php?task_id=$task_id'>" . $names . "</a>";
@@ -86,14 +85,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 								echo "<a href='update-task.php?task_id=$task_id2'>" . $names2 . "</a>";
 								echo "</td>";
 								echo "</tr>";
+								echo "</table>";
 							}
+					
 					 }else{
 						echo "<div></div>";
 					 } ?>
-					</table>
 				</div>
 			</div>
 		</div>
-    </nav>
 
 	

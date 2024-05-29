@@ -110,8 +110,8 @@ tr {
 }
 
 .badgecur {
-	position:relative;
-	top: -15px;
+	position: relative;
+	top: -10px;
 	right: 2px;
 	padding: 5px 5px;
 	border-radius: 50%;
@@ -121,8 +121,8 @@ tr {
 
 .badgepas {
 	position: relative;
-	top: 15px;
-	right: -5px;
+	top: -30px;
+	right: -145px;
 	padding: 5px 5px;
 	border-radius: 50%;
 	background: red;
@@ -154,12 +154,9 @@ body.loggedin {
 	padding: 5px;
 	background-color: #1d1c1c;
 }
-.content {
-	width: 1000px;
-	margin: 0 auto;
-}
+
 .content h1 {
-	margin: 0;
+	margin: 20px;
 	padding: 25px 0;
 	font-size: 22px;
 	border-bottom: 1px solid #e0e0e3;
@@ -231,15 +228,14 @@ body.loggedin {
   	padding: 10px 15px;
   	margin: 15px 0;
 }
-.task-mngr {
+.w3-top .w3-bar .w3-dropdown-hover .task-mngr {
 	display: inline-block;
 	text-decoration: none;
-	background-color: #3892b6;
 	font-weight: bold;
 	font-size: 14px;
 	color: #FFFFFF;
-	padding: 10px 15px;
-	margin: 15px 0;
+	width:max-content;
+
 }
 .add-task {
 	display: inline-block;
@@ -514,7 +510,7 @@ body.loggedin {
 }
 .content {
 	width: 1500px;
-	margin: 0 auto;
+	margin: 30px auto;
 }
 .content > p, .content > div {
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);

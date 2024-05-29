@@ -35,7 +35,7 @@
 <?=template_header('Home')?>
 
 <div class="content w3-mobile">
- <h1><?php echo date('M d, Y') . "&nbsp" . date('   g:i a');?></h1>
+ <h1><?php echo date('M d, Y') . "&nbsp;" . date('   g:i a');?></h1>
    <div class="w3-col s12 m5 l5 w3-margin">
     <div class="read">
      <h2>Tasks: Clients <?= number_format($clients);?></h2>
