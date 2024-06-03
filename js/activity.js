@@ -1,11 +1,11 @@
 // Income Line Chart
-const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; 
+const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; 
 let clientlbls = [{monthname: "Jan",clientnum: "0"},{monthname: "Feb",clientnum: "0"},{monthname: "Mar",clientnum: "0"},
-                  {monthname: "Apr",clientnum: "0"},{monthname: "May",clientnum: "0"},{monthname: "June",clientnum: "0"},
+                  {monthname: "Apr",clientnum: "0"},{monthname: "May",clientnum: "0"},{monthname: "Jun",clientnum: "0"},
                   {monthname: "July",clientnum: "0"},{monthname: "Aug",clientnum: "0"},{monthname: "Sept",clientnum: "0"},
                   {monthname: "Oct",clientnum: "0"},{monthname: "Nov",clientnum: "0"},{monthname: "Dec",clientnum: "0"},];
 let leadlbls = [{monthname: "Jan",leadnum: "0"},{monthname: "Feb",leadnum: "0"},{monthname: "Mar",leadnum: "0"},
-                  {monthname: "Apr",leadnum: "0"},{monthname: "May",leadnum: "0"},{monthname: "June",leadnum: "0"},
+                  {monthname: "Apr",leadnum: "0"},{monthname: "May",leadnum: "0"},{monthname: "Jun",leadnum: "0"},
                   {monthname: "July",leadnum: "0"},{monthname: "Aug",leadnum: "0"},{monthname: "Sept",leadnum: "0"},
                   {monthname: "Oct",leadnum: "0"},{monthname: "Nov",leadnum: "0"},{monthname: "Dec",leadnum: "0"},];
 
