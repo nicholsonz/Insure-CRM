@@ -318,6 +318,8 @@
 			$convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND MONTH(created) = MONTH(now())")->fetchColumn();
 			if($convleads == "0"){
 				$convperc = "0";
+			}elseif($newleads == "0" && $convleads > "0"){
+				$convperc = $convleads;
 			}else{
 			$convperc = $convleads / $newleads;
 			}
@@ -343,10 +345,12 @@
 				$pdo = pdo_connect_mysql();
 				$newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
 				$convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
-				if($convleads > 0){
-					$convperc = $convleads / $newleads;
-				}else{
+				if($convleads == "0"){
 					$convperc = "0";
+				}elseif($newleads == "0" && $convleads > "0"){
+					$convperc = $convleads;
+				}else{
+				$convperc = $convleads / $newleads;
 				}
 			?>
 		<table>
