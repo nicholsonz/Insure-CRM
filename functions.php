@@ -39,7 +39,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 			<a href="profile.php" class="w3-bar-item w3-padding-large"><i class="fas fa-user-circle w3-margin-right"></i> Profile</a>
 			<a href="logout.php" class="w3-bar-item w3-padding-large"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a> 
 			<div class="w3-dropdown-hover">
-				<a href="" class="task-mngr w3-bar-item w3-padding-large"><i class="fas fa-bell w3-margin-right"></i> Tasks Due 
+				<a href="" class="task-mngr w3-bar-item w3-padding-large"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
 				<?php
 				$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() BETWEEN DATE(deadline) AND DATE_ADD(DATE(deadline), INTERVAL 14 DAY))";
 				$res = mysqli_query($con, $sql_tasks);
@@ -64,7 +64,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 			
 				if($num_tasks >= 1 || $num_tasks2 >= 1) { ?>
 				<div class="w3-dropdown-content">
-					<table class="w3-table">
 						 <?php
 							while($row = mysqli_fetch_assoc($res)){
 								$names = $row['name'];
@@ -90,7 +89,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 					 }else{
 						echo "<div></div>";
 					 } ?>
-					</table>
 				</div>
 			</div>
 		</div>

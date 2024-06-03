@@ -522,14 +522,13 @@ a {
 .w3-dropdown-hover {
     position: absolute;
     display: inline-block;
-    top: 28px;
     height: 45px;
     width: 150px;
     cursor: pointer
 }
 
 .w3-dropdown-hover:hover .w3-dropdown-content {
-    display: block
+    display: block;
 }
 
 .w3-dropdown-hover:first-child,
@@ -545,7 +544,7 @@ a {
 }
 
 .w3-dropdown-content {
-    cursor: auto;
+    cursor: pointer;
     color: #fff;
     background-color: #1a1919;
     display: none;
