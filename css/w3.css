@@ -520,9 +520,8 @@ a {
 
 .w3-dropdown-click,
 .w3-dropdown-hover {
-    position: absolute;
+    position: fixed;
     display: inline-block;
-    top: 28px;
     height: 45px;
     width: 150px;
     cursor: pointer
@@ -549,7 +548,7 @@ a {
     color: #fff;
     background-color: #1a1919;
     display: none;
-    position: absolute;
+    position: fixed;
     min-width: 160px;
     max-width: 230px;
     margin: 0;

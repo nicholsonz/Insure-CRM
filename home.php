@@ -20,16 +20,6 @@
 		$other = $row['other'];
 	}
 
-// PHP Calendar for lead count
-	$time = time();
-	$mnthyr = date('F Y');
-	$numDay = date('d', $time);
-	$numMonth = date('m', $time);
-	$strMonth = date('F', $time);
-	$numYear = date('Y', $time);
-	$firstDay = mktime(0,0,0,$numMonth,1,$numYear);
-	$daysInMonth = cal_days_in_month(0, $numMonth, $numYear);
-	$dayOfWeek = date('w', $firstDay);
 ?>
 
 <?=template_header('Home')?>
@@ -368,6 +358,19 @@
 			</tr>
 		</table>       
     </div>
+	<?php
+	
+		// PHP Calendar for lead count
+		$time = time();
+		$mnthyr = date('F Y');
+		$numDay = date('d', $time);
+		$numMonth = date('m', $time);
+		$strMonth = date('F', $time);
+		$numYear = date('Y', $time);
+		$firstDay = mktime(0,0,0,$numMonth,1,$numYear);
+		$daysInMonth = cal_days_in_month(0, $numMonth, $numYear);
+		$dayOfWeek = date('w', $firstDay);
+	?>
 	<div class="w3-col s12 m2 l2 w3-margin-left">	
 		<table>
 	  	 <caption><?php echo($mnthyr); ?></caption>	
@@ -385,7 +388,7 @@
 		<tbody>
 			<tr>
 				<?php
-				if(0 != $dayOfWeek) { echo("<td colspan='$dayOfWeek'> </td>"); }
+				if($dayOfWeek != 0) { echo("<td colspan='$dayOfWeek'> </td>"); }
 				for($i=1;$i<=$daysInMonth;$i++) {
 
 				if($i == $numDay) { echo("<td class='today' style='color: black;'>"); } else { echo("<td>"); }

@@ -64,13 +64,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 			
 				if($num_tasks >= 1 || $num_tasks2 >= 1) { ?>
 				<div class="w3-dropdown-content">
-					<table class='w3-table'>
+					<table class="w3-table">
 						 <?php
 							while($row = mysqli_fetch_assoc($res)){
 								$names = $row['name'];
 								$task_id = $row['task_id'];	
 								
-								echo "";
 								echo "<tr>";
 								echo "<td>";
 								echo "<a href='update-task.php?task_id=$task_id'>" . $names . "</a>";
