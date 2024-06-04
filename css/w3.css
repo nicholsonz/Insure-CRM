@@ -627,7 +627,7 @@ a {
 
 .w3-center .w3-bar {
     display: inline-block;
-    width: auto;
+    width: 78%;
 }
 
 .w3-bar .w3-bar-item {
@@ -637,7 +637,7 @@ a {
     color: white;
     border: none;
     display: block;
-    outline: 0
+    outline: 0;
 }
 .w3-bar .w3-bar-logo {
     padding: 8px 16px;

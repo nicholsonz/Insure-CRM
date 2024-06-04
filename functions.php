@@ -30,8 +30,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 			<script src="./js/alertify.min.js"></script>
 		</head>
 <body>
-    <div class="w3-top">
-    	<div class="w3-bar w3-black">
+    <div class="w3-top w3-center">
+    	<div class="w3-bar w3-flat-blue-fade w3-mobile">
 			<a href="home.php" class="w3-bar-logo w3-padding-large"><i class="fas fa-home w3-margin-right"></i> Simple CRM</a>
 			<a href="taskmngr.php" class="w3-bar-item w3-padding-large"><i class="fas fa-hourglass w3-margin-right"></i> Tasks</a>
 			<a href="clients.php" class="w3-bar-item w3-padding-large"><i class="fas fa-address-book w3-margin-right"></i> Clients</a>
