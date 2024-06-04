@@ -26,7 +26,7 @@
 
 <div class="content w3-mobile">
  <h1><?php echo date('M d, Y') . "&nbsp;" . date('   g:i a');?></h1>
-   <div class="w3-col s12 m5 l5 w3-margin">
+   <div class="w3-col s12 m5 l5 w3-margin w3-padding">
     <div class="read">
      <h2>Tasks: Clients <?= number_format($clients);?></h2>
      <table class="w3-table w3-hoverable">     
@@ -298,9 +298,7 @@
      </table>
 	</div> 
  </div>
-</div>
- <div class="content w3-mobile">
-	<div class="w3-col s12 m2 l2 w3-margin-left">
+	<div class="w3-col s12 m2 l2 w3-margin-left w3-padding">
 		<h2><?php echo date('F'); ?> Activity</h2>
 		<?php
 			$pdo = pdo_connect_mysql();
@@ -329,7 +327,7 @@
 			</tr>
 		</table>       
     </div>
-	<div class="w3-col s12 m2 l2 w3-margin-left">
+	<div class="w3-col s12 m2 l2 w3-margin-left w3-padding">
 		<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
 				$pdo = pdo_connect_mysql();
@@ -371,7 +369,7 @@
 		$daysInMonth = cal_days_in_month(0, $numMonth, $numYear);
 		$dayOfWeek = date('w', $firstDay);
 	?>
-	<div class="w3-col s12 m2 l2 w3-margin-left">	
+	<div class="w3-col s12 m2 l2 w3-margin-left w3-padding">	
 		<table>
 	  	 <caption><?php echo($mnthyr); ?></caption>	
 			<thead>

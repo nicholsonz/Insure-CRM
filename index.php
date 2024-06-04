@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Login</title>
-		<link rel="stylesheet" href="./fontawesome/css/all.css">
+		<link rel="stylesheet" href="../fontawesome/css/all.css">
 		<link href="./css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body class="logincolor">

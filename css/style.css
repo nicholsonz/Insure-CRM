@@ -121,8 +121,6 @@ tr {
 
 .badgepas {
 	position: relative;
-	top: -30px;
-	right: -145px;
 	padding: 5px 5px;
 	border-radius: 50%;
 	background: red;
@@ -514,7 +512,7 @@ body.loggedin {
 }
 .content > p, .content > div {
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-	margin: 25px 0;
+	margin: 15px 0;
 	padding: 25px;
 	background-color: #201f1f;
 }

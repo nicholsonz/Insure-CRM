@@ -52,7 +52,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 				$num_tasks2 = mysqli_num_rows($res2);
 				 			
 				if($num_tasks >= 1 && $num_tasks2 >= 1){
-					echo "<span class='badgecur'>". number_format($num_tasks) ."</span></a>";
+					echo "<span class='badgecur'>". number_format($num_tasks) ."</span>";
 					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></a>";
 				}elseif($num_tasks >= 1 && $num_tasks2 < 1){
 					echo "<span class='badgecur'>". number_format($num_tasks) ."</span></a>";
@@ -64,6 +64,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 			
 				if($num_tasks >= 1 || $num_tasks2 >= 1) { ?>
 				<div class="w3-dropdown-content">
+					<table class="w3-table">
 						 <?php
 							while($row = mysqli_fetch_assoc($res)){
 								$names = $row['name'];
@@ -89,6 +90,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 					 }else{
 						echo "<div></div>";
 					 } ?>
+					</table>
 				</div>
 			</div>
 		</div>
