@@ -4,6 +4,7 @@
 	// Connect to MySQL database
 	$pdo = pdo_connect_mysql();
 	$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+	$page2 = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
 	// Number of records to show on each page
 	$records_per_page = 6;
 
@@ -36,7 +37,7 @@
 		<th>Task</th>
 		<th>Client</th>
 		<th>Priority</th>
-		<th>Deadline</th>
+		<th><a href="javascript:SortTable(4,'D','dmyy');">Deadline <i class="fa fa-sort"></a></th>
 		</tr>
      </thead>
 		<?php 
@@ -44,16 +45,33 @@
 		//Select Database
 		$db_select = mysqli_select_db($con, DB_NAME) or die();
 				
-		//Create SQL Query to Get DAta from Databse
-		$sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name 
+		//Create SQL Query to Get Data from Databse
+			$stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name 
 				FROM tasks AS t
 				LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
 				WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
-				ORDER BY deadline";
+				ORDER BY deadline LIMIT :current_page, :record_per_page");
+			$stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
+			$stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
+			$stmt->execute();
 		
+			// Fetch the records so we can display them in our template.
+			$clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			// Get the total number of clients, this is so we can determine whether there should be a next and previous button
+			$num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
+			LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+			WHERE t.acct_id = '$acct_id' AND t.type = 'Client'")->fetchColumn();
 
-		//Execute Query
-		$res = mysqli_query($con, $sql);
+			//Create SQL Query to Get DAta from Databse
+			$sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name 
+			FROM tasks AS t
+			LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+			WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
+			ORDER BY deadline"
+			;
+			//Execute Query
+			$res = mysqli_query($con, $sql);
+		
      		//CHeck whether the query execueted o rnot
 			if($res==true)
 			{
@@ -63,36 +81,39 @@
 			
 			//Create Serial Number Variable
 			$sn=1;
-					
+			
 			//Check whether there is task on database or not
 			if($count_clients>0)
 			{
 			//Data is in Database
-				while($row=mysqli_fetch_assoc($res))
-				{
-				$task_id = $row['task_id'];
-				$task_name = $row['task_name'];
-				$name = $row['name'];
-				$priority = $row['priority'];
-				// $list_name = $row['list_name'];
-				$deadline = $row['deadline'];
+				// while($row=mysqli_fetch_assoc($res))
+				// {
+				// $task_id = $row['task_id'];
+				// $task_name = $row['task_name'];
+				// $name = $row['name'];
+				// $priority = $row['priority'];
+				// // $list_name = $row['list_name'];
+				// $deadline = $row['deadline'];
 
 		
-				$sql2 = "SELECT name FROM clients WHERE acct_id = '$acct_id' AND name LIKE '$name%'";
-				$result = mysqli_query($con, $sql2);
-				while($row=mysqli_fetch_assoc($result)){
-					$name = $row['name'];
-				}
-		?>				
+				// $sql2 = "SELECT name FROM clients WHERE acct_id = '$acct_id' AND name LIKE '$name%'";
+				// $result = mysqli_query($con, $sql2);
+				// while($row=mysqli_fetch_assoc($result)){
+				// 	$name = $row['name'];
+				// }
+		?>		
+		<tbody id="tblSrch">
+		<?php foreach ($clients as $client): ?>
 		<tr>
 		<!-- <td><?php echo $sn++; ?></td> -->
-		<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name;?></a></td>
-		<td><a href="./updateclient.php?name=<?= $name; ?>"><?php echo $name; ?></a></td>
-		<td><?php echo $priority; ?></td>
-		<td><?php echo $deadline; ?></td>
-		</tr>			
+		<td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['task_name'];?></a></td>
+		<td><a href="./updatelead.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
+		<td><?= $client['priority']; ?></td>
+		<td><?= $client['deadline']; ?></td>
+		</tr>	
+		<?php endforeach; ?>		
 		<?php
-				}
+				
 			}
 			else
 			{
@@ -108,6 +129,14 @@
 		?>	
      </table>
 	</div> 
+	<div class="center pagination">
+		<?php if ($page > 1): ?>
+		<a href="home.php?page=<?=$page-1?>"><i class="fas fa-angle-double-left fa-lg"></i></a>
+		<?php endif; ?>
+		<?php if ($page*$records_per_page < $num_clients): ?>
+		<a href="home.php?page=<?=$page+1?>"><i class="fas fa-angle-double-right fa-lg"></i></a>
+		<?php endif; ?>
+	</div>
    <div class="read">
      <h2>Tasks: Leads <?= number_format($leads);?></h2>
      <table class="w3-table w3-hoverable" id="srtTable">     
@@ -127,13 +156,13 @@
 									LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
 									WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
 									ORDER BY deadline LIMIT :current_page, :record_per_page");
-			$stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
+			$stmt->bindValue(':current_page', ($page2-1)*$records_per_page, PDO::PARAM_INT);
 			$stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
 			$stmt->execute();
 			// Fetch the records so we can display them in our template.
-			$clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			// Get the total number of clients, this is so we can determine whether there should be a next and previous button
-			$num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
+			$num_leads = $pdo->query("SELECT COUNT(*) FROM tasks AS t
 			LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
 			WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'")->fetchColumn();
 
@@ -182,13 +211,13 @@
 				// }
 		?>
 	  <tbody id="tblSrch">
-		<?php foreach ($clients as $client): ?>
+		<?php foreach ($leads as $lead): ?>
 		<tr>
 		<!-- <td><?php echo $sn++; ?></td> -->
-		<td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['task_name'];?></a></td>
-		<td><a href="./updatelead.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
-		<td><?= $client['priority']; ?></td>
-		<td><?= $client['deadline']; ?></td>
+		<td><a href="./update-task.php?task_id=<?= $lead['task_id']; ?>"><?= $lead['task_name'];?></a></td>
+		<td><a href="./updatelead.php?name=<?= $lead['name']; ?>"><?= $lead['name']; ?></a></td>
+		<td><?= $lead['priority']; ?></td>
+		<td><?= $lead['deadline']; ?></td>
 		</tr>	
 		<?php endforeach; ?>		
 		<?php
@@ -207,12 +236,13 @@
 		
 		?>	
      </table>
-	</div><div class="center pagination">
-		<?php if ($page > 1): ?>
-		<a href="home.php?page=<?=$page-1?>"><i class="fas fa-angle-double-left fa-lg"></i></a>
+	</div>
+	<div class="center pagination">
+		<?php if ($page2 > 1): ?>
+		<a href="home.php?page=<?=$page2-1?>"><i class="fas fa-angle-double-left fa-lg"></i></a>
 		<?php endif; ?>
-		<?php if ($page*$records_per_page < $num_clients): ?>
-		<a href="home.php?page=<?=$page+1?>"><i class="fas fa-angle-double-right fa-lg"></i></a>
+		<?php if ($page2*$records_per_page < $num_leads): ?>
+		<a href="home.php?page=<?=$page2+1?>"><i class="fas fa-angle-double-right fa-lg"></i></a>
 		<?php endif; ?>
 	</div>
    <div class="read">
