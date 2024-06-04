@@ -4,7 +4,6 @@
 	// Connect to MySQL database
 	$pdo = pdo_connect_mysql();
 	$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
-	$page2 = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
 	// Number of records to show on each page
 	$records_per_page = 6;
 
@@ -156,7 +155,7 @@
 									LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
 									WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
 									ORDER BY deadline LIMIT :current_page, :record_per_page");
-			$stmt->bindValue(':current_page', ($page2-1)*$records_per_page, PDO::PARAM_INT);
+			$stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
 			$stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
 			$stmt->execute();
 			// Fetch the records so we can display them in our template.
@@ -238,11 +237,11 @@
      </table>
 	</div>
 	<div class="center pagination">
-		<?php if ($page2 > 1): ?>
-		<a href="home.php?page=<?=$page2-1?>"><i class="fas fa-angle-double-left fa-lg"></i></a>
+		<?php if ($page > 1): ?>
+		<a href="home.php?page=<?=$page-1?>"><i class="fas fa-angle-double-left fa-lg"></i></a>
 		<?php endif; ?>
-		<?php if ($page2*$records_per_page < $num_leads): ?>
-		<a href="home.php?page=<?=$page2+1?>"><i class="fas fa-angle-double-right fa-lg"></i></a>
+		<?php if ($page*$records_per_page < $num_leads): ?>
+		<a href="home.php?page=<?=$page+1?>"><i class="fas fa-angle-double-right fa-lg"></i></a>
 		<?php endif; ?>
 	</div>
    <div class="read">
