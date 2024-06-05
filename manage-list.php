@@ -85,7 +85,7 @@ if ($stmt = $con->prepare('SELECT * FROM task_lists ORDER BY list_name LIMIT ?,?
              <tbody id="tblSrch">
                 <?php while ($row = $result->FETCH_ASSOC()): ?>                  
                     <tr>
-                        <td><?= $row['list_name'] ?></td>
+                        <td><a href="./update-list.php?list_id=<?= $row['list_id']; ?>"><?= $row['list_name'] ?></a></td>
                         <td><?= $row['list_description'] ?></td>
                         <td class="actions">
                             <a href="./update-list.php?list_id=<?= $row['list_id'] ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>   

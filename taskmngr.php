@@ -93,7 +93,11 @@ if ($stmt = $con->prepare('SELECT * FROM tasks
             <?php while ($row = $result->FETCH_ASSOC()): ?>
             <tr>
                 <td><?= $row['task_name'] ?></td>
-                <td><?= $row['name'] ?></td>
+                <?php if($row['type'] == 'Lead'): ?>
+                    <td><a href="./updatelead.php?name=<?= $row['name']; ?>"><?= $row['name'] ?></a></td>
+                <?php else: ?>
+                    <td><a href="./updateclient.php?name=<?= $row['name']; ?>"><?= $row['name'] ?></a></td>
+                <?php endif; ?>
                 <td><?= $row['task_description'] ?></td>
                 <td><?= $row['list_name'] ?></td>
                 <td><?= $row['priority'] ?></td>

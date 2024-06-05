@@ -601,29 +601,32 @@ body.loggedin {
 	box-sizing: border-box;
 	padding-right: 10px;
 }
+.dots {
+	color: white;
+}
 .pagination li a {
 	box-sizing: border-box;
-	background-color: rgb(145, 224, 238, .7);
+	background-color: #518acb;
 	padding: 8px;
 	text-decoration: none;
 	font-size: 12px;
 	font-weight: bold;
-	color: #171718;
+	color: black;
 	border-radius: 4px;
 }
 .pagination li a:hover {
-	background-color: #d4dada;
+	background-color: rgb(145, 224, 238);
 }
 .pagination .next a, .pagination .prev a {
 	text-transform: uppercase;
 	font-size: 12px;
 }
 .pagination .currentpage a {
-	background-color: #518acb;
-	color: #fff;
+	background-color: rgb(145, 224, 238);
+	color: black;
 }
 .pagination .currentpage a:hover {
-	background-color: #518acb;
+	background-color: rgb(145, 224, 238);
 }
 /* CSS pagination styling
 /* .pagination {
