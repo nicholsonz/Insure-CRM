@@ -51,7 +51,7 @@ if ($stmt = $con->prepare('SELECT * FROM clients ORDER BY name LIMIT ?,?')) {
         <tbody id="tblSrch">
             <?php while ($row = $result->FETCH_ASSOC()): ?>
             <tr>
-                <td><a href="./view.php?id=<?=$client['id']; ?>" target="_blank"><?=$row['name']?></a></td>
+                <td><a href="./view.php?id=<?=$row['id']; ?>" target="_blank"><?=$row['name']?></a></td>
                 <td><?=$row['birthdate']?></td>
                 <td><?=$row['phone']?></td>
                 <td><?=$row['policy']?></td>
