@@ -625,3 +625,24 @@ body.loggedin {
 .pagination .currentpage a:hover {
 	background-color: #518acb;
 }
+/* CSS pagination styling
+/* .pagination {
+	display: inline-block;
+  }
+  
+  .pagination a {
+	color: rgb(206, 237, 241);
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	transition: background-color .3s;
+	border: 1px solid #ddd;
+  }
+  
+  .pagination a.active {
+	background-color: #4CAF50;
+	color: rgb(9, 89, 155);
+	border: 1px solid #4CAF50;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #034469;} */
