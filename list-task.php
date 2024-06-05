@@ -1,5 +1,6 @@
 <?php 
-       require_once('./functions.php');
+    require_once('./require/header.php');
+    
 
     //Get the listid from URL
     
@@ -140,10 +141,10 @@
         </div>
         
         </div>
-    </body>
-    
-</html>
 
+ <?php 
+    require_once('./require/footer.php') ;
+?>      
 
 
 

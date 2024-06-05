@@ -1,6 +1,6 @@
 <?php 
-
-require_once('./functions.php');
+    require_once('./require/header.php');
+    
     
     //Check task_id in URL
     if(isset($_GET['task_id']))

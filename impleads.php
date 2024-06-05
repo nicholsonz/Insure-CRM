@@ -1,6 +1,6 @@
 <?php
-
-  require_once('./functions.php');
+    require_once('./require/header.php');
+    
    
 ?>   
    
@@ -14,4 +14,4 @@
     </div>
  </div>
 
- <?php require_once('./footer.php');?>
+ <?php require_once('./require/footer.php');?>

@@ -20,39 +20,10 @@ input, label {
 	float: left;
 }
 
-textarea {
-	width: 650px;
-	height: 150px;
-	padding: 5px 5px;
-	box-sizing: border-box;
-	border: 2px solid #ccc;
-	border-radius: 4px;
-	background-color: white;
-	font-size: 16px;
-}
-.contentview textarea {
-	width: 650px;
-	height: 150px;
-	padding: 12px 20px;
-	box-sizing: border-box;
-	border: 2px solid #ccc;
-	border-radius: 4px;
-	background-color: #1d1c1c;
-	font-size: 16px;
-	color: white
-}
 .textbox {
 	height: 150px;
   }
-.contentview table {
-	border-collapse: collapse;
-	table-layout: fixed;
-}
-tr {
-	text-align: left;
-	border: 1px solid black;
-	color: white
-}
+
 /* chart style */
 .chart-style {
 	max-height: 350px; 
@@ -138,8 +109,19 @@ caption {
 body.loggedin {
 	background-color: #f3f4f7;
 }
+textarea {
+	width: 650px;
+	height: 150px;
+	padding: 5px 5px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: white;
+	font-size: 16px;
+}
+
 .contentview {
-	width: 1000px;
+	width: 1200px;
 	margin: 10px auto;
 }
 .contentview > div p {
@@ -152,7 +134,27 @@ body.loggedin {
 	padding: 5px;
 	background-color: #1d1c1c;
 }
-
+.contentview textarea {
+	width: 850px;
+	min-height: 450px;
+	padding: 12px 20px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #1d1c1c;
+	font-size: 16px;
+	color: white
+}
+.contentview table {
+	border-collapse: collapse;
+	table-layout: fixed;
+	width: auto;
+}
+tr {
+	text-align: left;
+	border: 1px solid black;
+	color: white
+}
 .content h1 {
 	margin: 20px;
 	padding: 25px 0;
@@ -235,6 +237,15 @@ body.loggedin {
 	width:max-content;
 
 }
+.task-mngr a {
+	display: inline-block;
+	background-color: #097baf;
+	width: 120px;
+	height: 30px;
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 5%;
+}
 .add-task {
 	display: inline-block;
 	text-decoration: none;
@@ -250,20 +261,6 @@ body.loggedin {
 }
 .center {
 	text-align: center;
-}
-.pagination a {
-	color: rgb(243, 248, 250);
-	float: center;
-	padding: 1px 6px;
-	text-decoration: none;
-	transition: background-color .3s;
-}
-.pagination a.active {
-	background-color: #4CAF50;
-	color: #2f3947;
-}
-.pagination a:hover:not(.active) {
-  	background-color: #2f3947;
 }
 .read table {
   	width: 100%;
@@ -590,4 +587,41 @@ body.loggedin {
 .register form input[type="submit"]:hover {
   background-color: #2868c7;
 	transition: background-color 0.2s;
+}
+/* Pagination */
+.pagination {
+	list-style-type: none;
+	padding: 10px 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+}
+.pagination li {
+	box-sizing: border-box;
+	padding-right: 10px;
+}
+.pagination li a {
+	box-sizing: border-box;
+	background-color: rgb(145, 224, 238, .7);
+	padding: 8px;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+	color: #171718;
+	border-radius: 4px;
+}
+.pagination li a:hover {
+	background-color: #d4dada;
+}
+.pagination .next a, .pagination .prev a {
+	text-transform: uppercase;
+	font-size: 12px;
+}
+.pagination .currentpage a {
+	background-color: #518acb;
+	color: #fff;
+}
+.pagination .currentpage a:hover {
+	background-color: #518acb;
 }

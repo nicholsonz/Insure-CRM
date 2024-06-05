@@ -1,5 +1,6 @@
 <?php
-    require_once('./functions.php');
+    require_once('./require/header.php');
+    
 
 	// Connect to MySQL database
 	$pdo = pdo_connect_mysql();
@@ -448,4 +449,4 @@
 </script>
 <script src="./js/activity.js"></script>
 
-<?php require_once './footer.php';?>
+<?php require_once './require/footer.php';?>

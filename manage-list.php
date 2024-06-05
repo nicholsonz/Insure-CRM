@@ -1,6 +1,25 @@
 <?php 
+    require_once('./require/header.php');
+    
+// Get the total number of records from our table "students".
+$total_pages = $con->query('SELECT COUNT(*) FROM task_lists')->fetch_row()[0];
 
-require_once('./functions.php');
+// Check if the page number is specified and check if it's a number, if not return the default page number which is 1.
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+
+// Number of results to show on each page.
+$records_per_page = 8;
+
+
+if ($stmt = $con->prepare('SELECT * FROM task_lists ORDER BY list_name LIMIT ?,?')) {
+	// Calculate the page to get the results we need from our table.
+	$calc_page = ($page - 1) * $records_per_page;
+	$stmt->bind_param('ii', $calc_page, $records_per_page);
+	$stmt->execute(); 
+	// Get the results...
+	$result = $stmt->get_result();
+	$stmt->close();
+}
 
 ?>
 
@@ -10,9 +29,9 @@ require_once('./functions.php');
         
         <h1>TASK LIST MANAGER</h1>
     <!-- Menu Starts Here -->
-    <div class="">
+    <div class="task-mngr">
             
-        <a href="./taskmngr.php" class="task-mngr">Tasks</a>              
+        <a href="./taskmngr.php">Tasks</a>              
     </div>
         <!-- Menu Ends Here -->
             <?php 
@@ -58,87 +77,57 @@ require_once('./functions.php');
             <table class="w3-table w3-hoverable">
              <thead>
                 <tr>
-                    <th>S.N.</th>
                     <th>List Name</th>
                     <th>Description</th>
                     <th></th>
                 </tr>
-             </thead>
-                
-                <?php 
-                
-                    //Connect the DAtabase
-                    $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-                    
-                    //Select Database
-                    $db_select = mysqli_select_db($conn, DB_NAME) or die();
-                    
-                    //SQl Query to display all data fromo database
-                    $sql = "SELECT * FROM task_lists WHERE acct_id = '$acct_id'";
-                    
-                    //Execute the Query
-                    $res = mysqli_query($conn, $sql);
-                    
-                    //CHeck whether the query executed executed successfully or not
-                    if($res==true)
-                    {
-                        //work on displaying data
-                        //echo "Executed";
-                        
-                        //Count the rows of data in database
-                        $count_rows = mysqli_num_rows($res);
-                        
-                        //Create a SErial Number Variable
-                        $sn = 1;
-                        
-                        //Check whether there is data in database of not
-                        if($count_rows>0)
-                        {
-                            //There's data in database' Display in table
-                            
-                            while($row=mysqli_fetch_assoc($res))
-                            {
-                                //Getting the data from database
-                                $list_id = $row['list_id'];
-                                $list_name = $row['list_name'];
-                                $description = $row['list_description']
-                                ?>
-                                
-                                <tr>
-                                    <td><?php echo $sn++; ?>. </td>
-                                    <td><?php echo $list_name; ?></td>
-                                    <td><?php echo $description; ?></td>
-                                    <td class="actions">
-                                        <a href="./update-list.php?list_id=<?php echo $list_id; ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>   
-                                        <a href="./delete-list.php?list_id=<?php echo $list_id; ?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
-                                    </td>
-                                </tr>
-                                
-                                <?php
-                                
-                            }
-                            
-                            
-                        }
-                        else
-                        {
-                            //No Data in Database
-                            ?>
-                            
-                            <tr>
-                                <td colspan="3">No List Added Yet.</td>
-                            </tr>
-                            
-                            <?php
-                        }
-                    }
-                
-                ?>
-                
-                
+             </thead>                             
+             <tbody id="tblSrch">
+                <?php while ($row = $result->FETCH_ASSOC()): ?>                  
+                    <tr>
+                        <td><?= $row['list_name'] ?></td>
+                        <td><?= $row['list_description'] ?></td>
+                        <td class="actions">
+                            <a href="./update-list.php?list_id=<?= $row['list_id'] ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>   
+                            <a href="./delete-list.php?list_id=<?= $row['list_id'] ?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
+                        </td>
+                    </tr>
+                <?php endwhile ?>
+             </tbody>                                                 
             </table>
+            <?php if (ceil($total_pages / $records_per_page) > 0): ?>
+                <ul class="pagination">
+                    <?php if ($page > 1): ?>
+                    <li class="prev"><a href="manage-list.php?page=<?php echo $page-1 ?>">Prev</a></li>
+                    <?php endif; ?>
+
+                    <?php if ($page > 3): ?>
+                    <li class="start"><a href="manage-list.php?page=1">1</a></li>
+                    <li class="dots">...</li>
+                    <?php endif; ?>
+
+                    <?php if ($page-2 > 0): ?><li class="page"><a href="manage-list.php?page=<?php echo $page-2 ?>"><?php echo $page-2 ?></a></li><?php endif; ?>
+                    <?php if ($page-1 > 0): ?><li class="page"><a href="manage-list.php?page=<?php echo $page-1 ?>"><?php echo $page-1 ?></a></li><?php endif; ?>
+
+                    <li class="currentpage"><a href="manage-list.php?page=<?php echo $page ?>"><?php echo $page ?></a></li>
+
+                    <?php if ($page+1 < ceil($total_pages / $records_per_page)+1): ?><li class="page"><a href="manage-list.php?page=<?php echo $page+1 ?>"><?php echo $page+1 ?></a></li><?php endif; ?>
+                    <?php if ($page+2 < ceil($total_pages / $records_per_page)+1): ?><li class="page"><a href="manage-list.php?page=<?php echo $page+2 ?>"><?php echo $page+2 ?></a></li><?php endif; ?>
+
+                    <?php if ($page < ceil($total_pages / $records_per_page)-2): ?>
+                    <li class="dots">...</li>
+                    <li class="end"><a href="manage-list.php?page=<?php echo ceil($total_pages / $records_per_page) ?>"><?php echo ceil($total_pages / $records_per_page) ?></a></li>
+                    <?php endif; ?>
+
+                    <?php if ($page < ceil($total_pages / $records_per_page)): ?>
+                    <li class="next"><a href="manage-list.php?page=<?php echo $page+1 ?>">Next</a></li>
+                    <?php endif; ?>
+                </ul>
+            <?php endif; ?>
         </div>
         <!-- Table to display lists ends here -->
         </div>
-    </body>
-</html>
+
+<?php
+    require_once('./require/footer.php');
+?>

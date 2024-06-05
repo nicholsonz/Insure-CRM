@@ -1,23 +1,28 @@
 <?php
-    require_once('./functions.php');
+    require_once('./require/header.php');
 
 // Connect to MySQL database
 $pdo = pdo_connect_mysql();
-// Get the page via GET request (URL param: page), if non exists default the page to 1
-$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
-// Number of records to show on each page
-$records_per_page = 12;
 
-// Prepare the SQL statement and get records from our leads table, LIMIT will determine the page
-$stmt = $pdo->prepare("SELECT * FROM leads WHERE acct_id = '$acct_id' ORDER BY created DESC LIMIT :current_page, :record_per_page");
-$stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
-$stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
-$stmt->execute();
-// Fetch the records so we can display them in our template.
-$leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Get the total number of records from our table "students".
+$total_pages = $con->query('SELECT COUNT(*) FROM leads')->fetch_row()[0];
 
-// Get the total number of leads, this is so we can determine whether there should be a next and previous button
-$num_leads = $pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn();
+// Check if the page number is specified and check if it's a number, if not return the default page number which is 1.
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+
+// Number of results to show on each page.
+$records_per_page = 8;
+
+
+if ($stmt = $con->prepare('SELECT * FROM leads ORDER BY name LIMIT ?,?')) {
+	// Calculate the page to get the results we need from our table.
+	$calc_page = ($page - 1) * $records_per_page;
+	$stmt->bind_param('ii', $calc_page, $records_per_page);
+	$stmt->execute(); 
+	// Get the results...
+	$result = $stmt->get_result();
+	$stmt->close();
+}
 ?>
 
 <?=template_header('Leads')?>
@@ -42,34 +47,56 @@ $num_leads = $pdo->query('SELECT COUNT(*) FROM leads')->fetchColumn();
             </tr>
         </thead>
         <tbody id="tblSrch">
-            <?php foreach ($leads as $lead): ?>
+            <?php while ($row = $result->FETCH_ASSOC()): ?>
 	    <tr>
-                <td><a href="./updatelead.php?name=<?=$lead['name']; ?>"><?=$lead['name']?></td>
-                <td><?=$lead['birthdate']?></td>
-                <td><?=$lead['phone']?></td>
-                <td><?=$lead['email']?></td>
-                <td><?=$lead['notes']?></td>
-                <td><?=$lead['created']?></td>
+                <td><a href="./updatelead.php?name=<?=$row['name']; ?>"><?=$row['name']?></td>
+                <td><?=$row['birthdate']?></td>
+                <td><?=$row['phone']?></td>
+                <td><?=$row['email']?></td>
+                <td><?=$row['notes']?></td>
+                <td><?=$row['created']?></td>
                 <td class="actions">          
-                    <a href="add-task.php?name=<?=$lead['name']?>&&type=<?="Lead";?>" class="task"><i class="fas fa-tasks fa-xs"></i></a>
-                    <a href="convertlead.php?name=<?=$lead['name']?>" class="convert"><i class="fas fa-archive fa-xs"></i></a>
-                    <a href="updatelead.php?name=<?=$lead['name']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                    
-                    <a href="deletelead.php?name=<?=$lead['name']?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
+                    <a href="viewLds.php?name=<?=$row['name']?>" class="view" target="_blank"><i class="fas fa-eye fa-xs"></i></a>
+                    <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task"><i class="fas fa-tasks fa-xs"></i></a>
+                    <a href="convertlead.php?name=<?=$row['name']?>" class="convert"><i class="fas fa-archive fa-xs"></i></a>
+                    <a href="updatelead.php?name=<?=$row['name']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                    
+                    <a href="deletelead.php?name=<?=$row['name']?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
                    
                 </td>
             </tr>
-            <?php endforeach; ?>
+            <?php endwhile; ?>
         </tbody>
     </table>
-</div>
-	<div class="center pagination">
-		<?php if ($page > 1): ?>
-		<a href="leads.php?page=<?=$page-1?>"><i class="fas fa-angle-double-left fa-lg"></i></a>
-		<?php endif; ?>
-		<?php if ($page*$records_per_page < $num_leads): ?>
-		<a href="leads.php?page=<?=$page+1?>"><i class="fas fa-angle-double-right fa-lg"></i></a>
-		<?php endif; ?>
-	</div>
+    <?php if (ceil($total_pages / $records_per_page) > 0): ?>
+        <ul class="pagination">
+            <?php if ($page > 1): ?>
+            <li class="prev"><a href="leads.php?page=<?php echo $page-1 ?>">Prev</a></li>
+            <?php endif; ?>
+
+            <?php if ($page > 3): ?>
+            <li class="start"><a href="leads.php?page=1">1</a></li>
+            <li class="dots">...</li>
+            <?php endif; ?>
+
+            <?php if ($page-2 > 0): ?><li class="page"><a href="leads.php?page=<?php echo $page-2 ?>"><?php echo $page-2 ?></a></li><?php endif; ?>
+            <?php if ($page-1 > 0): ?><li class="page"><a href="leads.php?page=<?php echo $page-1 ?>"><?php echo $page-1 ?></a></li><?php endif; ?>
+
+            <li class="currentpage"><a href="leads.php?page=<?php echo $page ?>"><?php echo $page ?></a></li>
+
+            <?php if ($page+1 < ceil($total_pages / $records_per_page)+1): ?><li class="page"><a href="leads.php?page=<?php echo $page+1 ?>"><?php echo $page+1 ?></a></li><?php endif; ?>
+            <?php if ($page+2 < ceil($total_pages / $records_per_page)+1): ?><li class="page"><a href="leads.php?page=<?php echo $page+2 ?>"><?php echo $page+2 ?></a></li><?php endif; ?>
+
+            <?php if ($page < ceil($total_pages / $records_per_page)-2): ?>
+            <li class="dots">...</li>
+            <li class="end"><a href="leads.php?page=<?php echo ceil($total_pages / $records_per_page) ?>"><?php echo ceil($total_pages / $records_per_page) ?></a></li>
+            <?php endif; ?>
+
+            <?php if ($page < ceil($total_pages / $records_per_page)): ?>
+            <li class="next"><a href="leads.php?page=<?php echo $page+1 ?>">Next</a></li>
+            <?php endif; ?>
+        </ul>
+    <?php endif; ?>
+
 </div>
 
-<?php require_once('./footer.php');?>
+<?php require_once('./require/footer.php');?>

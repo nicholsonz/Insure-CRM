@@ -1,6 +1,6 @@
 <?php
-    require_once('./functions.php');
-
+    require_once('./require/header.php');
+    
 $pdo = pdo_connect_mysql();
 $msg = '';
 // Check if the contact id exists, for example update.php?id=1 will get the contact with the id of 1
@@ -54,4 +54,4 @@ if (isset($_GET['id'])) {
     <?php endif; ?>
 </div>
 
-<?php require_once('./footer.php');?>
+<?php require_once('./require/footer.php');?>

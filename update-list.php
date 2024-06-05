@@ -1,8 +1,6 @@
 <?php 
-
-require_once('./functions.php');
-
-    
+    require_once('./require/header.php');
+        
     //Get the Current Values of Selected List
     if(isset($_GET['list_id']))
     {
@@ -130,11 +128,9 @@ require_once('./functions.php');
         </form>
         
         </div>
-        
-    
-    </body>
-
-</html>
+<?php
+    require_once('./require/footer.php');
+?>
 
 
 

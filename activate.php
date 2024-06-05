@@ -1,5 +1,5 @@
 <?php
-include './dbconfig.php';
+include './include/dbconfig.php';
 
 // First we check if the email and code exists...
 if (isset($_GET['email'], $_GET['code'])) {

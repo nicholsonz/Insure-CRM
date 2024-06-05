@@ -1,5 +1,6 @@
 <?php
-    require_once('./functions.php');
+    require_once('./require/header.php');
+    
 
 $pdo = pdo_connect_mysql();
 $msg = '';
@@ -48,4 +49,3 @@ if (isset($_GET['name'])) {
     <?php endif; ?>
 </div>
 
-<?php require_once('./footer.php');?>

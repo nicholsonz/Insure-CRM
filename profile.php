@@ -1,7 +1,6 @@
 <?php
-    require_once('./functions.php');
-
-
+    require_once('./require/header.php');
+    
 // We don't have the password or email info stored in sessions so instead we can get the results from the database.
 $stmt = "SELECT username, email FROM accounts WHERE id = '$acct_id'";
 // In this case we can use the account ID to get the account info.
@@ -46,4 +45,4 @@ $stmt = "SELECT username, email FROM accounts WHERE id = '$acct_id'";
 			</div>
 		</div>
 
-		<?php require_once('./footer.php');?>
+<?php require_once('./require/footer.php');?>

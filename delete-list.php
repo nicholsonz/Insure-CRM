@@ -1,5 +1,6 @@
 <?php 
-    require_once('./functions.php');
+    require_once('./require/header.php');
+    
     //echo "Delete List Page";
     
     //Check whether the list_id is assigned or not

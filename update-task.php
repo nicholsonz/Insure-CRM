@@ -1,6 +1,6 @@
 <?php 
-      require_once('./functions.php');
-    
+    require_once('./require/header.php');
+        
     //Check the Task ID in URL
     
     if(isset($_GET['task_id']))
@@ -221,8 +221,9 @@
         
         </form>
         </div>
-    </body>
-</html>
+<?php
+    require_once('./require/footer.php');
+?>
 
 
 

@@ -1,6 +1,28 @@
 <?php
-    require_once('./functions.php');
+    require_once('./require/header.php');
+    
 
+// Get the total number of records from our table "students".
+$total_pages = $con->query('SELECT COUNT(*) FROM tasks')->fetch_row()[0];
+
+// Check if the page number is specified and check if it's a number, if not return the default page number which is 1.
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+
+// Number of results to show on each page.
+$records_per_page = 8;
+
+
+if ($stmt = $con->prepare('SELECT * FROM tasks 
+                           LEFT JOIN task_lists AS tl ON tasks.list_id = tl.list_id
+                           ORDER BY tasks.name LIMIT ?,?')) {
+	// Calculate the page to get the results we need from our table.
+	$calc_page = ($page - 1) * $records_per_page;
+	$stmt->bind_param('ii', $calc_page, $records_per_page);
+	$stmt->execute(); 
+	// Get the results...
+	$result = $stmt->get_result();
+	$stmt->close();
+}
 // Home Page template below.
 ?>
 
@@ -10,10 +32,10 @@
     
     <h1>TASK MANAGER</h1>    
     <!-- Menu Starts Here -->
-    <div class="">
+    <div class="task-mngr">
     
-        <a href="./taskmngr.php" class="task-mngr">Tasks</a>                
-        <a href="./manage-list.php" class="task-mngr">Manage Lists</a>
+        <a href="./taskmngr.php">Tasks</a>                
+        <a href="./manage-list.php">Manage Lists</a>
     </div>
     <!-- Menu Ends Here -->
     
@@ -68,83 +90,58 @@
             </tr>
          </thead>
         <tbody id="tblSrch">
-            <?php 
+            <?php while ($row = $result->FETCH_ASSOC()): ?>
+            <tr>
+                <td><?= $row['task_name'] ?></td>
+                <td><?= $row['name'] ?></td>
+                <td><?= $row['task_description'] ?></td>
+                <td><?= $row['list_name'] ?></td>
+                <td><?= $row['priority'] ?></td>
+                <td><?= $row['deadline'] ?></td>
+                <td><?= $row['type'] ?></td>
+                <td class="actions">
+                    <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                                    
+                    <a href="./delete-task.php?task_id=<?= $row['task_id'] ?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
                 
-                //Select Database
-                $db_select = mysqli_select_db($con, DB_NAME) or die();
-                
-                //Create SQL Query to Get DAta from Databse
-                $sql = "SELECT *, tl.list_name FROM tasks AS t
-                        LEFT JOIN task_lists AS tl ON tl.list_id = t.list_id
-                        WHERE t.acct_id = '$acct_id' 
-                        ORDER BY deadline";
-                
-                //Execute Query
-                $res = mysqli_query($con, $sql);
-                
-                //CHeck whether the query execueted o rnot
-                if($res==true)
-                {
-                    //DIsplay the Tasks from DAtabase
-                    $count_rows = mysqli_num_rows($res);
-                    
-                    //Create Serial Number Variable
-                    $sn=1;
-                    
-                    //Check whether there is task on database or not
-                    if($count_rows>0)
-                    {
-                        //Data is in Database
-                        while($row=mysqli_fetch_assoc($res))
-                        {
-                            $task_id = $row['task_id'];
-                            $task_name = $row['task_name'];
-                            $name = $row['name'];
-                            $descr = $row['task_description'];
-                            $list_name = $row['list_name'];
-                            $priority = $row['priority'];
-                            $deadline = $row['deadline'];
-                            $type = $row['type'];
-                            ?>
-                            <tr>
-                                <!-- <td><?php echo $sn++; ?></td> -->
-                                <td><?php echo $task_name; ?></td>
-                                <td><?php echo $name; ?></td>
-                                <td><?php echo $descr; ?></td>
-                                <td><?php echo $list_name; ?></td>
-                                <td><?php echo $priority; ?></td>
-                                <td><?php echo $deadline; ?></td>
-                                <td><?php echo $type; ?></td>
-                                <td class="actions">
-                                    <a href="./update-task.php?task_id=<?php echo $task_id; ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                                    
-                                    <a href="./delete-task.php?task_id=<?php echo $task_id; ?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
-                                
-                                </td>
-                            </tr>
-                            <?php
-                        }
-                    }
-                    else
-                    {
-                        //No data in Database
-                        ?>
-                        
-                        <tr>
-                            <td colspan="5">No Task Added Yet.</td>
-                        </tr>
-                        
-                        <?php
-                    }
-                }
-            
-            ?>
+                </td>
+            </tr>
+            <?php endwhile ?>
             
         </tbody>
         
         </table>
+    <?php if (ceil($total_pages / $records_per_page) > 0): ?>
+        <ul class="pagination">
+            <?php if ($page > 1): ?>
+            <li class="prev"><a href="taskmngr.php?page=<?php echo $page-1 ?>">Prev</a></li>
+            <?php endif; ?>
+
+            <?php if ($page > 3): ?>
+            <li class="start"><a href="taskmngr.php?page=1">1</a></li>
+            <li class="dots">...</li>
+            <?php endif; ?>
+
+            <?php if ($page-2 > 0): ?><li class="page"><a href="taskmngr.php?page=<?php echo $page-2 ?>"><?php echo $page-2 ?></a></li><?php endif; ?>
+            <?php if ($page-1 > 0): ?><li class="page"><a href="taskmngr.php?page=<?php echo $page-1 ?>"><?php echo $page-1 ?></a></li><?php endif; ?>
+
+            <li class="currentpage"><a href="taskmngr.php?page=<?php echo $page ?>"><?php echo $page ?></a></li>
+
+            <?php if ($page+1 < ceil($total_pages / $records_per_page)+1): ?><li class="page"><a href="taskmngr.php?page=<?php echo $page+1 ?>"><?php echo $page+1 ?></a></li><?php endif; ?>
+            <?php if ($page+2 < ceil($total_pages / $records_per_page)+1): ?><li class="page"><a href="taskmngr.php?page=<?php echo $page+2 ?>"><?php echo $page+2 ?></a></li><?php endif; ?>
+
+            <?php if ($page < ceil($total_pages / $records_per_page)-2): ?>
+            <li class="dots">...</li>
+            <li class="end"><a href="taskmngr.php?page=<?php echo ceil($total_pages / $records_per_page) ?>"><?php echo ceil($total_pages / $records_per_page) ?></a></li>
+            <?php endif; ?>
+
+            <?php if ($page < ceil($total_pages / $records_per_page)): ?>
+            <li class="next"><a href="taskmngr.php?page=<?php echo $page+1 ?>">Next</a></li>
+            <?php endif; ?>
+        </ul>
+    <?php endif; ?>
     
     <!-- Tasks Ends Here -->
     </div>
 </div>
 
-<?php require_once('./footer.php');?>
+<?php require_once('./require/footer.php');?>

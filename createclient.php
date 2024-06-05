@@ -1,5 +1,6 @@
 <?php
-require_once('./functions.php');
+    require_once('./require/header.php');
+    
 $pdo = pdo_connect_mysql();
 $msg = '';
 
@@ -142,4 +143,4 @@ if (!empty($_POST)) {
     </form>
 </div>
 
-<?php require_once('./footer.php');?>
+<?php require_once('./require/footer.php');?>
