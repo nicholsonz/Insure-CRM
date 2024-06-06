@@ -1,5 +1,5 @@
 # Simple CRM Web App 
-![Screenshot from 2024-05-19 20-43-21](https://github.com/nicholsonz/Simple-CRM/assets/77360596/35276f80-836d-470d-bb0e-532f7a98745f)
+![Screenshot from 2024-06-06 16-29-36](https://github.com/nicholsonz/Simple-CRM/assets/77360596/6aed60d9-e6ef-4c72-8cae-e05458a5aa09)
 
 
 ## Requirements - May or may not work on earlier versions of apps
