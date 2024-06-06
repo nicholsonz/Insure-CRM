@@ -14,7 +14,7 @@ $records_per_page = 8;
 
 if ($stmt = $con->prepare('SELECT * FROM tasks 
                            LEFT JOIN task_lists AS tl ON tasks.list_id = tl.list_id
-                           ORDER BY tasks.name LIMIT ?,?')) {
+                           ORDER BY tasks.deadline ASC LIMIT ?,?')) {
 	// Calculate the page to get the results we need from our table.
 	$calc_page = ($page - 1) * $records_per_page;
 	$stmt->bind_param('ii', $calc_page, $records_per_page);
@@ -84,7 +84,7 @@ if ($stmt = $con->prepare('SELECT * FROM tasks
                 <th>Details</th>
                 <th><a href="javascript:SortTable(4,'T');">Task List <i class="fa fa-sort"></a></th>
                 <th>Priority</th>
-                <th>Deadline</th>
+                <th><a href="javascript:SortTable(6,'D','dmyy');">Deadline <i class="fa fa-sort"></a></th>
                 <th><a href="javascript:SortTable(7,'T');">Type <i class="fa fa-sort"></a></th>
                 <th></th>
             </tr>
