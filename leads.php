@@ -14,7 +14,7 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 8;
 
 
-if ($stmt = $con->prepare('SELECT * FROM leads ORDER BY name LIMIT ?,?')) {
+if ($stmt = $con->prepare('SELECT * FROM leads ORDER BY created DESC LIMIT ?,?')) {
 	// Calculate the page to get the results we need from our table.
 	$calc_page = ($page - 1) * $records_per_page;
 	$stmt->bind_param('ii', $calc_page, $records_per_page);
