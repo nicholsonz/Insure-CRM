@@ -19,7 +19,7 @@
 // Connect to MySQL database
 $pdo = pdo_connect_mysql();
 
-// Check existence of id parameter before processing further
+// Check existence of name parameter before processing further
 if(isset($_GET["name"]) && !empty(trim($_GET["name"]))){
 
     // Prepare a select statement

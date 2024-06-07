@@ -2,7 +2,7 @@
     require_once('./require/header.php');
 
 
-// Get the total number of records from our table "students".
+// Get the total number of clients.
 $total_pages = $con->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id'")->fetch_row()[0];
 
 // Check if the page number is specified and check if it's a number, if not return the default page number which is 1.
