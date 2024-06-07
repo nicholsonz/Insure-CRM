@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 09, 2024 at 07:33 PM
+-- Generation Time: Apr 21, 2024 at 12:08 AM
 -- Server version: 10.11.6-MariaDB-0+deb12u1-log
 -- PHP Version: 8.2.18
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `clientdb`
 --
+CREATE DATABASE IF NOT EXISTS `clientdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `clientdb`;
 
 -- --------------------------------------------------------
 
@@ -43,7 +45,6 @@ CREATE TABLE `accounts` (
 
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
-  `acct_id` int(11) NOT NULL,
   `name` varchar(55) NOT NULL,
   `address` varchar(55) DEFAULT NULL,
   `city` varchar(25) DEFAULT NULL,
@@ -71,7 +72,6 @@ CREATE TABLE `clients` (
 --
 
 CREATE TABLE `leads` (
-  `acct_id` int(11) NOT NULL,
   `name` varchar(55) NOT NULL,
   `address` varchar(55) DEFAULT NULL,
   `city` varchar(25) DEFAULT NULL,
@@ -108,32 +108,42 @@ CREATE TABLE `tally` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tasks`
+-- Table structure for table `tbl_events`
 --
 
-CREATE TABLE `tasks` (
-  `task_id` int(10) UNSIGNED NOT NULL,
-  `acct_id` int(11) NOT NULL,
-  `task_name` varchar(150) NOT NULL,
-  `name` varchar(75) DEFAULT NULL,
-  `task_description` text NOT NULL,
-  `list_id` int(11) NOT NULL,
-  `priority` varchar(10) NOT NULL,
-  `deadline` date NOT NULL,
-  `type` enum('Lead','Client','Other') NOT NULL
+CREATE TABLE `tbl_events` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `task_lists`
+-- Table structure for table `tbl_lists`
 --
 
-CREATE TABLE `task_lists` (
+CREATE TABLE `tbl_lists` (
   `list_id` int(10) UNSIGNED NOT NULL,
-  `acct_id` int(11) NOT NULL,
   `list_name` varchar(50) NOT NULL,
   `list_description` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_tasks`
+--
+
+CREATE TABLE `tbl_tasks` (
+  `task_id` int(10) UNSIGNED NOT NULL,
+  `task_name` varchar(150) NOT NULL,
+  `lead_name` varchar(75) DEFAULT NULL,
+  `task_description` text NOT NULL,
+  `list_id` int(11) NOT NULL,
+  `priority` varchar(10) NOT NULL,
+  `deadline` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -144,22 +154,19 @@ CREATE TABLE `task_lists` (
 -- Indexes for table `accounts`
 --
 ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`) USING BTREE;
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `clients`
 --
 ALTER TABLE `clients`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `acct_id` (`acct_id`) USING BTREE;
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `leads`
 --
 ALTER TABLE `leads`
-  ADD PRIMARY KEY (`name`),
-  ADD KEY `acct_id` (`acct_id`) USING BTREE;
+  ADD PRIMARY KEY (`name`);
 
 --
 -- Indexes for table `tally`
@@ -168,19 +175,23 @@ ALTER TABLE `tally`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tasks`
+-- Indexes for table `tbl_events`
 --
-ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`task_id`),
-  ADD KEY `list_id` (`list_id`),
-  ADD KEY `acct_id` (`acct_id`);
+ALTER TABLE `tbl_events`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `task_lists`
+-- Indexes for table `tbl_lists`
 --
-ALTER TABLE `task_lists`
-  ADD PRIMARY KEY (`list_id`),
-  ADD KEY `acct_id` (`acct_id`);
+ALTER TABLE `tbl_lists`
+  ADD PRIMARY KEY (`list_id`);
+
+--
+-- Indexes for table `tbl_tasks`
+--
+ALTER TABLE `tbl_tasks`
+  ADD PRIMARY KEY (`task_id`),
+  ADD KEY `list_id` (`list_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -205,52 +216,22 @@ ALTER TABLE `tally`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tasks`
+-- AUTO_INCREMENT for table `tbl_events`
 --
-ALTER TABLE `tasks`
-  MODIFY `task_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbl_events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `task_lists`
+-- AUTO_INCREMENT for table `tbl_lists`
 --
-ALTER TABLE `task_lists`
+ALTER TABLE `tbl_lists`
   MODIFY `list_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `tbl_tasks`
 --
-
---
--- Constraints for table `clients`
---
-ALTER TABLE `clients`
-  ADD CONSTRAINT `clients_ibfk_1` FOREIGN KEY (`acct_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `leads`
---
-ALTER TABLE `leads`
-  ADD CONSTRAINT `leads_ibfk_1` FOREIGN KEY (`acct_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tasks`
---
-ALTER TABLE `tasks`
-  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`acct_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `task_lists`
---
-ALTER TABLE `task_lists`
-  ADD CONSTRAINT `task_lists_ibfk_1` FOREIGN KEY (`acct_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-DELIMITER $$
---
--- Events
---
-CREATE DEFINER=`zach`@`localhost` EVENT `AnnualReview` ON SCHEDULE EVERY 1 YEAR STARTS '2024-10-15 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO `tasks`(`task_name`, `name`, `task_description`, `list_id`, `priority`, `deadline`, `type`) SELECT 'Call', name, 'Annual Review', '3', 'Medium', DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH), 'Client' FROM clients WHERE policy = ('Med Adv') OR policy = ('Med Supp')$$
-
-DELIMITER ;
+ALTER TABLE `tbl_tasks`
+  MODIFY `task_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
