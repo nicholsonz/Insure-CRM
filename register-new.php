@@ -1,6 +1,6 @@
 <?php
 // Include config file
-include('dbconfig.php');
+include('./include/dbconfig.php');
 
 // Define variables and initialize with empty values
 $username = $email = $password = $confirm_password = "";
@@ -57,7 +57,7 @@ if(empty($username_err) && empty($email_err) && empty($password_err) && empty($c
 		$subject = 'Account Activation Required';
 		$headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
 	// Update the activation variable below
-		$activate_link = 'http://example.net/clients/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
+		$activate_link = 'http://example.net/clients/action/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
 		$message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
 		mail($_POST['email'], $subject, $message, $headers);	
 		echo '<script>alert("Account created succesfully! Please check your email for activation link.")</script>';	

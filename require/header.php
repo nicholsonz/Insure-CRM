@@ -37,7 +37,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 			<a href="clients.php" class="w3-bar-item w3-padding-large"><i class="fas fa-address-book w3-margin-right"></i> Clients</a>
             <a href="leads.php" class="w3-bar-item w3-padding-large"><i class="fas fa-address-book w3-margin-right"></i> Leads</a>
 			<a href="profile.php" class="w3-bar-item w3-padding-large"><i class="fas fa-user-circle w3-margin-right"></i> Profile</a>
-			<a href="logout.php" class="w3-bar-item w3-padding-large"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a> 
+			<a href="./action/logout.php" class="w3-bar-item w3-padding-large"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a> 
 			<div class="w3-dropdown-hover">
 				<a href="" class="task-mngr w3-bar-item w3-padding-large"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
 				<?php

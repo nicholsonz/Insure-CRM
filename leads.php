@@ -3,7 +3,7 @@
 
 
 // Get the total number of records from our table "students".
-$total_pages = $con->query('SELECT COUNT(*) FROM leads')->fetch_row()[0];
+$total_pages = $con->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id'")->fetch_row()[0];
 
 // Check if the page number is specified and check if it's a number, if not return the default page number which is 1.
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
@@ -12,7 +12,7 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 8;
 
 
-if ($stmt = $con->prepare('SELECT * FROM leads ORDER BY created DESC LIMIT ?,?')) {
+if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER BY created DESC LIMIT ?,?")) {
 	// Calculate the page to get the results we need from our table.
 	$calc_page = ($page - 1) * $records_per_page;
 	$stmt->bind_param('ii', $calc_page, $records_per_page);
