@@ -1,6 +1,6 @@
 <?php
 // Load the database configuration file
-include_once 'dbconfig.php';
+include_once './include/dbconfig.php';
 // We need to use sessions, so you should always start sessions using the below code.
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -80,5 +80,5 @@ if(isset($_POST['importSubmit'])){
 }
 
 // Redirect to the listing page
-header("Location: leads.php");
+header("Location: ../leads.php");
 ?>
