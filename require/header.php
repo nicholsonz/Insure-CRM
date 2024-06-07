@@ -9,6 +9,8 @@ if (session_status() === PHP_SESSION_NONE) {
   // Set some global variables 
 $acct_id = $_SESSION['id'];
 
+// Connect to MySQL database
+$pdo = pdo_connect_mysql();
 
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){

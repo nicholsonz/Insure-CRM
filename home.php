@@ -1,14 +1,6 @@
 <?php
     require_once('./require/header.php');
     
-
-	// Connect to MySQL database
-	$pdo = pdo_connect_mysql();
-	$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
-	// Number of records to show on each page
-	$records_per_page = 6;
-
-
 	$sql = "SELECT COUNT(*) as clients, 
 		(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Lead') as leads,
 		(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Other') as other
@@ -27,9 +19,10 @@
 
 <div class="content w3-mobile">
  <h1><?php echo date('M d, Y') . "&nbsp;" . date('   g:i a');?></h1>
-   <div class="w3-col s12 m5 l5 w3-margin w3-padding">
-    <div class="read">
-     <h2>Tasks: Clients <?= number_format($clients);?></h2>
+   <div class="w3-col s12 m5 l5 w3-padding">
+	<button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin w3-padding"><h3>Tasks: Clients <?= number_format($clients);?></h3></button>
+    <div id="show" class="read w3-hide w3-padding">
+	 <div class="tableFixHead">
      <table class="w3-table w3-hoverable">     
 	  <thead>   
 		<tr>
@@ -37,7 +30,7 @@
 		<th>Task</th>
 		<th>Client</th>
 		<th>Priority</th>
-		<th><a href="javascript:SortTable(4,'D','dmyy');">Deadline <i class="fa fa-sort"></a></th>
+		<th>Deadline</th>
 		</tr>
      </thead>
 		<?php 
@@ -50,9 +43,7 @@
 				FROM tasks AS t
 				LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
 				WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
-				ORDER BY deadline LIMIT :current_page, :record_per_page");
-			$stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
-			$stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
+				ORDER BY deadline");
 			$stmt->execute();
 		
 			// Fetch the records so we can display them in our template.
@@ -85,68 +76,47 @@
 			//Check whether there is task on database or not
 			if($count_clients>0)
 			{
-			//Data is in Database
-				// while($row=mysqli_fetch_assoc($res))
-				// {
-				// $task_id = $row['task_id'];
-				// $task_name = $row['task_name'];
-				// $name = $row['name'];
-				// $priority = $row['priority'];
-				// // $list_name = $row['list_name'];
-				// $deadline = $row['deadline'];
-
-		
-				// $sql2 = "SELECT name FROM clients WHERE acct_id = '$acct_id' AND name LIKE '$name%'";
-				// $result = mysqli_query($con, $sql2);
-				// while($row=mysqli_fetch_assoc($result)){
-				// 	$name = $row['name'];
-				// }
-		?>		
-		<tbody id="tblSrch">
-		<?php foreach ($clients as $client): ?>
-		<tr>
-		<!-- <td><?php echo $sn++; ?></td> -->
-		<td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['task_name'];?></a></td>
-		<td><a href="./updatelead.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
-		<td><?= $client['priority']; ?></td>
-		<td><?= $client['deadline']; ?></td>
-		</tr>	
-		<?php endforeach; ?>		
-		<?php
-				
-			}
-			else
-			{
-			//No data in Database
-		?>					
-		<tr>
-		<td colspan="5">No tasks ...</td>
-		</tr>					
-		<?php
+			
+			?>		
+			<tbody id="tblSrch">
+			<?php foreach ($clients as $client): ?>
+			<tr>
+			<!-- <td><?php echo $sn++; ?></td> -->
+			<td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['task_name'];?></a></td>
+			<td><a href="./updatelead.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
+			<td><?= $client['priority']; ?></td>
+			<td><?= $client['deadline']; ?></td>
+			</tr>	
+			<?php endforeach; ?>		
+			<?php
+					
+				}
+				else
+				{
+				//No data in Database
+			?>					
+			<tr>
+			<td colspan="5">No tasks ...</td>
+			</tr>					
+			<?php
 				}
 			}
-		
+			
 		?>	
      </table>
-	</div> 
-	<div class="center pagination">
-		<?php if ($page > 1): ?>
-		<a href="home.php?page=<?=$page-1?>"><i class="fas fa-angle-double-left fa-lg"></i></a>
-		<?php endif; ?>
-		<?php if ($page*$records_per_page < $num_clients): ?>
-		<a href="home.php?page=<?=$page+1?>"><i class="fas fa-angle-double-right fa-lg"></i></a>
-		<?php endif; ?>
 	</div>
-   <div class="read">
-     <h2>Tasks: Leads <?= number_format($leads);?></h2>
-     <table class="w3-table w3-hoverable" id="srtTable">     
+   </div>
+	<button id="showhide2" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin w3-padding"><h3>Tasks: Leads <?= number_format($leads);?></h3></button>
+    <div id="show2" class="read w3-hide w3-padding">
+   <div class="tableFixHead">
+     <table class="w3-table" id="srtTable">     
 	  <thead>   
 		<tr>
 		<!-- <th>#</th> -->
 		<th>Task</th>
 		<th>Lead</th>
 		<th>Priority</th>
-		<th><a href="javascript:SortTable(4,'D','dmyy');">Deadline <i class="fa fa-sort"></a></th>
+		<th>Deadline</th>
 		</tr>
      </thead>
 		<?php 
@@ -155,9 +125,7 @@
 									FROM tasks AS t
 									LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
 									WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
-									ORDER BY deadline LIMIT :current_page, :record_per_page");
-			$stmt->bindValue(':current_page', ($page-1)*$records_per_page, PDO::PARAM_INT);
-			$stmt->bindValue(':record_per_page', $records_per_page, PDO::PARAM_INT);
+									ORDER BY deadline");
 			$stmt->execute();
 			// Fetch the records so we can display them in our template.
 			$leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -193,22 +161,7 @@
 			//Check whether there is task on database or not
 			if($count_leads>0)
 			{
-			//Data is in Database
-				// while($row=mysqli_fetch_assoc($res))
-				// {
-				// $task_id = $row['task_id'];
-				// $task_name = $row['task_name'];
-				// $name = $row['name'];
-				// $priority = $row['priority'];
-				// // $list_name = $row['list_name'];
-				// $deadline = $row['deadline'];
-
-		
-				// $sql2 = "SELECT name FROM leads WHERE name LIKE '$name%'";
-				// $result = mysqli_query($con, $sql2);
-				// while($row=mysqli_fetch_assoc($result)){
-				// 	$name = $row['name'];
-				// }
+			
 		?>
 	  <tbody id="tblSrch">
 		<?php foreach ($leads as $lead): ?>
@@ -237,16 +190,10 @@
 		?>	
      </table>
 	</div>
-	<div class="center pagination">
-		<?php if ($page > 1): ?>
-		<a href="home.php?page=<?=$page-1?>"><i class="fas fa-angle-double-left fa-lg"></i></a>
-		<?php endif; ?>
-		<?php if ($page*$records_per_page < $num_leads): ?>
-		<a href="home.php?page=<?=$page+1?>"><i class="fas fa-angle-double-right fa-lg"></i></a>
-		<?php endif; ?>
-	</div>
-   <div class="read">
-     <h2>Tasks: Other <?= number_format($other);?></h2>
+   </div>
+	<button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin w3-padding"><h3>Tasks: Other <?= number_format($other);?></h3></button>
+    <div id="show3" class="read w3-hide w3-padding">     
+	<div class="tableFixHead">
      <table class="w3-table w3-hoverable">     
 	  <thead>   
 		<tr>
@@ -327,6 +274,7 @@
 		?>	
      </table>
 	</div> 
+  </div>
  </div>
 	<div class="w3-col s12 m2 l2 w3-margin-left w3-padding">
 		<h2><?php echo date('F'); ?> Activity</h2>
