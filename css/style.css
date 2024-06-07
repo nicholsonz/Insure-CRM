@@ -28,7 +28,9 @@ body {
     z-index: 1;
     background-color: #203c53;
 }
-
+.tallbox {
+    height: 600px;
+}
 input,
 label {
     display: block;

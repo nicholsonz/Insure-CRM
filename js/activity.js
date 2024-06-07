@@ -55,6 +55,8 @@ let ldlbls = [];
 // console.log(cllbls);
 // console.log(ldlbls);
 
+Chart.defaults.color = "white";
+
 new Chart(document.getElementById("activityChart"), {
   type: "bar",
   data: {
@@ -94,6 +96,24 @@ new Chart(document.getElementById("activityChart"), {
         right: 5,
       },
     },
+      scales: {
+        y: {
+          border: {
+            display: true
+          },
+          grid: {
+            color: "rgba(128,128,128,0.4)"
+            }
+          },
+        x: {
+          border: {
+            display: true
+          },
+          grid: {
+            color: "rgba(128,128,128,0.4)"  
+            }
+          }
+      },
     plugins: {
       legend: {
         display: true,

@@ -19,8 +19,8 @@
 
 <div class="content w3-mobile">
  <h1><?php echo date('M d, Y') . "&nbsp;" . date('   g:i a');?></h1>
-   <div class="w3-col s12 m5 l5 w3-padding">
-	<button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin w3-padding"><h3>Tasks: Clients <?= number_format($clients);?></h3></button>
+   <div class="w3-col s12 m5 l5 w3-padding tallbox">
+	<button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-padding"><h3>Tasks: Clients <?= number_format($clients);?></h3></button>
     <div id="show" class="read w3-hide w3-padding">
 	 <div class="tableFixHead">
      <table class="w3-table w3-hoverable">     
@@ -106,7 +106,7 @@
      </table>
 	</div>
    </div>
-	<button id="showhide2" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin w3-padding"><h3>Tasks: Leads <?= number_format($leads);?></h3></button>
+	<button id="showhide2" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-padding"><h3>Tasks: Leads <?= number_format($leads);?></h3></button>
     <div id="show2" class="read w3-hide w3-padding">
    <div class="tableFixHead">
      <table class="w3-table" id="srtTable">     
@@ -191,7 +191,7 @@
      </table>
 	</div>
    </div>
-	<button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin w3-padding"><h3>Tasks: Other <?= number_format($other);?></h3></button>
+	<button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-padding"><h3>Tasks: Other <?= number_format($other);?></h3></button>
     <div id="show3" class="read w3-hide w3-padding">     
 	<div class="tableFixHead">
      <table class="w3-table w3-hoverable">     
@@ -276,7 +276,7 @@
 	</div> 
   </div>
  </div>
-	<div class="w3-col s12 m2 l2 w3-margin-left w3-padding">
+	<div class="w3-col s12 m2 l2 w3-margin-left w3-padding w3-camo-black w3-border w3-round w3-border-blue">
 		<h2><?php echo date('F'); ?> Activity</h2>
 		<?php
 			$pdo = pdo_connect_mysql();
@@ -305,7 +305,7 @@
 			</tr>
 		</table>       
     </div>
-	<div class="w3-col s12 m2 l2 w3-margin-left w3-padding">
+	<div class="w3-col s12 m2 l2 w3-margin-left w3-padding w3-camo-black w3-border w3-round w3-border-blue">
 		<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
 				$pdo = pdo_connect_mysql();
@@ -347,7 +347,7 @@
 		$daysInMonth = cal_days_in_month(0, $numMonth, $numYear);
 		$dayOfWeek = date('w', $firstDay);
 	?>
-	<div class="w3-col s12 m2 l2 w3-margin-left w3-padding">	
+	<div class="w3-col s12 m2 l2 w3-margin-left w3-padding w3-camo-black w3-border w3-round w3-border-blue">	
 		<table>
 	  	 <caption><?php echo($mnthyr); ?></caption>	
 			<thead>
@@ -379,7 +379,7 @@
 		</tbody>
 		</table>
 	</div>
- <div class="w3-col s12 m6-6 l6-6 w3-margin w3-padding">
+ <div class="w3-col s12 m6-6 l6-6 w3-margin w3-padding w3-camo-black w3-border w3-round w3-border-blue">
 	<h2><?php echo date('Y'); ?> Activity</h2>
 	<?php
 		$pdo = pdo_connect_mysql();
