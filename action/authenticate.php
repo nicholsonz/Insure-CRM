@@ -1,5 +1,5 @@
 <?php
-include('dbconfig.php');
+include('../include/dbconfig.php');
 // We need to use sessions, so you should always start sessions using the below code.
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -36,7 +36,7 @@ if ($stmt->num_rows > 0) {
 		$_SESSION['loggedin'] = TRUE;
 		$_SESSION['name'] = $_POST['username'];
 		$_SESSION['id'] = $id;
-		header('Location: home.php');
+		header('Location: ../home.php');
 	} else {
 		// Incorrect password
 		echo 'Incorrect username and/or password!';

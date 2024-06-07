@@ -1,8 +1,6 @@
 <?php
     require_once('./require/header.php');
-    
-// Connect to MySQL database
-$pdo = pdo_connect_mysql();
+
 
 // Get the total number of records from our table "students".
 $total_pages = $con->query('SELECT COUNT(*) FROM clients')->fetch_row()[0];
@@ -51,7 +49,7 @@ if ($stmt = $con->prepare('SELECT * FROM clients ORDER BY name LIMIT ?,?')) {
         <tbody id="tblSrch">
             <?php while ($row = $result->FETCH_ASSOC()): ?>
             <tr>
-                <td><a href="./view.php?id=<?=$row['id']; ?>" target="_blank"><?=$row['name']?></a></td>
+                <td><a href="./viewCls.php?id=<?=$row['id']; ?>" target="_blank"><?=$row['name']?></a></td>
                 <td><?=$row['birthdate']?></td>
                 <td><?=$row['phone']?></td>
                 <td><?=$row['policy']?></td>

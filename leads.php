@@ -1,8 +1,6 @@
 <?php
     require_once('./require/header.php');
 
-// Connect to MySQL database
-$pdo = pdo_connect_mysql();
 
 // Get the total number of records from our table "students".
 $total_pages = $con->query('SELECT COUNT(*) FROM leads')->fetch_row()[0];
@@ -49,14 +47,13 @@ if ($stmt = $con->prepare('SELECT * FROM leads ORDER BY created DESC LIMIT ?,?')
         <tbody id="tblSrch">
             <?php while ($row = $result->FETCH_ASSOC()): ?>
 	    <tr>
-                <td><a href="./updatelead.php?name=<?=$row['name']; ?>"><?=$row['name']?></td>
+                <td><a href="./viewLds.php?name=<?=$row['name']; ?>" target="_blank"><?=$row['name']?></td>
                 <td><?=$row['birthdate']?></td>
                 <td><?=$row['phone']?></td>
                 <td><?=$row['email']?></td>
                 <td><?=$row['notes']?></td>
                 <td><?=$row['created']?></td>
                 <td class="actions">          
-                    <a href="viewLds.php?name=<?=$row['name']?>" class="view" target="_blank"><i class="fas fa-eye fa-xs"></i></a>
                     <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task"><i class="fas fa-tasks fa-xs"></i></a>
                     <a href="convertlead.php?name=<?=$row['name']?>" class="convert"><i class="fas fa-archive fa-xs"></i></a>
                     <a href="updatelead.php?name=<?=$row['name']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                    
