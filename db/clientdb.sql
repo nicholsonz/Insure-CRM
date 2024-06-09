@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 09, 2024 at 04:20 PM
+-- Generation Time: Jun 09, 2024 at 05:44 PM
 -- Server version: 10.11.6-MariaDB-0+deb12u1-log
 -- PHP Version: 8.2.18
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `clientdb`
 --
-CREATE DATABASE IF NOT EXISTS `clientdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `clientdb`;
 
 -- --------------------------------------------------------
 
