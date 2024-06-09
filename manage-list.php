@@ -11,10 +11,10 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 8;
 
 
-if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' ORDER BY list_name LIMIT ?,?")) {
+if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' ORDER BY list_name -- LIMIT ?,?")) {
 	// Calculate the page to get the results we need from our table.
-	$calc_page = ($page - 1) * $records_per_page;
-	$stmt->bind_param('ii', $calc_page, $records_per_page);
+	// $calc_page = ($page - 1) * $records_per_page;
+	// $stmt->bind_param('ii', $calc_page, $records_per_page);
 	$stmt->execute(); 
 	// Get the results...
 	$result = $stmt->get_result();
@@ -27,13 +27,12 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
         
     <div class="content">
         
-        <h1>TASK LIST MANAGER</h1>
-    <!-- Menu Starts Here -->
-    <div class="task-mngr">
-            
-        <a href="./taskmngr.php">Tasks</a>              
-    </div>
-        <!-- Menu Ends Here -->
+        <h1>TASK LIST MANAGER</h1> 
+        <div class="">    
+        <div class="task-mngr">               
+            <a href="./taskmngr.php">Manage Tasks</a>
+        </div>       
+        <div class="">
             <?php 
             
                 //Check if the session is set
@@ -70,10 +69,9 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
             ?>
              
         <!-- Table to display lists starts here -->
-        <div class="read">
-            
+        <div class="read">            
             <a href="./add-list.php" class="add-task">Add List</a>
-            
+            <div class="table-viewer tableFixHead">            
             <table class="w3-table w3-hoverable">
              <thead>
                 <tr>
@@ -95,6 +93,8 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
                 <?php endwhile ?>
              </tbody>                                                 
             </table>
+        </div>
+<!-- Pagination
             <?php if (ceil($total_pages / $records_per_page) > 0): ?>
                 <ul class="pagination">
                     <?php if ($page > 1): ?>
@@ -124,8 +124,8 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
                     <?php endif; ?>
                 </ul>
             <?php endif; ?>
+End Pagination -->
         </div>
-        <!-- Table to display lists ends here -->
         </div>
 
 <?php

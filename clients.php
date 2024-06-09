@@ -12,10 +12,10 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 8;
 
 
-if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = '$acct_id' ORDER BY name LIMIT ?,?")) {
+if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = '$acct_id' ORDER BY name -- LIMIT ?,?")) {
 	// Calculate the page to get the results we need from our table.
-	$calc_page = ($page - 1) * $records_per_page;
-	$stmt->bind_param('ii', $calc_page, $records_per_page);
+	// $calc_page = ($page - 1) * $records_per_page;
+	// $stmt->bind_param('ii', $calc_page, $records_per_page);
 	$stmt->execute(); 
 	// Get the results...
 	$result = $stmt->get_result();
@@ -34,6 +34,7 @@ if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = '$acct_id' ORD
         <div class="w3-right w3-padding">      
             <input id="tableSrch" type="text" placeholder="Filter..">
         </div> 
+        <div class="table-viewer tableFixHead">
         <table class="w3-table w3-hoverable" id="srtTable">
             <thead>
                 <tr>
@@ -67,6 +68,8 @@ if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = '$acct_id' ORD
                 <?php endwhile; ?>
             </tbody>
         </table>
+    </div>
+<!-- Pagination
         <?php if (ceil($total_pages / $records_per_page) > 0): ?>
             <ul class="pagination">
                 <?php if ($page > 1): ?>
@@ -96,6 +99,7 @@ if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = '$acct_id' ORD
                 <?php endif; ?>
             </ul>
         <?php endif; ?>
+End Pagination -->
     </div>
 </div>
 

@@ -15,10 +15,10 @@ $records_per_page = 10;
 if ($stmt = $con->prepare("SELECT * FROM tasks 
                            LEFT JOIN task_lists AS tl ON tasks.list_id = tl.list_id
                            WHERE tasks.acct_id = '$acct_id'
-                           ORDER BY tasks.deadline ASC LIMIT ?,?")) {
+                           ORDER BY tasks.deadline ASC -- LIMIT ?,?")) {
 	// Calculate the page to get the results we need from our table.
-	$calc_page = ($page - 1) * $records_per_page;
-	$stmt->bind_param('ii', $calc_page, $records_per_page);
+	// $calc_page = ($page - 1) * $records_per_page;
+	// $stmt->bind_param('ii', $calc_page, $records_per_page);
 	$stmt->execute(); 
 	// Get the results...
 	$result = $stmt->get_result();
@@ -31,17 +31,11 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
 
 <div class="content read">
     
-    <h1>TASK MANAGER</h1>    
-    <!-- Menu Starts Here -->
-    <div class="task-mngr">
-               
+    <h1>TASK MANAGER</h1> 
+    <div class="">    
+    <div class="task-mngr">               
         <a href="./manage-list.php">Manage Lists</a>
-    </div>
-    <!-- Menu Ends Here -->
-    
-    <!-- Tasks Starts Here -->
-       
-    <div class="">
+    </div>       
      <div class="">
         <?php 
         
@@ -73,7 +67,7 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
         ?>
     </div>
         <a href="./add-task.php" class="add-task">Add Task</a>
-        
+        <div class="table-viewer tableFixHead">
         <table class="w3-table w3-hoverable" id="srtTable">
          <thead>
             <tr>
@@ -113,7 +107,9 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
         </tbody>
         
         </table>
-    <?php if (ceil($total_pages / $records_per_page) > 0): ?>
+                </div>
+<!-- Pagination
+     <?php if (ceil($total_pages / $records_per_page) > 0): ?>
         <ul class="pagination">
             <?php if ($page > 1): ?>
             <li class="prev"><a href="taskmngr.php?page=<?php echo $page-1 ?>">Prev</a></li>
@@ -141,9 +137,8 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
             <li class="next"><a href="taskmngr.php?page=<?php echo $page+1 ?>">Next</a></li>
             <?php endif; ?>
         </ul>
-    <?php endif; ?>
-    
-    <!-- Tasks Ends Here -->
+    <?php endif; ?> 
+End Pagination-->
     </div>
 </div>
 

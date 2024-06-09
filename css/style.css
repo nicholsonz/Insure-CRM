@@ -28,6 +28,12 @@ body {
     z-index: 1;
     background-color: #203c53;
 }
+.content .table-viewer{
+    width: 100%;
+    height: 600px;
+    overflow: scroll;
+    scrollbar-color: none;
+}
 .tallbox {
     height: 600px;
 }
@@ -609,6 +615,7 @@ body.loggedin {
     width: 80%;
     padding: inherit;
 }
+
 .content>p table td,
 .content>div table td {
     padding: 5px;
