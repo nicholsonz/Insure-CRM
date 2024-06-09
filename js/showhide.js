@@ -23,3 +23,4 @@ btn3.onclick = function myFunction() {
     ? (t.className += " w3-show")
     : (t.className = t.className.replace(" w3-show", ""));
 }
+

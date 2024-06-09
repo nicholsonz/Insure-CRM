@@ -79,9 +79,11 @@ if(isset($_POST['submit']))
         <h1>ADD TASK</h1>
    
             <!-- Menu Starts Here -->
-        <div class="">            
-            <a href="./taskmngr.php" class="task-mngr">Tasks</a>             
+        <div class="task-mngr">            
+            <a href="./taskmngr.php">Tasks</a>     
         </div>
+        <div class="">        
+      
 <!-- Menu Ends Here -->
   
             <?php             
@@ -198,9 +200,9 @@ if(isset($_POST['submit']))
             
          </form>
         </div>
-    </body>
+    </div>
+</body>
 </html>
-
 
 
 

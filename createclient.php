@@ -38,6 +38,7 @@ if (!empty($_POST)) {
 
 <div class="content update">
 	<h1>Create Client</h1>
+    <div class="">
     <form action="createclient.php" method="post">
 <table>
 <tr>
@@ -142,5 +143,5 @@ if (!empty($_POST)) {
 </table>
     </form>
 </div>
-
+</div>
 <?php require_once('./require/footer.php');?>

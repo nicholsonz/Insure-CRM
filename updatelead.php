@@ -47,6 +47,7 @@ if (isset($_GET['name'])) {
 <?=template_header('Read')?>
 
 <div class="content update">
+    <div class="">
 	<h1><?=$lead['name']?></h1>
     <form action="updatelead.php?name=<?=$lead['name']?>" method="post">
       <table>
@@ -143,17 +144,19 @@ if (isset($_GET['name'])) {
         </td>
         </tr>
         <tr>
-        <td>
+            <td>
                 <input type="submit" value="Update">
-        </td>
+            </td>
+            <td>
+                <a href="./leads.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
+            </td>
         </tr>
       </table>
     </form>
-        <a href="./leads.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
 
     <?php if ($msg): ?>
     <p><?=$msg?></p>
     <?php endif; ?>
 </div>
-
+</div>
 <?php require_once('./require/footer.php');?>

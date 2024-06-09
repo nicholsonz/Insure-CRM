@@ -103,9 +103,10 @@
         <h1>UPDATE TASK</h1>        
         
             <!-- Menu Starts Here -->
-            <div class="">            
-                <a href="./taskmngr.php" class="task-mngr">Tasks</a>             
+            <div class="task-mngr">            
+                <a href="./taskmngr.php">Tasks</a>             
             </div>
+            <div class="">
             <!-- Menu Ends Here -->
             <?php 
                 if(isset($_SESSION['update_fail']))
@@ -115,112 +116,113 @@
                 }
             ?>
      
-        <form method="POST" action="">
-        
-            <table class="">
-                <tr>
-                    <td>Task Name: </td>
-                    <td><input type="text" name="task_name" value="<?php echo $task_name; ?>" required="required" /></td>
-                </tr>
-                <tr>
-                    <td>Name: </td>
-                    <td><input type="text" name="name" value="<?php echo $name; ?>" /></td>
-                </tr>
-                
-                <tr>
-                    <td>Task Description: </td>
-                    <td><textarea  type="text" name="task_description"><?=$task_description; ?></textarea></td>
-                </tr>
-                
-                <tr>
-                    <td>Select List: </td>
-                    <td>
-                        <select name="list_id">
-                            
-                            <?php 
-                                                               
-                                //SElect Database
-                                $db_select2 = mysqli_select_db($con, DB_NAME) or die();
+            <form method="POST" action="">
+            
+                <table class="">
+                    <tr>
+                        <td>Task Name: </td>
+                        <td><input type="text" name="task_name" value="<?php echo $task_name; ?>" required="required" /></td>
+                    </tr>
+                    <tr>
+                        <td>Name: </td>
+                        <td><input type="text" name="name" value="<?php echo $name; ?>" /></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Task Description: </td>
+                        <td><textarea  type="text" name="task_description"><?=$task_description; ?></textarea></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Select List: </td>
+                        <td>
+                            <select name="list_id">
                                 
-                                //SQL Query to GET Lists
-                                $sql2 = "SELECT * FROM task_lists WHERE acct_id = '$acct_id' ";
-                                
-                                //Execute Query
-                                $res2 = mysqli_query($con, $sql2);
-                                
-                                //Check if executed successfully or not
-                                if($res2==true)
-                                {
-                                    //Display the Lists
-                                    //Count Rows
-                                    $count_rows2 = mysqli_num_rows($res2);
+                                <?php 
+                                                                
+                                    //SElect Database
+                                    $db_select2 = mysqli_select_db($con, DB_NAME) or die();
                                     
-                                    //Check whether list is added or not
-                                    if($count_rows2>0)
+                                    //SQL Query to GET Lists
+                                    $sql2 = "SELECT * FROM task_lists WHERE acct_id = '$acct_id' ";
+                                    
+                                    //Execute Query
+                                    $res2 = mysqli_query($con, $sql2);
+                                    
+                                    //Check if executed successfully or not
+                                    if($res2==true)
                                     {
-                                        //Lists are Added
-                                        while($row2=mysqli_fetch_assoc($res2))
+                                        //Display the Lists
+                                        //Count Rows
+                                        $count_rows2 = mysqli_num_rows($res2);
+                                        
+                                        //Check whether list is added or not
+                                        if($count_rows2>0)
                                         {
-                                            //Get individual value
-                                            $list_id_db = $row2['list_id'];
-                                            $list_name = $row2['list_name'];
+                                            //Lists are Added
+                                            while($row2=mysqli_fetch_assoc($res2))
+                                            {
+                                                //Get individual value
+                                                $list_id_db = $row2['list_id'];
+                                                $list_name = $row2['list_name'];
+                                                ?>
+                                                
+                                                <option <?php if($list_id_db==$list_id){echo "selected='selected'";} ?> value="<?php echo $list_id_db; ?>"><?php echo $list_name; ?></option>
+                                                
+                                                <?php
+                                            }
+                                        }
+                                        else
+                                        {
+                                            //No List Added
+                                            //Display None as option
                                             ?>
-                                            
-                                            <option <?php if($list_id_db==$list_id){echo "selected='selected'";} ?> value="<?php echo $list_id_db; ?>"><?php echo $list_name; ?></option>
-                                            
+                                            <option <?php if($list_id=0){echo "selected='selected'";} ?> value="0">None</option>p
                                             <?php
                                         }
                                     }
-                                    else
-                                    {
-                                        //No List Added
-                                        //Display None as option
-                                        ?>
-                                        <option <?php if($list_id=0){echo "selected='selected'";} ?> value="0">None</option>p
-                                        <?php
-                                    }
-                                }
-                            ?>
-                            
-                        </select>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>Priority: </td>
-                    <td>
-                        <select name="priority">
-                            <option <?php if($priority=="High"){echo "selected='selected'";} ?> value="High">High</option>
-                            <option <?php if($priority=="Medium"){echo "selected='selected'";} ?> value="Medium">Medium</option>
-                            <option <?php if($priority=="Low"){echo "selected='selected'";} ?> value="Low">Low</option>
-                        </select>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>Deadline: </td>
-                    <td><input type="date" name="deadline" value="<?php echo $deadline; ?>" /></td>
-                </tr>
-                <tr>
-                    <td>Type: </td>
-                    <td>
-                        <select name="type">
-                            <option <?php if($type=="Lead"){echo "selected='selected'";} ?> value="Lead">Lead</option>
-                            <option <?php if($type=="Client"){echo "selected='selected'";} ?> value="Client">Client</option>
-                            <option <?php if($type=="Other"){echo "selected='selected'";} ?> value="Other">Other</option>
-                        </select>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td><input class="w3-button" type="submit" name="submit" value="UPDATE" /></td>
-                    <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
-                </tr>
-                
-            </table>
-        
-        </form>
+                                ?>
+                                
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Priority: </td>
+                        <td>
+                            <select name="priority">
+                                <option <?php if($priority=="High"){echo "selected='selected'";} ?> value="High">High</option>
+                                <option <?php if($priority=="Medium"){echo "selected='selected'";} ?> value="Medium">Medium</option>
+                                <option <?php if($priority=="Low"){echo "selected='selected'";} ?> value="Low">Low</option>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Deadline: </td>
+                        <td><input type="date" name="deadline" value="<?php echo $deadline; ?>" /></td>
+                    </tr>
+                    <tr>
+                        <td>Type: </td>
+                        <td>
+                            <select name="type">
+                                <option <?php if($type=="Lead"){echo "selected='selected'";} ?> value="Lead">Lead</option>
+                                <option <?php if($type=="Client"){echo "selected='selected'";} ?> value="Client">Client</option>
+                                <option <?php if($type=="Other"){echo "selected='selected'";} ?> value="Other">Other</option>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><input class="w3-button" type="submit" name="submit" value="UPDATE" /></td>
+                        <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
+                    </tr>
+                    
+                </table>
+            
+            </form>
         </div>
+    </div>
 <?php
     require_once('./require/footer.php');
 ?>

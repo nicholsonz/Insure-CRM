@@ -27,6 +27,7 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
 
 <div class="content read">
 	<h1>LEADS</h1>
+    <div class="">
 	<a href="createlead.php" class="create-contact">Create Lead</a>
 	<a href="impleads.php" class="create-contact">Import Leads</a>
     <div class="w3-right w3-padding">      
@@ -57,7 +58,7 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
                     <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task"><i class="fas fa-tasks fa-xs"></i></a>
                     <a href="convertlead.php?name=<?=$row['name']?>" class="convert"><i class="fas fa-archive fa-xs"></i></a>
                     <a href="updatelead.php?name=<?=$row['name']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                    
-                    <a href="deletelead.php?name=<?=$row['name']?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
+                    <a href="delete-lead.php?name=<?=$row['name']?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
                    
                 </td>
             </tr>
@@ -93,7 +94,7 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
             <?php endif; ?>
         </ul>
     <?php endif; ?>
-
+    </div>
 </div>
 
 <?php require_once('./require/footer.php');?>

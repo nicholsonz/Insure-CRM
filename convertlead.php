@@ -41,17 +41,17 @@ if (isset($_GET['name'])) {
 <?=template_header('Convert')?>
 
 <div class="content update">
-	<h2>Convert Lead <?= $lead['name']?></h2>
-    <?php if ($msg): ?>
-    <p><?=$msg?></p>
-    <?php else: ?>
-	<p>Are you sure you want to convert the lead <?= $lead['name']?>?</p>
-    <div class="yesno">
-       <a href="convertlead.php?name=<?= $lead['name']?>&confirm=yes">Yes</a>
-       <a href="convertlead.php?name=<?= $lead['name']?>&confirm=no">No</a>
-        
-    </div>
+    <div class="">
+        <h2>Convert Lead <?= $lead['name']?></h2>
+        <?php if ($msg): ?>
+        <p><?=$msg?></p>
+        <?php else: ?>
+        <p>Are you sure you want to convert the lead <?= $lead['name']?>?</p>
+        <div class="yesno">
+            <a href="convertlead.php?name=<?= $lead['name']?>&confirm=yes">Yes</a>
+            <a href="convertlead.php?name=<?= $lead['name']?>&confirm=no">No</a>                
+        </div>
     <?php endif; ?>
+    </div>
 </div>
-
 <?php require_once('./require/footer.php');?>

@@ -88,13 +88,12 @@
         <h1>UPDATE TASK LIST</h1>
         
             <!-- Menu Starts Here -->
-        <div class="">
-        
-            <a href="./taskmngr.php" class="task-mngr">Tasks</a>                
-            <a href="./manage-list.php" class="task-mngr">Manage Lists</a>
+        <div class="task-mngr">
+                     
+            <a href="./manage-list.php">Manage Lists</a>
         </div>
             <!-- Menu Ends Here -->
-  
+        <div class="">
             <?php 
                 //Check whether the session is set or not
                 if(isset($_SESSION['update_fail']))
@@ -104,30 +103,30 @@
                 }
             ?>
     
-        <form method="POST" action="">
-        
-            <table class="tbl-half">
-                <tr>
-                    <td>List Name: </td>
-                    <td><input type="text" name="list_name" value="<?php echo $list_name; ?>" required="required" /></td>
-                </tr>
-                
-                <tr>
-                    <td>List Description: </td>
-                    <td>
-                        <textarea type="text" name="list_description"><?=$list_description; ?></textarea>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td><input class="w3-button" type="submit" name="submit" value="UPDATE" /></td>
-                    <td><a href="./manage-list.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
-                </tr>
-            </table>
+            <form method="POST" action="">
             
-        </form>
-        
+                <table class="tbl-half">
+                    <tr>
+                        <td>List Name: </td>
+                        <td><input type="text" name="list_name" value="<?php echo $list_name; ?>" required="required" /></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>List Description: </td>
+                        <td>
+                            <textarea type="text" name="list_description"><?=$list_description; ?></textarea>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><input class="w3-button" type="submit" name="submit" value="UPDATE" /></td>
+                        <td><a href="./manage-list.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
+                    </tr>
+                </table>
+                
+            </form>        
         </div>
+    </div>
 <?php
     require_once('./require/footer.php');
 ?>

@@ -43,8 +43,8 @@ if (isset($_GET['name'])) {
     <?php else: ?>
 	<p>Are you sure you want to delete lead <?=$lead['name']?>?</p>
     <div class="yesno">
-        <a href="deletelead.php?name=<?=$lead['name']?>&confirm=yes">Yes</a>
-        <a href="deletelead.php?name=<?=$lead['name']?>&confirm=no">No</a>
+        <a href="delete-lead.php?name=<?=$lead['name']?>&confirm=yes">Yes</a>
+        <a href="delete-lead.php?name=<?=$lead['name']?>&confirm=no">No</a>
     </div>
     <?php endif; ?>
 </div>

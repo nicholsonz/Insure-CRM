@@ -566,11 +566,13 @@ a {
 
 .w3-sidebar {
     height: 100%;
-    width: 240px;
-    background-color: #fff;
+    width: 220px;
+    background-color: #1a1919;
     position: fixed !important;
     z-index: 3;
-    overflow: auto
+    overflow: auto;
+    color: teal;
+    padding: 10px;
 }
 
 .w3-bar-block .w3-dropdown-hover,
@@ -2780,6 +2782,10 @@ a {
 /* Fade camo-black */
 
 .w3-camo-fade {
+    color: #fff;
+    background-color: rgba(55, 53, 56, 0.8)
+}
+.w3-hover-camo-fade {
     color: #fff;
     background-color: rgba(55, 53, 56, 0.8)
 }

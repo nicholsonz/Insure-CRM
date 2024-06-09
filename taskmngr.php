@@ -33,14 +33,15 @@ if ($stmt = $con->prepare('SELECT * FROM tasks
     <h1>TASK MANAGER</h1>    
     <!-- Menu Starts Here -->
     <div class="task-mngr">
-    
-        <a href="./taskmngr.php">Tasks</a>                
+               
         <a href="./manage-list.php">Manage Lists</a>
     </div>
     <!-- Menu Ends Here -->
     
     <!-- Tasks Starts Here -->
-   
+       
+    <div class="">
+     <div class="">
         <?php 
         
             if(isset($_SESSION['add']))
@@ -69,10 +70,7 @@ if ($stmt = $con->prepare('SELECT * FROM tasks
             }
         
         ?>
-   
-    
-    <div class="">
-        
+    </div>
         <a href="./add-task.php" class="add-task">Add Task</a>
         
         <table class="w3-table w3-hoverable" id="srtTable">

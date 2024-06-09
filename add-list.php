@@ -1,63 +1,6 @@
 <?php 
     require_once('./require/header.php');
 
-?>
-
-<?=template_header('Task Mngr')?>
-
-<div class="content">
-            
-        <h1>ADD TASK LIST</h1>
-        
-        <!-- Menu Starts Here -->
-        <div class="">            
-            <a href="./taskmngr.php" class="task-mngr">Tasks</a>                
-            <a href="./manage-list.php" class="task-mngr">Manage Lists</a>            
-        </div>
-        <!-- Menu Ends Here -->
-        <?php 
-        
-            //Check whether the session is created or not
-            if(isset($_SESSION['add_fail']))
-            {
-                //display session message
-                echo $_SESSION['add_fail'];
-                //Remove the message after displaying once
-                unset($_SESSION['add_fail']);
-            }
-        
-        ?>
-        
-        <!-- Form to Add List Starts Here -->
-        
-        <form method="POST" action="">
-            
-            <table class="">
-                <tr>
-                    <td>List Name: </td>
-                    <td><input type="text" name="list_name" placeholder="Type list name here" required="required" /></td>
-                </tr>
-                <tr>
-                    <td>List Description: </td>
-                    <td><textarea name="list_description" placeholder="Type List Description Here"></textarea></td>
-                </tr>
-                
-                <tr>
-                    <td><input class="w3-button" type="submit" name="submit" value="SAVE" /></td>
-                    <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
-                </tr>
-                
-            </table>
-            
-        </form>
-        
-        <!-- Form to Add List Ends Here -->
-        </div>
-    </body>
-</html>
-
-
-<?php 
 
     //Check whether the form is submitted or not
     if(isset($_POST['submit']))
@@ -128,35 +71,58 @@
 
 ?>
 
+<?=template_header('Task Mngr')?>
 
+<div class="content">
+            
+        <h1>ADD TASK LIST</h1>
+        
+        <!-- Menu Starts Here -->
+        <div class="task-mngr">            
+            <a href="./taskmngr.php">Tasks</a>                
+            <a href="./manage-list.php">Manage Lists</a>            
+        </div>
+        <div class="">      
+        <!-- Menu Ends Here -->
+        <?php 
+        
+            //Check whether the session is created or not
+            if(isset($_SESSION['add_fail']))
+            {
+                //display session message
+                echo $_SESSION['add_fail'];
+                //Remove the message after displaying once
+                unset($_SESSION['add_fail']);
+            }
+        
+        ?>
+        
+        <!-- Form to Add List Starts Here -->
+        
+        <form method="POST" action="">
+            
+            <table class="">
+                <tr>
+                    <td>List Name: </td>
+                    <td><input type="text" name="list_name" placeholder="Type list name here" required="required" /></td>
+                </tr>
+                <tr>
+                    <td>List Description: </td>
+                    <td><textarea name="list_description" placeholder="Type List Description Here"></textarea></td>
+                </tr>
+                
+                <tr>
+                    <td><input class="w3-button" type="submit" name="submit" value="SAVE" /></td>
+                    <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
+                </tr>
+                
+            </table>
+            
+        </form>
+        
+        <!-- Form to Add List Ends Here -->
+        </div>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<?php require('./require/footer.php');
+?>

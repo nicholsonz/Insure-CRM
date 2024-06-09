@@ -120,10 +120,13 @@ label {
     color: white;
 }
 
-.today {
+.content .today {
     background-color: white;
     color: black;
     border-radius: 25%;
+    width: 5px;
+    height: 5px;
+    font-weight: bold;
 }
 
 caption {
@@ -266,7 +269,7 @@ tr {
     margin: 15px 0;
 }
 
-.w3-top .w3-bar .w3-dropdown-hover .task-mngr {
+.w3-bar .w3-dropdown-hover .task-mngr {
     display: inline-block;
     text-decoration: none;
     font-weight: bold;
@@ -601,9 +604,12 @@ body.loggedin {
 
 .content {
     width: 1500px;
-    margin: 60px auto;
+    margin: 60px auto
 }
-
+.content .small-table {
+    width: 80%;
+    padding: inherit;
+}
 .content>p table td,
 .content>div table td {
     padding: 5px;

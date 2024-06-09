@@ -57,6 +57,7 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
 
 <div class="content update">
 	<h1><?=$client['name']?></h1>
+    <div class="">
 <!-- Client file upload -- Needs editing to produce specific folders for each client with appropriate access rights 
             <form action="upld.php" method="post" enctype="multipart/form-data">
             Select file to upload:
@@ -159,17 +160,19 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
         </td>
         </tr>
         <tr>
-        <td>
+            <td>
                 <input type="submit" value="Update">
-        </td>
+            </td>
+            <td>                
+                <a href="./clients.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
+            </td>
         </tr>
      </table>
     </form>
-       <a href="./clients.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
 
     <?php if ($msg): ?>
     <p><?=$msg?></p>
     <?php endif; ?>
 </div>
-
+</div>
 <?php require_once('./require/footer.php');?>
