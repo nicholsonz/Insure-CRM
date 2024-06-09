@@ -6,6 +6,7 @@ $msg = '';
 // Check that POST data is not empty
 if (!empty($_POST)) {
     // Post data not empty insert a new record
+    $acct_id = (isset($_POST['acct_id']) && !empty($_POST['acct_id']) ? $_POST['acct_id'] : '');
     $name = (isset($_POST['name']) && !empty($_POST['name']) ? $_POST['name'] : '');
     $address = (isset($_POST['address']) && !empty($_POST['address']) ? $_POST['address'] : '');
     $city = (isset($_POST['city']) && !empty($_POST['city']) ? $_POST['city'] : '');
@@ -38,6 +39,31 @@ if (!empty($_POST)) {
     <div class="">
     <form action="createlead.php" method="post">
         <table>
+        <tr> 
+            <td colspan="2">
+                <label>Agent</label>
+                <?php 
+                    $sqlagent = "SELECT id, username
+                                FROM accounts
+                                ORDER BY username DESC";                 
+
+                    $result = mysqli_query($con, $sqlagent);
+
+                    echo "<select class='form-select' name='acct_id' id='acct_id'>";
+                    
+                        while($row = mysqli_fetch_assoc($result)) 
+                        {
+                            if($acct_id == $row['id']){
+                            echo "<option value='".$row['id']."' selected>" . $row['username'] . "</option>";
+                            }else{
+                            echo "<option value='" . $row['id'] . "'>" . $row['username'] . "</option>";
+                        
+                            }
+                        }
+                        echo "</select></td>";
+                    ?>
+            </td>           
+        </tr>
         <tr>
             <td><label>Name</label>
                 <input type="text" name="name" placeholder="Name" id="name" />
@@ -91,43 +117,44 @@ if (!empty($_POST)) {
         </td>
         </tr>
         <tr>
-        <td>
-            <label>Insurer</label>
-                <input type="text" name="insurer" placeholder="Insurer" id="insurer" />
-        </td>
-            <td><label>Policy</label>
-                <select name="policy" id="policy">
-                    <option value="Policy" disabled selected>Policy</option>
-                    <option value="Health">Health</option>
-                    <option value="Life">Life</option>
-                    <option value="Med Supp">Med Supp</option>
-                    <option value="Med Adv">Med Adv</option>
-                    <option value="Final Exp">Final Exp</option>
-                    <option value="Hospital Ind">Hospital Ind</option>
-                    <option value="Annuity">Annuity</option>
-                    <option value="DVH">DVH</option>
-                </select>
+            <td>
+                <label>Insurer</label>
+                    <input type="text" name="insurer" placeholder="Insurer" id="insurer" />
             </td>
-        <td><label>Status</label>
-                <select id="appstatus" name="appstatus">
-                    <option value="Status" disabled selected>Status</option>
-                    <option value="Active Lead">Active Lead</option>
-                    <option value="Lost Lead">Lost Lead</option>
-                    <option value="Enrolled">Enrolled</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Accepted">Accepted</option>
-                    <option value="Denied">Denied</option>
-                    <option value="Cancelled">Cancelled</option>
-                </select>
-        </td>
+                <td><label>Policy</label>
+                    <select name="policy" id="policy">
+                        <option value="Policy" disabled selected>Policy</option>
+                        <option value="Health">Health</option>
+                        <option value="Life">Life</option>
+                        <option value="Med Supp">Med Supp</option>
+                        <option value="Med Adv">Med Adv</option>
+                        <option value="Final Exp">Final Exp</option>
+                        <option value="Hospital Ind">Hospital Ind</option>
+                        <option value="Annuity">Annuity</option>
+                        <option value="DVH">DVH</option>
+                    </select>
+                </td>
+            <td>
+                <label>Status</label>
+                    <select id="appstatus" name="appstatus">
+                        <option value="Status" disabled selected>Status</option>
+                        <option value="Active Lead">Active Lead</option>
+                        <option value="Lost Lead">Lost Lead</option>
+                        <option value="Enrolled">Enrolled</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Denied">Denied</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+            </td>
         </tr>
         <tr>
-        <td colspan="2">
+            <td colspan="2">
                 <textarea type="text" name="notes" placeholder="Notes" id="notes"></textarea>
-        </td>
-        <td>
+            </td>
+            <td>
                 <input type="datetime-local" name="created" value="<?=date('Y-m-d\TH:i')?>" id="created" />
-        </td>
+            </td>
         </tr>
         <tr>
             <td>
@@ -144,4 +171,4 @@ if (!empty($_POST)) {
     <?php endif; ?>
 </div>
 </div>
-<?php require_once("./requre/footer.php");?>
+<?php require_once("./require/footer.php");?>

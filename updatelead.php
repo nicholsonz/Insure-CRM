@@ -7,6 +7,7 @@ $msg = '';
 if (isset($_GET['name'])) {
     if (!empty($_POST)) {
         // This part is similar to the create.php, but instead we update a record and not insert
+  	    $acct_id = (isset($_POST['acct_id']) && !empty($_POST['acct_id']) ? $_POST['acct_id'] : '');
   	    $name = (isset($_POST['name']) && !empty($_POST['name']) ? $_POST['name'] : '');
         $address = (isset($_POST['address']) && !empty($_POST['address']) ? $_POST['address'] : '');
         $city = (isset($_POST['city']) && !empty($_POST['city']) ? $_POST['city'] : '');
@@ -26,8 +27,8 @@ if (isset($_GET['name'])) {
         $notes = (isset($_POST['notes']) && !empty($_POST['notes']) ? $_POST['notes'] : '');
         $created = (isset($_POST['created']) && !empty($_POST['created']) ? $_POST['created'] : date('Y-m-d H:i:s'));       
         // Update the record
-        $stmt = $pdo->prepare('UPDATE leads SET name = ?, address = ?, city = ?, state = ?, zip = ?, county = ?, birthdate = ?, email = ?, phone = ?, phone_sec = ?, partA_date = ?, partB_date = ?, medicare_number = ?, policy = ?, insurer = ?, appstatus = ?, notes = ?, created = ? WHERE name = ?');
-        $stmt->execute([$name, $address, $city, $state, $zip, $county, $birthdate, $email, $phone, $phone2, $partA_date, $partB_date, $medicare_number, $policy, $insurer, $appstatus, $notes, $created, $_GET['name']]);
+        $stmt = $pdo->prepare('UPDATE leads SET acct_id = ?, name = ?, address = ?, city = ?, state = ?, zip = ?, county = ?, birthdate = ?, email = ?, phone = ?, phone_sec = ?, partA_date = ?, partB_date = ?, medicare_number = ?, policy = ?, insurer = ?, appstatus = ?, notes = ?, created = ? WHERE name = ?');
+        $stmt->execute([$acct_id, $name, $address, $city, $state, $zip, $county, $birthdate, $email, $phone, $phone2, $partA_date, $partB_date, $medicare_number, $policy, $insurer, $appstatus, $notes, $created, $_GET['name']]);
         $msg = 'Updated Successfully!';
         header('Location: ./leads.php');
     }
@@ -51,6 +52,27 @@ if (isset($_GET['name'])) {
 	<h1><?=$lead['name']?></h1>
     <form action="updatelead.php?name=<?=$lead['name']?>" method="post">
       <table>
+        <tr> 
+            <td>
+            <label>Agent</label>
+            <?php 
+                  $sqlagent = "SELECT id, username
+                               FROM accounts
+                               ORDER BY username DESC";                 
+
+                  $result = mysqli_query($con, $sqlagent);
+
+                  echo "<select class='form-select' name='acct_id' id='acct_id'>";
+                    while($row = mysqli_fetch_assoc($result)) 
+                    {
+                      echo "<option value='" . $row['id'] . "'>" . $row['username'] . "</option>";
+                
+                    }
+                    echo "</select></td>";
+                ?>
+           
+            </td>
+        </tr>
         <tr>
             <td><label>Name</label>
                 <input type="text" name="name" placeholder="Name" value="<?=$lead['name']?>" id="name">
