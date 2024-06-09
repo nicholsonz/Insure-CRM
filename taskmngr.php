@@ -2,8 +2,8 @@
     require_once('./require/header.php');
     
 
-// Get the total number of records from our table "students".
-$total_pages = $con->query('SELECT COUNT(*) FROM tasks')->fetch_row()[0];
+// Get the total number of records.
+$total_pages = $con->query("SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id'")->fetch_row()[0];
 
 // Check if the page number is specified and check if it's a number, if not return the default page number which is 1.
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
@@ -12,9 +12,10 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 10;
 
 
-if ($stmt = $con->prepare('SELECT * FROM tasks 
+if ($stmt = $con->prepare("SELECT * FROM tasks 
                            LEFT JOIN task_lists AS tl ON tasks.list_id = tl.list_id
-                           ORDER BY tasks.deadline ASC LIMIT ?,?')) {
+                           WHERE tasks.acct_id = '$acct_id'
+                           ORDER BY tasks.deadline ASC LIMIT ?,?")) {
 	// Calculate the page to get the results we need from our table.
 	$calc_page = ($page - 1) * $records_per_page;
 	$stmt->bind_param('ii', $calc_page, $records_per_page);

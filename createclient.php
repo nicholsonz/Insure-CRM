@@ -7,6 +7,7 @@ $msg = '';
 // Check that POST data is not empty
 if (!empty($_POST)) {
     // Post data not empty insert a new record
+    $acct_id = (isset($_POST['acct_id']) && !empty($_POST['acct_id']) ? $_POST['acct_id'] : '');
     $name = (isset($_POST['name']) && !empty($_POST['name']) ? $_POST['name'] : '');
     $address = (isset($_POST['address']) && !empty($_POST['address']) ? $_POST['address'] : '');
     $city = (isset($_POST['city']) && !empty($_POST['city']) ? $_POST['city'] : '');
@@ -41,6 +42,31 @@ if (!empty($_POST)) {
     <div class="">
     <form action="createclient.php" method="post">
 <table>
+<tr> 
+    <td colspan="2">
+        <label>Agent</label>
+        <?php 
+            $sqlagent = "SELECT id, username
+                        FROM accounts
+                        ORDER BY username DESC";                 
+
+            $result = mysqli_query($con, $sqlagent);
+
+            echo "<select class='form-select' name='acct_id' id='acct_id'>";
+            
+                while($row = mysqli_fetch_assoc($result)) 
+                {
+                    if($acct_id == $row['id']){
+                    echo "<option value='".$row['id']."' selected>" . $row['username'] . "</option>";
+                    }else{
+                    echo "<option value='" . $row['id'] . "'>" . $row['username'] . "</option>";
+                
+                    }
+                }
+                echo "</select></td>";
+            ?>
+    </td>           
+</tr>
 <tr>
     <td><label>Name</label>
         <input type="text" name="name" placeholder="Name" id="name">

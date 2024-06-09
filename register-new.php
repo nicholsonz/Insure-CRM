@@ -3,13 +3,18 @@
 include('./include/dbconfig.php');
 
 // Define variables and initialize with empty values
-$username = $email = $password = $confirm_password = "";
-$username_err = $email_err = $password_err = $confirm_password_err = "";
+$accttype = $username = $email = $password = $confirm_password = "";
+$accttype_err = $username_err = $email_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+	
+if(empty(trim($_POST["acct_type"]))){
+	$accttype_err = "Select account type";
+}else{
+	$accttype = trim($_POST["acct_type"]);
+}
+	if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 	$email_err = "Email is not valid!";
 }
 if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) == 0) {
@@ -33,7 +38,7 @@ if(empty(trim($_POST["confirm_password"]))){
 	}
 }
 // Check input errors before inserting in database
-if(empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
+if(empty($accttype_err) && empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)){
 
 	// We need to check if the account with that username exists.
 	if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
@@ -47,11 +52,11 @@ if(empty($username_err) && empty($email_err) && empty($password_err) && empty($c
 			$username_err = "This username is already taken.";
 		} else {
 			// Username doesnt exists, insert new account
-	if ($stmt = $con->prepare('INSERT INTO accounts (username, password, email, activation_code) VALUES (?, ?, ?, ?)')) {
+	if ($stmt = $con->prepare('INSERT INTO accounts (acct_type, username, password, email, activation_code) VALUES (?, ?, ?, ?, ?)')) {
 		// We do not want to expose passwords in our database, so hash the password and use password_verify when a user logs in.
 		$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		$uniqid = uniqid();
-		$stmt->bind_param('ssss', $_POST['username'], $password, $_POST['email'], $uniqid);
+		$stmt->bind_param('sssss', $accttype, $_POST['username'], $password, $_POST['email'], $uniqid);
 		$stmt->execute();
 		$from    = 'example@gmail.com';
 		$subject = 'Account Activation Required';
@@ -81,7 +86,7 @@ $con->close();
 	<head>
 		<meta charset="utf-8">
 		<title>Register</title>
-		<link rel="stylesheet" href="./fontawesome/css/all.css">
+		<link rel="stylesheet" href="../fontawesome/css/all.css">
         <link href="./css/style.css" rel="stylesheet" type="text/css">
         <script src="./js/alertify.min.js"></script>
 	</head>
@@ -102,6 +107,14 @@ $con->close();
             }
             ?>
 			<form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="off">
+				<label for="acct_type">
+					<i class="fas fa-user"></i>
+				</label>
+				<select name="acct_type" id="acct_type" required>
+					<option value="Admin">Admin</option>
+					<option value="Agent">Agent</option>
+					<option value="Support">Support</option>
+				</select>
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
