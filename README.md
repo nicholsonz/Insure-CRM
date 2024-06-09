@@ -2,10 +2,13 @@
 ![Screenshot from 2024-06-09 17-45-28](https://github.com/nicholsonz/Simple-CRM/assets/77360596/c628d162-4d34-4430-808d-8ad100b96f98)
 ![Screenshot from 2024-06-09 17-46-02](https://github.com/nicholsonz/Simple-CRM/assets/77360596/acfc4280-db08-427c-bea2-d8a707b3e12e)
 
+Simple-CRM was designed for licensed insurance agents or anyone who needs to track their client/lead generation.
+
 ## Features
+* Complete task system with notification
 * Multi-user environment with assigned rights
 * Responsive
-* Tables are searchable and sortable
+* Searchable and sortable tables
 * Easy to setup and use
   
 ## Requirements - May or may not work on earlier versions of apps
