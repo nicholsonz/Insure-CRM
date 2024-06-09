@@ -43,7 +43,6 @@ label {
 
 /* chart style */
 .chart-style {
-    max-height: 350px;
     display: inline-block;
     position: relative;
     width: 100%;
@@ -194,7 +193,7 @@ tr {
 .content h1 {
     margin: 20px;
     padding: 25px 0;
-    font-size: 22px;
+    font-size: 28px;
     border-bottom: 1px solid #e0e0e3;
     color: #097baf;
 }
@@ -210,7 +209,7 @@ tr {
     margin: 0;
     padding: 5px 0;
     font-size: 18px;
-    color: #39bce0;
+    color: #6ec9ec;
     text-align: left;
 }
 
