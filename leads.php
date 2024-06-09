@@ -9,7 +9,7 @@ $total_pages = $con->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 
 // Number of results to show on each page.
-$records_per_page = 8;
+$records_per_page = 10;
 
 
 if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER BY created DESC LIMIT ?,?")) {
