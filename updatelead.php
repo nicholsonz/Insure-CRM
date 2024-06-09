@@ -53,25 +53,29 @@ if (isset($_GET['name'])) {
     <form action="updatelead.php?name=<?=$lead['name']?>" method="post">
       <table>
         <tr> 
-            <td>
-            <label>Agent</label>
-            <?php 
-                  $sqlagent = "SELECT id, username
-                               FROM accounts
-                               ORDER BY username DESC";                 
+            <td colspan="2">
+                <label>Agent</label>
+                <?php 
+                    $sqlagent = "SELECT id, username
+                                FROM accounts
+                                ORDER BY username DESC";                 
 
-                  $result = mysqli_query($con, $sqlagent);
+                    $result = mysqli_query($con, $sqlagent);
 
-                  echo "<select class='form-select' name='acct_id' id='acct_id'>";
-                    while($row = mysqli_fetch_assoc($result)) 
-                    {
-                      echo "<option value='" . $row['id'] . "'>" . $row['username'] . "</option>";
-                
-                    }
-                    echo "</select></td>";
-                ?>
-           
-            </td>
+                    echo "<select class='form-select' name='acct_id' id='acct_id'>";
+                    
+                        while($row = mysqli_fetch_assoc($result)) 
+                        {
+                            if($acct_id == $row['id']){
+                            echo "<option value='".$row['id']."' selected>" . $row['username'] . "</option>";
+                            }else{
+                            echo "<option value='" . $row['id'] . "'>" . $row['username'] . "</option>";
+                        
+                            }
+                        }
+                        echo "</select></td>";
+                    ?>
+            </td>           
         </tr>
         <tr>
             <td><label>Name</label>

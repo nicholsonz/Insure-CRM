@@ -102,7 +102,7 @@ new Chart(document.getElementById("activityChart"), {
             display: true
           },
           grid: {
-            color: "rgba(128,128,128,0.4)"
+            color: "rgba(128,128,128,0.2)"
             }
           },
         x: {
@@ -110,7 +110,8 @@ new Chart(document.getElementById("activityChart"), {
             display: true
           },
           grid: {
-            color: "rgba(128,128,128,0.4)"  
+            display: false,
+            color: "rgba(128,128,128,0.2)"  
             }
           }
       },
