@@ -36,16 +36,16 @@
 			?>
 			<table>
 				<tr>
-					<td><h3>Leads</h3></td>
-					<td><?= $newleads?></td>
+					<td class="w3-xlarge">Leads</td>
+					<td class="w3-xlarge"><?= $newleads?></td>
 				</tr>
 				<tr>
-					<td><h3>Clients</h3></td>
-					<td><?= $convleads?></td>
+					<td class="w3-xlarge">Clients</td>
+					<td class="w3-xlarge"><?= $convleads?></td>
 				</tr>
 				<tr>
-					<td><h3>Conversion</h3></td>
-					<td><?= number_format($convperc * 100); ?> %</td>
+					<td class="w3-xlarge">Conversion</td>
+					<td class="w3-xlarge"><?= number_format($convperc * 100); ?> %</td>
 				</tr>
 			</table>       
     	</div>
@@ -65,16 +65,16 @@
 			?>
 			<table>
 				<tr>
-					<td><h3>Leads</h3></td>
-					<td><?= $newleads?></td>
+					<td class="w3-xlarge">Leads</td>
+					<td class="w3-xlarge"><?= $newleads?></td>
 				</tr>
 				<tr>
-					<td><h3>Clients</h3></td>
-					<td><?= $convleads?></td>
+					<td class="w3-xlarge">Clients</td>
+					<td class="w3-xlarge"><?= $convleads?></td>
 				</tr>
 				<tr>
-					<td><h3>Conversion</h3></td>
-					<td><?= number_format($convperc * 100); ?> %</td>
+					<td class="w3-xlarge">Conversion</td>
+					<td class="w3-xlarge"><?= number_format($convperc * 100); ?> %</td>
 				</tr>
 			</table>       
 		</div>
