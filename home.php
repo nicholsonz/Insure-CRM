@@ -131,7 +131,7 @@
 			</tbody>
 			</table>
 		</div>
-		<div class="w3-col s12 m5 l5 w3-margin w3-padding">
+		<div class="w3-col s12 m5 l5 w3-margin">
 		<button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-padding"><h3>Tasks | &nbsp;Clients <?= number_format($clients);?></h3></button>
 			<div id="show" class="read w3-hide">
 				<div class="tableFixHead">
@@ -389,7 +389,7 @@
 			</div>
 		</div>
 
-		<div class="w3-col s12 m6-6 l6-6 w3-margin-left w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
+		<div class="w3-col s12 m6-6 l6-6 w3-margin w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
 				$pdo = pdo_connect_mysql();
