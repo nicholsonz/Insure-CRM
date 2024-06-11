@@ -1,13 +1,13 @@
 <?php
     require_once('./require/header.php');
-    
+
 $pdo = pdo_connect_mysql();
 $msg = '';
 // Check if the client id exists, for example update.php?id=1 will get the client with the id of 1
 if (isset($_GET['id']) || isset($_GET['name'])) {
     if (!empty($_POST)) {
         // This part is similar to the create.php, but instead we update a record and not insert
-        $acct_id = (isset($_POST['acct_id']) && !empty($_POST['acct_id']) ? $_POST['acct_id'] : '');    
+        $acct_id = (isset($_POST['acct_id']) && !empty($_POST['acct_id']) ? $_POST['acct_id'] : '');
         $name = (isset($_POST['name']) && !empty($_POST['name']) ? $_POST['name'] : '');
         $address = (isset($_POST['address']) && !empty($_POST['address']) ? $_POST['address'] : '');
         $city = (isset($_POST['city']) && !empty($_POST['city']) ? $_POST['city'] : '');
@@ -25,7 +25,7 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
         $insurer = (isset($_POST['insurer']) && !empty($_POST['insurer']) ? $_POST['insurer'] : '');
         $appstatus = (isset($_POST['appstatus']) && !empty($_POST['appstatus']) ? $_POST['appstatus'] : '');
         $notes = (isset($_POST['notes']) && !empty($_POST['notes']) ? $_POST['notes'] : '');
-        $created = (isset($_POST['created']) && !empty($_POST['created']) ? $_POST['created'] : date('Y-m-d H:i:s'));       
+        $created = (isset($_POST['created']) && !empty($_POST['created']) ? $_POST['created'] : date('Y-m-d H:i:s'));
         // Update the record
         $stmt = $pdo->prepare('UPDATE clients SET acct_id = ?, name = ?, address = ?, city = ?, state = ?, zip = ?, county = ?, birthdate = ?, email = ?, phone = ?, phone_sec = ?, partA_date = ?, partB_date = ?, medicare_number = ?, policy = ?, insurer = ?, appstatus = ?, notes = ?, created = ? WHERE id = ? OR name = ?');
         $stmt->execute([$acct_id, $name, $address, $city, $state, $zip, $county, $birthdate, $email, $phone, $phone2, $partA_date, $partB_date, $medicare_number, $policy, $insurer, $appstatus, $notes, $created, $_GET['id'], $_GET['name']]);
@@ -59,7 +59,7 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
 <div class="content update">
 	<h1><?=$client['name']?></h1>
     <div class="">
-<!-- Client file upload -- Needs editing to produce specific folders for each client with appropriate access rights 
+<!-- Client file upload needs editing to produce specific folders for each client with appropriate access rights 
             <form action="upld.php" method="post" enctype="multipart/form-data">
             Select file to upload:
             <input type="file" name="fileToUpload" id="fileToUpload">
@@ -68,30 +68,30 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
 -->
     <form action="updateclient.php?id=<?=$client['id']?>" method="post">
       <table>
-        <tr> 
+        <tr>
             <td colspan="2">
                 <label>Agent</label>
-                <?php 
+                <?php
                     $sqlagent = "SELECT id, username
                                 FROM accounts
-                                ORDER BY username DESC";                 
+                                ORDER BY username DESC";
 
                     $result = mysqli_query($con, $sqlagent);
 
                     echo "<select class='form-select' name='acct_id' id='acct_id'>";
-                    
-                        while($row = mysqli_fetch_assoc($result)) 
+
+                        while($row = mysqli_fetch_assoc($result))
                         {
                             if($acct_id == $row['id']){
                             echo "<option value='".$row['id']."' selected>" . $row['username'] . "</option>";
                             }else{
                             echo "<option value='" . $row['id'] . "'>" . $row['username'] . "</option>";
-                        
+
                             }
                         }
                         echo "</select></td>";
                     ?>
-            </td>           
+            </td>
         </tr>
         <tr>
             <td><label>Name</label>
@@ -142,7 +142,7 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
         </td>
         <td><label>Medicare</label>
                 <input type="text" name="medicare_number" placeholder="Medicare Number" value="<?=$client['medicare_number']?>" id="medicare_number">
-                
+
         </td>
         </tr>
         <tr>
@@ -189,7 +189,7 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
             <td>
                 <input type="submit" value="Update">
             </td>
-            <td>                
+            <td>
                 <a href="./clients.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
             </td>
         </tr>
