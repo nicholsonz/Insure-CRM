@@ -611,7 +611,7 @@ body.loggedin {
     width: 1500px;
     margin: 60px auto
 }
-.content .small-table {
+.content .cal-table {
     width: 80%;
     padding: inherit;
 }
@@ -760,7 +760,7 @@ body.loggedin {
 /* .pagination {
 	display: inline-block;
   }
-  
+
   .pagination a {
 	color: rgb(206, 237, 241);
 	float: left;
@@ -769,11 +769,11 @@ body.loggedin {
 	transition: background-color .3s;
 	border: 1px solid #ddd;
   }
-  
+
   .pagination a.active {
 	background-color: #4CAF50;
 	color: rgb(9, 89, 155);
 	border: 1px solid #4CAF50;
   }
-  
+
   .pagination a:hover:not(.active) {background-color: #034469;} */
