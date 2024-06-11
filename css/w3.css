@@ -228,15 +228,20 @@ html {
 }
 
 h1 {
-    font-size: 36px
+    font-size: 36px;
+    color: rgb(66, 105, 163);
+
 }
 
 h2 {
-    font-size: 30px
+    font-size: 30px;
+    color: teal;
+    text-align: center
 }
 
 h3 {
-    font-size: 24px
+    font-size: 24px;
+    color: whitesmoke;
 }
 
 h4 {
@@ -275,7 +280,7 @@ h5,
 h6 {
     font-family: "Segoe UI", Arial, sans-serif;
     font-weight: 400;
-    margin: 10px 0
+    margin: 10px 0;
 }
 
 .w3-wide {
@@ -333,7 +338,7 @@ a {
 .w3-hoverable tbody tr:hover,
 .w3-ul.w3-hoverable li:hover {
     background-color: #297deb;
-    color: #fff        
+    color: #fff
 }
 
 .w3-hoverable-income tr:hover {
@@ -374,7 +379,7 @@ a {
 .w3-header th {
     background-color: #1a1919;
     color: whitesmoke
-    
+
 }
 
 .w3-centered tr th,
@@ -919,7 +924,8 @@ a {
 }
 
 .w3-content {
-    max-width: 980px
+  max-width: 1320px;
+  margin: 60px auto
 }
 
 .w3-auto {

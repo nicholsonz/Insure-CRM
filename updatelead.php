@@ -1,6 +1,6 @@
 <?php
     require_once('./require/header.php');
-    
+
 $pdo = pdo_connect_mysql();
 $msg = '';
 // Check if the lead exists
@@ -25,7 +25,7 @@ if (isset($_GET['name'])) {
         $insurer = (isset($_POST['insurer']) && !empty($_POST['insurer']) ? $_POST['insurer'] : '');
         $appstatus = (isset($_POST['appstatus']) && !empty($_POST['appstatus']) ? $_POST['appstatus'] : '');
         $notes = (isset($_POST['notes']) && !empty($_POST['notes']) ? $_POST['notes'] : '');
-        $created = (isset($_POST['created']) && !empty($_POST['created']) ? $_POST['created'] : date('Y-m-d H:i:s'));       
+        $created = (isset($_POST['created']) && !empty($_POST['created']) ? $_POST['created'] : date('Y-m-d H:i:s'));
         // Update the record
         $stmt = $pdo->prepare('UPDATE leads SET acct_id = ?, name = ?, address = ?, city = ?, state = ?, zip = ?, county = ?, birthdate = ?, email = ?, phone = ?, phone_sec = ?, partA_date = ?, partB_date = ?, medicare_number = ?, policy = ?, insurer = ?, appstatus = ?, notes = ?, created = ? WHERE name = ?');
         $stmt->execute([$acct_id, $name, $address, $city, $state, $zip, $county, $birthdate, $email, $phone, $phone2, $partA_date, $partB_date, $medicare_number, $policy, $insurer, $appstatus, $notes, $created, $_GET['name']]);
@@ -47,35 +47,36 @@ if (isset($_GET['name'])) {
 
 <?=template_header('Read')?>
 
-<div class="content update">
+<div class="w3-content update">
     <div class="">
 	<h1><?=$lead['name']?></h1>
+  <hr></hr>
     <form action="updatelead.php?name=<?=$lead['name']?>" method="post">
       <table>
-        <tr> 
+        <tr>
             <td colspan="2">
                 <label>Agent</label>
-                <?php 
+                <?php
                     $sqlagent = "SELECT id, username
                                 FROM accounts
-                                ORDER BY username DESC";                 
+                                ORDER BY username DESC";
 
                     $result = mysqli_query($con, $sqlagent);
 
                     echo "<select class='form-select' name='acct_id' id='acct_id'>";
-                    
-                        while($row = mysqli_fetch_assoc($result)) 
+
+                        while($row = mysqli_fetch_assoc($result))
                         {
                             if($acct_id == $row['id']){
                             echo "<option value='".$row['id']."' selected>" . $row['username'] . "</option>";
                             }else{
                             echo "<option value='" . $row['id'] . "'>" . $row['username'] . "</option>";
-                        
+
                             }
                         }
                         echo "</select></td>";
                     ?>
-            </td>           
+            </td>
         </tr>
         <tr>
             <td><label>Name</label>
@@ -126,7 +127,7 @@ if (isset($_GET['name'])) {
         </td>
         <td><label>Medicare</label>
                 <input type="text" name="medicare_number" placeholder="Medicare Number" value="<?=$lead['medicare_number']?>" id="medicare_number">
-                
+
         </td>
         </tr>
         <tr>

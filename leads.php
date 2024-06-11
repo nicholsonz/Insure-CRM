@@ -16,7 +16,7 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
 	// Calculate the page to get the results we need from our table.
 	// $calc_page = ($page - 1) * $records_per_page;
 	// $stmt->bind_param('ii', $calc_page, $records_per_page);
-	$stmt->execute(); 
+	$stmt->execute();
 	// Get the results...
 	$result = $stmt->get_result();
 	$stmt->close();
@@ -25,14 +25,15 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
 
 <?=template_header('Leads')?>
 
-<div class="content read">
+<div class="w3-content read">
 	<h1>LEADS</h1>
+  <hr></hr>
     <div class="">
 	<a href="createlead.php" class="create-contact">Create Lead</a>
 	<a href="impleads.php" class="create-contact">Import Leads</a>
-    <div class="w3-right w3-padding">      
+    <div class="w3-right w3-padding">
          <input id="tableSrch" type="text" placeholder="Filter..">
-    </div> 
+    </div>
     <div class="table-viewer tableFixHead">
 	<table class="w3-table w3-hoverable" id="srtTable">
         <thead>
@@ -55,12 +56,12 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
                 <td><?=$row['email']?></td>
                 <td><?=$row['notes']?></td>
                 <td><?=$row['created']?></td>
-                <td class="actions">          
+                <td class="actions">
                     <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task"><i class="fas fa-tasks fa-xs"></i></a>
                     <a href="convertlead.php?name=<?=$row['name']?>" class="convert"><i class="fas fa-archive fa-xs"></i></a>
-                    <a href="updatelead.php?name=<?=$row['name']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                    
+                    <a href="updatelead.php?name=<?=$row['name']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>
                     <a href="delete-lead.php?name=<?=$row['name']?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
-                   
+
                 </td>
             </tr>
             <?php endwhile; ?>

@@ -1,6 +1,6 @@
-<?php 
+<?php
     require_once('./require/header.php');
-    
+
     if (isset($_GET['task_name'])) {
         $name = ($_GET['task_name']);
     }else{
@@ -29,15 +29,15 @@ if(isset($_POST['submit']))
     $priority = htmlspecialchars($_POST['priority']);
     $deadline = htmlspecialchars($_POST['deadline']);
     $type = htmlspecialchars($_POST['type']);
-    
+
     //Connect Database
     $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-    
+
     //SElect Database
     $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
-    
+
     //CReate SQL Query to INSERT DATA into DAtabase
-    $sql2 = "INSERT INTO tasks SET 
+    $sql2 = "INSERT INTO tasks SET
         acct_id = '$acct_id',
         task_name = '$task_name',
         name = '$name',
@@ -46,19 +46,19 @@ if(isset($_POST['submit']))
         priority = '$priority',
         deadline = '$deadline',
         type = '$type'";
-    
+
     //Execute Query
     $res2 = mysqli_query($conn2, $sql2);
-    
+
     //Check whetehre the query executed successfully or not
     if($res2==true)
     {
         //Query Executed and Task Inserted Successfully
         $_SESSION['add'] = "Task Added Successfully.";
-        
+
         //Redirect to Homepage
         header('location: ./taskmngr.php');
-        
+
     }
     else
     {
@@ -73,29 +73,29 @@ if(isset($_POST['submit']))
 
 
 <?=template_header('Task Mngr')?>
-    
+
         <div class="content">
-        
+
         <h1>ADD TASK</h1>
-   
+
             <!-- Menu Starts Here -->
-        <div class="task-mngr">            
-            <a href="./taskmngr.php">Tasks</a>     
+        <div class="task-mngr">
+            <a href="./taskmngr.php">Tasks</a>
         </div>
-        <div class="">        
-      
+        <div class="">
+
 <!-- Menu Ends Here -->
-  
-            <?php             
+
+            <?php
                 if(isset($_SESSION['add_fail']))
                 {
                     echo $_SESSION['add_fail'];
                     unset($_SESSION['add_fail']);
-                }            
+                }
             ?>
-        
+
         <form method="POST" action="">
-            
+
             <table class="">
                 <tr>
                     <td>Task Name: </td>
@@ -105,37 +105,37 @@ if(isset($_POST['submit']))
                     <td>Name: </td>
                     <td><input type="text" name="name" placeholder="Name" value="<?= $name;?>"/></td>
                 </tr>
-                
+
                 <tr>
                     <td>Task Description: </td>
                     <td><textarea type="text" name="task_description" placeholder="Type Task Description"></textarea></td>
                 </tr>
-                
+
                 <tr>
                     <td>Select List: </td>
                     <td>
                         <select name="list_id">
-                            
-                            <?php 
-                                
+
+                            <?php
+
                                 //Connect Database
                                 $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-                                
+
                                 //SElect Database
                                 $db_select = mysqli_select_db($conn, DB_NAME) or die();
-                                
+
                                 //SQL query to get the list from table
                                 $sql = "SELECT * FROM task_lists WHERE acct_id = '$acct_id'";
-                                
+
                                 //Execute Query
                                 $res = mysqli_query($conn, $sql);
-                                
+
                                 //Check whether the query executed or not
                                 if($res==true)
                                 {
                                     //Create variable to Count Rows
                                     $count_rows = mysqli_num_rows($res);
-                                    
+
                                     //If there is data in database then display all in dropdows else display None as option
                                     if($count_rows>0)
                                     {
@@ -156,15 +156,15 @@ if(isset($_POST['submit']))
                                         <option value="0">None</option>p
                                         <?php
                                     }
-                                    
+
                                 }
                             ?>
-                        
-                            
+
+
                         </select>
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td>Priority: </td>
                     <td>
@@ -175,7 +175,7 @@ if(isset($_POST['submit']))
                         </select>
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td>Deadline: </td>
                     <td><input type="date" name="deadline" /></td>
@@ -190,52 +190,16 @@ if(isset($_POST['submit']))
                         </select>
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td><input class="w3-button" type="submit" name="submit" value="SAVE" /></td>
                     <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
                 </tr>
-                
+
             </table>
-            
+
          </form>
         </div>
     </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

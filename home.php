@@ -17,11 +17,12 @@
 
 <?=template_header('Home')?>
 
-<div class="content w3-mobile">
+<div class="w3-content w3-mobile">
  	<h1><?php echo date('M d, Y') . "&nbsp;" . date('   g:i a');?></h1>
-  	<div class="w3-col-6">
+  <hr></hr>
    		<div class="w3-col s12 m3 l3 w3-margin w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
 			<h2><?php echo date('F'); ?> Activity</h2>
+      <br />
 			<?php
 				$pdo = pdo_connect_mysql();
 				$newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND MONTH(created) = MONTH(now())")->fetchColumn();
@@ -43,14 +44,18 @@
 					<td class="w3-xlarge">Clients</td>
 					<td class="w3-xlarge"><?= $convleads?></td>
 				</tr>
+        <tr>
+          <td><br /></td>
+        </tr>
 				<tr>
 					<td class="w3-xlarge">Conversion</td>
-					<td class="w3-xlarge"><?= number_format($convperc * 100); ?> %</td>
+					<td class="w3-xlarge">&nbsp; <?= number_format($convperc * 100); ?> %</td>
 				</tr>
 			</table>
-    	</div>
+    </div>
 		<div class="w3-col s12 m3 l3 w3-margin w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
+      <br />
 			<?php
 				$pdo = pdo_connect_mysql();
 				$newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
@@ -72,30 +77,31 @@
 					<td class="w3-xlarge">Clients</td>
 					<td class="w3-xlarge"><?= $convleads?></td>
 				</tr>
+        <tr>
+          <td><br /></td>
+        </tr>
 				<tr>
 					<td class="w3-xlarge">Conversion</td>
-					<td class="w3-xlarge"><?= number_format($convperc * 100); ?> %</td>
+					<td class="w3-xlarge">&nbsp; <?= number_format($convperc * 100); ?> %</td>
 				</tr>
 			</table>
 		</div>
-  </div>
-  <div class="w3-col-5">
-		<?php
+  		<?php
 
-			// PHP Calendar for lead count
-			$time = time();
-			$mnthyr = date('F Y');
-			$numDay = date('d', $time);
-			$numMonth = date('m', $time);
-			$strMonth = date('F', $time);
-			$numYear = date('Y', $time);
-			$firstDay = mktime(0,0,0,$numMonth,1,$numYear);
-			$daysInMonth = cal_days_in_month(0, $numMonth, $numYear);
-			$dayOfWeek = date('w', $firstDay);
-		?>
+  			// PHP Calendar for lead count
+  			$time = time();
+  			$mnthyr = date('F Y');
+  			$numDay = date('d', $time);
+  			$numMonth = date('m', $time);
+  			$strMonth = date('F', $time);
+  			$numYear = date('Y', $time);
+  			$firstDay = mktime(0,0,0,$numMonth,1,$numYear);
+  			$daysInMonth = cal_days_in_month(0, $numMonth, $numYear);
+  			$dayOfWeek = date('w', $firstDay);
+  		?>
 		<div class="w3-col s12 m5 l5 w3-margin w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
-			<table class="cal-table">
-			<caption><?php echo($mnthyr); ?></caption>
+      <h2><?php echo($mnthyr); ?></h2>
+			<table class="w3-centered cal-table">
 				<thead>
 					<tr>
 						<th abbr="Sunday" scope="col" title="Sunday">S</th>
@@ -125,10 +131,8 @@
 			</tbody>
 			</table>
 		</div>
-  	</div>
-	<div class="w3-col-5">
 		<div class="w3-col s12 m5 l5 w3-margin w3-padding">
-		<button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-padding"><h3>Tasks | Clients <?= number_format($clients);?></h3></button>
+		<button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-padding"><h3>Tasks | &nbsp;Clients <?= number_format($clients);?></h3></button>
 			<div id="show" class="read w3-hide">
 				<div class="tableFixHead">
 				<table class="w3-table w3-hoverable">
@@ -214,7 +218,7 @@
 				</table>
 				</div>
 			</div>
-			<button id="showhide2" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | Leads <?= number_format($leads);?></h3></button>
+			<button id="showhide2" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | &nbsp;Leads <?= number_format($leads);?></h3></button>
 			<div id="show2" class="read w3-hide">
 			<div class="tableFixHead">
 				<table class="w3-table" id="srtTable">
@@ -299,7 +303,7 @@
 				</table>
 				</div>
 			</div>
-			<button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-right w3-padding"><h3>Tasks | Other <?= number_format($other);?></h3></button>
+			<button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-right w3-padding"><h3>Tasks | &nbsp;Other <?= number_format($other);?></h3></button>
 			<div id="show3" class="read w3-hide">
 				<div class="tableFixHead">
 				<table class="w3-table w3-hoverable">
@@ -384,8 +388,7 @@
 				</div>
 			</div>
 		</div>
-  </div>
-  <div class="w3-col-6">
+
 		<div class="w3-col s12 m6-6 l6-6 w3-margin-left w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
@@ -397,7 +400,6 @@
 			<canvas id="activityChart" class="chart-style"></canvas>
 		</div>
 	</div>
-</div>
 
 <script type="text/javascript">
 	const mnthleads = <?php echo json_encode($mnthleads) ?>;

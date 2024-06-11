@@ -1,6 +1,6 @@
 <?php
     require_once('./require/header.php');
-    
+
 
 // Get the total number of records.
 $total_pages = $con->query("SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id'")->fetch_row()[0];
@@ -12,14 +12,14 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 10;
 
 
-if ($stmt = $con->prepare("SELECT * FROM tasks 
+if ($stmt = $con->prepare("SELECT * FROM tasks
                            LEFT JOIN task_lists AS tl ON tasks.list_id = tl.list_id
                            WHERE tasks.acct_id = '$acct_id'
                            ORDER BY tasks.deadline ASC -- LIMIT ?,?")) {
 	// Calculate the page to get the results we need from our table.
 	// $calc_page = ($page - 1) * $records_per_page;
 	// $stmt->bind_param('ii', $calc_page, $records_per_page);
-	$stmt->execute(); 
+	$stmt->execute();
 	// Get the results...
 	$result = $stmt->get_result();
 	$stmt->close();
@@ -29,41 +29,42 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
 
 <?=template_header('Task Mngr')?>
 
-<div class="content read">
-    
-    <h1>TASK MANAGER</h1> 
-    <div class="">    
-    <div class="task-mngr">               
+<div class="w3-content read">
+
+    <h1>TASK MANAGER</h1>
+    <hr></hr>
+    <div class="">
+    <div class="task-mngr">
         <a href="./manage-list.php">Manage Lists</a>
-    </div>       
+    </div>
      <div class="">
-        <?php 
-        
+        <?php
+
             if(isset($_SESSION['add']))
             {
                 echo $_SESSION['add'];
                 unset($_SESSION['add']);
             }
-            
+
             if(isset($_SESSION['delete']))
             {
                 echo $_SESSION['delete'];
                 unset($_SESSION['delete']);
             }
-            
+
             if(isset($_SESSION['update']))
             {
                 echo $_SESSION['update'];
                 unset($_SESSION['update']);
             }
-            
-            
+
+
             if(isset($_SESSION['delete_fail']))
             {
                 echo $_SESSION['delete_fail'];
                 unset($_SESSION['delete_fail']);
             }
-        
+
         ?>
     </div>
         <a href="./add-task.php" class="add-task">Add Task</a>
@@ -97,15 +98,15 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
                 <td><?= $row['deadline'] ?></td>
                 <td><?= $row['type'] ?></td>
                 <td class="actions">
-                    <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>                                    
+                    <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>
                     <a href="./delete-task.php?task_id=<?= $row['task_id'] ?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
-                
+
                 </td>
             </tr>
             <?php endwhile ?>
-            
+
         </tbody>
-        
+
         </table>
                 </div>
 <!-- Pagination
@@ -137,7 +138,7 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
             <li class="next"><a href="taskmngr.php?page=<?php echo $page+1 ?>">Next</a></li>
             <?php endif; ?>
         </ul>
-    <?php endif; ?> 
+    <?php endif; ?>
 End Pagination-->
     </div>
 </div>

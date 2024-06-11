@@ -1,6 +1,6 @@
-<?php 
+<?php
     require_once('./require/header.php');
-    
+
 // Get the total number of records from our table "students".
 $total_pages = $con->query("SELECT COUNT(*) FROM task_lists WHERE acct_id = '$acct_id'")->fetch_row()[0];
 
@@ -15,7 +15,7 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
 	// Calculate the page to get the results we need from our table.
 	// $calc_page = ($page - 1) * $records_per_page;
 	// $stmt->bind_param('ii', $calc_page, $records_per_page);
-	$stmt->execute(); 
+	$stmt->execute();
 	// Get the results...
 	$result = $stmt->get_result();
 	$stmt->close();
@@ -24,17 +24,18 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
 ?>
 
 <?=template_header('Task Mngr')?>
-        
-    <div class="content">
-        
-        <h1>TASK LIST MANAGER</h1> 
-        <div class="">    
-        <div class="task-mngr">               
-            <a href="./taskmngr.php">Manage Tasks</a>
-        </div>       
+
+    <div class="w3-content">
+
+        <h1>TASK LIST MANAGER</h1>
+        <hr></hr>
         <div class="">
-            <?php 
-            
+        <div class="task-mngr">
+            <a href="./taskmngr.php">Manage Tasks</a>
+        </div>
+        <div class="">
+            <?php
+
                 //Check if the session is set
                 if(isset($_SESSION['add']))
                 {
@@ -43,35 +44,35 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
                     //REmove the message after displaying one time
                     unset($_SESSION['add']);
                 }
-                
+
                 //Check the session for Delete
-                
+
                 if(isset($_SESSION['delete']))
                 {
                     echo $_SESSION['delete'];
                     unset($_SESSION['delete']);
                 }
-                
+
                 //Check Session Message for Update
                 if(isset($_SESSION['update']))
                 {
                     echo $_SESSION['update'];
                     unset($_SESSION['update']);
                 }
-                
+
                 //Check for Delete Fail
                 if(isset($_SESSION['delete_fail']))
                 {
                     echo $_SESSION['delete_fail'];
                     unset($_SESSION['delete_fail']);
                 }
-            
+
             ?>
-             
+
         <!-- Table to display lists starts here -->
-        <div class="read">            
+        <div class="read">
             <a href="./add-list.php" class="add-task">Add List</a>
-            <div class="table-viewer tableFixHead">            
+            <div class="table-viewer tableFixHead">
             <table class="w3-table w3-hoverable">
              <thead>
                 <tr>
@@ -79,19 +80,19 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
                     <th>Description</th>
                     <th></th>
                 </tr>
-             </thead>                             
+             </thead>
              <tbody id="tblSrch">
-                <?php while ($row = $result->FETCH_ASSOC()): ?>                  
+                <?php while ($row = $result->FETCH_ASSOC()): ?>
                     <tr>
                         <td><a href="./update-list.php?list_id=<?= $row['list_id']; ?>"><?= $row['list_name'] ?></a></td>
                         <td><?= $row['list_description'] ?></td>
                         <td class="actions">
-                            <a href="./update-list.php?list_id=<?= $row['list_id'] ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>   
+                            <a href="./update-list.php?list_id=<?= $row['list_id'] ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>
                             <a href="./delete-list.php?list_id=<?= $row['list_id'] ?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
                         </td>
                     </tr>
                 <?php endwhile ?>
-             </tbody>                                                 
+             </tbody>
             </table>
         </div>
 <!-- Pagination
