@@ -143,12 +143,12 @@ label {
     left: 15px;
     padding: 7px 7px;
     border-radius: 50%;
-    background: rgb(161, 6, 6);
+    background: rgba(161, 6, 6, 1);
     color: whitesmoke;
 }
 
 caption {
-    color: rgb(96, 217, 238);
+    color: rgba(96, 217, 238, 1);
     font-size: larger;
 }
 
