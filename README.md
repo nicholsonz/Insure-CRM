@@ -1,6 +1,6 @@
 # Simple CRM Web App 
 ![Screenshot from 2024-06-09 17-45-28](https://github.com/nicholsonz/Simple-CRM/assets/77360596/c628d162-4d34-4430-808d-8ad100b96f98)
-![Screenshot from 2024-06-09 17-46-02](https://github.com/nicholsonz/Simple-CRM/assets/77360596/acfc4280-db08-427c-bea2-d8a707b3e12e)
+![Screenshot from 2024-06-12 16-45-36](https://github.com/nicholsonz/Simple-CRM/assets/77360596/f1477db7-3d42-4925-9b37-5de0dd92f2f9)
 
 Simple-CRM was designed for licensed insurance agents or anyone who needs to track their client/lead generation.
 
