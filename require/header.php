@@ -30,6 +30,7 @@ $pdo = pdo_connect_mysql();
 			<link rel="stylesheet" href="./css/style.css">
 			<link rel="stylesheet" href="./css/w3.css">
 			<link rel="stylesheet" href="../fontawesome/css/all.css">
+      <link rel="icon" href="./favicon.ico">
 			<script src="./js/jquery-3.7.1.min.js"></script>
 			<script src="./js/chart.min.js"></script>
 			<script src="./js/alertify.min.js"></script>
