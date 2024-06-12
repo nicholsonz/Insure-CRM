@@ -47,7 +47,7 @@ if (isset($_GET['name'])) {
 
 <?=template_header('Read')?>
 
-<div class="w3-content update">
+<div class="w3-content update w3-mobile">
     <div class="">
 	<h1><?=$lead['name']?></h1>
   <hr></hr>

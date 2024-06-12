@@ -56,10 +56,10 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
 
 <?=template_header('Read')?>
 
-<div class="content update">
+<div class="w3-content update w3-mobile">
 	<h1><?=$client['name']?></h1>
     <div class="">
-<!-- Client file upload needs editing to produce specific folders for each client with appropriate access rights 
+<!-- Client file upload needs editing to produce specific folders for each client with appropriate access rights
             <form action="upld.php" method="post" enctype="multipart/form-data">
             Select file to upload:
             <input type="file" name="fileToUpload" id="fileToUpload">

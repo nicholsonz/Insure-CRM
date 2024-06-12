@@ -74,14 +74,16 @@ if(isset($_POST['submit']))
 
 <?=template_header('Task Mngr')?>
 
-        <div class="content">
+        <div class="w3-content">
 
         <h1>ADD TASK</h1>
+        <hr></hr>
 
             <!-- Menu Starts Here -->
         <div class="task-mngr">
             <a href="./taskmngr.php">Tasks</a>
         </div>
+        <br />
         <div class="">
 
 <!-- Menu Ends Here -->
@@ -96,7 +98,7 @@ if(isset($_POST['submit']))
 
         <form method="POST" action="">
 
-            <table class="">
+            <table>
                 <tr>
                     <td>Task Name: </td>
                     <td><input type="text" name="task_name" placeholder="Task Name" required="required" value="<?= $task_name;?>"/></td>
@@ -190,7 +192,11 @@ if(isset($_POST['submit']))
                         </select>
                     </td>
                 </tr>
-
+                <tr>
+                  <td>
+                    <br />
+                  </td>
+                </tr>
                 <tr>
                     <td><input class="w3-button" type="submit" name="submit" value="SAVE" /></td>
                     <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>

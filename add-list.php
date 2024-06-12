@@ -73,14 +73,16 @@
 
 <?=template_header('Task Mngr')?>
 
-<div class="content">
+<div class="w3-content">
 
         <h1>ADD TASK LIST</h1>
+        <hr></hr>
 
         <!-- Menu Starts Here -->
         <div class="task-mngr">
             <a href="./manage-list.php">Manage Lists</a>
         </div>
+        <br />
         <div class="">
         <!-- Menu Ends Here -->
         <?php
@@ -109,7 +111,16 @@
                     <td>List Description: </td>
                     <td><textarea name="list_description" placeholder="Type List Description Here"></textarea></td>
                 </tr>
-
+                <tr>
+                  <td>
+                    <br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <br />
+                  </td>
+                </tr>
                 <tr>
                     <td><input class="w3-button" type="submit" name="submit" value="SAVE" /></td>
                     <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>

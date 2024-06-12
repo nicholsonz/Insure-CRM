@@ -1,28 +1,28 @@
-<?php 
+<?php
     require_once('./require/header.php');
-        
+
     //Check the Task ID in URL
-    
+
     if(isset($_GET['task_id']))
     {
         //Get the Values from DAtabase
         $task_id = $_GET['task_id'];
-               
+
         //Select Database
         $db_select = mysqli_select_db($con, DB_NAME) or die();
-        
+
         //SQL Query to Get the detail of selected task
         $sql = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND task_id = '$task_id'";
-        
+
         //Execute Query
         $res = mysqli_query($con, $sql);
-        
+
         //Check if the query executed successfully or not
         if($res==true)
         {
             //Query <br />Executed
             $row = mysqli_fetch_assoc($res);
-            
+
             //Get the Individual Value
             $task_name = $row['task_name'];
             $name = $row['name'];
@@ -38,13 +38,13 @@
         //Redirect to Homepage
         header('location: ./taskmngr.php');
     }
-                           
+
 
     //Check if the button is clicked
     if(isset($_POST['submit']))
     {
         //echo "Clicked";
-        
+
         //Get the values from Form
         $task_name = htmlspecialchars($_POST['task_name']);
         $name = htmlspecialchars($_POST['name']);
@@ -53,12 +53,12 @@
         $priority = htmlspecialchars($_POST['priority']);
         $deadline = htmlspecialchars($_POST['deadline']);
         $type = htmlspecialchars($_POST['type']);
-        
+
         //SElect Database
         $db_select3 = mysqli_select_db($con, DB_NAME) or die();
-        
+
         //CREATE SQL QUery to Update TAsk
-        $sql3 = "UPDATE tasks SET 
+        $sql3 = "UPDATE tasks SET
                 task_name = '$task_name',
                 name = '$name',
                 task_description = '$task_description',
@@ -66,19 +66,19 @@
                 priority = '$priority',
                 deadline = '$deadline',
                 type = '$type'
-                WHERE acct_id = '$acct_id' 
+                WHERE acct_id = '$acct_id'
                 AND task_id = '$task_id'";
-        
+
         //Execute Query
         $res3 = mysqli_query($con, $sql3);
-    
-    
+
+
         //CHeck whether the Query Executed of Not
         if($res3==true)
         {
             //Query Executed and Task Updated
             $_SESSION['update'] = "Task Updated Successfully";
-                    
+
             //Redirect to Home Page
             header('location: ./taskmngr.php');
         }
@@ -86,38 +86,39 @@
         {
             //FAiled to Update Task
             $_SESSION['update_fail'] = "Failed to Update Task";
-            
+
             //Redirect to this Page
             header('Location: ./update-task.php?task_id='.$task_id);
         }
-        
-        
+
+
     }
-    
+
     ?>
 
 <?=template_header('Task Mngr')?>
-    
-    <div class="content">
-        
-        <h1>UPDATE TASK</h1>        
-        
+
+    <div class="w3-content">
+
+        <h1>UPDATE TASK</h1>
+        <hr></hr>
             <!-- Menu Starts Here -->
-            <div class="task-mngr">            
-                <a href="./taskmngr.php">Tasks</a>             
+            <div class="task-mngr">
+                <a href="./taskmngr.php">Tasks</a>
             </div>
+            <br />
             <div class="">
             <!-- Menu Ends Here -->
-            <?php 
+            <?php
                 if(isset($_SESSION['update_fail']))
                 {
                     echo $_SESSION['update_fail'];
                     unset($_SESSION['update_fail']);
                 }
             ?>
-     
+
             <form method="POST" action="">
-            
+
                 <table class="">
                     <tr>
                         <td>Task Name: </td>
@@ -127,35 +128,35 @@
                         <td>Name: </td>
                         <td><input type="text" name="name" value="<?php echo $name; ?>" /></td>
                     </tr>
-                    
+
                     <tr>
                         <td>Task Description: </td>
                         <td><textarea  type="text" name="task_description"><?=$task_description; ?></textarea></td>
                     </tr>
-                    
+
                     <tr>
                         <td>Select List: </td>
                         <td>
                             <select name="list_id">
-                                
-                                <?php 
-                                                                
+
+                                <?php
+
                                     //SElect Database
                                     $db_select2 = mysqli_select_db($con, DB_NAME) or die();
-                                    
+
                                     //SQL Query to GET Lists
                                     $sql2 = "SELECT * FROM task_lists WHERE acct_id = '$acct_id' ";
-                                    
+
                                     //Execute Query
                                     $res2 = mysqli_query($con, $sql2);
-                                    
+
                                     //Check if executed successfully or not
                                     if($res2==true)
                                     {
                                         //Display the Lists
                                         //Count Rows
                                         $count_rows2 = mysqli_num_rows($res2);
-                                        
+
                                         //Check whether list is added or not
                                         if($count_rows2>0)
                                         {
@@ -166,9 +167,9 @@
                                                 $list_id_db = $row2['list_id'];
                                                 $list_name = $row2['list_name'];
                                                 ?>
-                                                
+
                                                 <option <?php if($list_id_db==$list_id){echo "selected='selected'";} ?> value="<?php echo $list_id_db; ?>"><?php echo $list_name; ?></option>
-                                                
+
                                                 <?php
                                             }
                                         }
@@ -182,11 +183,11 @@
                                         }
                                     }
                                 ?>
-                                
+
                             </select>
                         </td>
                     </tr>
-                    
+
                     <tr>
                         <td>Priority: </td>
                         <td>
@@ -197,7 +198,7 @@
                             </select>
                         </td>
                     </tr>
-                    
+
                     <tr>
                         <td>Deadline: </td>
                         <td><input type="date" name="deadline" value="<?php echo $deadline; ?>" /></td>
@@ -212,60 +213,21 @@
                             </select>
                         </td>
                     </tr>
-                    
+                    <tr>
+                      <td>
+                        <br />
+                      </td>
+                    </tr>                    
                     <tr>
                         <td><input class="w3-button" type="submit" name="submit" value="UPDATE" /></td>
                         <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
                     </tr>
-                    
+
                 </table>
-            
+
             </form>
         </div>
     </div>
 <?php
     require_once('./require/footer.php');
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
