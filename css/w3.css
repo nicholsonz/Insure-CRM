@@ -575,7 +575,6 @@ a {
     background-color: #1a1919;
     position: fixed !important;
     z-index: 3;
-    overflow: auto;
     color: teal;
     padding: 10px;
 }
@@ -924,8 +923,8 @@ a {
 }
 
 .w3-content {
-  max-width: 1320px;
-  margin: 60px auto
+  max-width: 1620px;
+  margin: 60px 20px 20px 280px;
 }
 
 .w3-auto {
@@ -966,9 +965,10 @@ a {
     display: inline-block !important
 }
 
-@media (max-width:1205px) {
-    .w3-auto {
-        max-width: 95%
+@media (max-width:1405px) {
+    .w3-auto, .w3-content {
+        max-width: 95%;
+        margin: auto;
     }
 }
 

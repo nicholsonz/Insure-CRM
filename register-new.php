@@ -8,7 +8,7 @@ $accttype_err = $username_err = $email_err = $password_err = $confirm_password_e
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-	
+
 if(empty(trim($_POST["acct_type"]))){
 	$accttype_err = "Select account type";
 }else{
@@ -21,7 +21,7 @@ if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) == 0) {
     $username_err = "Username is not valid!";
 }
 if(empty(trim($_POST["password"]))){
-	$password_err = "Please enter a password.";     
+	$password_err = "Please enter a password.";
 } elseif(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,32}$/',trim($_POST["password"]))) {
 	$password_err = "Password must be between 8 - 32 characters and include one upper-case letter, numbers, and at least one special character ! @ # $ %";
 } else{
@@ -30,7 +30,7 @@ if(empty(trim($_POST["password"]))){
 
 // Validate confirm password
 if(empty(trim($_POST["confirm_password"]))){
-	$confirm_password_err = "Please confirm password.";     
+	$confirm_password_err = "Please confirm password.";
 } else{
 	$confirm_password = trim($_POST["confirm_password"]);
 	if(empty($password_err) && ($password != $confirm_password)){
@@ -58,14 +58,14 @@ if(empty($accttype_err) && empty($username_err) && empty($email_err) && empty($p
 		$uniqid = uniqid();
 		$stmt->bind_param('sssss', $accttype, $_POST['username'], $password, $_POST['email'], $uniqid);
 		$stmt->execute();
-		$from    = 'example@gmail.com';
+		$from    = 'register@example.net';
 		$subject = 'Account Activation Required';
 		$headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
 	// Update the activation variable below
-		$activate_link = 'http://example.net/clients/action/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
+		$activate_link = 'https://example.net/clients/action/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
 		$message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
-		mail($_POST['email'], $subject, $message, $headers);	
-		echo '<script>alert("Account created succesfully! Please check your email for activation link.")</script>';	
+		mail($_POST['email'], $subject, $message, $headers);
+		echo '<script>alert("Account created succesfully! Please check your email for activation link.")</script>';
 		header('Refresh:3; url=./index.php');
 	} else {
 		// Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
@@ -93,7 +93,7 @@ $con->close();
 	<body class="regcolor">
 		<div class="register">
 			<h1>Register</h1>
-			<?php 
+			<?php
             if(!empty($password_err)){
                 echo '<div class="alert">' . $password_err . '</div>';
             } elseif(!empty($username_err)){

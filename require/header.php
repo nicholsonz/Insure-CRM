@@ -107,7 +107,8 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
 					 }
 ?>
 <?php }else{ ?>
-
+</div>
+</div>
 	<div class="w3-sidebar w3-bar-block w3-collapse w3-card-4 w3-animate-left w3-custom-blue" id="mySidebar">
 		<button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
  			<div class="w3-logo">
@@ -115,7 +116,8 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
 			</div>
 			<a href="taskmngr.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-hourglass w3-margin-right"></i> Tasks</a>
             <a href="leads.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Leads</a>
-			<a href="./action/logout.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a> <div class="w3-dropdown-hover">
+			<a href="./action/logout.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a>
+      <div class="w3-dropdown-hover">
 				<a href="" class="task-mngr w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
 				<?php
 				$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 7 DAY) AND DATE(deadline));";
@@ -174,8 +176,9 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
 			</div>
 		</div>
 	</div>
+</div>
 	<div class="">
   	<button class="w3-button w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
-  		<div class="w3-container">
+  	<div class="w3-container">
 		</div>
 	</div>

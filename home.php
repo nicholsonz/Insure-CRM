@@ -17,7 +17,7 @@
 
 <?=template_header('Home')?>
 
-<div class="w3-content w3-mobile">
+<div class="content w3-mobile">
  	<h1><?php echo date('M d, Y') . "&nbsp;" . date('   g:i a');?></h1>
   <hr></hr>
    		<div class="w3-col s12 m3 l3 w3-margin w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
