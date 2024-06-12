@@ -130,20 +130,21 @@ label {
 
 .badgecur {
     position: relative;
-    top: -10px;
-    right: 2px;
+    bottom: 10px;
+    left: 2px;
     padding: 5px 5px;
     border-radius: 50%;
     background: rgb(255, 145, 0);
-    color: white;
+    color: black;
 }
 
 .badgepas {
     position: relative;
-    padding: 5px 5px;
+    left: 15px;
+    padding: 7px 7px;
     border-radius: 50%;
-    background: red;
-    color: white;
+    background: rgb(161, 6, 6);
+    color: whitesmoke;
 }
 
 caption {
