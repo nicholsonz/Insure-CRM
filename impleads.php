@@ -96,7 +96,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           echo '<div></div>';
       }
       ?>
-        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?> " method="post" enctype="multipart/form-data">
+        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
             <input type="file" id="file" class="file-upload" name="file" />
             <input type="submit" class="w3-btn" name="importSubmit" value="IMPORT">
         </form>

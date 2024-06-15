@@ -108,7 +108,7 @@ $con->close();
             ?>
 			<form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="off">
 				<label for="acct_type">
-					<i class="fas fa-user"></i>
+					<i class="fas fa-users-rectangle"></i>
 				</label>
 				<select name="acct_type" id="acct_type" required>
 					<option value="Admin">Admin</option>
