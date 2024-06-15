@@ -1,6 +1,6 @@
 <?php
     require_once('./require/header.php');
-    
+
 
 $pdo = pdo_connect_mysql();
 $msg = '';
@@ -21,7 +21,6 @@ if (isset($_GET['name'])) {
             $stmt = $pdo->prepare('DELETE FROM leads WHERE name = ?');
             $stmt->execute([$_GET['name']]);
             $msg = 'You have deleted the lead!';
-            sleep(3);
             header('Location: leads.php');
         } else {
             // User clicked the "No" button, redirect them back to the read page
@@ -48,4 +47,3 @@ if (isset($_GET['name'])) {
     </div>
     <?php endif; ?>
 </div>
-

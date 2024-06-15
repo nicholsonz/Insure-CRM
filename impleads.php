@@ -59,22 +59,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $created  = $line[17];
 
                 // Check whether member already exists in the database with the same email
-                $prevQuery = "SELECT * FROM leads WHERE name = '$line[0]'";
+                $prevQuery = "SELECT * FROM leads WHERE name = '$line[0]' AND acct_id = '$acct_id'";
                 $prevResult = $con->query($prevQuery);
+                $nameQry = "SELECT name FROM leads WHERE name = '$line[0]' AND acct_id = '$acct_id'";
+                $result = $con -> query($nameQry);
+                $row = $result -> fetch_array(MYSQLI_ASSOC);
 
                 if($prevResult->num_rows > 0){
-                    $file_err = "Possible duplicate lead - $name!";
+                  foreach($row as $names) {
+                    echo "<div class='alert w3-content'>Possible duplicate lead - " . $names ."!</div>";
+                  }
                     // $con->query("UPDATE leads SET name = '$name', address = '$address', city = '$city', state = '$state', zip = '$zip', county = '$county', birthdate = '$birthdate', phone = '$phone', phone_sec = '$phone_sec', email = '$email', partA_date = '$partA_date', partB_date = '$partB_date', medicare_number = '$medicare_number', policy = '$policy', insurer = '$insurer',  appstatus = '$appstatus', notes = '$notes', created = '$created'");
                 }else{
                     // Insert member data in the database
                     $con->query("INSERT INTO leads (acct_id, name, address, city, state, zip, county, birthdate, phone, phone_sec, email, partA_date, partB_date, medicare_number, policy, insurer, appstatus, notes, created) VALUES ('$acct_id', '$name', '$address', '$city', '$state', '$zip', '$county', '$birthdate', '$phone', '$phone_sec', '$email', '$partA_date', '$partB_date', '$medicare_number', '$policy', '$insurer', '$appstatus', '$notes', NOW())");
+
+                    $file_suc = "Leads imported successfully!";
                 }
             }
 
             // Close opened CSV file
             fclose($csvFile);
 
-          $file_suc = "Leads imported successfully!";
     }
   }else{
       $file_err = "Plese choose a valid file (CSV format).";
@@ -93,7 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     echo '<div class="alert">' . $file_err .'</div>';
   } elseif(!empty($file_suc)){
     echo '<div class="success">' . $file_suc .'</div>';
-  }else{
+  } else{
       echo '<div></div>';
   }
   ?>

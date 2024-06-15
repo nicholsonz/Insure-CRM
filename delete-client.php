@@ -1,6 +1,6 @@
 <?php
     require_once('./require/header.php');
-    
+
 
 $pdo = pdo_connect_mysql();
 $msg = '';
@@ -21,7 +21,6 @@ if (isset($_GET['name'])) {
             $stmt = $pdo->prepare('DELETE FROM clients WHERE name = ?');
             $stmt->execute([$_GET['name']]);
             $msg = 'The client was deleted successfully!';
-            sleep(3);
             header('Location: clients.php');
         } else {
             // User clicked the "No" button, redirect them back to the read page
