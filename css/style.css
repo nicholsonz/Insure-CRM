@@ -16,7 +16,11 @@ body {
     background-color: #f44336;
     color: white;
 }
-
+.success {
+  padding: 20px;
+  background-color: rgba(227, 100, 19, 1);
+  color: white;
+}
 .tableFixHead {
     overflow: scroll;
     height: 300px;

@@ -24,9 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
 
     // Validate whether selected file is a CSV file
-    if(empty($_FILES['file']['name'])){
-        $file_err = "Plese select a file to upload.";
-    }
+    if(!empty($_FILES['file']['name'])){
     if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $csvMimes)){
 
         // If the file is uploaded
@@ -65,8 +63,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $prevResult = $con->query($prevQuery);
 
                 if($prevResult->num_rows > 0){
-                    // Update member data in the database
-                    $con->query("UPDATE leads SET name = '$name', phone = '$phone', status = '$status', modified = NOW() WHERE email = '$email'");
+                    $file_err = "Possible duplicate lead - $name!";
+                    // $con->query("UPDATE leads SET name = '$name', address = '$address', city = '$city', state = '$state', zip = '$zip', county = '$county', birthdate = '$birthdate', phone = '$phone', phone_sec = '$phone_sec', email = '$email', partA_date = '$partA_date', partB_date = '$partB_date', medicare_number = '$medicare_number', policy = '$policy', insurer = '$insurer',  appstatus = '$appstatus', notes = '$notes', created = '$created'");
                 }else{
                     // Insert member data in the database
                     $con->query("INSERT INTO leads (acct_id, name, address, city, state, zip, county, birthdate, phone, phone_sec, email, partA_date, partB_date, medicare_number, policy, insurer, appstatus, notes, created) VALUES ('$acct_id', '$name', '$address', '$city', '$state', '$zip', '$county', '$birthdate', '$phone', '$phone_sec', '$email', '$partA_date', '$partB_date', '$medicare_number', '$policy', '$insurer', '$appstatus', '$notes', NOW())");
@@ -76,31 +74,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Close opened CSV file
             fclose($csvFile);
 
-            $file_err = "File uploaded successfully!";
-
-    }else{
-        $file_err = "Plese choose a valid file (CSV format).";
+          $file_suc = "Leads imported successfully!";
     }
+  }else{
+      $file_err = "Plese choose a valid file (CSV format).";
   }
- }
+}else{
+    $file_err = "Plese select a file to upload.";
+}
+}
 }
 ?>
 
 <?=template_header('Leads')?>
 <div class="w3-content read">
-  <div class="col-md-12" id="importFrm">
-      <?php
-      if(!empty($file_err)){
-        echo '<div class="alert">' . $file_err .'</div>';
-      } else{
-          echo '<div></div>';
-      }
-      ?>
+  <?php
+  if(!empty($file_err)){
+    echo '<div class="alert">' . $file_err .'</div>';
+  } elseif(!empty($file_suc)){
+    echo '<div class="success">' . $file_suc .'</div>';
+  }else{
+      echo '<div></div>';
+  }
+  ?>
+  <div class="w3-row">
+    <div class="w3-col l12 w3-margin w3-padding" id="importFrm">
         <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
             <input type="file" id="file" class="file-upload" name="file" />
             <input type="submit" class="w3-btn" name="importSubmit" value="IMPORT">
         </form>
     </div>
+  </div>
+  <div class="w3-row">
+    <div class="w3-col l12 w3-margin w3-padding w3-text-white">
+      <p><a href="./db/impLeads.csv" class="w3-btn w3-blue" download>Download</a> csv template file for upload.</p>
+    </div>
  </div>
+</div>
 
  <?php require_once('./require/footer.php');?>

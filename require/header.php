@@ -33,7 +33,7 @@ $pdo = pdo_connect_mysql();
       <link rel="icon" href="./favicon.ico">
 			<script src="./js/jquery-3.7.1.min.js"></script>
 			<script src="./js/chart.min.js"></script>
-			<script src="./js/alertify.min.js"></script>
+			<!-- <script src="./js/alertify.min.js"></script> -->
 		</head>
 <body>
 <?php
