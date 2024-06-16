@@ -53,6 +53,7 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
             <a href="leads.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Leads</a>
 			<a href="profile.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-user-circle w3-margin-right"></i> Profile</a>
 			<a href="./action/logout.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a>
+      <hr></hr>
 			<div class="w3-dropdown-hover">
 				<a href="" class="task-mngr w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
 				<?php
