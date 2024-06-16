@@ -529,7 +529,7 @@ a {
     display: inline-block;
     height: 45px;
     width: 250px;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .w3-dropdown-hover:hover .w3-dropdown-content {
@@ -556,9 +556,11 @@ a {
     position: absolute;
     min-width: 160px;
     max-width: 250px;
+    max-height: 320px;
+    overflow: auto;
     margin: 0;
     padding: 0;
-    z-index: 1
+    z-index: 1;
 }
 
 .w3-check,

@@ -56,13 +56,13 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
 			<div class="w3-dropdown-hover">
 				<a href="" class="task-mngr w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
 				<?php
-				$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 7 DAY) AND DATE(deadline));";
+				$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 8 DAY) AND DATE(deadline)) ORDER BY deadline ASC";
 				$res = mysqli_query($con, $sql_tasks);
 				$num_tasks = mysqli_num_rows($res);
 
 
 
-				$sql_tasks2 = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() >= DATE_ADD(DATE(deadline), INTERVAL 1 DAY))";
+				$sql_tasks2 = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() >= DATE_ADD(DATE(deadline), INTERVAL 1 DAY)) ORDER BY deadline ASC";
 				$res2 = mysqli_query($con, $sql_tasks2);
 				$num_tasks2 = mysqli_num_rows($res2);
 
