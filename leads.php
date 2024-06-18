@@ -43,7 +43,7 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
                 <th>Primary Phone</th>
                 <th>Email</th>
                 <th>Notes</th>
-                <th><a href="javascript:SortTable(5,'D','ymd h:m:s');">Created <i class="fa fa-sort"></th>
+                <th><a href="javascript:SortTable(5,'D','mdy');">Created <i class="fa fa-sort"></th>
                 <th></th>
             </tr>
         </thead>
@@ -55,12 +55,12 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
                 <td><?=$row['phone']?></td>
                 <td><?=$row['email']?></td>
                 <td><?=$row['notes']?></td>
-                <td><?=$row['created']?></td>
+                <td><?=date("m-d-Y", strtotime($row['created']));?></td>
                 <td class="actions">
-                    <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task"><i class="fas fa-tasks fa-xs"></i></a>
-                    <a href="convertlead.php?name=<?=$row['name']?>" class="convert"><i class="fas fa-archive fa-xs"></i></a>
-                    <a href="updatelead.php?name=<?=$row['name']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>
-                    <a href="delete-lead.php?name=<?=$row['name']?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
+                    <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task tooltip"><i class="fas fa-tasks fa-xs"></i><span class="tooltiptext">Schedule Task</span></a>
+                    <a href="convertlead.php?name=<?=$row['name']?>" class="convert tooltip"><i class="fas fa-archive fa-xs"></i><span class="tooltiptext">Convert Lead</span></a>
+                    <a href="updatelead.php?name=<?=$row['name']?>" class="edit tooltip"><i class="fas fa-edit fa-xs"></i><span class="tooltiptext">Edit Lead</span></a>
+                    <a href="delete-lead.php?name=<?=$row['name']?>" class="trash tooltip"><i class="fas fa-trash-alt fa-xs"></i><span class="tooltiptext">Delete Lead</span></a>
 
                 </td>
             </tr>

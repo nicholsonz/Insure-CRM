@@ -45,7 +45,7 @@ if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = '$acct_id' ORD
                     <th>Policy</th>
                     <th><a href="javascript:SortTable(4,'T');">Insurer <i class="fa fa-sort"></a></th>
                     <th>App Status</th>
-                    <th><a href="javascript:SortTable(6,'D','ymd h:m:s');">Created <i class="fa fa-sort"></a></th>
+                    <th><a href="javascript:SortTable(6,'D','mdy');">Created <i class="fa fa-sort"></a></th>
                     <th></th>
                 </tr>
             </thead>
@@ -58,12 +58,12 @@ if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = '$acct_id' ORD
                     <td><?=$row['policy']?></td>
                     <td><?=$row['insurer']?></td>
                     <td><?=$row['appstatus']?></td>
-                    <td><?=$row['created']?></td>
+                    <td><?=date("m-d-Y", strtotime($row['created']));?></td>
                     <td class="actions">
-                        <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Client";?>" class="task"><i class="fas fa-tasks fa-xs"></i></a>
-                        <a href="viewCls.php?id=<?=$row['id']?>" class="view" target="_blank"><i class="fas fa-eye fa-xs"></i></a>
-                        <a href="updateclient.php?id=<?=$row['id']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>
-                        <a href="delete-client.php?name=<?=$row['name']?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
+                        <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Client";?>" class="task tooltip"><i class="fas fa-tasks fa-xs"></i><span class="tooltiptext">Schedule Task</span></a>
+                        <a href="viewCls.php?id=<?=$row['id']?>" class="view tooltip" target="_blank"><i class="fas fa-eye fa-xs"></i><span class="tooltiptext">View Client</span></a>
+                        <a href="updateclient.php?id=<?=$row['id']?>" class="edit tooltip"><i class="fas fa-edit fa-xs"></i><span class="tooltiptext">Edit Client</span></a>
+                        <a href="delete-client.php?name=<?=$row['name']?>" class="trash tooltip"><i class="fas fa-trash-alt fa-xs"></i><span class="tooltiptext">Delete Client</span></a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
