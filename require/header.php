@@ -63,7 +63,7 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
 
 
 
-				$sql_tasks2 = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() >= DATE_ADD(DATE(deadline), INTERVAL 1 DAY)) ORDER BY deadline ASC";
+				$sql_tasks2 = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND DATE(NOW()) >= DATE(deadline) ORDER BY deadline ASC";
 				$res2 = mysqli_query($con, $sql_tasks2);
 				$num_tasks2 = mysqli_num_rows($res2);
 
