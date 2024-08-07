@@ -1,12 +1,12 @@
 // Income Line Chart
-const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; 
+const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 let clientlbls = [{monthname: "Jan",clientnum: "0"},{monthname: "Feb",clientnum: "0"},{monthname: "Mar",clientnum: "0"},
                   {monthname: "Apr",clientnum: "0"},{monthname: "May",clientnum: "0"},{monthname: "Jun",clientnum: "0"},
-                  {monthname: "July",clientnum: "0"},{monthname: "Aug",clientnum: "0"},{monthname: "Sept",clientnum: "0"},
+                  {monthname: "Jul",clientnum: "0"},{monthname: "Aug",clientnum: "0"},{monthname: "Sep",clientnum: "0"},
                   {monthname: "Oct",clientnum: "0"},{monthname: "Nov",clientnum: "0"},{monthname: "Dec",clientnum: "0"},];
 let leadlbls = [{monthname: "Jan",leadnum: "0"},{monthname: "Feb",leadnum: "0"},{monthname: "Mar",leadnum: "0"},
                   {monthname: "Apr",leadnum: "0"},{monthname: "May",leadnum: "0"},{monthname: "Jun",leadnum: "0"},
-                  {monthname: "July",leadnum: "0"},{monthname: "Aug",leadnum: "0"},{monthname: "Sept",leadnum: "0"},
+                  {monthname: "Jul",leadnum: "0"},{monthname: "Aug",leadnum: "0"},{monthname: "Sep",leadnum: "0"},
                   {monthname: "Oct",leadnum: "0"},{monthname: "Nov",leadnum: "0"},{monthname: "Dec",leadnum: "0"},];
 
   // Push properties from mnthclients to clientlbls
@@ -15,7 +15,7 @@ let leadlbls = [{monthname: "Jan",leadnum: "0"},{monthname: "Feb",leadnum: "0"},
         clientlbls.push(clientnum)
       }
   }
- // Remove duplicate monthnames from clientlbls       
+ // Remove duplicate monthnames from clientlbls
  function getUniqueListBy(clientlbls, key) {
   return [...new Map(clientlbls.map(item => [item[key], item])).values()]
 }
@@ -27,7 +27,7 @@ if (! leadlbls.includes(mnthleads)) {
       leadlbls.push(leadnum)
     }
 }
-// Remove duplicate monthnames from leadlbls       
+// Remove duplicate monthnames from leadlbls
 function getUniqueListBy(leadlbls, key) {
 return [...new Map(leadlbls.map(item => [item[key], item])).values()]
 }
@@ -36,11 +36,11 @@ const leadlblsnew = getUniqueListBy(leadlbls, 'monthname');
 // Remove key "monthname:" from clientlblsnew
 for (var i = 0, len = clientlblsnew.length; i < len; i++) {
   delete clientlblsnew[i].monthname;
-}    
+}
 // Remove key "monthname:" from clientlblsnew
 for (var i = 0, len = leadlblsnew.length; i < len; i++) {
     delete leadlblsnew[i].monthname;
-  }           
+  }
 // Dump object array into cllbls array and feed it to chartjs
 let cllbls = [];
   for (i of clientlblsnew) {
@@ -111,7 +111,7 @@ new Chart(document.getElementById("activityChart"), {
           },
           grid: {
             display: false,
-            color: "rgba(128,128,128,0.2)"  
+            color: "rgba(128,128,128,0.2)"
             }
           }
       },
