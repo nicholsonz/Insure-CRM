@@ -26,7 +26,7 @@
             //Get the Individual Value
             $task_name = $row['task_name'];
             $name = $row['name'];
-            $task_description = $row['task_description'];
+            $details = $row['details'];
             $list_id = $row['list_id'];
             $priority = $row['priority'];
             $deadline = $row['deadline'];
@@ -48,7 +48,7 @@
         //Get the values from Form
         $task_name = htmlspecialchars($_POST['task_name']);
         $name = htmlspecialchars($_POST['name']);
-        $task_description = htmlspecialchars($_POST['task_description']);
+        $details = htmlspecialchars($_POST['details']);
         $list_id = htmlspecialchars($_POST['list_id']);
         $priority = htmlspecialchars($_POST['priority']);
         $deadline = htmlspecialchars($_POST['deadline']);
@@ -61,7 +61,7 @@
         $sql3 = "UPDATE tasks SET
                 task_name = '$task_name',
                 name = '$name',
-                task_description = '$task_description',
+                details = '$details',
                 list_id = '$list_id',
                 priority = '$priority',
                 deadline = '$deadline',
@@ -131,7 +131,7 @@
 
                     <tr>
                         <td>Task Description: </td>
-                        <td><textarea  type="text" name="task_description"><?=$task_description; ?></textarea></td>
+                        <td><textarea  type="text" name="details"><?=$details; ?></textarea></td>
                     </tr>
 
                     <tr>
@@ -217,7 +217,7 @@
                       <td>
                         <br />
                       </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td><input class="w3-button" type="submit" name="submit" value="UPDATE" /></td>
                         <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>

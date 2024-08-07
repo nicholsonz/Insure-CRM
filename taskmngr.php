@@ -92,7 +92,7 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
                 <?php else: ?>
                     <td><a href="./updateclient.php?name=<?= $row['name']; ?>"><?= $row['name'] ?></a></td>
                 <?php endif; ?>
-                <td><?= $row['task_description'] ?></td>
+                <td><?= $row['details'] ?></td>
                 <td><?= $row['list_name'] ?></td>
                 <td><?= $row['priority'] ?></td>
                 <td><?= $row['deadline'] ?></td>

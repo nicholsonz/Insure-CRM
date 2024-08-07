@@ -24,7 +24,7 @@ if(isset($_POST['submit']))
     //Get all the Values from Form
     $task_name = htmlspecialchars($_POST['task_name']);
     $name = htmlspecialchars($_POST['name']);
-    $task_description = htmlspecialchars($_POST['task_description']);
+    $details = htmlspecialchars($_POST['details']);
     $list_id = htmlspecialchars($_POST['list_id']);
     $priority = htmlspecialchars($_POST['priority']);
     $deadline = htmlspecialchars($_POST['deadline']);
@@ -41,7 +41,7 @@ if(isset($_POST['submit']))
         acct_id = '$acct_id',
         task_name = '$task_name',
         name = '$name',
-        task_description = '$task_description',
+        details = '$details',
         list_id = $list_id,
         priority = '$priority',
         deadline = '$deadline',
@@ -110,7 +110,7 @@ if(isset($_POST['submit']))
 
                 <tr>
                     <td>Task Description: </td>
-                    <td><textarea type="text" name="task_description" placeholder="Type Task Description"></textarea></td>
+                    <td><textarea type="text" name="details" placeholder="Type Task Description"></textarea></td>
                 </tr>
 
                 <tr>

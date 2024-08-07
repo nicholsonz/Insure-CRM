@@ -166,8 +166,6 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
         <td><label>Status</label>
                 <select id="appstatus" name="appstatus">
                     <option value="Status" disabled selected>Status</option>
-                    <option value="Active Lead" <?php if($client["appstatus"] == "Active Lead"){ echo "selected"; } ?>>Active Lead</option>
-                    <option value="Lost Lead" <?php if($client["appstatus"] == "Lost Lead"){ echo "selected"; } ?>>Lost Lead</option>
                     <option value="Enrolled" <?php if($client["appstatus"] == "Enrolled"){ echo "selected"; } ?>>Enrolled</option>
                     <option value="Pending" <?php if($client["appstatus"] == "Pending"){ echo "selected"; } ?>>Pending</option>
                     <option value="Accepted" <?php if($client["appstatus"] == "Accepted"){ echo "selected"; } ?>>Accepted</option>
