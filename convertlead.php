@@ -1,6 +1,6 @@
 <?php
     require_once('./require/header.php');
-    
+
 $pdo = pdo_connect_mysql();
 $msg = '';
 
@@ -18,8 +18,8 @@ if (isset($_GET['name'])) {
     if (isset($_GET['confirm'])) {
         if ($_GET['confirm'] == 'yes') {
             // User clicked the "Yes" button, convert record
-            $stmt = $pdo->prepare('INSERT INTO clients (name, address, city, state, zip, county, birthdate, phone, phone_sec, email, partA_date, partB_date, medicare_number, policy, insurer, appstatus, notes, created)
-                                   SELECT * FROM leads WHERE name = ?');
+            $stmt = $pdo->prepare('INSERT INTO clients (acct_id, name, address, city, state, zip, county, birthdate, phone, phone_sec, email, partA_date, partB_date, medicare_number, policy, insurer, appstatus, notes, created)
+                                   SELECT acct_id, name, address, city, state, zip, county, birthdate, phone, phone_sec, email, partA_date, partB_date, medicare_number, policy, insurer, appstatus, notes, created FROM leads WHERE name = ?');
             $stmt->execute([$_GET['name']]);
             $updstmt = $pdo->prepare('UPDATE `clients` SET created = current_timestamp WHERE name = ?');
             $updstmt->execute([$_GET['name']]);
@@ -49,7 +49,7 @@ if (isset($_GET['name'])) {
         <p>Are you sure you want to convert the lead <?= $lead['name']?>?</p>
         <div class="yesno">
             <a href="convertlead.php?name=<?= $lead['name']?>&confirm=yes">Yes</a>
-            <a href="convertlead.php?name=<?= $lead['name']?>&confirm=no">No</a>                
+            <a href="convertlead.php?name=<?= $lead['name']?>&confirm=no">No</a>
         </div>
     <?php endif; ?>
     </div>
