@@ -139,8 +139,6 @@ if (!empty($_POST)) {
                 <label>Status</label>
                     <select id="appstatus" name="appstatus">
                         <option value="Status" disabled selected>Status</option>
-                        <option value="Active Lead">Active Lead</option>
-                        <option value="Lost Lead">Lost Lead</option>
                         <option value="Enrolled">Enrolled</option>
                         <option value="Pending">Pending</option>
                         <option value="Accepted">Accepted</option>
