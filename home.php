@@ -18,6 +18,7 @@
 <?=template_header('Home')?>
 
 <div class="content w3-padding w3-mobile">
+  <h1><?= date("l - F d Y");?></h1>
   <table class="w3-table w3-striped w3-custom-blue">
     <tr>
       <?php
