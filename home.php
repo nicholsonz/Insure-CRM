@@ -16,21 +16,23 @@
 ?>
 
 <?=template_header('Home')?>
+<div class="content w3-padding">
+<table class="w3-table w3-striped w3-custom-blue">
+  <tr>
+    <?php
+      $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients WHERE acct_id = '$acct_id' GROUP BY policy";
+      $result = mysqli_query($con, $sqlpol);
 
+      while($row = mysqli_fetch_assoc($result)){
+        echo  "<td>".$row['policy']. "&nbsp; - " .$row['counted']. "</td>";
+      }?>
+   </tr>
+ </table>
+</div>
 <div class="content w3-padding w3-mobile">
-  <h1><?= date("l - F d Y");?></h1>
-  <table class="w3-table w3-striped w3-custom-blue">
-    <tr>
-      <?php
-        $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients WHERE acct_id = '$acct_id' GROUP BY policy";
-        $result = mysqli_query($con, $sqlpol);
+  <!-- <h1><?= date("l - F d Y");?></h1> -->
 
-        while($row = mysqli_fetch_assoc($result)){
-          echo  "<td>".$row['policy']. "&nbsp; - " .$row['counted']. "</td>";
-        }?>
-     </tr>
-   </table>
-   		<div class="w3-col s12 m3 l3 w3-margin w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
+   		<div class="w3-col s12 m3 l3 w3-margin w3-border w3-round w3-border-blue w3-pannel w3-card-4">
 			<h2><?php echo date('F'); ?> Activity</h2>
       <br />
 			<?php
@@ -63,7 +65,7 @@
 				</tr>
 			</table>
     </div>
-		<div class="w3-col s12 m3 l3 w3-margin w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
+		<div class="w3-col s12 m3 l3 w3-margin w3-border w3-round w3-border-blue w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
       <br />
 			<?php
@@ -109,7 +111,7 @@
   			$daysInMonth = cal_days_in_month(0, $numMonth, $numYear);
   			$dayOfWeek = date('w', $firstDay);
   		?>
-		<div class="w3-col s12 m5 l5 w3-margin w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
+		<div class="w3-col s12 m5 l5 w3-margin w3-border w3-round w3-border-blue w3-pannel w3-card-4">
       <h2><?php echo($mnthyr); ?></h2>
 			<table class="w3-centered cal-table">
 				<thead>
@@ -399,7 +401,7 @@
 			</div>
 		</div>
 
-		<div class="w3-col s12 m6-6 l6-6 w3-margin w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
+		<div class="w3-col s12 m6-6 l6-6 w3-margin w3-border w3-round w3-border-blue w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
 				$pdo = pdo_connect_mysql();
