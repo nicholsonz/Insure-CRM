@@ -17,9 +17,18 @@
 
 <?=template_header('Home')?>
 
-<div class="content w3-mobile">
- 	<h1><?php echo date('M d, Y') . "&nbsp;" . date('   g:i a');?></h1>
-  <hr></hr>
+<div class="content w3-padding w3-mobile">
+  <table class="w3-table w3-striped w3-custom-blue">
+    <tr>
+      <?php
+        $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients WHERE acct_id = '$acct_id' GROUP BY policy";
+        $result = mysqli_query($con, $sqlpol);
+
+        while($row = mysqli_fetch_assoc($result)){
+          echo  "<td>".$row['policy']. "&nbsp; - " .$row['counted']. "</td>";
+        }?>
+     </tr>
+   </table>
    		<div class="w3-col s12 m3 l3 w3-margin w3-padding w3-border w3-round w3-border-blue w3-pannel w3-card-4">
 			<h2><?php echo date('F'); ?> Activity</h2>
       <br />
