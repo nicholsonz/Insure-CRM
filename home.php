@@ -16,7 +16,7 @@
 ?>
 
 <?=template_header('Home')?>
-<div class="content w3-padding">
+<div class="content w3-padding w3-mobile">
 <table class="w3-table w3-striped w3-custom-blue">
   <tr>
     <?php
@@ -143,264 +143,6 @@
 			</tbody>
 			</table>
 		</div>
-		<div class="w3-col s12 m5 l5 w3-margin">
-		<button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-padding"><h3>Tasks | &nbsp;Clients <?= number_format($clients);?></h3></button>
-			<div id="show" class="read w3-hide">
-				<div class="tableFixHead">
-				<table class="w3-table w3-hoverable">
-				<thead>
-					<tr>
-					<!-- <th>#</th> -->
-					<th>Task</th>
-					<th>Client</th>
-					<th>Priority</th>
-					<th>Deadline</th>
-					</tr>
-				</thead>
-					<?php
-
-					//Select Database
-					$db_select = mysqli_select_db($con, DB_NAME) or die();
-
-					//Create SQL Query to Get Data from Databse
-						$stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
-							FROM tasks AS t
-							LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-							WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
-							ORDER BY deadline");
-						$stmt->execute();
-
-						// Fetch the records so we can display them in our template.
-						$clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
-						// Get the total number of clients, this is so we can determine whether there should be a next and previous button
-						$num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
-						LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-						WHERE t.acct_id = '$acct_id' AND t.type = 'Client'")->fetchColumn();
-
-						//Create SQL Query to Get DAta from Databse
-						$sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
-						FROM tasks AS t
-						LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-						WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
-						ORDER BY deadline"
-						;
-						//Execute Query
-						$res = mysqli_query($con, $sql);
-
-						//CHeck whether the query execueted o rnot
-						if($res==true)
-						{
-						//DIsplay the Tasks from DAtabase
-						//Count the Tasks on Database first
-						$count_clients = mysqli_num_rows($res);
-
-						//Create Serial Number Variable
-						$sn=1;
-
-						//Check whether there is task on database or not
-						if($count_clients>0)
-						{
-
-						?>
-						<tbody id="tblSrch">
-						<?php foreach ($clients as $client): ?>
-						<tr>
-						<!-- <td><?php echo $sn++; ?></td> -->
-						<td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['task_name'];?></a></td>
-						<td><a href="./updatelead.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
-						<td><?= $client['priority']; ?></td>
-						<td><?= $client['deadline']; ?></td>
-						</tr>
-						<?php endforeach; ?>
-						<?php
-
-							}
-							else
-							{
-							//No data in Database
-						?>
-						<tr>
-						<td colspan="5">No tasks ...</td>
-						</tr>
-						<?php
-							}
-						}
-
-					?>
-				</table>
-				</div>
-			</div>
-			<button id="showhide2" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | &nbsp;Leads <?= number_format($leads);?></h3></button>
-			<div id="show2" class="read w3-hide">
-			<div class="tableFixHead">
-				<table class="w3-table" id="srtTable">
-				<thead>
-					<tr>
-					<!-- <th>#</th> -->
-					<th>Task</th>
-					<th>Lead</th>
-					<th>Priority</th>
-					<th>Deadline</th>
-					</tr>
-				</thead>
-					<?php
-						// Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
-						$stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
-												FROM tasks AS t
-												LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-												WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
-												ORDER BY deadline");
-						$stmt->execute();
-						// Fetch the records so we can display them in our template.
-						$leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
-						// Get the total number of clients, this is so we can determine whether there should be a next and previous button
-						$num_leads = $pdo->query("SELECT COUNT(*) FROM tasks AS t
-						LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-						WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'")->fetchColumn();
-
-					//Select Database
-					$db_select = mysqli_select_db($con, DB_NAME) or die();
-
-					//Create SQL Query to Get DAta from Databse
-					$sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
-							FROM tasks AS t
-							LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-							WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
-							ORDER BY deadline";
-
-
-					//Execute Query
-					$res = mysqli_query($con, $sql);
-
-					//Check whether the query execueted or not
-						if($res==true)
-						{
-						//DIsplay the Tasks from DAtabase
-						//Count the Tasks on Database first
-						$count_leads = mysqli_num_rows($res);
-
-						//Create Serial Number Variable
-						$sn=1;
-
-						//Check whether there is task on database or not
-						if($count_leads>0)
-						{
-
-					?>
-				<tbody id="tblSrch">
-					<?php foreach ($leads as $lead): ?>
-					<tr>
-					<!-- <td><?php echo $sn++; ?></td> -->
-					<td><a href="./update-task.php?task_id=<?= $lead['task_id']; ?>"><?= $lead['task_name'];?></a></td>
-					<td><a href="./updatelead.php?name=<?= $lead['name']; ?>"><?= $lead['name']; ?></a></td>
-					<td><?= $lead['priority']; ?></td>
-					<td><?= $lead['deadline']; ?></td>
-					</tr>
-					<?php endforeach; ?>
-					<?php
-
-						}
-						else
-						{
-						//No data in Database
-					?>
-					<tr>
-					<td colspan="5">No tasks ...</td>
-					</tr>
-					<?php
-							}
-						}
-
-					?>
-				</table>
-				</div>
-			</div>
-			<button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-right w3-padding"><h3>Tasks | &nbsp;Other <?= number_format($other);?></h3></button>
-			<div id="show3" class="read w3-hide">
-				<div class="tableFixHead">
-				<table class="w3-table w3-hoverable">
-				<thead>
-					<tr>
-					<!-- <th>#</th> -->
-					<th>Task</th>
-					<th>Name</th>
-					<th>Priority</th>
-					<th>Deadline</th>
-					</tr>
-				</thead>
-					<?php
-
-					//Select Database
-					$db_select = mysqli_select_db($con, DB_NAME) or die();
-
-					//Create SQL Query to Get DAta from Databse
-					$sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
-							FROM tasks AS t
-							LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-							WHERE t.acct_id = '$acct_id' AND t.type = 'Other'
-							ORDER BY deadline";
-
-
-					//Execute Query
-					$res = mysqli_query($con, $sql);
-
-					//CHeck whether the query execueted o rnot
-						if($res==true)
-						{
-						//DIsplay the Tasks from DAtabase
-						//Dount the Tasks on Database first
-						$count_other = mysqli_num_rows($res);
-
-						//Create Serial Number Variable
-						$sn=1;
-
-						//Check whether there is task on database or not
-						if($count_other>0)
-						{
-						//Data is in Database
-							while($row=mysqli_fetch_assoc($res))
-							{
-							$task_id = $row['task_id'];
-							$task_name = $row['task_name'];
-							$name = $row['name'];
-							$priority = $row['priority'];
-							// $list_name = $row['list_name'];
-							$deadline = $row['deadline'];
-
-
-							$sql2 = "SELECT name FROM clients WHERE name LIKE '$name%'";
-							$result = mysqli_query($con, $sql2);
-							while($row=mysqli_fetch_assoc($result)){
-								$name = $row['name'];
-							}
-					?>
-					<tr>
-					<!-- <td><?php echo $sn++; ?></td> -->
-					<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name;?></a></td>
-					<td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $name; ?></a></td>
-					<td><?php echo $priority; ?></td>
-					<td><?php echo $deadline; ?></td>
-					</tr>
-					<?php
-							}
-						}
-						else
-						{
-						//No data in Database
-					?>
-					<tr>
-					<td colspan="5">No tasks ...</td>
-					</tr>
-					<?php
-							}
-						}
-
-					?>
-				</table>
-				</div>
-			</div>
-		</div>
-
 		<div class="w3-col s12 m6-6 l6-6 w3-margin w3-border w3-round w3-border-blue w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
@@ -411,6 +153,264 @@
 
 			<canvas id="activityChart" class="chart-style"></canvas>
 		</div>
+    <div class="w3-col s12 m5 l5 w3-margin">
+    <button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-padding"><h3>Tasks | &nbsp;Clients <?= number_format($clients);?></h3></button>
+      <div id="show" class="read w3-hide">
+        <div class="tableFixHead">
+        <table class="w3-table w3-hoverable">
+        <thead>
+          <tr>
+          <!-- <th>#</th> -->
+          <th>Task</th>
+          <th>Client</th>
+          <th>Priority</th>
+          <th>Deadline</th>
+          </tr>
+        </thead>
+          <?php
+
+          //Select Database
+          $db_select = mysqli_select_db($con, DB_NAME) or die();
+
+          //Create SQL Query to Get Data from Databse
+            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
+              FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
+              ORDER BY deadline");
+            $stmt->execute();
+
+            // Fetch the records so we can display them in our template.
+            $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // Get the total number of clients, this is so we can determine whether there should be a next and previous button
+            $num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
+            LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+            WHERE t.acct_id = '$acct_id' AND t.type = 'Client'")->fetchColumn();
+
+            //Create SQL Query to Get DAta from Databse
+            $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
+            FROM tasks AS t
+            LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+            WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
+            ORDER BY deadline"
+            ;
+            //Execute Query
+            $res = mysqli_query($con, $sql);
+
+            //CHeck whether the query execueted o rnot
+            if($res==true)
+            {
+            //DIsplay the Tasks from DAtabase
+            //Count the Tasks on Database first
+            $count_clients = mysqli_num_rows($res);
+
+            //Create Serial Number Variable
+            $sn=1;
+
+            //Check whether there is task on database or not
+            if($count_clients>0)
+            {
+
+            ?>
+            <tbody id="tblSrch">
+            <?php foreach ($clients as $client): ?>
+            <tr>
+            <!-- <td><?php echo $sn++; ?></td> -->
+            <td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['task_name'];?></a></td>
+            <td><a href="./updatelead.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
+            <td><?= $client['priority']; ?></td>
+            <td><?= $client['deadline']; ?></td>
+            </tr>
+            <?php endforeach; ?>
+            <?php
+
+              }
+              else
+              {
+              //No data in Database
+            ?>
+            <tr>
+            <td colspan="5">No tasks ...</td>
+            </tr>
+            <?php
+              }
+            }
+
+          ?>
+        </table>
+        </div>
+      </div>
+      <button id="showhide2" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | &nbsp;Leads <?= number_format($leads);?></h3></button>
+      <div id="show2" class="read w3-hide">
+      <div class="tableFixHead">
+        <table class="w3-table" id="srtTable">
+        <thead>
+          <tr>
+          <!-- <th>#</th> -->
+          <th>Task</th>
+          <th>Lead</th>
+          <th>Priority</th>
+          <th>Deadline</th>
+          </tr>
+        </thead>
+          <?php
+            // Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
+            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
+                        FROM tasks AS t
+                        LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+                        WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
+                        ORDER BY deadline");
+            $stmt->execute();
+            // Fetch the records so we can display them in our template.
+            $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // Get the total number of clients, this is so we can determine whether there should be a next and previous button
+            $num_leads = $pdo->query("SELECT COUNT(*) FROM tasks AS t
+            LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+            WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'")->fetchColumn();
+
+          //Select Database
+          $db_select = mysqli_select_db($con, DB_NAME) or die();
+
+          //Create SQL Query to Get DAta from Databse
+          $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
+              FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
+              ORDER BY deadline";
+
+
+          //Execute Query
+          $res = mysqli_query($con, $sql);
+
+          //Check whether the query execueted or not
+            if($res==true)
+            {
+            //DIsplay the Tasks from DAtabase
+            //Count the Tasks on Database first
+            $count_leads = mysqli_num_rows($res);
+
+            //Create Serial Number Variable
+            $sn=1;
+
+            //Check whether there is task on database or not
+            if($count_leads>0)
+            {
+
+          ?>
+        <tbody id="tblSrch">
+          <?php foreach ($leads as $lead): ?>
+          <tr>
+          <!-- <td><?php echo $sn++; ?></td> -->
+          <td><a href="./update-task.php?task_id=<?= $lead['task_id']; ?>"><?= $lead['task_name'];?></a></td>
+          <td><a href="./updatelead.php?name=<?= $lead['name']; ?>"><?= $lead['name']; ?></a></td>
+          <td><?= $lead['priority']; ?></td>
+          <td><?= $lead['deadline']; ?></td>
+          </tr>
+          <?php endforeach; ?>
+          <?php
+
+            }
+            else
+            {
+            //No data in Database
+          ?>
+          <tr>
+          <td colspan="5">No tasks ...</td>
+          </tr>
+          <?php
+              }
+            }
+
+          ?>
+        </table>
+        </div>
+      </div>
+      <button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-right w3-padding"><h3>Tasks | &nbsp;Other <?= number_format($other);?></h3></button>
+      <div id="show3" class="read w3-hide">
+        <div class="tableFixHead">
+        <table class="w3-table w3-hoverable">
+        <thead>
+          <tr>
+          <!-- <th>#</th> -->
+          <th>Task</th>
+          <th>Name</th>
+          <th>Priority</th>
+          <th>Deadline</th>
+          </tr>
+        </thead>
+          <?php
+
+          //Select Database
+          $db_select = mysqli_select_db($con, DB_NAME) or die();
+
+          //Create SQL Query to Get DAta from Databse
+          $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
+              FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.acct_id = '$acct_id' AND t.type = 'Other'
+              ORDER BY deadline";
+
+
+          //Execute Query
+          $res = mysqli_query($con, $sql);
+
+          //CHeck whether the query execueted o rnot
+            if($res==true)
+            {
+            //DIsplay the Tasks from DAtabase
+            //Dount the Tasks on Database first
+            $count_other = mysqli_num_rows($res);
+
+            //Create Serial Number Variable
+            $sn=1;
+
+            //Check whether there is task on database or not
+            if($count_other>0)
+            {
+            //Data is in Database
+              while($row=mysqli_fetch_assoc($res))
+              {
+              $task_id = $row['task_id'];
+              $task_name = $row['task_name'];
+              $name = $row['name'];
+              $priority = $row['priority'];
+              // $list_name = $row['list_name'];
+              $deadline = $row['deadline'];
+
+
+              $sql2 = "SELECT name FROM clients WHERE name LIKE '$name%'";
+              $result = mysqli_query($con, $sql2);
+              while($row=mysqli_fetch_assoc($result)){
+                $name = $row['name'];
+              }
+          ?>
+          <tr>
+          <!-- <td><?php echo $sn++; ?></td> -->
+          <td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name;?></a></td>
+          <td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $name; ?></a></td>
+          <td><?php echo $priority; ?></td>
+          <td><?php echo $deadline; ?></td>
+          </tr>
+          <?php
+              }
+            }
+            else
+            {
+            //No data in Database
+          ?>
+          <tr>
+          <td colspan="5">No tasks ...</td>
+          </tr>
+          <?php
+              }
+            }
+
+          ?>
+        </table>
+        </div>
+      </div>
+    </div>
+
 	</div>
 
 <script type="text/javascript">
