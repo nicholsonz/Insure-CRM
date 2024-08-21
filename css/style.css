@@ -93,7 +93,6 @@ body {
 }
 .cal-table {
     width: 100%;
-    padding: inherit;
     align-content: center;
 }
 .tallbox {
@@ -275,10 +274,9 @@ tr {
 
 .content h3 {
     margin: 0;
-    padding: 5px 0;
+    padding: 10px 0;
     font-size: 18px;
     color: #6ec9ec;
-    text-align: left;
 }
 
 .content h5 {
@@ -319,7 +317,7 @@ tr {
 
 .content h2 {
     margin: 0;
-    padding: 25px 0;
+    padding: 5px 0;
     font-size: 22px;
     color: #0777ac;
 }
