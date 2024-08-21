@@ -96,7 +96,7 @@ if(isset($_POST['submit']))
                 }
             ?>
 
-        <form method="POST" action="">
+        <form method="POST" action="add-task.php">
 
             <table>
                 <tr>
@@ -104,8 +104,8 @@ if(isset($_POST['submit']))
                     <td><input type="text" name="task_name" placeholder="Task Name" required="required" value="<?= $task_name;?>"/></td>
                 </tr>
                 <tr>
-                    <td>Name: </td>
-                    <td><input type="text" name="name" placeholder="Name" value="<?= $name;?>"/></td>
+                    <td>Lead/Client: </td>
+                    <td><input type="text" name="name" placeholder="Lead/Client/Other" value="<?= $name;?>"/></td>
                 </tr>
 
                 <tr>

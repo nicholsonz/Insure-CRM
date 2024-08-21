@@ -125,7 +125,7 @@
                         <td><input type="text" name="task_name" value="<?php echo $task_name; ?>" required="required" /></td>
                     </tr>
                     <tr>
-                        <td>Name: </td>
+                        <td>Lead/Client: </td>
                         <td><input type="text" name="name" value="<?php echo $name; ?>" /></td>
                     </tr>
 

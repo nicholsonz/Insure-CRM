@@ -217,7 +217,7 @@
             <tr>
             <!-- <td><?php echo $sn++; ?></td> -->
             <td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['task_name'];?></a></td>
-            <td><a href="./updatelead.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
+            <td><a href="./updateclient.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
             <td><?= $client['priority']; ?></td>
             <td><?= $client['deadline']; ?></td>
             </tr>
