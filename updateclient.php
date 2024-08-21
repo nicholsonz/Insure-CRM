@@ -188,7 +188,7 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
                 <input type="submit" value="Update">
             </td>
             <td>
-                <a href="./clients.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
+                <a href="./clients.php" class="w3-button w3-orange w3-hover-amber">Cancel</a>
             </td>
         </tr>
      </table>

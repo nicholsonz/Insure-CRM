@@ -173,7 +173,7 @@ if (isset($_GET['name'])) {
                 <input type="submit" value="Update">
             </td>
             <td>
-                <a href="./leads.php"><button class="w3-button w3-orange w3-hover-amber">Cancel</button></a>
+                <a href="./leads.php" class="w3-button w3-orange w3-hover-amber">Cancel</a>
             </td>
         </tr>
       </table>
