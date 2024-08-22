@@ -53,8 +53,8 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
                         <td><a href="./update-list.php?list_id=<?= $row['list_id']; ?>"><?= $row['list_name'] ?></a></td>
                         <td><?= $row['list_description'] ?></td>
                         <td class="actions">
-                          <a href="./update-list.php?list_id=<?= $row['list_id'] ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>
-                          <button type="button" value="<?=$row['list_id'];?>" class="delList trash fas fa-trash fa-xs"></button>
+                          <a href="./update-list.php?list_id=<?= $row['list_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a>
+                          <button type="button" value="<?=$row['list_id'];?>" class="w3-btn delList trash"><i class="fas fa-trash-alt fa-xs"></i></button>
 
                         </td>
                     </tr>

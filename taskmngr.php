@@ -71,8 +71,8 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
                 <td><?= $row['deadline'] ?></td>
                 <td><?= $row['type'] ?></td>
                 <td class="actions">
-                    <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>
-                    <button type="button" value="<?=$row['task_id'];?>" class="delTask trash fas fa-trash fa-xs"></button>
+                    <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a>
+                    <button type="button" value="<?=$row['task_id'];?>" class="w3-btn delTask trash"><i class="fas fa-trash fa-xs"></i></button>
 
                 </td>
             </tr>
