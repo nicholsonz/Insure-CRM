@@ -38,36 +38,9 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
         <a href="./manage-list.php">Manage Lists</a>
     </div>
      <div class="">
-        <?php
-
-            if(isset($_SESSION['add']))
-            {
-                echo $_SESSION['add'];
-                unset($_SESSION['add']);
-            }
-
-            if(isset($_SESSION['delete']))
-            {
-                echo $_SESSION['delete'];
-                unset($_SESSION['delete']);
-            }
-
-            if(isset($_SESSION['update']))
-            {
-                echo $_SESSION['update'];
-                unset($_SESSION['update']);
-            }
-
-
-            if(isset($_SESSION['delete_fail']))
-            {
-                echo $_SESSION['delete_fail'];
-                unset($_SESSION['delete_fail']);
-            }
-
-        ?>
     </div>
         <a href="./add-task.php" class="add-task">Add Task</a>
+      <div id="taskTable">
         <div class="table-viewer tableFixHead">
         <table class="w3-table w3-hoverable" id="srtTable">
          <thead>
@@ -99,7 +72,7 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
                 <td><?= $row['type'] ?></td>
                 <td class="actions">
                     <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>
-                    <a href="./delete-task.php?task_id=<?= $row['task_id'] ?>" class="trash"><i class="fas fa-trash-alt fa-xs"></i></a>
+                    <button type="button" value="<?=$row['task_id'];?>" class="delTask trash fas fa-trash fa-xs"></button>
 
                 </td>
             </tr>
@@ -108,7 +81,8 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
         </tbody>
 
         </table>
-                </div>
+        </div>
+      </div>
 <!-- Pagination
      <?php if (ceil($total_pages / $records_per_page) > 0): ?>
         <ul class="pagination">

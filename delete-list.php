@@ -1,35 +1,36 @@
-<?php 
-    require_once('./require/header.php');
-    
+<?php
+
+    include('./include/dbconfig.php');
+
     //echo "Delete List Page";
-    
+
     //Check whether the list_id is assigned or not
-    
+
     if(isset($_GET['list_id']))
     {
         //Delete the List from database
-        
+
         //Get the list_id value from URL or Get Method
         $list_id = $_GET['list_id'];
-        
+
         //Connect the DAtabase
         $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
-        
+
         //SElect Database
         $db_select = mysqli_select_db($conn, DB_NAME) or die();
-        
+
         //Write the Query to DELETE List from DAtabase
         $sql = "DELETE FROM task_lists WHERE list_id=$list_id";
-        
+
         //Execute The Query
         $res = mysqli_query($conn, $sql);
-        
+
         //Check whether the query executed successfully or not
         if($res==true)
         {
             //Query Executed Successfully which means list is deleted successfully
             $_SESSION['delete'] = "List Deleted Successfully";
-            
+
             //Redirect to Manage List Page
             header('location: ./manage-list.php');
         }
@@ -45,9 +46,9 @@
         //Redirect to Manage List Page
         header('location: ./manage-list.php');
     }
-    
 
-    
-    
-    
+
+
+
+
 ?>
