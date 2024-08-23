@@ -31,43 +31,43 @@ if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = '$acct_id' ORD
 	<h1>CLIENTS</h1>
   <hr></hr>
     <div class="">
-        <a href="./createclient.php" class="create-contact">Create Client</a>
-        <div class="w3-right w3-padding">
-            <input id="tableSrch" type="text" placeholder="Filter..">
-        </div>
-        <div class="table-viewer tableFixHead">
-        <table class="w3-table w3-hoverable" id="srtTable">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th><a href="javascript:SortTable(1,'D','ymd');">Birth Date <i class="fa fa-sort"></a></th>
-                    <th>Primary Phone</th>
-                    <th>Policy</th>
-                    <th><a href="javascript:SortTable(4,'T');">Insurer <i class="fa fa-sort"></a></th>
-                    <th>App Status</th>
-                    <th><a href="javascript:SortTable(6,'D','mdy');">Created <i class="fa fa-sort"></a></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="tblSrch">
-                <?php while ($row = $result->FETCH_ASSOC()): ?>
-                <tr>
-                    <td><a href="./viewCls.php?id=<?=$row['id']; ?>" target="_blank"><?=$row['name']?></a></td>
-                    <td><?=$row['birthdate']?></td>
-                    <td><?=$row['phone']?></td>
-                    <td><?=$row['policy']?></td>
-                    <td><?=$row['insurer']?></td>
-                    <td><?=$row['appstatus']?></td>
-                    <td><?=date("m-d-Y", strtotime($row['created']));?></td>
-                    <td class="actions">
-                        <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Client";?>" class="task tooltip"><i class="fas fa-tasks fa-xs"></i><span class="tooltiptext">Schedule Task</span></a>
-                        <a href="viewCls.php?id=<?=$row['id']?>" class="view tooltip" target="_blank"><i class="fas fa-eye fa-xs"></i><span class="tooltiptext">View Client</span></a>
-                        <a href="updateclient.php?id=<?=$row['id']?>" class="edit tooltip"><i class="fas fa-edit fa-xs"></i><span class="tooltiptext">Edit Client</span></a>
-                        <a href="delete-client.php?name=<?=$row['name']?>" class="trash tooltip"><i class="fas fa-trash-alt fa-xs"></i><span class="tooltiptext">Delete Client</span></a>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
+      <a href="./createclient.php" class="create-contact">Create Client</a>
+      <div class="w3-right w3-padding">
+          <input id="tableSrch" type="text" placeholder="Filter..">
+      </div>
+      <div class="table-viewer tableFixHead" id="clientTable">
+      <table class="w3-table w3-hoverable" id="srtTable">
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th><a href="javascript:SortTable(1,'D','ymd');">Birth Date <i class="fa fa-sort"></a></th>
+                  <th>Primary Phone</th>
+                  <th>Policy</th>
+                  <th><a href="javascript:SortTable(4,'T');">Insurer <i class="fa fa-sort"></a></th>
+                  <th>App Status</th>
+                  <th><a href="javascript:SortTable(6,'D','mdy');">Created <i class="fa fa-sort"></a></th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody id="tblSrch">
+              <?php while ($row = $result->FETCH_ASSOC()): ?>
+              <tr>
+                  <td><a href="./viewCls.php?id=<?=$row['id']; ?>" target="_blank"><?=$row['name']?></a></td>
+                  <td><?=$row['birthdate']?></td>
+                  <td><?=$row['phone']?></td>
+                  <td><?=$row['policy']?></td>
+                  <td><?=$row['insurer']?></td>
+                  <td><?=$row['appstatus']?></td>
+                  <td><?=date("m-d-Y", strtotime($row['created']));?></td>
+                  <td class="actions">
+                      <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Client";?>" class="task tooltip"><i class="fas fa-tasks fa-xs"></i><span class="tooltiptext">Schedule Task</span></a>
+                      <a href="viewCls.php?id=<?=$row['id']?>" class="view tooltip" target="_blank"><i class="fas fa-eye fa-xs"></i><span class="tooltiptext">View Client</span></a>
+                      <a href="updateclient.php?id=<?=$row['id']?>" class="edit tooltip"><i class="fas fa-edit fa-xs"></i><span class="tooltiptext">Edit Client</span></a>
+                      <button type="button" value="<?=$row['name'];?>" class="w3-btn delClient trash"><i class="fas fa-trash-alt fa-xs"></i></button>
+                  </td>
+              </tr>
+              <?php endwhile; ?>
+          </tbody>
         </table>
     </div>
 <!-- Pagination

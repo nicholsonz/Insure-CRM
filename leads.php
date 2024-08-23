@@ -29,45 +29,44 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
 	<h1>LEADS</h1>
   <hr></hr>
     <div class="">
-	<a href="createlead.php" class="create-contact">Create Lead</a>
-	<a href="impleads.php" class="create-contact">Import Leads</a>
-    <div class="w3-right w3-padding">
-         <input id="tableSrch" type="text" placeholder="Filter..">
+    	<a href="createlead.php" class="create-contact">Create Lead</a>
+    	<a href="impleads.php" class="create-contact">Import Leads</a>
+        <div class="w3-right w3-padding">
+             <input id="tableSrch" type="text" placeholder="Filter..">
+        </div>
+        <div class="table-viewer tableFixHead" id="leadTable">
+        	<table class="w3-table w3-hoverable" id="srtTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th><a href="javascript:SortTable(1,'D','ymd h:m:s');">Birthdate <i class="fa fa-sort"></th>
+                        <th>Primary Phone</th>
+                        <th>Email</th>
+                        <th>Notes</th>
+                        <th><a href="javascript:SortTable(5,'D','mdy');">Created <i class="fa fa-sort"></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tblSrch">
+                    <?php while ($row = $result->FETCH_ASSOC()): ?>
+        	    <tr>
+                  <td><a href="./viewLds.php?name=<?=$row['name']; ?>" target="_blank"><?=$row['name']?></td>
+                  <td><?=$row['birthdate']?></td>
+                  <td><?=$row['phone']?></td>
+                  <td><?=$row['email']?></td>
+                  <td><?=$row['notes']?></td>
+                  <td><?=date("m-d-Y", strtotime($row['created']));?></td>
+                  <td class="actions">
+                      <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task tooltip"><i class="fas fa-tasks fa-xs"></i><span class="tooltiptext">Schedule Task</span></a>
+                      <a href="convertlead.php?name=<?=$row['name']?>" class="convert tooltip"><i class="fas fa-archive fa-xs"></i><span class="tooltiptext">Convert Lead</span></a>
+                      <a href="updatelead.php?name=<?=$row['name']?>" class="edit tooltip"><i class="fas fa-edit fa-xs"></i><span class="tooltiptext">Edit Lead</span></a>
+                      <button type="button" value="<?=$row['name'];?>" class="w3-btn delLead trash"><i class="fas fa-trash-alt fa-xs"></i></button>
+                  </td>
+              </tr>
+              <?php endwhile; ?>
+          </tbody>
+      </table>
     </div>
-    <div class="table-viewer tableFixHead">
-	<table class="w3-table w3-hoverable" id="srtTable">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th><a href="javascript:SortTable(1,'D','ymd h:m:s');">Birthdate <i class="fa fa-sort"></th>
-                <th>Primary Phone</th>
-                <th>Email</th>
-                <th>Notes</th>
-                <th><a href="javascript:SortTable(5,'D','mdy');">Created <i class="fa fa-sort"></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="tblSrch">
-            <?php while ($row = $result->FETCH_ASSOC()): ?>
-	    <tr>
-                <td><a href="./viewLds.php?name=<?=$row['name']; ?>" target="_blank"><?=$row['name']?></td>
-                <td><?=$row['birthdate']?></td>
-                <td><?=$row['phone']?></td>
-                <td><?=$row['email']?></td>
-                <td><?=$row['notes']?></td>
-                <td><?=date("m-d-Y", strtotime($row['created']));?></td>
-                <td class="actions">
-                    <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task tooltip"><i class="fas fa-tasks fa-xs"></i><span class="tooltiptext">Schedule Task</span></a>
-                    <a href="convertlead.php?name=<?=$row['name']?>" class="convert tooltip"><i class="fas fa-archive fa-xs"></i><span class="tooltiptext">Convert Lead</span></a>
-                    <a href="updatelead.php?name=<?=$row['name']?>" class="edit tooltip"><i class="fas fa-edit fa-xs"></i><span class="tooltiptext">Edit Lead</span></a>
-                    <a href="delete-lead.php?name=<?=$row['name']?>" class="trash tooltip"><i class="fas fa-trash-alt fa-xs"></i><span class="tooltiptext">Delete Lead</span></a>
-
-                </td>
-            </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-</div>
 <!-- Pagination
     <?php if (ceil($total_pages / $records_per_page) > 0): ?>
         <ul class="pagination">
