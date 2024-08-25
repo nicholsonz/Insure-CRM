@@ -1,4 +1,6 @@
 <?php
+include('../include/dbconfig.php');
+
 // We need to use sessions, so you should always start sessions using the below code.
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
@@ -9,6 +11,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 header("location: ../index.php");
 exit;
 }
+
+$clientID = $_SESSION['clientID'];
 
 // prevent execution of the file directly
 if(!isset($_POST['submit'])){
@@ -24,7 +28,7 @@ $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 if(isset($_POST["submit"])) {
   $check = filesize($_FILES["fileToUpload"]["tmp_name"]);
   if($check !== false) {
-    echo "File has been uploaded successfully - " . $check["mime"] . ".";
+    echo "File has been uploaded successfully - " . $check . ".";
     $uploadOk = 1;
   } else {
     echo "File is not an acceptable format.";
@@ -58,7 +62,10 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+      $insert = $con->query("UPDATE clients SET files = '$target_file' WHERE id='$clientID'");
+      }
+      if($insert){
+        echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
   } else {
     echo "Sorry, there was an error uploading your file.";
   }

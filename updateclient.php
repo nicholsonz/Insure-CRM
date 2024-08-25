@@ -34,9 +34,12 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
     }
     // Get the client from the clients table
     if(isset($_GET['id'])){
-    $stmt = $pdo->prepare('SELECT * FROM clients WHERE id = ?');
-    $stmt->execute([$_GET['id']]);
-    $client = $stmt->fetch(PDO::FETCH_ASSOC);
+      $stmt = $pdo->prepare('SELECT * FROM clients WHERE id = ?');
+      $stmt->execute([$_GET['id']]);
+      $client = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      $_SESSION['clientID'] = $_GET['id'];
+
     if (!$client) {
         exit('client doesn\'t exist with that id!');
     }
@@ -59,13 +62,12 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
 <div class="w3-content update w3-mobile">
 	<h1><?=$client['name']?></h1>
     <div class="">
-<!-- Client file upload needs editing to produce specific folders for each client with appropriate access rights
-            <form action="upld.php" method="post" enctype="multipart/form-data">
+        <form action="./action/upld.php" method="post" enctype="multipart/form-data">
             Select file to upload:
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Upload File" name="submit">
         </form>
--->
+
     <form action="updateclient.php?id=<?=$client['id']?>" method="post">
       <table>
         <tr>
