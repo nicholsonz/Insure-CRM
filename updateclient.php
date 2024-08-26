@@ -68,21 +68,26 @@ $files = scandir($path);
 <div class="w3-content update w3-mobile">
 	<h1><?=$client['name']?></h1>
     <div class="">
-    <form action="./action/upld.php?client=<?=$client['name']?>" method="post" enctype="multipart/form-data">
-        Select file to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload File" name="submit">
-    </form>
-    <div id="fileTable">
-      <?php
-      foreach ($files as $file) {
-        $filePath = $path . '/' . $file;
-        if (is_file($filePath)) {
-          echo $file . "&nbsp " . " <a class=\"view\" target=\"_blank\" href=\"{$filePath}\"><i class=\"fas fa-eye fa-xs\"></i></a>" . "&nbsp" . "<button type=\"button\" class=\"w3-btn delFile trash\" value=\"{$filePath}\"><i class=\"fas fa-trash-alt fa-xs\"></i></button>"."<br>";
-        }
-      }
-        ?>
-    </div>
+      <div class="w3-row">
+        <div class="w3-col s12 m5 l5">
+        <form action="./action/upld.php?client=<?=$client['name']?>" method="post" enctype="multipart/form-data">
+            Select file to upload:
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Upload File" name="submit">
+        </form>
+        </div>
+        <div id="fileTable" class="w3-col s12 m5 l5 read">
+          <h3>Files</h3>
+          <?php
+          foreach ($files as $file) {
+            $filePath = $path . '/' . $file;
+            if (is_file($filePath)) {
+              echo $file . "&nbsp " . " <button class='view' target='_blank' href='{$filePath}'><i class='fas fa-eye fa-xs'></i></button>" . "&nbsp" . "<button type='button' class='delFile trash' value='{$filePath}'><i class='fas fa-trash-alt fa-xs'></i></button>"."<br>";
+            }
+          }
+            ?>
+        </div>
+      </div>
     <form action="updateclient.php?id=<?=$client['id']?>" method="post">
       <table>
         <tr>
