@@ -1,3 +1,28 @@
+
+// Delete files
+$(document).on("click", ".delFile", function (e) {
+  if (
+    (e.preventDefault(),
+    confirm("CAUTION: Are you wanting to delete the file?"))
+  ) {
+    let e = $(this).val();
+      console.log(e);
+    $.ajax({
+      type: "POST",
+      url: "./action/delall.php",
+      data: { delete_file: !0, file: e },
+      success: function (e) {
+        let a = jQuery.parseJSON(e);
+        500 == a.status
+          ? alert(a.message)
+          : (alertify.set("notifier", "position", "top-right"),
+            alertify.success(a.message),
+            $("#fileTable").load(location.href + " #fileTable"));
+      },
+    });
+  }
+});
+// Delete Task
 $(document).on("click", ".delTask", function (e) {
       if (
         (e.preventDefault(),
@@ -19,7 +44,7 @@ $(document).on("click", ".delTask", function (e) {
         });
       }
     });
-// Delet task Lists
+// Delete task Lists
 $(document).on("click", ".delList", function (e) {
       if (
         (e.preventDefault(),
@@ -41,7 +66,7 @@ $(document).on("click", ".delList", function (e) {
         });
       }
 });
-// Delet Clients
+// Delete Clients
 $(document).on("click", ".delClient", function (e) {
   if (
     (e.preventDefault(),
@@ -63,7 +88,7 @@ $(document).on("click", ".delClient", function (e) {
     });
   }
 });
-// Delet Leads
+// Delete Leads
 $(document).on("click", ".delLead", function (e) {
   if (
     (e.preventDefault(),

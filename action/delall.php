@@ -1,6 +1,28 @@
 <?php
     include('../include/dbconfig.php');
 
+// Delete Files
+if(isset($_POST['delete_file'])) {
+  $filePath = "/var/www/html/clients/" . $_POST['file'];
+  if($filePath !== FALSE){
+    unlink($filePath);
+
+    $filePath = [
+      'status' => 200,
+      'message' => 'File Entry Deleted Successfully'
+    ];
+    echo json_encode($filePath);
+    return;
+    }else {
+      $filePath = [
+        'status' => 500,
+        'message' => 'File Entry Not Deleted'
+      ];
+      echo json_encode($filePath);
+      return;
+    }
+}
+
 // Delete Task
     //Check task_id in URL
     if(isset($_POST['delete_task']))

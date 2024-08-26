@@ -36,6 +36,9 @@ if (isset($_GET['name'])) {
     $stmt = $pdo->prepare('SELECT * FROM leads WHERE name = ?');
     $stmt->execute([$_GET['name']]);
     $lead = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $_SESSION['leadName'] = $lead['name'];
+
     if (!$lead) {
         exit('Lead doesn\'t exist with that Phone #!');
     }
@@ -51,6 +54,11 @@ if (isset($_GET['name'])) {
     <div class="">
 	<h1><?=$lead['name']?></h1>
   <hr></hr>
+      <form action="./action/upld.php?lead=<?=$lead['name']?>" method="post" enctype="multipart/form-data">
+          Select file to upload:
+          <input type="file" name="fileToUpload" id="fileToUpload">
+          <input type="submit" value="Upload File" name="submit">
+      </form>
     <form action="updatelead.php?name=<?=$lead['name']?>" method="post">
       <table>
         <tr>

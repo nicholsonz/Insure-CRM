@@ -12,19 +12,35 @@ header("location: ../index.php");
 exit;
 }
 
-$clientID = $_SESSION['clientID'];
-
 // prevent execution of the file directly
 if(!isset($_POST['submit'])){
   exit("This file cannot be accessed directly!");
 }
-
-$target_dir = "../uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+// Determine if client or lead
+if(isset($_GET['client'])){
+  $name = $_GET['client'];
+  $type = 'Client';
+  $target_dir = "../uplds/clients/$name";
+  // Check if target dir exists and if not create
+  if (!file_exists($target_dir)) {
+    mkdir($target_dir, 0770, true);
+  }
+}
+if(isset($_GET['lead'])){
+  $name = $_GET['lead'];
+  $type = 'Lead';
+  $target_dir = "../uplds/leads/$name";
+  // Check if target dir exists and if not create
+  if (!file_exists($target_dir)) {
+    mkdir($target_dir, 0770, true);
+  }
+}
+// Set a few variables
+$target_file = $target_dir . "/" . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-// Check if image file is a actual image or fake image
+// Check if file is genuine
 if(isset($_POST["submit"])) {
   $check = filesize($_FILES["fileToUpload"]["tmp_name"]);
   if($check !== false) {
@@ -44,7 +60,7 @@ if (file_exists($target_file)) {
 }
 
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 1000000) {
+if ($_FILES["fileToUpload"]["size"] > 10000000) {
   echo "Sorry, your file is too large.";
   $uploadOk = 0;
 
@@ -62,9 +78,9 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-      $insert = $con->query("UPDATE clients SET files = '$target_file' WHERE id='$clientID'");
-      }
-      if($insert){
+      // $insert = $con->query("INSERT INTO files (name, type, location) VALUES ('$name', '$type', '$target_file')");
+      // }
+      // if($insert){
         echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
   } else {
     echo "Sorry, there was an error uploading your file.";

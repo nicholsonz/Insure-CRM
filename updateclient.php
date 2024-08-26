@@ -38,7 +38,8 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
       $stmt->execute([$_GET['id']]);
       $client = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      $_SESSION['clientID'] = $_GET['id'];
+      $_SESSION['name'] = $client['name'];
+      $clientName = $client['name'];
 
     if (!$client) {
         exit('client doesn\'t exist with that id!');
@@ -55,6 +56,11 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
     exit('No id or name specified!');
 }
 }
+
+$path    = "./uplds/clients/$clientName";
+$files = scandir($path);
+// $files = array_diff(scandir($path), array('.', '..'));
+
 ?>
 
 <?=template_header('Read')?>
@@ -62,12 +68,21 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
 <div class="w3-content update w3-mobile">
 	<h1><?=$client['name']?></h1>
     <div class="">
-        <form action="./action/upld.php" method="post" enctype="multipart/form-data">
-            Select file to upload:
-            <input type="file" name="fileToUpload" id="fileToUpload">
-            <input type="submit" value="Upload File" name="submit">
-        </form>
-
+    <form action="./action/upld.php?client=<?=$client['name']?>" method="post" enctype="multipart/form-data">
+        Select file to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload File" name="submit">
+    </form>
+    <div id="fileTable">
+      <?php
+      foreach ($files as $file) {
+        $filePath = $path . '/' . $file;
+        if (is_file($filePath)) {
+          echo $file . "&nbsp " . " <a class=\"view\" target=\"_blank\" href=\"{$filePath}\"><i class=\"fas fa-eye fa-xs\"></i></a>" . "&nbsp" . "<button type=\"button\" class=\"w3-btn delFile trash\" value=\"{$filePath}\"><i class=\"fas fa-trash-alt fa-xs\"></i></button>"."<br>";
+        }
+      }
+        ?>
+    </div>
     <form action="updateclient.php?id=<?=$client['id']?>" method="post">
       <table>
         <tr>
