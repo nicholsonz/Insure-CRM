@@ -11,7 +11,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 	header("Location: index.php");
   exit();
    }
-       
+
 // Delete Files
 if(isset($_POST['delete_file'])) {
   $filePath = "/var/www/html/clients/" . $_POST['file'];

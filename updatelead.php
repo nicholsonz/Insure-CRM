@@ -38,6 +38,7 @@ if (isset($_GET['name'])) {
     $lead = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $_SESSION['leadName'] = $lead['name'];
+    $leadName = $lead['name'];
 
     if (!$lead) {
         exit('Lead doesn\'t exist with that Phone #!');
@@ -46,19 +47,36 @@ if (isset($_GET['name'])) {
     exit('No Phone # specified!');
 }
 
+$path    = "./uplds/leads/$leadName";
+$files = scandir($path);
+// $files = array_diff(scandir($path), array('.', '..'));
 ?>
 
 <?=template_header('Read')?>
 
 <div class="w3-content update w3-mobile">
+<h1><?=$lead['name']?></h1>
     <div class="">
-	<h1><?=$lead['name']?></h1>
-  <hr></hr>
-      <form action="./action/upld.php?lead=<?=$lead['name']?>" method="post" enctype="multipart/form-data">
-          Select file to upload:
-          <input type="file" name="fileToUpload" id="fileToUpload">
-          <input type="submit" value="Upload File" name="submit">
-      </form>
+      <div class="w3-row">
+        <div class="w3-col s12 m5 l5">
+        <form action="./action/upld.php?lead=<?=$lead['name']?>" method="post" enctype="multipart/form-data">
+            Select file to upload:
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Upload File" name="submit">
+        </form>
+        </div>
+        <div id="fileTable" class="w3-col s12 m5 l5 read">
+          <h3>Files</h3>
+          <?php
+          foreach ($files as $file) {
+            $filePath = $path . '/' . $file;
+            if (is_file($filePath)) {
+              echo $file . "&nbsp " . " <button class='view' target='_blank' href='{$filePath}'><i class='fas fa-eye fa-xs'></i></button>" . "&nbsp" . "<button type='button' class='delFile trash' value='{$filePath}'><i class='fas fa-trash-alt fa-xs'></i></button>"."<br>";
+            }
+          }
+            ?>
+        </div>
+      </div>
     <form action="updatelead.php?name=<?=$lead['name']?>" method="post">
       <table>
         <tr>

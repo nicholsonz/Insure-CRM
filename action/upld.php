@@ -16,6 +16,8 @@ exit;
 if(!isset($_POST['submit'])){
   exit("This file cannot be accessed directly!");
 }
+
+
 // Determine if client or lead
 if(isset($_GET['client'])){
   $name = $_GET['client'];
@@ -39,51 +41,52 @@ if(isset($_GET['lead'])){
 $target_file = $target_dir . "/" . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+$error_msg = '';
 
 // Check if file is genuine
 if(isset($_POST["submit"])) {
   $check = filesize($_FILES["fileToUpload"]["tmp_name"]);
   if($check !== false) {
-    echo "File has been uploaded successfully - " . $check . ".";
     $uploadOk = 1;
   } else {
-    echo "File is not an acceptable format.";
     $uploadOk = 0;
   }
 }
 
 // Check if file already exists
 if (file_exists($target_file)) {
-  echo "Sorry, file already exists.";
+  $error_msg = "Sorry, file already exists.";
   $uploadOk = 0;
-
 }
 
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 10000000) {
-  echo "Sorry, your file is too large.";
+  $error_msg = "Sorry, your file is too large.";
   $uploadOk = 0;
-
 }
 
 // Allow certain file formats
 if($fileType != "pdf" && $fileType != "odt" && $fileType != "docx" && $fileType != "doc" ) {
-  echo "Sorry, only PDF, ODT, DOCX, and DOC files are allowed.";
+  $error_msg = "Sorry, only PDF, ODT, DOCX, and DOC files are allowed.";
   $uploadOk = 0;
 }
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded.";
+  echo "<script>alert('$error_msg');
+        history.back()</script>";
+
 // if everything is ok, try to upload file
 } else {
   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
       // $insert = $con->query("INSERT INTO files (name, type, location) VALUES ('$name', '$type', '$target_file')");
       // }
       // if($insert){
-        echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+        echo "<script>alert('The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.');
+              history.back()</script>";
   } else {
-    echo "Sorry, there was an error uploading your file.";
+    echo "<script>alert('$error_msg');
+          history.back()</script>";
   }
 }
 ?>

@@ -6,7 +6,7 @@ $(document).on("click", ".delFile", function (e) {
     confirm("CAUTION: Are you wanting to delete the file?"))
   ) {
     let e = $(this).val();
-      console.log(e);
+      // console.log(e);
     $.ajax({
       type: "POST",
       url: "./action/delall.php",
