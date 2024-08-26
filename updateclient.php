@@ -69,20 +69,20 @@ $files = scandir($path);
 	<h1><?=$client['name']?></h1>
     <div class="">
       <div class="w3-row">
-        <div class="w3-col s12 m5 l5">
+        <div class="w3-col s12 m5 l5 w3-text-white">
         <form action="./action/upld.php?client=<?=$client['name']?>" method="post" enctype="multipart/form-data">
             Select file to upload:
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Upload File" name="submit">
         </form>
         </div>
-        <div id="fileTable" class="w3-col s12 m5 l5 read">
+        <div id="fileTable" class="w3-col s12 m5 l5 read w3-text-white">
           <h3>Files</h3>
           <?php
           foreach ($files as $file) {
             $filePath = $path . '/' . $file;
             if (is_file($filePath)) {
-              echo $file . "&nbsp " . " <button class='view' target='_blank' href='{$filePath}'><i class='fas fa-eye fa-xs'></i></button>" . "&nbsp" . "<button type='button' class='delFile trash' value='{$filePath}'><i class='fas fa-trash-alt fa-xs'></i></button>"."<br>";
+              echo $file . "&nbsp " . " <a class='view' target='_blank' href='{$filePath}'><i class='fas fa-eye fa-xs'></i></a>" . "&nbsp" . "<button type='button' class='delFile trash' value='{$filePath}'><i class='fas fa-trash-alt fa-xs'></i></button>"."<br>";
             }
           }
             ?>
