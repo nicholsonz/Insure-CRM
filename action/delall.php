@@ -1,6 +1,17 @@
 <?php
-    include('../include/dbconfig.php');
+include('../include/dbconfig.php');
 
+// We need to use sessions, so you should always start sessions using the below code.
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+	header("Location: index.php");
+  exit();
+   }
+       
 // Delete Files
 if(isset($_POST['delete_file'])) {
   $filePath = "/var/www/html/clients/" . $_POST['file'];
