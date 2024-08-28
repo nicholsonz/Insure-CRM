@@ -1,4 +1,27 @@
 
+// Upload Client files
+// $(document).on("click", ".upldClient", function (e) {
+//   if (
+//     (e.preventDefault(),
+//     confirm("Would you like to upload the file?"))
+//   ) {
+//     let e = $(this).val();
+//       // console.log(e);
+//     $.ajax({
+//       type: "POST",
+//       url: "./action/upld.php",
+//       data: { upld_client: !0, file: e },
+//       success: function (e) {
+//         let a = jQuery.parseJSON(e);
+//         500 == a.status
+//           ? alert(a.message)
+//           : (alertify.set("notifier", "position", "top-right"),
+//             alertify.success(a.message),
+//             $("#fileTable").load(location.href + " #fileTable"));
+//       },
+//     });
+//   }
+// });
 // Delete files
 $(document).on("click", ".delFile", function (e) {
   if (
