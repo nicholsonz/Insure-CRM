@@ -55,10 +55,13 @@ let ldlbls = [];
 // console.log(cllbls);
 // console.log(ldlbls);
 
+// Set some point options
+Chart.defaults.elements.point.hoverRadius = 11;
+Chart.defaults.elements.point.radius = 7;
 Chart.defaults.color = "white";
 
 new Chart(document.getElementById("activityChart"), {
-  type: "bar",
+  type: "line",
   data: {
     labels: labels,
     datasets: [
@@ -66,23 +69,23 @@ new Chart(document.getElementById("activityChart"), {
         label: "Clients",
         data: cllbls,
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
+          "rgba(255, 99, 132, 0.7)",
         ],
         borderColor: [
-          "rgb(255, 99, 132)",
+          "rgba(255, 99, 132, 0.5)",
         ],
-        borderWidth: 1,
+        tension: 0.3
       },
       {
         label: "Leads",
         data: ldlbls,
         backgroundColor: [
-          "rgba(153, 102, 255, 0.2)",
+          "rgba(153, 102, 255, 0.7)",
         ],
         borderColor: [
-          "rgba(153, 102, 255)",
+          "rgba(153, 102, 255, 0.5)",
         ],
-        borderWidth: 1,
+        tension: 0.3
       },
     ],
   },
