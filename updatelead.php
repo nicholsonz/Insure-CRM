@@ -47,7 +47,7 @@ if (isset($_GET['name'])) {
     exit('No Phone # specified!');
 }
 
-$path    = "./uplds/leads/$leadName";
+$path = "./uplds/leads/$leadName";
 $files = scandir($path);
 // $files = array_diff(scandir($path), array('.', '..'));
 ?>

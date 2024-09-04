@@ -57,7 +57,7 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
 }
 }
 
-$path    = "./uplds/clients/$clientName";
+$path = "./uplds/clients/$clientName";
 $files = scandir($path);
 // $files = array_diff(scandir($path), array('.', '..'));
 
