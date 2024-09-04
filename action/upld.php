@@ -25,7 +25,7 @@ if(isset($_GET['client'])){
   $target_dir = "../uplds/clients/$name";
   // Check if target dir exists and if not create
   if (!file_exists($target_dir)) {
-    mkdir($target_dir, 0770, true);
+    mkdir($target_dir, 0755, true);
   }
 }
 if(isset($_GET['lead'])){
@@ -34,7 +34,7 @@ if(isset($_GET['lead'])){
   $target_dir = "../uplds/leads/$name";
   // Check if target dir exists and if not create
   if (!file_exists($target_dir)) {
-    mkdir($target_dir, 0770, true);
+    mkdir($target_dir, 0755, true);
   }
 }
 // Set a few variables
