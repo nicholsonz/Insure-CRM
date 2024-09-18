@@ -51,14 +51,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Login - Simple-CRM</title>
+		<title>Login - Insure CRM</title>
 		<link rel="stylesheet" href="../fontawesome/css/all.css">
 		<link href="./css/style.css" rel="stylesheet" type="text/css">
 		<link rel="icon" href="./favicon.ico">
 	</head>
 	<body class="logincolor">
 		<div class="login">
-			<h1>Simple-CRM</h1>
+			<h1>Insure CRM</h1>
 			  <?php
 	      if(!empty($login_err)){
 	        echo '<div class="alert">' . $login_err .'</div>';

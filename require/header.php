@@ -45,7 +45,7 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
     <div class="w3-sidebar w3-bar-block w3-collapse w3-card-4 w3-animate-left w3-custom-blue" id="mySidebar">
 		<button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
  			<div class="w3-logo">
-				<a href="home.php" class="w3-bar-logo w3-padding w3-hover-text-blue"><h3><i class="fas fa-home w3-margin-right"></i> Simple CRM</h3></a>
+				<a href="home.php" class="w3-bar-logo w3-padding w3-hover-text-blue"><h3><i class="fas fa-home w3-margin-right"></i> Insure CRM</h3></a>
 			</div>
 			<a href="taskmngr.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-hourglass w3-margin-right"></i> Tasks</a>
 			<a href="clients.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Clients</a>
@@ -112,7 +112,7 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
 	<div class="w3-sidebar w3-bar-block w3-collapse w3-card-4 w3-animate-left w3-custom-blue" id="mySidebar">
 		<button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
  			<div class="w3-logo">
-				<a href="home.php" class="w3-bar-logo w3-padding-large w3-hover-text-blue"><h3><i class="fas fa-home w3-margin-right"></i> Simple CRM</h3></a>
+				<a href="home.php" class="w3-bar-logo w3-padding-large w3-hover-text-blue"><h3><i class="fas fa-home w3-margin-right"></i> Insure CRM</h3></a>
 			</div>
 			<a href="taskmngr.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-hourglass w3-margin-right"></i> Tasks</a>
             <a href="leads.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Leads</a>
