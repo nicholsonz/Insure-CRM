@@ -17,7 +17,7 @@
 
 <?=template_header('Home')?>
 <div class="content w3-padding w3-mobile">
-<table class="w3-table w3-striped w3-custom-blue">
+<table class="w3-table w3-striped w3-custom-blue w3-card-4">
   <tr>
     <?php
       $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients WHERE acct_id = '$acct_id' GROUP BY policy";
@@ -32,7 +32,7 @@
 <div class="content w3-padding w3-mobile">
   <!-- <h1><?= date("l - F d Y");?></h1> -->
 
-   		<div class="w3-col s12 m3 l3 w3-margin w3-border w3-round w3-border-blue w3-pannel w3-card-4">
+   		<div class="w3-col s12 m3 l3 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
 			<h2><?php echo date('F'); ?> Activity</h2>
       <br />
 			<?php
@@ -65,7 +65,7 @@
 				</tr>
 			</table>
     </div>
-		<div class="w3-col s12 m3 l3 w3-margin w3-border w3-round w3-border-blue w3-pannel w3-card-4">
+		<div class="w3-col s12 m3 l3 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
       <br />
 			<?php
@@ -111,7 +111,7 @@
   			$daysInMonth = cal_days_in_month(0, $numMonth, $numYear);
   			$dayOfWeek = date('w', $firstDay);
   		?>
-		<div class="w3-col s12 m5 l5 w3-margin w3-border w3-round w3-border-blue w3-pannel w3-card-4">
+		<div class="w3-col s12 m5 l5 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
       <h2><?php echo($mnthyr); ?></h2>
 			<table class="w3-centered cal-table">
 				<thead>
@@ -143,7 +143,7 @@
 			</tbody>
 			</table>
 		</div>
-		<div class="w3-col s12 m6-6 l6-6 w3-margin w3-border w3-round w3-border-blue w3-pannel w3-card-4">
+		<div class="w3-col s12 m6-6 l6-6 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
 				$pdo = pdo_connect_mysql();
@@ -153,8 +153,8 @@
 
 			<canvas id="activityChart" class="chart-style"></canvas>
 		</div>
-    <div class="w3-col s12 m5 l5 w3-margin">
-    <button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-padding"><h3>Tasks | &nbsp;Clients <?= number_format($clients);?></h3></button>
+    <div class="w3-col s12 m5 l5  w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
+    <button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue-grey w3-margin-bottom w3-padding"><h3>Tasks | &nbsp;Clients <?= number_format($clients);?></h3></button>
       <div id="show" class="read w3-hide">
         <div class="tableFixHead">
         <table class="w3-table w3-hoverable">
@@ -240,7 +240,7 @@
         </table>
         </div>
       </div>
-      <button id="showhide2" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | &nbsp;Leads <?= number_format($leads);?></h3></button>
+      <button id="showhide2" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue-grey w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | &nbsp;Leads <?= number_format($leads);?></h3></button>
       <div id="show2" class="read w3-hide">
       <div class="tableFixHead">
         <table class="w3-table" id="srtTable">
@@ -325,7 +325,7 @@
         </table>
         </div>
       </div>
-      <button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue w3-margin-right w3-padding"><h3>Tasks | &nbsp;Other <?= number_format($other);?></h3></button>
+      <button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue-grey w3-margin-right w3-padding"><h3>Tasks | &nbsp;Other <?= number_format($other);?></h3></button>
       <div id="show3" class="read w3-hide">
         <div class="tableFixHead">
         <table class="w3-table w3-hoverable">

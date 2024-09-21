@@ -10,11 +10,6 @@
   display: none;
 }
 
-body {
-    background-color: rgb(39, 37, 37);
-    margin: 0;
-}
-
 .alert {
     padding: 20px;
     background-color: #f44336;
@@ -682,7 +677,7 @@ body.loggedin {
 .content>p table td:first-child,
 .content>div table td:first-child {
     font-weight: bold;
-    color: #4a536e;
+    color: rgba(21, 123, 198, 0.93);
     padding-right: 15px;
 }
 

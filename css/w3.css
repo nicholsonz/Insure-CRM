@@ -17,10 +17,11 @@ html {
 
 body {
     margin: 0;
-    background-color: rgb(39, 37, 37);
+    /* background-color: rgb(39, 37, 37); */
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed
+    background-attachment: fixed;
+    background-color: rgba(55, 53, 56, 0.97)
 }
 
 article,
