@@ -5,11 +5,11 @@
  if (session_status() === PHP_SESSION_NONE) {
      session_start();
    }
- 
-   // Set some global variables 
+
+   // Set some global variables
  $acct_id = $_SESSION['id'];
- 
- 
+
+
  // Check if the user is logged in, if not then redirect him to login page
  if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
    header("location: index.php");
@@ -24,21 +24,21 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 
     // Prepare a select statement
     $sql = "SELECT * FROM clients WHERE acct_id = '$acct_id' AND id = :id";
-    
+
     if($stmt = $pdo->prepare($sql)){
         // Bind variables to the prepared statement as parameters
         $stmt->bindParam(":id", $param_id);
-        
+
         // Set parameters
         $param_id = trim($_GET["id"]);
-        
+
         // Attempt to execute the prepared statement
         if($stmt->execute()){
             if($stmt->rowCount() == 1){
                 /* Fetch result row as an associative array. Since the result set
                 contains only one row, we don't need to use while loop */
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                
+
                 // Retrieve individual field value
                 $name = $row["name"];
                 $address = $row["address"];
@@ -63,15 +63,15 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                  header("location: error.php");
                 exit();
             }
-            
+
         } else{
             echo "Oops! Something went wrong. Please try again later.";
         }
     }
-     
+
     // Close statement
     unset($stmt);
-    
+
     // Close connection
     unset($pdo);
 } else{
@@ -88,7 +88,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     <meta charset="UTF-8">
     <title>View Record</title>
     <link rel="stylesheet" href="./css/style.css">
-   
+
 </head>
 <body>
     <div class="contentview">
@@ -147,11 +147,9 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                              <p><?php echo $row["created"]; ?></p>
                          </td>
                         </tr>
-                    </table>    
-                
+                    </table>
+
                 </div>
            </div>
-        </div>
     </body>
 </html>
-

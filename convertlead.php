@@ -23,10 +23,10 @@ if (isset($_GET['name'])) {
             $stmt->execute([$_GET['name']]);
             $updstmt = $pdo->prepare('UPDATE `clients` SET created = current_timestamp WHERE name = ?');
             $updstmt->execute([$_GET['name']]);
-            if ($updstmt == true){
-            $delstmt = $pdo->prepare('DELETE FROM `leads` WHERE name = ?');
-            $delstmt->execute([$_GET['name']]);
-            }
+            // if ($updstmt == true){
+            // $delstmt = $pdo->prepare('DELETE FROM `leads` WHERE name = ?');
+            // $delstmt->execute([$_GET['name']]);
+            // }
             $msg = 'You have converted the lead!';
             sleep(3);
             header('Location: leads.php');

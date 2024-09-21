@@ -9,7 +9,9 @@
 ::-webkit-scrollbar {
   display: none;
 }
-
+body {
+    background-color: rgba(55, 53, 56, 0.97)
+}
 .alert {
     padding: 20px;
     background-color: #f44336;
@@ -128,6 +130,7 @@ label {
     width: 250px;
     word-wrap: break-word;
     color: white;
+    background-color: rgba(55, 53, 56, 0.7)
 }
 
 .signup {
@@ -229,7 +232,7 @@ textarea {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
     margin: 15px 0;
     padding: 5px;
-    background-color: #1d1c1c;
+    background-color: rgba(55, 53, 56, 0.7);
 }
 
 .contentview textarea {
@@ -239,11 +242,13 @@ textarea {
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
-    background-color: #1d1c1c;
+    background-color: rgba(55, 53, 56, 0.7);
     font-size: 16px;
     color: white
 }
-
+.contentview label {
+  color: rgba(42, 125, 128, 1);
+}
 .contentview table {
     border-collapse: collapse;
     table-layout: fixed;
