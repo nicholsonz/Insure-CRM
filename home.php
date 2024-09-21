@@ -325,7 +325,7 @@
         </table>
         </div>
       </div>
-      <button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue-grey w3-margin-right w3-padding"><h3>Tasks | &nbsp;Other <?= number_format($other);?></h3></button>
+      <button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue-grey  w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | &nbsp;Other <?= number_format($other);?></h3></button>
       <div id="show3" class="read w3-hide">
         <div class="tableFixHead">
         <table class="w3-table w3-hoverable">
