@@ -17,7 +17,7 @@
 
 <?=template_header('Home')?>
 <div class="content w3-padding w3-mobile">
-<table class="w3-table w3-striped w3-custom-blue w3-card-4">
+<table class="w3-table w3-custom-blue w3-card-4">
   <tr>
     <?php
       $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients WHERE acct_id = '$acct_id' GROUP BY policy";
