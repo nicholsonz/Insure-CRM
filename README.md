@@ -4,7 +4,7 @@
 
 
 
-Simple-CRM was designed for licensed insurance agents or anyone who needs to track their client/lead generation.
+Insure CRM was designed for licensed insurance agents or anyone who needs to track their client/lead generation.
 
 ## Features
 * Complete task system with notification
