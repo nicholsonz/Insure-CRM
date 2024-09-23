@@ -38,7 +38,7 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
         	<table class="w3-table w3-hoverable" id="srtTable">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th><a href="javascript:SortTable(0,'T');">Name <i class="fa fa-sort"></th>
                         <th><a href="javascript:SortTable(1,'D','ymd h:m:s');">Birthdate <i class="fa fa-sort"></th>
                         <th>Primary Phone</th>
                         <th>Email</th>
