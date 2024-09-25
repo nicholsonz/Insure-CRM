@@ -69,10 +69,10 @@ new Chart(document.getElementById("activityChart"), {
         label: "Clients",
         data: cllbls,
         backgroundColor: [
-          "rgba(255, 99, 132, 0.3)",
+          "rgba(75, 244, 233, 0.3)",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 0.5)",
+          "rgba(75, 244, 233, 0.5)",
         ],
         tension: 0.3,
         fill: 'origin'
@@ -81,10 +81,10 @@ new Chart(document.getElementById("activityChart"), {
         label: "Leads",
         data: ldlbls,
         backgroundColor: [
-          "rgba(153, 102, 255, 0.3)",
+          "rgba(13, 172, 240, 0.3)",
         ],
         borderColor: [
-          "rgba(153, 102, 255, 0.5)",
+          "rgba(13, 172, 240, 0.5)",
         ],
         tension: 0.3,
         fill: 'origin'
