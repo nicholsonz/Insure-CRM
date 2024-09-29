@@ -1,6 +1,7 @@
 # Insure CRM Web App 
 ![Screenshot from 2024-06-09 17-45-28](https://github.com/nicholsonz/Simple-CRM/assets/77360596/c628d162-4d34-4430-808d-8ad100b96f98)
-![Screenshot from 2024-09-21 12-15-31](https://github.com/user-attachments/assets/a7c4fdce-f919-40e8-9dc5-a3c2a25318da)
+![Screenshot from 2024-09-29 12-34-45](https://github.com/user-attachments/assets/4756bee5-1d03-41bd-a1b1-d8197985b8dd)
+
 
 
 
