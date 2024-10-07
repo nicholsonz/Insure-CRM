@@ -32,35 +32,35 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
         $msg = 'Updated Successfully!';
         header('Location: ./clients.php');
     }
-    // Get the client from the clients table
-    if(isset($_GET['id'])){
+
       $stmt = $pdo->prepare('SELECT * FROM clients WHERE id = ?');
       $stmt->execute([$_GET['id']]);
       $client = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      $_SESSION['name'] = $client['name'];
+      // $_SESSION['clientName'] = $client['name'];
       $clientName = $client['name'];
 
     if (!$client) {
         exit('client doesn\'t exist with that id!');
-    }
+
     }elseif(isset($_GET['name'])){
         $stmt = $pdo->prepare('SELECT * FROM clients WHERE name = ?');
         $stmt->execute([$_GET['name']]);
         $client = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $clientName = $client['name'];
+
         if (!$client) {
             exit('client doesn\'t exist with that name!');
 
     }
+}
 } else {
     exit('No id or name specified!');
 }
-}
 
-$path = "./uplds/clients/$clientName";
-$files = scandir($path);
+// $files = array_slice(scandir($path), 2);
 // $files = array_diff(scandir($path), array('.', '..'));
-
 ?>
 
 <?=template_header('Read')?>
@@ -70,7 +70,7 @@ $files = scandir($path);
     <div class="">
       <div class="w3-row">
         <div class="w3-col s12 m5 l5 w3-text-white">
-        <form action="./action/upld.php?client=<?=$client['name']?>" method="post" enctype="multipart/form-data">
+          <form action="./action/upld.php?client=<?=$client['name']?>" method="post" enctype="multipart/form-data">
             Select file to upload:
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Upload File" name="submit">
@@ -79,12 +79,19 @@ $files = scandir($path);
         <div id="fileTable" class="w3-col s12 m5 l5 read w3-text-white">
           <h3>Files</h3>
           <?php
-          foreach ($files as $file) {
-            $filePath = $path . '/' . $file;
-            if (is_file($filePath)) {
-              echo $file . "&nbsp " . " <a class='view' target='_blank' href='{$filePath}'><i class='fas fa-eye fa-xs'></i></a>" . "&nbsp" . "<button type='button' class='delFile trash' value='{$filePath}'><i class='fas fa-trash-alt fa-xs'></i></button>"."<br>";
-            }
-          }
+              if(true == is_dir(rtrim(("./uplds/clients/$clientName")))) {
+                $path = rtrim("./uplds/clients/$clientName");
+                $files = scandir($path);
+              if (is_array($files) || is_object($files))
+                {
+                foreach ($files as $file) {
+                  $filePath = $path . '/' . $file;
+                  if (is_file($filePath)) {
+                    echo $file . "&nbsp " . " <a class='view' target='_blank' href='{$filePath}'><i class='fas fa-eye fa-xs'></i></a>" . "&nbsp" . "<button type='button' class='delFile trash' value='{$filePath}'><i class='fas fa-trash-alt fa-xs'></i></button>"."<br>";
+                  }
+                }
+              }
+              }
             ?>
         </div>
       </div>

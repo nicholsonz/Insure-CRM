@@ -47,8 +47,6 @@ if (isset($_GET['name'])) {
     exit('No Phone # specified!');
 }
 
-$path = "./uplds/leads/$leadName";
-$files = scandir($path);
 // $files = array_diff(scandir($path), array('.', '..'));
 ?>
 
@@ -68,12 +66,19 @@ $files = scandir($path);
         <div id="fileTable" class="w3-col s12 m5 l5 read w3-text-white">
           <h3>Files</h3>
           <?php
-          foreach ($files as $file) {
-            $filePath = $path . '/' . $file;
-            if (is_file($filePath)) {
-              echo $file . "&nbsp " . " <a class='view' target='_blank' href='{$filePath}'><i class='fas fa-eye fa-xs'></i></a>" . "&nbsp" . "<button type='button' class='delFile trash' value='{$filePath}'><i class='fas fa-trash-alt fa-xs'></i></button>"."<br>";
-            }
-          }
+              if(true == is_dir(rtrim(("./uplds/leads/$leadName")))) {
+                $path = rtrim("./uplds/leads/$leadName");
+                $files = scandir($path);
+              if (is_array($files) || is_object($files))
+                {
+                foreach ($files as $file) {
+                  $filePath = $path . '/' . $file;
+                  if (is_file($filePath)) {
+                    echo $file . "&nbsp " . " <a class='view' target='_blank' href='{$filePath}'><i class='fas fa-eye fa-xs'></i></a>" . "&nbsp" . "<button type='button' class='delFile trash' value='{$filePath}'><i class='fas fa-trash-alt fa-xs'></i></button>"."<br>";
+                    }
+                  }
+                }
+                }
             ?>
         </div>
       </div>
