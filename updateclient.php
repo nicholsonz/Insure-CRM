@@ -32,32 +32,31 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
         $msg = 'Updated Successfully!';
         header('Location: ./clients.php');
     }
-
-      $stmt = $pdo->prepare('SELECT * FROM clients WHERE id = ?');
-      $stmt->execute([$_GET['id']]);
-      $client = $stmt->fetch(PDO::FETCH_ASSOC);
-
-      // $_SESSION['clientName'] = $client['name'];
-      $clientName = $client['name'];
-
-    if (!$client) {
-        exit('client doesn\'t exist with that id!');
-
-    }elseif(isset($_GET['name'])){
-        $stmt = $pdo->prepare('SELECT * FROM clients WHERE name = ?');
-        $stmt->execute([$_GET['name']]);
-        $client = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $clientName = $client['name'];
-
-        if (!$client) {
-            exit('client doesn\'t exist with that name!');
-
-    }
-}
-} else {
+  } else {
     exit('No id or name specified!');
 }
+// Assign $clientName variable based on $_GET 
+if(isset($_GET['id'])) {
+  $stmt = $pdo->prepare('SELECT * FROM clients WHERE id = ?');
+  $stmt->execute([$_GET['id']]);
+  $client = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  $clientName = $client['name'];
+
+if (!$client) {
+    exit('client doesn\'t exist with that id!');
+    }
+  } else {
+    $stmt = $pdo->prepare('SELECT * FROM clients WHERE name = ?');
+    $stmt->execute([$_GET['name']]);
+    $client = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $clientName = $client['name'];
+
+    if (!$client) {
+        exit('client doesn\'t exist with that name!');
+      }
+  }
 
 // $files = array_slice(scandir($path), 2);
 // $files = array_diff(scandir($path), array('.', '..'));
