@@ -59,7 +59,7 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
         <tbody id="tblSrch">
             <?php while ($row = $result->FETCH_ASSOC()): ?>
             <tr>
-                <td><?= $row['task_name'] ?></td>
+                <td><a href="./update-task.php?task_id=<?= $row['task_id'] ?>"><?= $row['task_name'] ?></a></td>
                 <?php if($row['type'] == 'Lead'): ?>
                     <td><a href="./updatelead.php?name=<?= $row['name']; ?>"><?= $row['name'] ?></a></td>
                 <?php else: ?>
