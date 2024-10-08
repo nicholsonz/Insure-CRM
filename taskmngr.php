@@ -46,7 +46,7 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
          <thead>
             <tr>
                 <!-- <th>S.N.</th> -->
-                <th><a href="javascript:SortTable(0,'T');">Task Name <i class="fa fa-sort"></th>
+                <th><a href="javascript:SortTable(0,'T');">Task <i class="fa fa-sort"></th>
                 <th><a href="javascript:SortTable(1,'T');">Name <i class="fa fa-sort"></th>
                 <th>Details</th>
                 <th><a href="javascript:SortTable(4,'T');">Task List <i class="fa fa-sort"></a></th>

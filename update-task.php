@@ -121,7 +121,7 @@
 
                 <table class="">
                     <tr>
-                        <td>Task Name: </td>
+                        <td>Task: </td>
                         <td><input type="text" name="task_name" value="<?php echo $task_name; ?>" required="required" /></td>
                     </tr>
                     <tr>
@@ -135,7 +135,7 @@
                     </tr>
 
                     <tr>
-                        <td>Select List: </td>
+                        <td>Task List: </td>
                         <td>
                             <select name="list_id">
 

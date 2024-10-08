@@ -100,8 +100,8 @@ if(isset($_POST['submit']))
 
             <table>
                 <tr>
-                    <td>Task Name: </td>
-                    <td><input type="text" name="task_name" placeholder="Task Name" required="required" value="<?= $task_name;?>"/></td>
+                    <td>Task: </td>
+                    <td><input type="text" name="task_name" placeholder="Task" required="required" value="<?= $task_name;?>"/></td>
                 </tr>
                 <tr>
                     <td>Lead/Client: </td>
@@ -114,7 +114,7 @@ if(isset($_POST['submit']))
                 </tr>
 
                 <tr>
-                    <td>Select List: </td>
+                    <td>Task List: </td>
                     <td>
                         <select name="list_id">
 
