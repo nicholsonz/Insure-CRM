@@ -133,6 +133,4 @@
         <!-- Form to Add List Ends Here -->
         </div>
     </div>
-
-<?php require('./require/footer.php');
-?>
+<?php require('./require/footer.php');?>
