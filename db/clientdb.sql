@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 07, 2024 at 06:13 PM
+-- Generation Time: Dec 10, 2024 at 09:01 AM
 -- Server version: 10.11.6-MariaDB-0+deb12u1-log
--- PHP Version: 8.2.20
+-- PHP Version: 8.2.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `clientdb`
 --
-CREATE DATABASE IF NOT EXISTS `clientdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `clientdb`;
 
 -- --------------------------------------------------------
 
@@ -29,15 +27,13 @@ USE `clientdb`;
 -- Table structure for table `accounts`
 --
 
-CREATE TABLE IF NOT EXISTS `accounts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `accounts` (
+  `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `activation_code` varchar(50) DEFAULT '',
-  `acct_type` varchar(75) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`) USING BTREE
+  `acct_type` varchar(75) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -46,8 +42,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 -- Table structure for table `clients`
 --
 
-CREATE TABLE IF NOT EXISTS `clients` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `clients` (
+  `id` int(11) NOT NULL,
   `acct_id` int(11) NOT NULL,
   `name` varchar(55) NOT NULL,
   `address` varchar(55) DEFAULT NULL,
@@ -66,9 +62,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `insurer` varchar(25) DEFAULT NULL,
   `appstatus` varchar(20) DEFAULT NULL,
   `notes` text DEFAULT NULL,
-  `created` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`),
-  KEY `acct_id` (`acct_id`) USING BTREE
+  `created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -77,8 +71,8 @@ CREATE TABLE IF NOT EXISTS `clients` (
 -- Table structure for table `leads`
 --
 
-CREATE TABLE IF NOT EXISTS `leads` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `leads` (
+  `id` int(11) NOT NULL,
   `acct_id` int(11) NOT NULL,
   `name` varchar(55) NOT NULL,
   `address` varchar(55) DEFAULT NULL,
@@ -97,8 +91,7 @@ CREATE TABLE IF NOT EXISTS `leads` (
   `insurer` varchar(20) DEFAULT NULL,
   `appstatus` varchar(20) DEFAULT NULL,
   `notes` text DEFAULT NULL,
-  `created` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
+  `created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -107,12 +100,11 @@ CREATE TABLE IF NOT EXISTS `leads` (
 -- Table structure for table `tally`
 --
 
-CREATE TABLE IF NOT EXISTS `tally` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tally` (
+  `id` int(11) NOT NULL,
   `date` date DEFAULT NULL,
   `clients` int(6) DEFAULT NULL,
-  `leads` int(6) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `leads` int(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -121,23 +113,18 @@ CREATE TABLE IF NOT EXISTS `tally` (
 -- Table structure for table `tasks`
 --
 
-CREATE TABLE IF NOT EXISTS `tasks` (
+CREATE TABLE `tasks` (
   `client_id` int(11) DEFAULT NULL,
   `lead_id` int(11) DEFAULT NULL,
-  `task_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `task_id` int(10) UNSIGNED NOT NULL,
   `acct_id` int(11) NOT NULL,
   `task_name` varchar(150) NOT NULL,
   `name` varchar(75) DEFAULT NULL,
   `details` text NOT NULL,
   `list_id` int(11) NOT NULL,
   `priority` varchar(10) NOT NULL,
-  `deadline` date NOT NULL,
-  `type` enum('Lead','Client','Other') NOT NULL,
-  PRIMARY KEY (`task_id`),
-  KEY `list_id` (`list_id`),
-  KEY `acct_id` (`acct_id`),
-  KEY `client_id` (`client_id`),
-  KEY `lead_id` (`lead_id`)
+  `deadline` datetime NOT NULL,
+  `type` enum('Lead','Client','Other') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -146,14 +133,99 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 -- Table structure for table `task_lists`
 --
 
-CREATE TABLE IF NOT EXISTS `task_lists` (
-  `list_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `task_lists` (
+  `list_id` int(10) UNSIGNED NOT NULL,
   `acct_id` int(11) NOT NULL,
   `list_name` varchar(50) NOT NULL,
-  `list_description` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`list_id`),
-  KEY `acct_id` (`acct_id`)
+  `list_description` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`) USING BTREE;
+
+--
+-- Indexes for table `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `acct_id` (`acct_id`) USING BTREE;
+
+--
+-- Indexes for table `leads`
+--
+ALTER TABLE `leads`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tally`
+--
+ALTER TABLE `tally`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`task_id`),
+  ADD KEY `list_id` (`list_id`),
+  ADD KEY `acct_id` (`acct_id`),
+  ADD KEY `client_id` (`client_id`),
+  ADD KEY `lead_id` (`lead_id`);
+
+--
+-- Indexes for table `task_lists`
+--
+ALTER TABLE `task_lists`
+  ADD PRIMARY KEY (`list_id`),
+  ADD KEY `acct_id` (`acct_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `leads`
+--
+ALTER TABLE `leads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tally`
+--
+ALTER TABLE `tally`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `task_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `task_lists`
+--
+ALTER TABLE `task_lists`
+  MODIFY `list_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
