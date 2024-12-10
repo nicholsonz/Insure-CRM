@@ -173,7 +173,7 @@
           $db_select = mysqli_select_db($con, DB_NAME) or die();
 
           //Create SQL Query to Get Data from Databse
-            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
+            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
@@ -188,7 +188,7 @@
             WHERE t.acct_id = '$acct_id' AND t.type = 'Client'")->fetchColumn();
 
             //Create SQL Query to Get DAta from Databse
-            $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
+            $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
             FROM tasks AS t
             LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
             WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
@@ -255,7 +255,7 @@
         </thead>
           <?php
             // Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
-            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
+            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
                         FROM tasks AS t
                         LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
                         WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
@@ -272,7 +272,7 @@
           $db_select = mysqli_select_db($con, DB_NAME) or die();
 
           //Create SQL Query to Get DAta from Databse
-          $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
+          $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
@@ -344,7 +344,7 @@
           $db_select = mysqli_select_db($con, DB_NAME) or die();
 
           //Create SQL Query to Get DAta from Databse
-          $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%m-%d-%Y') AS deadline, tl.list_name
+          $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Other'

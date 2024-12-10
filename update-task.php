@@ -125,7 +125,7 @@
                         <td><input type="text" name="task_name" value="<?php echo $task_name; ?>" required="required" /></td>
                     </tr>
                     <tr>
-                        <td>Lead/Client: </td>
+                        <td>Lead/Client/Other: </td>
                         <td><input type="text" name="name" value="<?php echo $name; ?>" /></td>
                     </tr>
 
@@ -201,7 +201,7 @@
 
                     <tr>
                         <td>Deadline: </td>
-                        <td><input type="date" name="deadline" value="<?php echo $deadline; ?>" /></td>
+                        <td><input type="datetime-local" name="deadline" value="<?php echo $deadline; ?>" /></td>
                     </tr>
                     <tr>
                         <td>Type: </td>

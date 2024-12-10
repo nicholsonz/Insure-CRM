@@ -12,7 +12,8 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 10;
 
 
-if ($stmt = $con->prepare("SELECT * FROM tasks
+if ($stmt = $con->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, type, tl.list_name
+                           FROM tasks
                            LEFT JOIN task_lists AS tl ON tasks.list_id = tl.list_id
                            WHERE tasks.acct_id = '$acct_id'
                            ORDER BY tasks.deadline ASC -- LIMIT ?,?")) {
@@ -58,6 +59,7 @@ if ($stmt = $con->prepare("SELECT * FROM tasks
          </thead>
         <tbody id="tblSrch">
             <?php while ($row = $result->FETCH_ASSOC()): ?>
+
             <tr>
                 <td><a href="./update-task.php?task_id=<?= $row['task_id'] ?>"><?= $row['task_name'] ?></a></td>
                 <?php if($row['type'] == 'Lead'): ?>

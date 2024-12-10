@@ -104,7 +104,7 @@ if(isset($_POST['submit']))
                     <td><input type="text" name="task_name" placeholder="Task" required="required" value="<?= $task_name;?>"/></td>
                 </tr>
                 <tr>
-                    <td>Lead/Client: </td>
+                    <td>Lead/Client/Other: </td>
                     <td><input type="text" name="name" placeholder="Lead/Client/Other" value="<?= $name;?>"/></td>
                 </tr>
 
@@ -180,7 +180,7 @@ if(isset($_POST['submit']))
 
                 <tr>
                     <td>Deadline: </td>
-                    <td><input type="date" name="deadline" /></td>
+                    <td><input type="datetime-local" name="deadline" /></td>
                 </tr>
                 <tr>
                     <td>Type: </td>
