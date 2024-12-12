@@ -22,6 +22,24 @@
 //     });
 //   }
 // });
+//
+// Select all checkbox
+$(function () {
+     // add multiple select / deselect functionality
+     $("#selectall").click(function () {
+         $('.name').attr('checked', this.checked);
+     });
+     // if all checkbox are selected, then check the select all checkbox
+     // and viceversa
+     $(".name").click(function () {
+         if ($(".name").length == $(".name:checked").length) {
+             $("#selectall").attr("checked", "checked");
+         } else {
+             $("#selectall").removeAttr("checked");
+         }
+     });
+ });
+
 // Delete files
 $(document).on("click", ".delFile", function (e) {
   if (

@@ -38,6 +38,7 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
         	<table class="w3-table w3-hoverable" id="srtTable">
                 <thead>
                     <tr>
+                        <th><input type="checkbox" id="selectall" /></th>
                         <th><a href="javascript:SortTable(0,'T');">Name <i class="fa fa-sort"></th>
                         <th><a href="javascript:SortTable(1,'D','ymd h:m:s');">Birthdate <i class="fa fa-sort"></th>
                         <th>Primary Phone</th>
@@ -50,6 +51,7 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
                 <tbody id="tblSrch">
                     <?php while ($row = $result->FETCH_ASSOC()): ?>
         	    <tr>
+                  <td><input type="checkbox" class="name" /></td>
                   <td><a href="./viewLds.php?name=<?=$row['name']; ?>" target="_blank"><?=$row['name']?></td>
                   <td><?=$row['birthdate']?></td>
                   <td><?=$row['phone']?></td>
