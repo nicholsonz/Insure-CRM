@@ -21,7 +21,7 @@ if (!empty($_POST)) {
     $partA_date = (isset($_POST['partA_date']) && !empty($_POST['partA_date']) ? $_POST['partA_date'] : NULL);
     $partB_date = (isset($_POST['partB_date']) && !empty($_POST['partB_date']) ? $_POST['partB_date'] : NULL);
     $medicare_number = (isset($_POST['medicare_number']) && !empty($_POST['medicare_number']) ? $_POST['medicare_number'] : '');
-    $policy = (isset($_POST['policy']) && !empty($_POST['policy']) ? $_POST['policy'] : '');
+    $policy = (isset($_POST['policy']) && !empty($_POST['policy']) ? implode(',', $_POST['policy']) : '');
     $insurer = (isset($_POST['insurer']) && !empty($_POST['insurer']) ? $_POST['insurer'] : '');
     $appstatus = (isset($_POST['appstatus']) && !empty($_POST['appstatus']) ? $_POST['appstatus'] : '');
     $notes = (isset($_POST['notes']) && !empty($_POST['notes']) ? $_POST['notes'] : '');
@@ -133,7 +133,7 @@ if (!empty($_POST)) {
         <input type="text" name="insurer" placeholder="Insurer" id="insurer">
 </td>
     <td><label>Policy</label>
-        <select name="policy" id="policy">
+        <select name="policy[]" id="policy" multiple>
             <option value="Policy" disabled selected>Policy</option>
             <option value="Health">Health</option>
             <option value="Life">Life</option>

@@ -21,7 +21,7 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
         $partA_date = (isset($_POST['partA_date']) && !empty($_POST['partA_date']) ? $_POST['partA_date'] : NULL);
         $partB_date = (isset($_POST['partB_date']) && !empty($_POST['partB_date']) ? $_POST['partB_date'] : NULL);
         $medicare_number = (isset($_POST['medicare_number']) && !empty($_POST['medicare_number']) ? $_POST['medicare_number'] : '');
-        $policy = (isset($_POST['policy']) && !empty($_POST['policy']) ? $_POST['policy'] : '');
+        $policy = (isset($_POST['policy']) && !empty($_POST['policy']) ? implode(',', $_POST['policy']) : '');
         $insurer = (isset($_POST['insurer']) && !empty($_POST['insurer']) ? $_POST['insurer'] : '');
         $appstatus = (isset($_POST['appstatus']) && !empty($_POST['appstatus']) ? $_POST['appstatus'] : '');
         $notes = (isset($_POST['notes']) && !empty($_POST['notes']) ? $_POST['notes'] : '');
@@ -35,7 +35,7 @@ if (isset($_GET['id']) || isset($_GET['name'])) {
   } else {
     exit('No id or name specified!');
 }
-// Assign $clientName variable based on $_GET 
+// Assign $clientName variable based on $_GET
 if(isset($_GET['id'])) {
   $stmt = $pdo->prepare('SELECT * FROM clients WHERE id = ?');
   $stmt->execute([$_GET['id']]);
@@ -179,16 +179,16 @@ if (!$client) {
                 <input type="text" name="insurer" placeholder="Insurer" value="<?=$client['insurer']?>" id="insurer">
         </td>
             <td><label>Policy</label>
-                <select id="policy" name="policy">
+                <select id="policy" name="policy[]" multiple>
                     <option value="Policy" disabled selected>Policy</option>
-                    <option <?php if($client["policy"] == "Health"){ echo "selected"; } ?>>Health</option>
-                    <option <?php if($client["policy"] == "Life"){ echo "selected"; } ?>>Life</option>
-                    <option <?php if($client["policy"] == "Med Supp"){ echo "selected"; } ?>>Med Supp</option>
-                    <option <?php if($client["policy"] == "Med Adv"){ echo "selected"; } ?>>Med Adv</option>
-                    <option <?php if($client["policy"] == "Final Exp"){ echo "selected"; } ?>>Final Exp</option>
-                    <option <?php if($client["policy"] == "Hospital Ind"){ echo "selected"; } ?>>Hospital Ind</option>
-                    <option <?php if($client["policy"] == "Annuity"){ echo "selected"; } ?>>Annuity</option>
-                    <option <?php if($client["policy"] == "DVH"){ echo "selected"; } ?>>DVH</option>
+                    <option value="Health" <?php if(str_contains($client["policy"], "Health")){ echo "selected"; } ?>>Health</option>
+                    <option value="Life" <?php if(str_contains($client["policy"], "Life")){ echo "selected"; } ?>>Life</option>
+                    <option value="Med Supp" <?php if(str_contains($client["policy"], "Med Supp")){ echo "selected"; } ?>>Med Supp</option>
+                    <option value="Med Adv" <?php if(str_contains($client["policy"], "Med Adv")){ echo "selected"; } ?>>Med Adv</option>
+                    <option value="Final Exp" <?php if(str_contains($client["policy"], "Final Exp")){ echo "selected"; } ?>>Final Exp</option>
+                    <option value="Hospital Ind" <?php if(str_contains($client["policy"], "Hospital Ind")){ echo "selected"; } ?>>Hospital Ind</option>
+                    <option value="Annuity" <?php if(str_contains($client["policy"], "Annuity")){ echo "selected"; } ?>>Annuity</option>
+                    <option value="DVH" <?php if(str_contains($client["policy"], "DVH")){ echo "selected"; } ?>>DVH</option>
                 </select>
         </td>
         <td><label>Status</label>
