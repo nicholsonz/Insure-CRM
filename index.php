@@ -36,10 +36,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				} else {
 					// Incorrect password
 					$login_err = 'Incorrect username and/or password!';
+          error_log("Insure-CRM - Incorrect username and/or password!", 0);
 				}
 		} else {
 			// Incorrect username
 			$login_err = 'Incorrect username and/or password!';
+      error_log("Insure-CRM - Incorrect username and/or password!", 0);
 		}
 
 		$stmt->close();
