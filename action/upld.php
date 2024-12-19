@@ -6,11 +6,12 @@ if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 
+$key = $_SESSION["loggedin"];
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-header("location: ../index.php");
-exit;
-}
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== $key){
+	header("Location: index.php");
+  exit();
+   }
 
 // prevent execution of the file directly
 if(!isset($_POST['submit'])){
