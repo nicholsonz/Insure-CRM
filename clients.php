@@ -12,11 +12,11 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 8;
 
 
-if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = '$acct_id' ORDER BY name -- LIMIT ?,?")) {
+if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = ? ORDER BY name -- LIMIT ?,?")) {
 	// Calculate the page to get the results we need from our table.
 	// $calc_page = ($page - 1) * $records_per_page;
 	// $stmt->bind_param('ii', $calc_page, $records_per_page);
-	$stmt->execute();
+	$stmt->execute([$acct_id]);
 	// Get the results...
 	$result = $stmt->get_result();
 	$stmt->close();

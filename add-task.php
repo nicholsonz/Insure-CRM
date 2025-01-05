@@ -22,13 +22,13 @@ if(isset($_POST['submit']))
 {
     //echo "Button Clicked";
     //Get all the Values from Form
-    $task_name = htmlspecialchars($_POST['task_name']);
-    $name = htmlspecialchars($_POST['name']);
-    $details = htmlspecialchars($_POST['details']);
-    $list_id = htmlspecialchars($_POST['list_id']);
-    $priority = htmlspecialchars($_POST['priority']);
-    $deadline = htmlspecialchars($_POST['deadline']);
-    $type = htmlspecialchars($_POST['type']);
+    $task_name = mysqli_real_escape_string($con, $_POST['task_name']);
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $details = mysqli_real_escape_string($con, $_POST['details']);
+    $list_id = mysqli_real_escape_string($con, $_POST['list_id']);
+    $priority = mysqli_real_escape_string($con, $_POST['priority']);
+    $deadline = mysqli_real_escape_string($con, $_POST['deadline']);
+    $type = mysqli_real_escape_string($con, $_POST['type']);
 
     //Connect Database
     $conn2 = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
@@ -37,21 +37,11 @@ if(isset($_POST['submit']))
     $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
 
     //CReate SQL Query to INSERT DATA into DAtabase
-    $sql2 = "INSERT INTO tasks SET
-        acct_id = '$acct_id',
-        task_name = '$task_name',
-        name = '$name',
-        details = '$details',
-        list_id = $list_id,
-        priority = '$priority',
-        deadline = '$deadline',
-        type = '$type'";
+    $sql_ins = mysqli_prepare($con, "INSERT INTO tasks SET acct_id = ?, task_name = ?, name = ?, details = ?, list_id = ?, priority = ?, deadline = ?, type = ?");
+      mysqli_stmt_bind_param($sql_ins, "isssisss", $acct_id, $task_name, $name, $details, $list_id, $priority, $deadline, $type);
+    $sql_ins->execute();
 
-    //Execute Query
-    $res2 = mysqli_query($conn2, $sql2);
-
-    //Check whetehre the query executed successfully or not
-    if($res2==true)
+    if($sql_ins)
     {
         //Query Executed and Task Inserted Successfully
         $_SESSION['add'] = "Task Added Successfully.";

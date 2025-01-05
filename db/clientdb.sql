@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 10, 2024 at 09:01 AM
+-- Generation Time: Dec 26, 2024 at 12:14 PM
 -- Server version: 10.11.6-MariaDB-0+deb12u1-log
--- PHP Version: 8.2.24
+-- PHP Version: 8.2.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -162,7 +162,8 @@ ALTER TABLE `clients`
 -- Indexes for table `leads`
 --
 ALTER TABLE `leads`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `acct_id` (`acct_id`);
 
 --
 -- Indexes for table `tally`
@@ -178,7 +179,8 @@ ALTER TABLE `tasks`
   ADD KEY `list_id` (`list_id`),
   ADD KEY `acct_id` (`acct_id`),
   ADD KEY `client_id` (`client_id`),
-  ADD KEY `lead_id` (`lead_id`);
+  ADD KEY `lead_id` (`lead_id`),
+  ADD KEY `deadline` (`deadline`);
 
 --
 -- Indexes for table `task_lists`

@@ -75,13 +75,11 @@ if(isset($_POST['delete_file'])) {
         $list_id = mysqli_real_escape_string($con, $_POST['list_id']);
 
         //Write the Query to DELETE List from DAtabase
-        $sql = "DELETE FROM task_lists WHERE list_id='$list_id'";
+        $sql = mysqli_prepare($con, "DELETE FROM task_lists WHERE list_id=?");
+          mysqli_stmt_bind_param($sql, "i", $list_id);
+        $sql->execute();
 
-        //Execute The Query
-        $res = mysqli_query($con, $sql);
-
-        //Check whether the query executed successfully or not
-        if($res==true) {
+        if($sql) {
           $res = [
               'status' => 200,
               'message' => 'Task List Entry Deleted Successfully'
@@ -106,13 +104,11 @@ if(isset($_POST['delete_file'])) {
         $name = mysqli_real_escape_string($con, $_POST['name']);
 
         //Write the Query to DELETE List from DAtabase
-        $sql = "DELETE FROM clients WHERE name='$name'";
+        $sql = mysqli_prepare($con, "DELETE FROM clients WHERE name=?");
+          mysqli_stmt_bind_param($sql, "s", $name);
+        $sql->execute();
 
-        //Execute The Query
-        $res = mysqli_query($con, $sql);
-
-        //Check whether the query executed successfully or not
-        if($res==true) {
+        if($sql) {
           $res = [
               'status' => 200,
               'message' => 'Client Deleted Successfully'
@@ -136,14 +132,13 @@ if(isset($_POST['delete_file'])) {
             //Get the list_id value from URL or Get Method
             $name = mysqli_real_escape_string($con, $_POST['name']);
 
+
             //Write the Query to DELETE List from DAtabase
-            $sql = "DELETE FROM leads WHERE name='$name'";
+            $sql = mysqli_prepare($con, "DELETE FROM leads WHERE name=?");
+              mysqli_stmt_bind_param($sql, "s", $name);
+            $sql->execute();
 
-            //Execute The Query
-            $res = mysqli_query($con, $sql);
-
-            //Check whether the query executed successfully or not
-            if($res==true) {
+            if($sql) {
               $res = [
                   'status' => 200,
                   'message' => 'Lead Deleted Successfully'

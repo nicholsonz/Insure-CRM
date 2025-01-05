@@ -8,8 +8,8 @@
         //echo "Form Submitted";
 
         //Get the values from form and save it in variables
-        $list_name = htmlspecialchars($_POST['list_name']);
-        $list_description = htmlspecialchars($_POST['list_description']);
+        $list_name = mysqli_real_escape_string($con, $_POST['list_name']);
+        $list_description = mysqli_real_escape_string($con, $_POST['list_description']);
 
         //Connect Database
         $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
@@ -33,16 +33,11 @@
         }
         */
         //SQL Query to Insert data into database
-        $sql = "INSERT INTO task_lists SET
-            acct_id = '$acct_id',
-            list_name = '$list_name',
-            list_description = '$list_description'";
+        $sql = mysqli_prepare($con, "INSERT INTO task_lists SET acct_id = ?, list_name = ?, list_description = ?");
+          mysqli_stmt_bind_param($sql, "iss", $acct_id, $list_name, $list_description);
+        $sql->execute();
 
-        //Execute Query and Insert into Database
-        $res = mysqli_query($conn, $sql);
-
-        //Check whether the query executed successfully or not
-        if($res==true)
+        if($sql)
         {
             //Data inserted successfully
             //echo "Data Inserted";
