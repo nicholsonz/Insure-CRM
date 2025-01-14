@@ -37,7 +37,7 @@ Then
     FLUSH PRIVILEGES;
     EXIT;
 
-Next, import the clientdb.sql file
+Next, import the clientdb.sql file located in db directory
 
     sudo mysql clientdb < clientdb.sql
 
