@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 26, 2024 at 12:14 PM
+-- Generation Time: Jan 25, 2025 at 11:26 AM
 -- Server version: 10.11.6-MariaDB-0+deb12u1-log
 -- PHP Version: 8.2.26
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `clientdb`
 --
+CREATE DATABASE IF NOT EXISTS `clientdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `clientdb`;
 
 -- --------------------------------------------------------
 
@@ -263,7 +265,7 @@ DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`zach`@`localhost` EVENT `AnnualReview` ON SCHEDULE EVERY 1 YEAR STARTS '2024-10-15 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO `tasks`(`task_name`, `name`, `task_description`, `list_id`, `priority`, `deadline`, `type`) SELECT 'Call', name, 'Annual Review', '3', 'Medium', DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH), 'Client' FROM clients WHERE policy = ('Med Adv') OR policy = ('Med Supp')$$
+CREATE DEFINER=`clients`@`localhost` EVENT `AnnualReview` ON SCHEDULE EVERY 1 YEAR STARTS '2025-10-01 11:23:17' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO `tasks`(`task_name`, `name`, `task_description`, `list_id`, `priority`, `deadline`, `type`) SELECT 'Call', name, 'Annual Review', '3', 'Medium', DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH), 'Client' FROM clients WHERE policy = ('Med Adv') OR policy = ('Med Supp')$$
 
 DELIMITER ;
 COMMIT;
