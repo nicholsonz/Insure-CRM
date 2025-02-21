@@ -43,7 +43,7 @@ while($row = mysqli_fetch_assoc($chkres)){
 if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
 
     <div class="w3-sidebar w3-bar-block w3-collapse w3-card-4 w3-animate-left w3-custom-blue" id="mySidebar">
-		<button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+    <button class="w3-bar-item w3-button w3-large w3-hide-large" id="w3close">Close &times;</button>
  			<div class="w3-logo">
 				<a href="home.php" class="w3-bar-logo w3-padding w3-hover-text-blue"><h3><i class="fas fa-home w3-margin-right"></i> Insure CRM</h3></a>
 			</div>
@@ -110,7 +110,7 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
 </div>
 </div>
 	<div class="w3-sidebar w3-bar-block w3-collapse w3-card-4 w3-animate-left w3-custom-blue" id="mySidebar">
-		<button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+    <button class="w3-bar-item w3-button w3-large w3-hide-large" id="w3close">Close &times;</button>
  			<div class="w3-logo">
 				<a href="home.php" class="w3-bar-logo w3-padding-large w3-hover-text-blue"><h3><i class="fas fa-home w3-margin-right"></i> Insure CRM</h3></a>
 			</div>
@@ -178,7 +178,7 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
 	</div>
 </div>
 	<div class="">
-  	<button class="w3-button w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+    <button class="w3-button w3-xlarge w3-hide-large" id="w3open">&#9776;</button>
   	<div class="w3-container">
 		</div>
 	</div>
