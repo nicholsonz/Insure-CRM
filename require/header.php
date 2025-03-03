@@ -5,9 +5,9 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
   }
-$key = $_SESSION["loggedin"];
+
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== $key){
+if(!isset($_SESSION["loggedin"])){
 	header("Location: index.php");
   exit();
    }
@@ -25,7 +25,7 @@ $pdo = pdo_connect_mysql();
 	<html>
 		<head>
 			<meta charset="utf-8">
-			<?php function template_header($title) {echo "<title>" . $title . "</title>";}?>
+      <?php function template_header($title) {echo "<title>" . $title . "</title>";}?>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<link rel="stylesheet" href="./css/style.css">
 			<link rel="stylesheet" href="./css/w3.css">

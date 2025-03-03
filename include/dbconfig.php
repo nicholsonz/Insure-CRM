@@ -23,4 +23,3 @@ $con = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
 if($con === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
-?>
