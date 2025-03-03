@@ -29,9 +29,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					// Verification success! User has logged-in!
 					// Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
 					session_regenerate_id();
-          // $ip = $_SERVER("REMOTE_ADDR");
-          $key = hash('sha256', $_SERVER['REMOTE_ADDR']);
-          $_SESSION['loggedin'] = $key . random_bytes(32);
+          // $key = hash('sha256', $_SERVER['REMOTE_ADDR']);
+          $key = hash('sha256', $_SESSION['REMOTE_ADDR']);
+          $_SESSION['loggedin'] = $key;
 					$_SESSION['name'] = $_POST['username'];
 					$_SESSION['id'] = $id;
 					header('Location: home.php');
