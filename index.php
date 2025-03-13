@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					// Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
 					session_regenerate_id();
           // $key = hash('sha256', $_SERVER['REMOTE_ADDR']);
-          $key = hash('sha256', $_SESSION['REMOTE_ADDR']);
+          $key = hash('sha256', $_SERVER['REMOTE_ADDR']);
           $_SESSION['loggedin'] = $key;
 					$_SESSION['name'] = $_POST['username'];
 					$_SESSION['id'] = $id;

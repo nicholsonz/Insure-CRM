@@ -5,7 +5,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 
-  $key = hash('sha256', $_SESSION['REMOTE_ADDR']);
+  $key = hash('sha256', $_SERVER['REMOTE_ADDR']);
     $_SESSION['DoubleCheck'] = $key;
   }
 
