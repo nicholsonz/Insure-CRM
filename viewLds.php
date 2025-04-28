@@ -4,17 +4,19 @@
  // We need to use sessions, so you should always start sessions using the below code.
  if (session_status() === PHP_SESSION_NONE) {
      session_start();
+
+     $key = hash('sha256', $_SERVER['REMOTE_ADDR']);
+    $_SESSION['DoubleCheck'] = $key;
+  }
+
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION['loggedin'] !== $_SESSION['DoubleCheck']){
+	header("Location: index.php");
+  exit();
    }
 
-   // Set some global variables
- $acct_id = $_SESSION['id'];
-
-
- // Check if the user is logged in, if not then redirect him to login page
- if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-   header("location: index.php");
-   exit;
-  }
+// Set some global variables
+$acct_id = $_SESSION['id'];
 
 // Connect to MySQL database
 $pdo = pdo_connect_mysql();
