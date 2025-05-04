@@ -52,7 +52,7 @@ if ($stmt = $con->prepare("SELECT * FROM clients  WHERE acct_id = ? ORDER BY nam
           <tbody id="tblSrch">
               <?php while ($row = $result->FETCH_ASSOC()): ?>
               <tr>
-                  <td><a href="./viewCls.php?id=<?=$row['id']; ?>" target="_blank"><?=$row['name']?></a></td>
+                  <td><a href="./updateclient.php?id=<?=$row['id']?>"><?=$row['name']?></a></td>
                   <td><?=$row['birthdate']?></td>
                   <td><?=$row['phone']?></td>
                   <td><?=$row['policy']?></td>

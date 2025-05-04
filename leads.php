@@ -39,12 +39,12 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
                 <thead>
                     <tr>
                       <th><input type="checkbox" id="selectall" /><button type="button" value="" class="w3-button w3-tiny w3-round w3-border"> Delete</button></th>
-                      <th><a href="javascript:SortTable(0,'T');">Name <i class="fa fa-sort"></th>
-                      <th><a href="javascript:SortTable(1,'D','ymd h:m:s');">Birthdate <i class="fa fa-sort"></th>
+                      <th><a href="javascript:SortTable(1,'T');">Name <i class="fa fa-sort"></a></th>
+                      <th><a href="javascript:SortTable(2,'D','ymd h:m:s');">Birthdate <i class="fa fa-sort"></a></th>
                       <th>Primary Phone</th>
                       <th>Email</th>
                       <th>Notes</th>
-                      <th><a href="javascript:SortTable(5,'D','mdy');">Created <i class="fa fa-sort"></th>
+                      <th><a href="javascript:SortTable(6,'D','mdy');">Created <i class="fa fa-sort"></a></th>
                       <th></th>
                     </tr>
                 </thead>
@@ -52,7 +52,7 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
                     <?php while ($row = $result->FETCH_ASSOC()): ?>
         	    <tr>
                   <td><input type="checkbox" class="name" /></td>
-                  <td><a href="./viewLds.php?name=<?=$row['name']; ?>" target="_blank"><?=$row['name']?></td>
+                  <td><a href="./updatelead.php?name=<?=$row['name']?>"><?=$row['name']?></a></td>
                   <td><?=$row['birthdate']?></td>
                   <td><?=$row['phone']?></td>
                   <td><?=$row['email']?></td>
