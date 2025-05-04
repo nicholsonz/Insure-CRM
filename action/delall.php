@@ -1,6 +1,9 @@
 <?php
 include('../include/dbconfig.php');
 
+// Set document root for uploaded files
+$rootDir = $_SERVER['DOCUMENT_ROOT'];
+$files = "";
 // We need to use sessions, so you should always start sessions using the below code.
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -15,22 +18,24 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Delete Files
 if(isset($_POST['delete_file'])) {
-  $filePath = "/var/www/html/clients/" . $_POST['file'];
-  if($filePath !== FALSE){
-    unlink($filePath);
+  $files .= $rootDir;
+  $fileUrl = $_POST['file'];
+  $files .= "/clients" . ltrim($fileUrl, '.');
+  if($files !== FALSE){
+    unlink($files);
 
-    $filePath = [
+    $files = [
       'status' => 200,
       'message' => 'File Entry Deleted Successfully'
     ];
-    echo json_encode($filePath);
+    echo json_encode($files);
     return;
     }else {
-      $filePath = [
+      $files = [
         'status' => 500,
         'message' => 'File Entry Not Deleted'
       ];
-      echo json_encode($filePath);
+      echo json_encode($files);
       return;
     }
 }
