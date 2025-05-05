@@ -26,16 +26,16 @@
 // Select all checkbox
 $(function () {
      // add multiple select / deselect functionality
-     $("#selectall").click(function () {
+     $("#select_all").click(function () {
          $('.name').attr('checked', this.checked);
      });
      // if all checkbox are selected, then check the select all checkbox
      // and viceversa
      $(".name").click(function () {
          if ($(".name").length == $(".name:checked").length) {
-             $("#selectall").attr("checked", "checked");
+             $("#select_all").attr("checked", "checked");
          } else {
-             $("#selectall").removeAttr("checked");
+             $("#select_all").removeAttr("checked");
          }
      });
  });

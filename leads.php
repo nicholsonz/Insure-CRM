@@ -30,20 +30,23 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
   <hr></hr>
     <div class="">
     	<a href="createlead.php" class="create-contact">Create Lead</a>
-    	<a href="impleads.php" class="create-contact">Import Leads</a>
-        <div class="w3-right w3-padding">
-             <input id="tableSrch" type="text" placeholder="Filter..">
+    	<a href="impleads.php" class="create-contact">Import Leads</a>        
+        <div class="w3-margin">            
+           <button type="button" value="" id="delete" class="w3-button w3-small w3-round w3-border w3-red w3-text-black"> DELETE</button>
+            <div class="w3-right w3-padding">
+              <input id="tableSrch" type="text" placeholder="Filter..">
+            </div>
         </div>
         <div class="table-viewer tableFixHead" id="leadTable">
         	<table class="w3-table w3-hoverable" id="srtTable">
                 <thead>
                     <tr>
-                      <th><input type="checkbox" id="selectall" /><button type="button" value="" class="w3-button w3-tiny w3-round w3-border"> Delete</button></th>
+                      <th><input type="checkbox" id="select_all"></th>
                       <th><a href="javascript:SortTable(1,'T');">Name <i class="fa fa-sort"></a></th>
                       <th><a href="javascript:SortTable(2,'D','ymd h:m:s');">Birthdate <i class="fa fa-sort"></a></th>
                       <th>Primary Phone</th>
+                      <th>Zip Code</th>
                       <th>Email</th>
-                      <th>Notes</th>
                       <th><a href="javascript:SortTable(6,'D','mdy');">Created <i class="fa fa-sort"></a></th>
                       <th></th>
                     </tr>
@@ -51,12 +54,12 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
                 <tbody id="tblSrch">
                     <?php while ($row = $result->FETCH_ASSOC()): ?>
         	    <tr>
-                  <td><input type="checkbox" class="name" /></td>
+                  <td><input type="checkbox" class="name" value="<?=$row['id']?>"></td>
                   <td><a href="./updatelead.php?name=<?=$row['name']?>"><?=$row['name']?></a></td>
                   <td><?=$row['birthdate']?></td>
                   <td><?=$row['phone']?></td>
+                  <td><?=$row['zip']?></td>
                   <td><?=$row['email']?></td>
-                  <td><?=$row['notes']?></td>
                   <td><?=date("m-d-Y", strtotime($row['created']));?></td>
                   <td class="actions">
                       <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task tooltip"><i class="fas fa-tasks fa-xs"></i><span class="tooltiptext">Schedule Task</span></a>

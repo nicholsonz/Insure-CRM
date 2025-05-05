@@ -15,7 +15,7 @@ if (session_status() === PHP_SESSION_NONE) {
   	header("Location: index.php");
     exit();
      }
-
+  
 // Delete Files
 if(isset($_POST['delete_file'])) {
   $files .= $rootDir;
