@@ -65,26 +65,26 @@ if (!empty($_POST)) {
         </div>
         <div class="w3-row">
             <div class="w3-col s12 m3 l3">
-                <input type="text" name="name" placeholder="Name" title="Name" value="<?=$lead['name']?>" id="name">
+                <input type="text" name="name" placeholder="Name" title="Name" id="name">
             </div>
             <div class="w3-col s12 m3 l3">
-                <input type="text" name="email" placeholder="Email" title="Email" value="<?=$lead['email']?>" id="email">
+                <input type="text" name="email" placeholder="Email" title="Email" id="email">
             </div>
             <div class="w3-col s12 m3 l3">
-                <input onfocus="(this.type='date')" name="birthdate" placeholder="Birthdate" title="Birth Date" value="<?=$lead['birthdate']?>" id="birthdate">
-            </div>
-        </div>
-        <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
-                <input type="text" name="address" placeholder="Street Address" title="Street Address" value="<?=$lead['address']?>" id="address">
-            </div>
-            <div class="w3-col s12 m3 l3">
-                <input type="text" name="city" placeholder="City" title="City" value="<?=$lead['city']?>" id="city">
+                <input onfocus="(this.type='date')" name="birthdate" placeholder="Birthdate" title="Birth Date" id="birthdate">
             </div>
         </div>
         <div class="w3-row">
             <div class="w3-col s12 m3 l3">
-                <!-- <input type="text" name="state" placeholder="State" title="State" value="<?=$lead['state']?>" id="state"> -->
+                <input type="text" name="address" placeholder="Street Address" title="Street Address" id="address">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="city" placeholder="City" title="City" id="city">
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <!-- <input type="text" name="state" placeholder="State" title="State" id="state"> -->
                 <select name="state" id="state">
                     <option value="State" selected disabled>State</option>
                     <option value="AL">Alabama</option>
@@ -141,62 +141,62 @@ if (!empty($_POST)) {
                     </select>
             </div>
             <div class="w3-col s12 m3 l3">
-                <input type="text" name="zip" placeholder="Zip" title="Zip" value="<?=$lead['zip']?>" id="zip">
+                <input type="text" name="zip" placeholder="Zip" title="Zip" id="zip">
             </div>
             <div class="w3-col s12 m3 l3">
-                <input type="text" name="county" placeholder="County" title="County" value="<?=$lead['county']?>" id="county">
+                <input type="text" name="county" placeholder="County" title="County" id="county">
             </div>
         </div>              
         <div class="w3-row">
             <div class="w3-col s12 m3 l3">
-                <input type="text" name="phone" placeholder="Home Phone" title="Home Phone" value="<?=$lead['phone']?>" id="phone">
+                <input type="text" name="phone" placeholder="Home Phone" title="Home Phone" id="phone">
             </div>
             <div class="w3-col s12 m3 l3">
-                <input type="text" name="phone_sec" placeholder="Mobile Phone" title="Secondary Phone" value="<?=$lead['phone_sec']?>" id="phone_sec">
-            </div>
-        </div>
-        <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
-                <input onfocus="(this.type='date')" name="partA_date" placeholder="Part A Date" title="PartA Date" value="<?=$lead['partA_date']?>" id="partA_date">
-            </div>
-            <div class="w3-col s12 m3 l3">
-                <input onfocus="(this.type='date')" name="partB_date" placeholder="Part B Date" title="PartB Date" value="<?=$lead['partB_date']?>" id="partB_date">
-            </div>
-            <div class="w3-col s12 m3 l3">
-                <input type="text" name="medicare_number" placeholder="Medicare Number" title="Medicare Number" value="<?=$lead['medicare_number']?>" id="medicare_number">
+                <input type="text" name="phone_sec" placeholder="Mobile Phone" title="Secondary Phone" id="phone_sec">
             </div>
         </div>
         <div class="w3-row">
             <div class="w3-col s12 m3 l3">
-                <input type="text" name="insurer" placeholder="Insurer" value="<?=$lead['insurer']?>" id="insurer">
+                <input onfocus="(this.type='date')" name="partA_date" placeholder="Part A Date" title="PartA Date" id="partA_date">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input onfocus="(this.type='date')" name="partB_date" placeholder="Part B Date" title="PartB Date" id="partB_date">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="medicare_number" placeholder="Medicare Number" title="Medicare Number" id="medicare_number">
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="insurer" placeholder="Insurer" id="insurer">
             </div>
             <div class="w3-col s12 m3 l3">
                 <select id="policy" name="policy[]" multiple>
                     <option value="Policy" disabled selected>Policy</option>
-                    <option value="Health" <?php if(str_contains($lead["policy"], "Health")){ echo "selected"; } ?>>Health</option>
-                    <option value="Life" <?php if(str_contains($lead["policy"], "Life")){ echo "selected"; } ?>>Life</option>
-                    <option value="Med Supp" <?php if(str_contains($lead["policy"], "Med Supp")){ echo "selected"; } ?>>Med Supp</option>
-                    <option value="Med Adv" <?php if(str_contains($lead["policy"], "Med Adv")){ echo "selected"; } ?>>Med Adv</option>
-                    <option value="Final Exp" <?php if(str_contains($lead["policy"], "Final Exp")){ echo "selected"; } ?>>Final Exp</option>
-                    <option value="Hospital Ind" <?php if(str_contains($lead["policy"], "Hospital Ind")){ echo "selected"; } ?>>Hospital Ind</option>
-                    <option value="Annuity" <?php if(str_contains($lead["policy"], "Annuity")){ echo "selected"; } ?>>Annuity</option>
-                    <option value="DVH" <?php if(str_contains($lead["policy"], "DVH")){ echo "selected"; } ?>>DVH</option>
+                    <option value="Health">Health</option>
+                    <option value="Life">Life</option>
+                    <option value="Med Supp">Med Supp</option>
+                    <option value="Med Adv">Med Adv</option>
+                    <option value="Final Exp">Final Exp</option>
+                    <option value="Hospital Ind">Hospital Ind</option>
+                    <option value="Annuity">Annuity</option>
+                    <option value="DVH">DVH</option>
                 </select>
             </div>
             <div class="w3-col s12 m3 l3">
                 <select id="appstatus" name="appstatus">
                     <option value="Status" disabled selected>Status</option>
-                    <option value="Enrolled" <?php if($lead["appstatus"] == "Enrolled"){ echo "selected"; } ?>>Enrolled</option>
-                    <option value="Pending" <?php if($lead["appstatus"] == "Pending"){ echo "selected"; } ?>>Pending</option>
-                    <option value="Accepted" <?php if($lead["appstatus"] == "Accepted"){ echo "selected"; } ?>>Accepted</option>
-                    <option value="Denied" <?php if($lead["appstatus"] == "Denied"){ echo "selected"; } ?>>Denied</option>
-                    <option value="Cancelled" <?php if($lead["appstatus"] == "Cancelled"){ echo "selected"; } ?>>Cancelled</option>
+                    <option value="Enrolled">Enrolled</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Denied">Denied</option>
+                    <option value="Cancelled">Cancelled</option>
                 </select>
             </div>
         </div>
         <div class="w3-row">
             <div class="w3-col s12 m3 l3">
-                <textarea type="text" name="notes" placeholder="Notes" id="notes"><?=$lead['notes']?></textarea>
+                <textarea type="text" name="notes" placeholder="Notes" id="notes"></textarea>
             </div>
         </div>
         <div class="w3-row">
