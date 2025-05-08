@@ -22,6 +22,9 @@ body {
   background-color: rgba(227, 100, 19, 1);
   color: white;
 }
+a {
+    margin: 1px;
+}
 /* Tooltip container */
 .tooltip {
  position: relative;
@@ -29,6 +32,10 @@ body {
  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
 
+/* Add flex styling */
+.flexible {
+    display: flex;
+}
 /* Tooltip text */
 .tooltip .tooltiptext {
  visibility: hidden;
@@ -490,9 +497,8 @@ tr {
 
 .update form label {
     display: inline-flex;
-    width: 100px;
-    padding: 5px 0;
-    margin-right: auto;
+    padding: 1px 0;
+    margin-right: 2px;
     color: white;
 }
 

@@ -49,10 +49,8 @@ if (!empty($_POST)) {
         </form>
 -->
     <form action="createclient.php" method="post">
-<table>
-<tr>
-    <td colspan="2">
-        <label>Agent</label>
+      <div class="w3-row">
+        <div class="w3-col s12 m5 l5 w3-text-white">
         <?php
             $sqlagent = "SELECT id, username
                         FROM accounts
@@ -71,108 +69,159 @@ if (!empty($_POST)) {
 
                     }
                 }
-                echo "</select></td>";
+                echo "</select>";
             ?>
-    </td>
-</tr>
-<tr>
-    <td><label>Name</label>
-        <input type="text" name="name" placeholder="Name" id="name">
-    </td>
-    <td><label>Email</label>
-        <input type="text" name="email" placeholder="Email" id="email">
-    </td>
-    <td><label>Birthdate</label>
-        <input type="date" name="birthdate" placeholder="Birthdate" id="birthdate">
-    </td>
-</tr>
-<tr>
-    <td><label>Address</label>
-        <input type="text" name="address" placeholder="Street Address" id="address">
-    </td>
-</tr>
-<tr>
-    <td><label>City</label>
-        <input type="text" name="city" placeholder="City" id="city">
-</td>
-    <td>    <label>State</label>
-        <input type="text" name="state" placeholder="State" id="state">
-    </td>
-    <td><label>Zip</label>
-        <input type="text" name="zip" placeholder="Zip" id="zip">
-    </td>
-</tr>
-<tr>
-    <td><label>County</label>
-        <input type="text" name="county" placeholder="County" id="county">
-    </td>
-</tr>
-<tr>
-    <td><label>Home</label>
-        <input type="text" name="phone" placeholder="Home Phone" id="phone">
-    </td>
-    <td><label>Mobile</label>
-        <input type="text" name="phone_sec" placeholder="Mobile Phone" id="phone_sec">
-    </td>
-</tr>
-<tr>
-    <td><label>Part A</label>
-        <input type="date" name="partA_date" placeholder="Part A Date" id="partA_date">
-    </td>
-<td><label>Part B</label>
-        <input type="date" name="partB_date" placeholder="Part B Date" id="partB_date">
-</td>
-<td><label>Medicare</label>
-        <input type="text" name="medicare_number" placeholder="Medicare Number" id="medicare_number">
-
-</td>
-</tr>
-<tr>
-<td>
-	<label>Insurer</label>
-        <input type="text" name="insurer" placeholder="Insurer" id="insurer">
-</td>
-    <td><label>Policy</label>
-        <select name="policy[]" id="policy" multiple>
-            <option value="Policy" disabled selected>Policy</option>
-            <option value="Health">Health</option>
-            <option value="Life">Life</option>
-            <option value="Med Supp">Med Supp</option>
-            <option value="Med Adv">Med Adv</option>
-            <option value="Final Exp">Final Exp</option>
-            <option value="Hospital Ind">Hospital Ind</option>
-            <option value="Annuity">Annuity</option>
-            <option value="DVH">DVH</option>
-        </select>
-    </td>
-<td><label>Status</label>
-        <select id="appstatus" name="appstatus">
-            <option value="Status" disabled selected>Status</option>
-            <option value="Enrolled">Enrolled</option>
-            <option value="Pending">Pending</option>
-            <option value="Accepted">Accepted</option>
-            <option value="Denied">Denied</option>
-            <option value="Cancelled">Cancelled</option>
-        </select>
-</td>
-</tr>
-<tr>
-<td colspan="2">
-        <textarea type="text" name="notes" placeholder="Notes" id="notes"></textarea>
-</td>
-<td>
-        <input type="datetime-local" name="created" value="<?=date('Y-m-d\TH:i')?>" id="created">
-</td>
-</tr>
-<tr>
-<td>
-   	<input type="submit" value="Create">
-</td>
-<td>
-    <a href="./clients.php" class="w3-button w3-orange w3-hover-amber">Cancel</a>
-</td>
-</tr>
-</table>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="name" placeholder="Name" title="Name" value="<?=$client['name']?>" id="name">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="email" placeholder="Email" title="Email" value="<?=$client['email']?>" id="email">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input onfocus="(this.type='date')" name="birthdate" placeholder="Birthdate" title="Birth Date" value="<?=$client['birthdate']?>" id="birthdate">
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="address" placeholder="Street Address" title="Street Address" value="<?=$client['address']?>" id="address">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="city" placeholder="City" title="City" value="<?=$client['city']?>" id="city">
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <!-- <input type="text" name="state" placeholder="State" title="State" value="<?=$client['state']?>" id="state"> -->
+                <select name="state" id="state">
+                    <option value="State" selected disabled>State</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">Dist of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                    </select>
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="zip" placeholder="Zip" title="Zip" value="<?=$client['zip']?>" id="zip">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="county" placeholder="County" title="County" value="<?=$client['county']?>" id="county">
+            </div>
+        </div>              
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="phone" placeholder="Home Phone" title="Home Phone" value="<?=$client['phone']?>" id="phone">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="phone_sec" placeholder="Mobile Phone" title="Secondary Phone" value="<?=$client['phone_sec']?>" id="phone_sec">
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <input onfocus="(this.type='date')" name="partA_date" placeholder="Part A Date" title="PartA Date" value="<?=$client['partA_date']?>" id="partA_date">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input onfocus="(this.type='date')" name="partB_date" placeholder="Part B Date" title="PartB Date" value="<?=$client['partB_date']?>" id="partB_date">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="medicare_number" placeholder="Medicare Number" title="Medicare Number" value="<?=$client['medicare_number']?>" id="medicare_number">
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <input type="text" name="insurer" placeholder="Insurer" value="<?=$client['insurer']?>" id="insurer">
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <select id="policy" name="policy[]" multiple>
+                    <option value="Policy" disabled selected>Policy</option>
+                    <option value="Health" <?php if(str_contains($client["policy"], "Health")){ echo "selected"; } ?>>Health</option>
+                    <option value="Life" <?php if(str_contains($client["policy"], "Life")){ echo "selected"; } ?>>Life</option>
+                    <option value="Med Supp" <?php if(str_contains($client["policy"], "Med Supp")){ echo "selected"; } ?>>Med Supp</option>
+                    <option value="Med Adv" <?php if(str_contains($client["policy"], "Med Adv")){ echo "selected"; } ?>>Med Adv</option>
+                    <option value="Final Exp" <?php if(str_contains($client["policy"], "Final Exp")){ echo "selected"; } ?>>Final Exp</option>
+                    <option value="Hospital Ind" <?php if(str_contains($client["policy"], "Hospital Ind")){ echo "selected"; } ?>>Hospital Ind</option>
+                    <option value="Annuity" <?php if(str_contains($client["policy"], "Annuity")){ echo "selected"; } ?>>Annuity</option>
+                    <option value="DVH" <?php if(str_contains($client["policy"], "DVH")){ echo "selected"; } ?>>DVH</option>
+                </select>
+            </div>
+            <div class="w3-col s12 m3 l3">
+                <select id="appstatus" name="appstatus">
+                    <option value="Status" disabled selected>Status</option>
+                    <option value="Enrolled" <?php if($client["appstatus"] == "Enrolled"){ echo "selected"; } ?>>Enrolled</option>
+                    <option value="Pending" <?php if($client["appstatus"] == "Pending"){ echo "selected"; } ?>>Pending</option>
+                    <option value="Accepted" <?php if($client["appstatus"] == "Accepted"){ echo "selected"; } ?>>Accepted</option>
+                    <option value="Denied" <?php if($client["appstatus"] == "Denied"){ echo "selected"; } ?>>Denied</option>
+                    <option value="Cancelled" <?php if($client["appstatus"] == "Cancelled"){ echo "selected"; } ?>>Cancelled</option>
+                </select>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <textarea type="text" name="notes" placeholder="Notes" id="notes"><?=$client['notes']?></textarea>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <input type="hidden" name="created" value="<?=date('Y-m-d\TH:i')?>" id="created">
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col s12 m3 l3">
+                <input type="submit" value="Update">
+            </div>
+            <div class="w3-col s12 m3 l3 w3-margin">
+                <a href="./clients.php" class="w3-btn w3-orange w3-hover-amber">Cancel</a>
+            </div> 
+        </div>       
     </form>
 </div>
 </div>
