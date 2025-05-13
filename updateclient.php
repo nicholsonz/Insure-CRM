@@ -120,26 +120,26 @@ if (!$client) {
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="name" placeholder="Name" title="Name" value="<?=$client['name']?>" id="name">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="email" placeholder="Email" title="Email" value="<?=$client['email']?>" id="email">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input onfocus="(this.type='date')" name="birthdate" placeholder="Birthdate" title="Birth Date" value="<?=$client['birthdate']?>" id="birthdate">
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="address" placeholder="Street Address" title="Street Address" value="<?=$client['address']?>" id="address">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="city" placeholder="City" title="City" value="<?=$client['city']?>" id="city">
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <!-- <input type="text" name="state" placeholder="State" title="State" value="<?=$client['state']?>" id="state"> -->
                 <select name="state" id="state">
                     <option value="<?=$client['state']?>"><?=$client['state']?></option>
@@ -196,37 +196,37 @@ if (!$client) {
                     <option value="WY">Wyoming</option>
                     </select>
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="zip" placeholder="Zip" title="Zip" value="<?=$client['zip']?>" id="zip">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="county" placeholder="County" title="County" value="<?=$client['county']?>" id="county">
             </div>
         </div>              
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="phone" placeholder="Home Phone" title="Home Phone" value="<?=$client['phone']?>" id="phone">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="phone_sec" placeholder="Mobile Phone" title="Secondary Phone" value="<?=$client['phone_sec']?>" id="phone_sec">
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input onfocus="(this.type='date')" name="partA_date" placeholder="Part A Date" title="PartA Date" value="<?=$client['partA_date']?>" id="partA_date">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input onfocus="(this.type='date')" name="partB_date" placeholder="Part B Date" title="PartB Date" value="<?=$client['partB_date']?>" id="partB_date">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="medicare_number" placeholder="Medicare Number" title="Medicare Number" value="<?=$client['medicare_number']?>" id="medicare_number">
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="insurer" placeholder="Insurer" value="<?=$client['insurer']?>" id="insurer">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <select id="policy" name="policy[]" multiple>
                     <option value="Policy" disabled selected>Policy</option>
                     <option value="Health" <?php if(str_contains($client["policy"], "Health")){ echo "selected"; } ?>>Health</option>
@@ -239,7 +239,7 @@ if (!$client) {
                     <option value="DVH" <?php if(str_contains($client["policy"], "DVH")){ echo "selected"; } ?>>DVH</option>
                 </select>
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <select id="appstatus" name="appstatus">
                     <option value="Status" disabled selected>Status</option>
                     <option value="Enrolled" <?php if($client["appstatus"] == "Enrolled"){ echo "selected"; } ?>>Enrolled</option>
@@ -251,7 +251,7 @@ if (!$client) {
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <textarea type="text" name="notes" placeholder="Notes" id="notes"><?=$client['notes']?></textarea>
             </div>
         </div>
@@ -261,10 +261,10 @@ if (!$client) {
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="submit" value="Update">
             </div>
-            <div class="w3-col s12 m3 l3 w3-margin">
+            <div class="w3-col s12 m12 l3 w3-margin-right w3-margin">
                 <a href="./clients.php" class="w3-btn w3-orange w3-hover-amber">Cancel</a>
             </div> 
         </div>       

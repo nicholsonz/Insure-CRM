@@ -64,26 +64,26 @@ if (!empty($_POST)) {
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="name" placeholder="Name" title="Name" id="name">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="email" placeholder="Email" title="Email" id="email">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input onfocus="(this.type='date')" name="birthdate" placeholder="Birthdate" title="Birth Date" id="birthdate">
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="address" placeholder="Street Address" title="Street Address" id="address">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="city" placeholder="City" title="City" id="city">
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <!-- <input type="text" name="state" placeholder="State" title="State" id="state"> -->
                 <select name="state" id="state">
                     <option value="State" selected disabled>State</option>
@@ -140,37 +140,37 @@ if (!empty($_POST)) {
                     <option value="WY">Wyoming</option>
                     </select>
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="zip" placeholder="Zip" title="Zip" id="zip">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="county" placeholder="County" title="County" id="county">
             </div>
         </div>              
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="phone" placeholder="Home Phone" title="Home Phone" id="phone">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="phone_sec" placeholder="Mobile Phone" title="Secondary Phone" id="phone_sec">
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input onfocus="(this.type='date')" name="partA_date" placeholder="Part A Date" title="PartA Date" id="partA_date">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input onfocus="(this.type='date')" name="partB_date" placeholder="Part B Date" title="PartB Date" id="partB_date">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="medicare_number" placeholder="Medicare Number" title="Medicare Number" id="medicare_number">
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="text" name="insurer" placeholder="Insurer" id="insurer">
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <select id="policy" name="policy[]" multiple>
                     <option value="Policy" disabled selected>Policy</option>
                     <option value="Health">Health</option>
@@ -183,7 +183,7 @@ if (!empty($_POST)) {
                     <option value="DVH">DVH</option>
                 </select>
             </div>
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <select id="appstatus" name="appstatus">
                     <option value="Status" disabled selected>Status</option>
                     <option value="Enrolled">Enrolled</option>
@@ -195,20 +195,20 @@ if (!empty($_POST)) {
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <textarea type="text" name="notes" placeholder="Notes" id="notes"></textarea>
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
                 <input type="hidden" name="created" value="<?=date('Y-m-d\TH:i')?>" id="created">
             </div>
         </div>
         <div class="w3-row">
-            <div class="w3-col s12 m3 l3">
-                <input type="submit" value="Update">
+            <div class="w3-col s12 m12 l3 w3-margin-right">
+                <input type="submit" value="Create">
             </div>
-            <div class="w3-col s12 m3 l3 w3-margin">
+            <div class="w3-col s12 m12 l3 w3-margin-right w3-margin">
                 <a href="./leads.php" class="w3-btn w3-orange w3-hover-amber">Cancel</a>
             </div> 
         </div>       
