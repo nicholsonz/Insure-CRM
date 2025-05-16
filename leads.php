@@ -31,12 +31,14 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
     <div class="">
     	<a href="createlead.php" class="create-contact">Create Lead</a>
     	<a href="impleads.php" class="create-contact">Import Leads</a>        
-        <div class="w3-margin">            
-           <button type="button" value="" id="delete" class="w3-button w3-small w3-round w3-border w3-red w3-text-black"> DELETE</button>
-            <div class="w3-right w3-padding">
-              <input id="tableSrch" type="text" placeholder="Filter..">
+            <div class="w3-row"> 
+                <div class="w3-left">           
+                    <button type="button" value="" id="delete" class="w3-button w3-small w3-round w3-border w3-red w3-text-black"> DELETE</button>
+                </div>
+                <div class="w3-right w3-padding">
+                    <input id="tableSrch" type="text" placeholder="Filter..">
+                </div>
             </div>
-        </div>
         <div class="table-viewer tableFixHead" id="leadTable">
         	<table class="w3-table w3-hoverable" id="srtTable">
                 <thead>
