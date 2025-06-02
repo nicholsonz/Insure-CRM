@@ -69,8 +69,8 @@ if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER
                       <a href="updatelead.php?name=<?=$row['name']?>" class="edit tooltip"><i class="fas fa-edit fa-xs"></i><span class="tooltiptext">Edit Lead</span></a>
                       <button type="button" value="<?=$row['name'];?>" class="w3-btn delLead trash"><i class="fas fa-trash-alt fa-xs"></i></button>
                   </td>
-              </tr>
-              <?php endwhile; ?>
+                </tr>
+                    <?php endwhile; ?>
           </tbody>
       </table>
     </div>
