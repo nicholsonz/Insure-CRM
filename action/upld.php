@@ -1,5 +1,5 @@
 <?php
-include('../include/dbconfig.php');
+include('../include/config.php');
 
 // We need to use sessions, so you should always start sessions using the below code.
 if (session_status() === PHP_SESSION_NONE) {

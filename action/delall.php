@@ -1,5 +1,5 @@
 <?php
-include('../include/dbconfig.php');
+include('../include/config.php');
 
 // Set document root for uploaded files
 $rootDir = $_SERVER['DOCUMENT_ROOT'];

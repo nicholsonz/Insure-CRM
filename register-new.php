@@ -1,6 +1,6 @@
 <?php
 // Include config file
-include('./include/dbconfig.php');
+include('./include/config.php');
 
 // Define variables and initialize with empty values
 $accttype = $username = $email = $password = $confirm_password = "";
