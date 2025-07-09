@@ -110,11 +110,26 @@ $con->close();
 				<label for="acct_type">
 					<i class="fas fa-users-rectangle"></i>
 				</label>
-				<select name="acct_type" id="acct_type" required>
-					<option value="Admin">Admin</option>
-					<option value="Agent">Agent</option>
-					<option value="Support">Support</option>
-				</select>
+				<?php 
+				// We need to check if the account with that username exists.
+				$admin = "Admin";
+				$stmt_admin = $con->prepare('SELECT * FROM accounts WHERE acct_type = ?');
+					$stmt_admin->bind_param('s', $admin);
+					$stmt_admin->execute();
+					$stmt_admin->store_result();
+				?>
+				<?php if ($stmt_admin->num_rows > 0):  ?>		
+					<select name="acct_type" id="acct_type" required>
+						<option value="Agent">Agent</option>
+						<option value="Support">Support</option>
+					<?php else:  ?> 
+					<select name="acct_type" id="acct_type" required>
+						<option value="Admin">Admin</option>
+						<option value="Agent">Agent</option>
+						<option value="Support">Support</option>
+					</select>
+				<?php endif; ?>
+				
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
