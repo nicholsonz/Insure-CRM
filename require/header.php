@@ -43,29 +43,29 @@ $pdo = pdo_connect_mysql();
 $sqlchk = "SELECT acct_type FROM accounts WHERE id = '$acct_id'";
 $chkres = mysqli_query($con, $sqlchk);
 while($row = mysqli_fetch_assoc($chkres)){
-if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
+if($row['acct_type'] == "Admin"){ ?>
 
     <div class="w3-sidebar w3-bar-block w3-collapse w3-card-4 w3-animate-left w3-custom-blue" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large w3-hide-large" id="w3close">Close &times;</button>
  			<div class="w3-logo">
 				<a href="home.php" class="w3-bar-logo w3-padding w3-hover-text-blue"><h3><i class="fas fa-home w3-margin-right"></i> Insure CRM</h3></a>
 			</div>
-			<a href="taskmngr.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-hourglass w3-margin-right"></i> Tasks</a>
-			<a href="clients.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Clients</a>
-            <a href="leads.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Leads</a>
-			<a href="profile.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-user-circle w3-margin-right"></i> Profile</a>
-			<a href="./action/logout.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a>
-      <hr></hr>
+				<a href="taskmngr.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-hourglass w3-margin-right"></i> Tasks</a>
+				<a href="clients.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Clients</a>
+				<a href="leads.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Leads</a>
+				<a href="settings.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-user-circle w3-margin-right"></i> Settings</a>
+				<a href="./action/logout.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a>
+				<hr></hr>
 			<div class="w3-dropdown-hover">
 				<a href="" class="task-mngr w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
 				<?php
-				$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 8 DAY) AND DATE(deadline)) ORDER BY deadline ASC";
+				$sql_tasks = "SELECT * FROM tasks WHERE (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 8 DAY) AND DATE(deadline)) ORDER BY deadline ASC";
 				$res = mysqli_query($con, $sql_tasks);
 				$num_tasks = mysqli_num_rows($res);
 
 
 
-				$sql_tasks2 = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND DATE(NOW()) >= DATE(deadline) ORDER BY deadline ASC";
+				$sql_tasks2 = "SELECT * FROM tasks WHERE DATE(NOW()) >= DATE(deadline) ORDER BY deadline ASC";
 				$res2 = mysqli_query($con, $sql_tasks2);
 				$num_tasks2 = mysqli_num_rows($res2);
 
@@ -110,17 +110,19 @@ if($row['acct_type'] == "Admin" || $row['acct_type'] == "Agent"){ ?>
 					 }
 ?>
 <?php }else{ ?>
-</div>
+	</div>
 </div>
 	<div class="w3-sidebar w3-bar-block w3-collapse w3-card-4 w3-animate-left w3-custom-blue" id="mySidebar">
-    <button class="w3-bar-item w3-button w3-large w3-hide-large" id="w3close">Close &times;</button>
+   	 <button class="w3-bar-item w3-button w3-large w3-hide-large" id="w3close">Close &times;</button>
  			<div class="w3-logo">
-				<a href="home.php" class="w3-bar-logo w3-padding-large w3-hover-text-blue"><h3><i class="fas fa-home w3-margin-right"></i> Insure CRM</h3></a>
+				<a href="home.php" class="w3-bar-logo w3-padding w3-hover-text-blue"><h3><i class="fas fa-home w3-margin-right"></i> Insure CRM</h3></a>
 			</div>
-			<a href="taskmngr.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-hourglass w3-margin-right"></i> Tasks</a>
-            <a href="leads.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Leads</a>
-			<a href="./action/logout.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a>
-      <div class="w3-dropdown-hover">
+				<a href="taskmngr.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-hourglass w3-margin-right"></i> Tasks</a>
+				<a href="clients.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Clients</a>
+				<a href="leads.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Leads</a>
+				<a href="./action/logout.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a>
+				<hr></hr>
+      		<div class="w3-dropdown-hover">
 				<a href="" class="task-mngr w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
 				<?php
 				$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 7 DAY) AND DATE(deadline));";
