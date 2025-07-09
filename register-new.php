@@ -122,6 +122,7 @@ $con->close();
 					<select name="acct_type" id="acct_type" required>
 						<option value="Agent">Agent</option>
 						<option value="Support">Support</option>
+					</select>
 					<?php else:  ?> 
 					<select name="acct_type" id="acct_type" required>
 						<option value="Admin">Admin</option>
