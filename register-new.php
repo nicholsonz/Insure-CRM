@@ -111,13 +111,13 @@ $con->close();
 					<i class="fas fa-users-rectangle"></i>
 				</label>
 				<?php 
-				// We need to check if the account with that username exists.
+				// Restrict admin account to 1
 				$admin = "Admin";
 				$stmt_admin = $con->prepare('SELECT * FROM accounts WHERE acct_type = ?');
 					$stmt_admin->bind_param('s', $admin);
 					$stmt_admin->execute();
 					$stmt_admin->store_result();
-				?>
+				?>				
 				<?php if ($stmt_admin->num_rows > 0):  ?>		
 					<select name="acct_type" id="acct_type" required>
 						<option value="Agent">Agent</option>
