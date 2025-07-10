@@ -1,17 +1,25 @@
 <?php
-    require_once('./require/header.php');
+  require_once('./require/header.php');
 
-	$sql = "SELECT COUNT(*) as clients,
-		(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Lead') as leads,
-		(SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Other') as other
-		FROM tasks
-		WHERE acct_id = '$acct_id' AND type = 'Client'";
-	$res = mysqli_query($con, $sql);
-	while($row=mysqli_fetch_assoc($res)){
-		$clients = $row['clients'];
-		$leads = $row['leads'];
-		$other = $row['other'];
-	}
+if($rowchk['acct_type'] == "Admin"){      
+$sql = "SELECT COUNT(*) as clients,
+  (SELECT COUNT(*) FROM tasks WHERE type = 'Lead') as leads,
+  (SELECT COUNT(*) FROM tasks WHERE type = 'Other') as other
+  FROM tasks
+  WHERE type = 'Client'";
+} else {
+$sql = "SELECT COUNT(*) as clients,
+  (SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Lead') as leads,
+  (SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Other') as other
+  FROM tasks
+  WHERE acct_id = '$acct_id' AND type = 'Client'";
+}
+$res = mysqli_query($con, $sql);
+while($row=mysqli_fetch_assoc($res)){
+  $clients = $row['clients'];
+  $leads = $row['leads'];
+  $other = $row['other'];
+}
 
 ?>
 
@@ -20,11 +28,20 @@
 <table class="w3-table w3-custom-blue w3-card-4">
   <tr>
     <?php
+      if($rowchk['acct_type'] == "Admin"){      
+        $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients GROUP BY policy";
+        $result = mysqli_query($con, $sqlpol);
+
+        while($row = mysqli_fetch_assoc($result)){
+          echo  "<td>".$row['policy']. "&nbsp; - " .$row['counted']. "</td>";
+        }
+      } else {
       $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients WHERE acct_id = '$acct_id' GROUP BY policy";
       $result = mysqli_query($con, $sqlpol);
 
       while($row = mysqli_fetch_assoc($result)){
         echo  "<td>".$row['policy']. "&nbsp; - " .$row['counted']. "</td>";
+       }
       }?>
    </tr>
  </table>
@@ -36,9 +53,16 @@
 			<h2><?php echo date('F'); ?> Activity</h2>
       <br />
 			<?php
-				$pdo = pdo_connect_mysql();
-				$newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(NOW()) AND MONTH(created) = MONTH(now())")->fetchColumn();
-				$convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(NOW()) AND MONTH(created) = MONTH(now())")->fetchColumn();
+      // Test whether the user is Admin
+        if($rowchk['acct_type'] == "Admin"){      
+          $pdo = pdo_connect_mysql();
+          $newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE YEAR(created) = YEAR(NOW()) AND MONTH(created) = MONTH(now())")->fetchColumn();
+          $convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE YEAR(created) = YEAR(NOW()) AND MONTH(created) = MONTH(now())")->fetchColumn();
+        } else {
+          $pdo = pdo_connect_mysql();
+          $newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(NOW()) AND MONTH(created) = MONTH(now())")->fetchColumn();
+          $convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(NOW()) AND MONTH(created) = MONTH(now())")->fetchColumn();
+        }
 				if($convleads == "0"){
 					$convperc = "0";
 				}elseif($newleads == "0" && $convleads > "0"){
@@ -69,9 +93,16 @@
 			<h2><?php echo date('Y'); ?> Activity</h2>
       <br />
 			<?php
-				$pdo = pdo_connect_mysql();
-				$newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
-				$convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
+      // Test whether the user is Admin
+        if($rowchk['acct_type'] == "Admin"){      
+          $pdo = pdo_connect_mysql();
+          $newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE YEAR(created) = YEAR(now())")->fetchColumn();
+          $convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE YEAR(created) = YEAR(now())")->fetchColumn();
+        } else {
+          $pdo = pdo_connect_mysql();
+          $newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
+          $convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
+        }
 				if($convleads == "0"){
 					$convperc = "0";
 				}elseif($newleads == "0" && $convleads > "0"){
@@ -146,9 +177,18 @@
 		<div class="w3-col s12 m6-6 l6-6 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
+      // Test whether the user is Admin
+        if($rowchk['acct_type'] == "Admin"){      
+				$pdo = pdo_connect_mysql();
+				$mnthleads = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as leadnum FROM leads WHERE YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
+				$mnthclients = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as clientnum FROM clients WHERE YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
+        } else {    
 				$pdo = pdo_connect_mysql();
 				$mnthleads = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as leadnum FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
 				$mnthclients = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as clientnum FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
+        
+
+        }
 			?>
 
 			<canvas id="activityChart" class="chart-style"></canvas>
@@ -171,29 +211,61 @@
 
           //Select Database
           $db_select = mysqli_select_db($con, DB_NAME) or die();
-
+          
+            if($rowchk['acct_type'] == "Admin"){      
           //Create SQL Query to Get Data from Databse
+            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+              FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.type = 'Client'
+              ORDER BY deadline");
+            $stmt->execute();
+            } else {
+              //Create SQL Query to Get Data from Databse
             $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
               ORDER BY deadline");
             $stmt->execute();
+            }
 
-            // Fetch the records so we can display them in our template.
-            $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            // Get the total number of clients, this is so we can determine whether there should be a next and previous button
-            $num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
-            LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-            WHERE t.acct_id = '$acct_id' AND t.type = 'Client'")->fetchColumn();
-
-            //Create SQL Query to Get DAta from Databse
-            $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
-            FROM tasks AS t
-            LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-            WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
-            ORDER BY deadline"
-            ;
+            
+            if($rowchk['acct_type'] == "Admin"){      
+              // Fetch the records so we can display them in our template.
+              $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+              // Get the total number of clients, this is so we can determine whether there should be a next and previous button
+              $num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.acct_id = '$acct_id' AND t.type = 'Client'")->fetchColumn();
+            } else {
+              // Fetch the records so we can display them in our template.
+              $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+              // Get the total number of clients, this is so we can determine whether there should be a next and previous button
+              $num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.type = 'Client'")->fetchColumn();
+            }
+            
+            // Test whether the user is Admin
+            $admchk = "SELECT acct_type FROM accounts WHERE id = '$acct_id'";
+            $chkres = mysqli_query($con, $admchk);
+            $row = mysqli_fetch_assoc($chkres);
+            if($rowchk['acct_type'] == "Admin"){      
+              //Create SQL Query to Get DAta from Databse
+              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+              FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.type = 'Client'
+              ORDER BY deadline";
+            } else {              
+              //Create SQL Query to Get DAta from Databse
+              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+              FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
+              ORDER BY deadline";
+            }
             //Execute Query
             $res = mysqli_query($con, $sql);
 
@@ -254,30 +326,57 @@
           </tr>
         </thead>
           <?php
+            if($rowchk['acct_type'] == "Admin"){      
             // Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
             $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
-                        FROM tasks AS t
-                        LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-                        WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
-                        ORDER BY deadline");
+                    FROM tasks AS t
+                    LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+                    WHERE t.type = 'Lead'
+                    ORDER BY deadline");
             $stmt->execute();
-            // Fetch the records so we can display them in our template.
-            $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            // Get the total number of clients, this is so we can determine whether there should be a next and previous button
-            $num_leads = $pdo->query("SELECT COUNT(*) FROM tasks AS t
-            LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-            WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'")->fetchColumn();
+            } else {              
+            // Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
+            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+                    FROM tasks AS t
+                    LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+                    WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
+                    ORDER BY deadline");
+            $stmt->execute();
+            }
+            if($rowchk['acct_type'] == "Admin"){      
+              // Fetch the records so we can display them in our template.
+              $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+              // Get the total number of clients, this is so we can determine whether there should be a next and previous button
+              $num_leads = $pdo->query("SELECT COUNT(*) FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.type = 'Lead'")->fetchColumn();
+            } else {                   
+              // Fetch the records so we can display them in our template.
+              $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+              // Get the total number of clients, this is so we can determine whether there should be a next and previous button
+              $num_leads = $pdo->query("SELECT COUNT(*) FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'")->fetchColumn();
+            }
 
           //Select Database
           $db_select = mysqli_select_db($con, DB_NAME) or die();
-
-          //Create SQL Query to Get DAta from Databse
-          $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+          
+            if($rowchk['acct_type'] == "Admin"){
+              //Create SQL Query to Get DAta from Databse
+              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+              FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.type = 'Lead'
+              ORDER BY deadline";
+            } else {              
+              //Create SQL Query to Get DAta from Databse
+              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
               ORDER BY deadline";
-
+            }
 
           //Execute Query
           $res = mysqli_query($con, $sql);
@@ -342,13 +441,22 @@
 
           //Select Database
           $db_select = mysqli_select_db($con, DB_NAME) or die();
-
-          //Create SQL Query to Get DAta from Databse
-          $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+            if($rowchk['acct_type'] == "Admin"){
+              //Create SQL Query to Get DAta from Databse
+              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+              FROM tasks AS t
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              WHERE t.type = 'Other'
+              ORDER BY deadline";
+            } else {
+              //Create SQL Query to Get DAta from Databse
+              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Other'
               ORDER BY deadline";
+
+            }
 
 
           //Execute Query

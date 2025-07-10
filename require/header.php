@@ -22,6 +22,11 @@ $acct_id = $_SESSION['id'];
 // Connect to MySQL database
 $pdo = pdo_connect_mysql();
 
+// SQL statement to test whether the user is Admin
+$admchk = "SELECT acct_type FROM accounts WHERE id = '$acct_id'";
+$chkres = mysqli_query($con, $admchk);
+$rowchk = mysqli_fetch_assoc($chkres);
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +58,7 @@ if($row['acct_type'] == "Admin"){ ?>
 				<a href="taskmngr.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-hourglass w3-margin-right"></i> Tasks</a>
 				<a href="clients.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Clients</a>
 				<a href="leads.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-address-book w3-margin-right"></i> Leads</a>
-				<a href="settings.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-user-circle w3-margin-right"></i> Settings</a>
+				<a href="admnstr.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-user-circle w3-margin-right"></i> Admin</a>
 				<a href="./action/logout.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a>
 				<hr></hr>
 			<div class="w3-dropdown-hover">
