@@ -35,8 +35,9 @@ $rowchk = mysqli_fetch_assoc($chkres);
 			<meta charset="utf-8">
       <?php function template_header($title) {echo "<title>" . $title . "</title>";}?>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link rel="stylesheet" href="./css/w3.css">
+			<!-- <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css"> -->
 			<link rel="stylesheet" href="../fontawesome/css/all.css">
+			<link rel="stylesheet" href="./css/w3.css">
 			<link rel="stylesheet" href="./css/style.css">
       <link rel="icon" href="./favicon.ico">
 			<script src="./js/jquery-3.7.1.min.js"></script>
@@ -130,13 +131,13 @@ if($row['acct_type'] == "Admin"){ ?>
       		<div class="w3-dropdown-hover">
 				<a href="" class="task-mngr w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
 				<?php
-				$sql_tasks = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 7 DAY) AND DATE(deadline));";
+				$sql_tasks = "SELECT * FROM tasks WHERE (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 8 DAY) AND DATE(deadline)) ORDER BY deadline ASC";
 				$res = mysqli_query($con, $sql_tasks);
 				$num_tasks = mysqli_num_rows($res);
 
 
 
-				$sql_tasks2 = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND (NOW() >= DATE_ADD(DATE(deadline), INTERVAL 1 DAY))";
+				$sql_tasks2 = "SELECT * FROM tasks WHERE DATE(NOW()) >= DATE(deadline) ORDER BY deadline ASC";
 				$res2 = mysqli_query($con, $sql_tasks2);
 				$num_tasks2 = mysqli_num_rows($res2);
 
