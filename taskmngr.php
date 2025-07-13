@@ -2,8 +2,13 @@
     require_once('./require/header.php');
 
 
+if($rowchk['acct_type'] == "Admin"){   
+// Get the total number of records.
+$total_pages = $con->query("SELECT COUNT(*) FROM tasks")->fetch_row()[0];
+} else {
 // Get the total number of records.
 $total_pages = $con->query("SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id'")->fetch_row()[0];
+}
 
 // Check if the page number is specified and check if it's a number, if not return the default page number which is 1.
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
@@ -12,15 +17,28 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 10;
 
 
-if ($stmt = $con->prepare("SELECT task_id, task_name, details, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, type, tl.list_name
-                           FROM tasks
-                           LEFT JOIN task_lists AS tl ON tasks.list_id = tl.list_id
-                           WHERE tasks.acct_id = '$acct_id'
-                           ORDER BY tasks.deadline ASC -- LIMIT ?,?")) {
+if($rowchk['acct_type'] == "Admin"){   
+    $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.task_name, t.details, t.name, t.list_id, t.priority, DATE_FORMAT(t.deadline, '%b %d, %y %h:%i %p') AS deadline, t.type, tl.list_name
+                           FROM tasks as t
+                           LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+                           ORDER BY t.deadline ASC -- LIMIT ?,?");
 	// Calculate the page to get the results we need from our table.
 	// $calc_page = ($page - 1) * $records_per_page;
 	// $stmt->bind_param('ii', $calc_page, $records_per_page);
 	$stmt->execute();
+	// Get the results...
+	$result = $stmt->get_result();
+	$stmt->close();
+} else {       
+    $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.task_name, t.details, t.name, t.list_id, t.priority, DATE_FORMAT(t.deadline, '%b %d, %y %h:%i %p') AS deadline, t.type, tl.list_name
+                           FROM tasks as t
+                           LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+                           WHERE t.acct_id = ?
+                           ORDER BY t.deadline ASC -- LIMIT ?,?");
+	// Calculate the page to get the results we need from our table.
+	// $calc_page = ($page - 1) * $records_per_page;
+	// $stmt->bind_param('ii', $calc_page, $records_per_page);
+	$stmt->execute([$acct_id]);
 	// Get the results...
 	$result = $stmt->get_result();
 	$stmt->close();
@@ -29,9 +47,41 @@ if ($stmt = $con->prepare("SELECT task_id, task_name, details, name, priority, l
 ?>
 
 <?=template_header('Task Mngr')?>
-
+<!-- Edit Income Modal -->
+<div class="modal fade" id="taskEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Income</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="updateTask">
+            <div class="modal-body">
+                <div id="errorMessageUpdate" class="alert alert-warning d-none">
+                </div>
+                <input type="hidden" name="task_id" id="task_id" >
+                <div class="mb-3">
+                    <label for="acct_id">Account ID</label>
+                    <input type="text" name="acct_id" Account IDacct_id" Account IDs="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="task_name">Task</label>
+                    <input type="text" name="task_name" id="task_name" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" />
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
 <div class="w3-content read">
-
     <h1>TASK MANAGER</h1>
     <hr></hr>
     <div class="">
@@ -39,7 +89,7 @@ if ($stmt = $con->prepare("SELECT task_id, task_name, details, name, priority, l
         <a href="./manage-list.php">Manage Lists</a>
     </div>
      <div class="">
-    </div>
+     </div>
         <a href="./add-task.php" class="add-task">Add Task</a>
       <div id="taskTable">
         <div class="table-viewer tableFixHead">
@@ -67,21 +117,20 @@ if ($stmt = $con->prepare("SELECT task_id, task_name, details, name, priority, l
                 <?php else: ?>
                     <td><a href="./updateclient.php?name=<?= $row['name']; ?>"><?= $row['name'] ?></a></td>
                 <?php endif; ?>
-                <td><?= $row['details'] ?></td>
-                <td><?= $row['list_name'] ?></td>
-                <td><?= $row['priority'] ?></td>
-                <td><?= $row['deadline'] ?></td>
-                <td><?= $row['type'] ?></td>
+                <td><?= htmlspecialchars($row['details']) ?></td>
+                <td><?= htmlspecialchars($row['list_name']) ?></td>
+                <td><?= htmlspecialchars($row['priority']) ?></td>
+                <td><?= date("m-d-Y h:i A", strtotime($row['deadline'])) ?></td>
+                <td><?= htmlspecialchars($row['type']) ?></td>
                 <td class="actions">
                     <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a>
+                    <!-- <button type="button" value="<?=$row['task_id'];?>" class="editTaskBtn w3-btn edit"><i class="fas fa-edit fa-xs"></i></button> -->
                     <button type="button" value="<?=$row['task_id'];?>" class="w3-btn delTask trash"><i class="fas fa-trash fa-xs"></i></button>
 
                 </td>
             </tr>
             <?php endwhile ?>
-
         </tbody>
-
         </table>
         </div>
       </div>

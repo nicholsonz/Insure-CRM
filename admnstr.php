@@ -6,12 +6,16 @@ if($rowchk['acct_type'] !== "Admin"){
 	header("Location: home.php");
 } else {
 	// Fetch all accounts
-	$stmt = $con->prepare("SELECT * FROM accounts AS a
-							ORDER BY a.username DESC"); 
-	}$stmt->execute();
-        // Get the results...
-        $result = $stmt->get_result();
-        $stmt->close();
+	$stmt = $con->prepare("SELECT a.username, a.email, a.acct_type, COUNT(c.policy) as policies 
+							FROM accounts AS a
+							LEFT JOIN clients AS c ON a.id = c.acct_id
+							GROUP BY a.id"); 
+	}
+	
+$stmt->execute();
+// Get the results...
+$result = $stmt->get_result();
+$stmt->close();
 
 ?>
 
@@ -29,6 +33,7 @@ if($rowchk['acct_type'] !== "Admin"){
 								<th><a href="javascript:SortTable(0,'T');">Username <i class="fa fa-sort"></a></th>
 								<th>Email</th>
 								<th>Account Type</th>
+								<th>Policies</th>
 							</tr>
 							</thead>
 						<?php while ($row = $result->FETCH_ASSOC()): ?>
@@ -37,6 +42,7 @@ if($rowchk['acct_type'] !== "Admin"){
 								<td><?=$row['username']?></td>
 								<td><?=$row['email']?></td>
 								<td><?=$row['acct_type']?></td>
+								<td><?=$row['policies']?></td>
 							</tr>
 						<?php endwhile; ?>
 							</tbody>					

@@ -1,9 +1,13 @@
 <?php
     require_once('./require/header.php');
 
-
-// Get the total number of records from our table "students".
-$total_pages = $con->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id'")->fetch_row()[0];
+if($rowchk['acct_type'] == "Admin"){   
+    // Get the total number of records from our table "students".
+    $total_pages = $con->query("SELECT COUNT(*) FROM leads")->fetch_row()[0];
+} else {    
+    // Get the total number of records from our table "students".
+    $total_pages = $con->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id'")->fetch_row()[0];
+}
 
 // Check if the page number is specified and check if it's a number, if not return the default page number which is 1.
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
@@ -11,15 +15,26 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 // Number of results to show on each page.
 $records_per_page = 10;
 
-
-if ($stmt = $con->prepare("SELECT * FROM leads  WHERE acct_id = '$acct_id' ORDER BY created DESC -- LIMIT ?,?")) {
-	// Calculate the page to get the results we need from our table.
-	// $calc_page = ($page - 1) * $records_per_page;
-	// $stmt->bind_param('ii', $calc_page, $records_per_page);
-	$stmt->execute();
-	// Get the results...
-	$result = $stmt->get_result();
-	$stmt->close();
+if($rowchk['acct_type'] == "Admin"){   
+    if ($stmt = $con->prepare("SELECT * FROM leads ORDER BY created DESC -- LIMIT ?,?")) {
+        // Calculate the page to get the results we need from our table.
+        // $calc_page = ($page - 1) * $records_per_page;
+        // $stmt->bind_param('ii', $calc_page, $records_per_page);
+        $stmt->execute();
+        // Get the results...
+        $result = $stmt->get_result();
+        $stmt->close();
+    }
+} else {
+    if ($stmt = $con->prepare("SELECT * FROM leads WHERE acct_id = ? ORDER BY created DESC -- LIMIT ?,?")) {
+        // Calculate the page to get the results we need from our table.
+        // $calc_page = ($page - 1) * $records_per_page;
+        // $stmt->bind_param('ii', $calc_page, $records_per_page);
+        $stmt->execute([$acct_id]);
+        // Get the results...
+        $result = $stmt->get_result();
+        $stmt->close();
+    }
 }
 ?>
 
