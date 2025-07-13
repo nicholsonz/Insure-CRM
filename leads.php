@@ -40,10 +40,9 @@ if($rowchk['acct_type'] == "Admin"){
 
 <?=template_header('Leads')?>
 
-<div class="w3-content read">
+<div class="w3-content">
 	<h1>LEADS</h1>
-  <hr></hr>
-    <div class="">
+	<div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
     	<a href="createlead.php" class="create-contact">Create Lead</a>
     	<a href="impleads.php" class="create-contact">Import Leads</a>        
             <div class="w3-row"> 

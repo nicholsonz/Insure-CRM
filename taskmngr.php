@@ -18,7 +18,8 @@ $records_per_page = 10;
 
 
 if($rowchk['acct_type'] == "Admin"){   
-    $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.task_name, t.details, t.name, t.list_id, t.priority, DATE_FORMAT(t.deadline, '%b %d, %y %h:%i %p') AS deadline, t.type, tl.list_name
+    $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.task_name, t.details, t.name, t.list_id, t.priority, 
+                            DATE_FORMAT(t.deadline, '%b %d, %y %h:%i %p') AS deadline, t.type, tl.list_name
                            FROM tasks as t
                            LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
                            ORDER BY t.deadline ASC -- LIMIT ?,?");
@@ -30,7 +31,8 @@ if($rowchk['acct_type'] == "Admin"){
 	$result = $stmt->get_result();
 	$stmt->close();
 } else {       
-    $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.task_name, t.details, t.name, t.list_id, t.priority, DATE_FORMAT(t.deadline, '%b %d, %y %h:%i %p') AS deadline, t.type, tl.list_name
+    $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.task_name, t.details, t.name, t.list_id, t.priority, 
+                            DATE_FORMAT(t.deadline, '%b %d, %y %h:%i %p') AS deadline, t.type, tl.list_name
                            FROM tasks as t
                            LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
                            WHERE t.acct_id = ?
@@ -52,25 +54,49 @@ if($rowchk['acct_type'] == "Admin"){
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Income</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form id="updateTask">
             <div class="modal-body">
                 <div id="errorMessageUpdate" class="alert alert-warning d-none">
                 </div>
-                <input type="hidden" name="task_id" id="task_id" >
-                <div class="mb-3">
-                    <label for="acct_id">Account ID</label>
-                    <input type="text" name="acct_id" Account IDacct_id" Account IDs="form-control" />
+                <input type="hidden" name="task_id" id="task_id" > 
+                <div class="row">                    
+                    <div class="col-md-4">
+                        <label for="acct_id">Account ID</label>
+                        <input type="number" name="acct_id" id="acct_id" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="task_name">Task</label>
+                        <input type="text" name="task_name" id="task_name" class="form-control" />
+                    </div>
+                    <div class="col-md4">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="details">Details</label>
+                        <input type="text" name="details" id="details" class="form-control" />
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label for="task_name">Task</label>
-                    <input type="text" name="task_name" id="task_name" class="form-control" />
+                    <label for="list_id">List ID</label>
+                    <input type="number" name="list_id" id="list_id" class="form-control" />
                 </div>
                 <div class="mb-3">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" class="form-control" />
+                    <label for="priority">Priority</label>
+                    <input type="text" name="priority" id="priority" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="deadline">Deadline</label>
+                    <input type="date" name="deadline" id="deadline" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="type">Type</label>
+                    <input type="text" name="type" id="type" class="form-control" />
                 </div>                
             </div>
             <div class="modal-footer">
@@ -81,10 +107,9 @@ if($rowchk['acct_type'] == "Admin"){
         </div>
     </div>
 </div>
-<div class="w3-content read">
+<div class="w3-content">
     <h1>TASK MANAGER</h1>
-    <hr></hr>
-    <div class="">
+	<div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
     <div class="task-mngr">
         <a href="./manage-list.php">Manage Lists</a>
     </div>
@@ -92,7 +117,7 @@ if($rowchk['acct_type'] == "Admin"){
      </div>
         <a href="./add-task.php" class="add-task">Add Task</a>
       <div id="taskTable">
-        <div class="table-viewer tableFixHead">
+        <div class="table-viewer tableFixHead" id="taskTable">
         <table class="w3-table w3-hoverable" id="srtTable">
          <thead>
             <tr>
@@ -123,13 +148,13 @@ if($rowchk['acct_type'] == "Admin"){
                 <td><?= date("m-d-Y h:i A", strtotime($row['deadline'])) ?></td>
                 <td><?= htmlspecialchars($row['type']) ?></td>
                 <td class="actions">
-                    <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a>
-                    <!-- <button type="button" value="<?=$row['task_id'];?>" class="editTaskBtn w3-btn edit"><i class="fas fa-edit fa-xs"></i></button> -->
+                    <!-- <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a> -->
+                    <button type="button" value="<?=$row['task_id'];?>" class="editTaskBtn w3-btn edit"><i class="fas fa-edit fa-xs"></i></button>
                     <button type="button" value="<?=$row['task_id'];?>" class="w3-btn delTask trash"><i class="fas fa-trash fa-xs"></i></button>
 
                 </td>
             </tr>
-            <?php endwhile ?>
+            <?php endwhile; ?>
         </tbody>
         </table>
         </div>

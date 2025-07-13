@@ -2,7 +2,7 @@
     let e = $(this).val();
     $.ajax({
       type: "GET",
-      url: "action/updtask.php?id=" + e,
+      url: "action/updtask.php?task_id=" + e,
       success: function(e) {
         let a = jQuery.parseJSON(e);
         404 == a.status
@@ -38,14 +38,14 @@
               $("#errorMessageUpdate").text(a.message),
               alertify.set("notifier", "position", "top-right"),
               alertify.error(a.message),
-              $("#incTable").load(location.href + " #incTable"))
+              $("#taskTable").load(location.href + " #taskTable"))
             : 200 == a.status
               ? ($("#errorMessageUpdate").addClass("d-none"),
                 alertify.set("notifier", "position", "top-right"),
                 alertify.success(a.message),
-                $("#incEditModal").modal("hide"),
-                $("#updateInc")[0].reset(),
-                $("#incTable").load(location.href + " #incTable"))
+                $("#taskEditModal").modal("hide"),
+                $("#updateTask")[0].reset(),
+                $("#taskTable").load(location.href + " #taskTable"))
               : 500 == a.status && alertify.error(a.message);
         },
       });

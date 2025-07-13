@@ -24,29 +24,33 @@ while($row=mysqli_fetch_assoc($res)){
 ?>
 
 <?=template_header('Home')?>
-<div class="content w3-padding w3-mobile">
-<table class="w3-table w3-custom-blue w3-card-4">
-  <tr>
-    <?php
-      if($rowchk['acct_type'] == "Admin"){      
-        $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients GROUP BY policy";
-        $result = mysqli_query($con, $sqlpol);
+<div class="w3-content">
+  <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
+    <table>
+      <tr>
+        <?php
+          if($rowchk['acct_type'] == "Admin"){      
+            $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients GROUP BY policy";
+            $result = mysqli_query($con, $sqlpol);
+            
+            echo "<td>" . "Policies" . "</td>";
+            while($row = mysqli_fetch_assoc($result)){
+              echo  "<td>" . $row['policy'] . "&nbsp; - " . $row['counted'] . "</td>";
+            }
+          } else {
+          $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients WHERE acct_id = '$acct_id' GROUP BY policy";
+          $result = mysqli_query($con, $sqlpol);
 
-        while($row = mysqli_fetch_assoc($result)){
-          echo  "<td>".$row['policy']. "&nbsp; - " .$row['counted']. "</td>";
-        }
-      } else {
-      $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients WHERE acct_id = '$acct_id' GROUP BY policy";
-      $result = mysqli_query($con, $sqlpol);
-
-      while($row = mysqli_fetch_assoc($result)){
-        echo  "<td>".$row['policy']. "&nbsp; - " .$row['counted']. "</td>";
-       }
-      }?>
-   </tr>
- </table>
+            echo "<td>" . "Policies" . "</td>";
+          while($row = mysqli_fetch_assoc($result)){
+              echo  "<td>" . $row['policy'] . "&nbsp; - " . $row['counted'] . "</td>";
+          }
+          }?>
+      </tr>
+    </table>
+  </div>
 </div>
-<div class="content w3-padding w3-mobile">
+<div class="w3-content">
   <!-- <h1><?= date("l - F d Y");?></h1> -->
 
    		<div class="w3-col s12 m3 l3 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
@@ -71,7 +75,7 @@ while($row=mysqli_fetch_assoc($res)){
 				$convperc = $convleads / $newleads;
 				}
 			?>
-			<table>
+			<table class="w3-table">
 				<tr>
 					<td class="w3-xlarge">Leads</td>
 					<td class="w3-xlarge"><?= $newleads?></td>
@@ -185,17 +189,15 @@ while($row=mysqli_fetch_assoc($res)){
         } else {    
 				$pdo = pdo_connect_mysql();
 				$mnthleads = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as leadnum FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
-				$mnthclients = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as clientnum FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
-        
-
+			  $mnthclients = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as clientnum FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
         }
 			?>
-
+<!-- Activity chart -------------------------------------------------------------------->
 			<canvas id="activityChart" class="chart-style"></canvas>
 		</div>
     <div class="w3-col s12 m5 l5  w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
     <button id="showhide" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue-grey w3-margin-bottom w3-padding"><h3>Tasks | &nbsp;Clients <?= number_format($clients);?></h3></button>
-      <div id="show" class="read w3-hide">
+      <div id="show" class="w3-hide">
         <div class="tableFixHead">
         <table class="w3-table w3-hoverable">
         <thead>
@@ -313,7 +315,7 @@ while($row=mysqli_fetch_assoc($res)){
         </div>
       </div>
       <button id="showhide2" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue-grey w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | &nbsp;Leads <?= number_format($leads);?></h3></button>
-      <div id="show2" class="read w3-hide">
+      <div id="show2" class="w3-hide">
       <div class="tableFixHead">
         <table class="w3-table" id="srtTable">
         <thead>
@@ -425,7 +427,7 @@ while($row=mysqli_fetch_assoc($res)){
         </div>
       </div>
       <button id="showhide3" class="w3-btn w3-border w3-round w3-block w3-custom-blue w3-border-blue-grey  w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | &nbsp;Other <?= number_format($other);?></h3></button>
-      <div id="show3" class="read w3-hide">
+      <div id="show3" class="w3-hide">
         <div class="tableFixHead">
         <table class="w3-table w3-hoverable">
         <thead>
@@ -518,9 +520,7 @@ while($row=mysqli_fetch_assoc($res)){
         </div>
       </div>
     </div>
-
-	</div>
-
+  </div>
 <script type="text/javascript">
 	const mnthleads = <?php echo json_encode($mnthleads) ?>;
 	const mnthclients = <?php echo json_encode($mnthclients) ?>;

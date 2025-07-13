@@ -22,12 +22,10 @@ $stmt->close();
 <?=template_header('Administrator')?>
 		<div class="w3-content">
 			<h1>Administrator</h1>
-      <hr></hr>
-			<div class="">
-			  	<div class="w3-col s12 m5 l5 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
-				<h2>User Accounts</h2>
-					<div class="table-viewer tableFixHead">
-						<table class="w3-table w3-hoverable" id="srtTable">
+			<div class="w3-col s12 m5 l5 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
+      			<div class="table-viewer tableFixHead" id="clientTable">
+				  <h2>User Accounts</h2>
+						<table class="table table-dark" id="srtTable">
 							<thead>
 							<tr>						
 								<th><a href="javascript:SortTable(0,'T');">Username <i class="fa fa-sort"></a></th>
@@ -47,7 +45,6 @@ $stmt->close();
 						<?php endwhile; ?>
 							</tbody>					
 						</table>
-					</div>
 				</div>
 			</div>
 		</div>

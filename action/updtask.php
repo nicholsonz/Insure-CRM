@@ -1,4 +1,5 @@
 <?php 
+require '../include/config.php';
 
 if(isset($_POST['update_task']))
 {
@@ -52,6 +53,41 @@ if(isset($_POST['update_task']))
         $res = [
             'status' => 500,
             'message' => 'Income Not Updated'
+        ];
+        echo json_encode($res);
+        return;
+    }
+}
+
+
+if(isset($_GET['task_id']))
+{
+    $id = $_GET['task_id'];
+
+
+    $get_id = mysqli_prepare($con, "SELECT * FROM tasks WHERE task_id=?");
+      mysqli_stmt_bind_param($get_id, "i", $id);
+    $get_id->execute();
+    $result = $get_id->get_result();
+    $rows = mysqli_num_rows($result);
+
+    if($rows == 1)
+    {
+        $entry = mysqli_fetch_array($result);
+
+        $res = [
+            'status' => 200,
+            'message' => 'Entry Fetch Successfully by id',
+            'data' => $entry
+        ];
+        echo json_encode($res);
+        return;
+    }
+    else
+    {
+        $res = [
+            'status' => 404,
+            'message' => 'Entry Id Not Found'
         ];
         echo json_encode($res);
         return;

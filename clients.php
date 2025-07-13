@@ -35,10 +35,9 @@ if($rowchk['acct_type'] == "Admin"){
 
 <?=template_header('Clients')?>
 
-<div class="w3-content read">
+<div class="w3-content">
 	<h1>CLIENTS</h1>
-  <hr></hr>
-    <div class="">
+	<div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
       <a href="./createclient.php" class="create-contact">Create Client</a>
       <div class="w3-right w3-padding">
           <input id="tableSrch" type="text" placeholder="Filter..">
@@ -68,9 +67,9 @@ if($rowchk['acct_type'] == "Admin"){
                   <td><?=$row['appstatus']?></td>
                   <td><?=date("m-d-Y", strtotime($row['created']));?></td>
                   <td class="actions">
-                      <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Client";?>" class="task tooltip"><i class="fas fa-tasks fa-xs"></i><span class="tooltiptext">Schedule Task</span></a>
-                      <a href="viewCls.php?id=<?=$row['id']?>" class="view tooltip" target="_blank"><i class="fas fa-eye fa-xs"></i><span class="tooltiptext">View Client</span></a>
-                      <a href="updateclient.php?id=<?=$row['id']?>" class="edit tooltip"><i class="fas fa-edit fa-xs"></i><span class="tooltiptext">Edit Client</span></a>
+                      <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Client";?>" class="w3-btn task tooltip"><i class="fas fa-tasks fa-xs"></i><span class="tooltiptext">Schedule Task</span></a>
+                      <a href="viewCls.php?id=<?=$row['id']?>" class="w3-btn view tooltip" target="_blank"><i class="fas fa-eye fa-xs"></i><span class="tooltiptext">View Client</span></a>
+                      <a href="updateclient.php?id=<?=$row['id']?>" class="w3-btn edit tooltip"><i class="fas fa-edit fa-xs"></i><span class="tooltiptext">Edit Client</span></a>
                       <button type="button" value="<?=$row['name'];?>" class="w3-btn delClient trash"><i class="fas fa-trash-alt fa-xs"></i></button>
                   </td>
               </tr>

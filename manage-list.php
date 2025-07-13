@@ -28,15 +28,14 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
     <div class="w3-content">
 
         <h1>TASK LIST MANAGER</h1>
-        <hr></hr>
-        <div class="">
+  <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
         <div class="task-mngr">
             <a href="./taskmngr.php">Manage Tasks</a>
         </div>
         <div class="">
 
         <!-- Table to display lists starts here -->
-        <div class="read">
+        <div class="">
             <a href="./add-list.php" class="add-task">Add List</a>
             <div class="table-viewer tableFixHead" id="listTable">
             <table class="w3-table w3-hoverable">

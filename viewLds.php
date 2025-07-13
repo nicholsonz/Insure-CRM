@@ -89,11 +89,10 @@ if(isset($_GET["name"]) && !empty(trim($_GET["name"]))){
 <head>
     <meta charset="UTF-8">
     <title>View Record</title>
-    <link rel="stylesheet" href="./css/style.css">
 
 </head>
 <body>
-    <div class="contentview">
+    <div class="w3-contentview">
         <div class="">
                     <h1 class=""><?php echo $row["name"]; ?></h1>
                     <table>

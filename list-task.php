@@ -8,7 +8,7 @@
 ?>
 <?=template_header('Task List')?>
 
-    <div class="content">        
+    <div class="w3-content">        
         <div class="">
         
         <h1>TASK MANAGER</h1>

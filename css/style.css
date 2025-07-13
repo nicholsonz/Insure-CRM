@@ -86,17 +86,17 @@ a {
     z-index: 1;
     background-color: #203c53;
 }
-.w3-content .table-viewer{
+
+.w3-content .table-viewer {
     width: 100%;
     height: 600px;
     overflow: scroll;
 }
 
 .today {
-    background-color: white;
-    background-size: 75% 75%;
+    background-color: rgba(226, 213, 213, 0.733);
     color: black;
-    border-radius: 50%;
+    border-radius: 5%;
     font-weight: bold;
 }
 .cal-table {
@@ -129,6 +129,7 @@ label {
     display: inline-block;
     position: relative;
     width: 100%;
+    max-height: 300px;
 }
 
 .contentview td {
@@ -256,7 +257,7 @@ textarea {
 .contentview label {
   color: rgba(42, 125, 128, 1);
 }
-.contentview table {
+table {
     border-collapse: collapse;
     table-layout: fixed;
     width: auto;
@@ -268,7 +269,7 @@ tr {
     color: white
 }
 
-.content h1 {
+.w3-content h1 {
     margin: 20px;
     padding: 25px 0;
     font-size: 28px;
@@ -276,21 +277,21 @@ tr {
     color: #097baf;
 }
 
-.content h2 {
+.w3-content h2 {
     margin: 0;
     padding: 15px 0;
     font-size: 22px;
     color: #4accec;
 }
 
-.content h3 {
+.w3-content h3 {
     margin: 0;
     padding: 10px 0;
     font-size: 18px;
     color: #6ec9ec;
 }
 
-.content h5 {
+.w3-content h5 {
     margin: 0;
     padding: 5px 0;
     font-size: 16px;
@@ -306,34 +307,34 @@ tr {
     color: #4a536e;
 }
 
-.content>p,
-.content>div {
+.w3-content>p,
+.w3-content>div {
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
     margin: 25px 0;
     padding: 25px;
     color: whitesmoke;
 }
 
-.content>p table td,
-.content>div table td {
+.w3-content>p table td,
+.w3-content>div table td {
     padding: 5px;
 }
 
-.content>p table td:first-child,
-.content>div table td:first-child {
+.w3-content>p table td:first-child,
+.w3-content>div table td:first-child {
     font-weight: bold;
     color: #097baf;
     padding-right: 15px;
 }
 
-.content h2 {
+.w3-content h2 {
     margin: 0;
     padding: 5px 0;
     font-size: 22px;
     color: #0777ac;
 }
 
-.read .create-contact {
+.create-contact {
     display: inline-block;
     text-decoration: none;
     background-color: #38b673;
@@ -375,7 +376,7 @@ tr {
     margin: 15px 0;
 }
 
-.read .create-contact:hover {
+.create-contact:hover {
     background-color: #32a367;
 }
 
@@ -383,64 +384,64 @@ tr {
     text-align: center;
 }
 
-.read table {
+table {
     width: 100%;
     padding-top: 30px;
     border-collapse: collapse;
 }
 
-.read table thead {
+table thead {
     background-color: #203c53;
     border-bottom: 1px solid #d3dae0;
     color: white;
 }
 
-.read table thead td {
+table thead td {
     padding: 10px;
     font-weight: bold;
     color: #34d6d6;
     font-size: 14px;
 }
 
-.read table tbody tr {
-    border-bottom: 1px solid #d3dae0;
+table tbody tr {
+    border-bottom: 1px solid #0c0d0ffb;
 }
 
-.read table tbody tr:nth-child(even) {
+table tbody tr:nth-child(even) {
     background-color: #202020;
 }
 
-.read table tbody tr:hover {
+table tbody tr:hover {
     background-color: #164d72;
 }
 
-.read table tbody tr:hover td {
+table tbody tr:hover td {
     color: #8dc2e6;
 }
 
-.read table tbody tr:hover td:nth-child(1) {
+table tbody tr:hover td:nth-child(1) {
     color: #19bee7;
 }
 
-.read table tbody tr td {
+table tbody tr td {
     padding: 10px;
     color: whitesmoke;
 }
 
-.read table tbody tr td:nth-child(1) {
+table tbody tr td:nth-child(1) {
     color: #48b1ee;
 }
 
-.read table tbody tr td.actions {
+table tbody tr td.actions {
     padding: 8px;
     text-align: right;
 }
 
-.read table tbody tr td.actions .edit,
-.read table tbody tr td.actions .trash,
-.read table tbody tr td.actions .task,
-.read table tbody tr td.actions .view,
-.read table tbody tr td.actions .convert {
+table tbody tr td.actions .edit,
+table tbody tr td.actions .trash,
+table tbody tr td.actions .task,
+table tbody tr td.actions .view,
+table tbody tr td.actions .convert {
     display: inline-flex;
     text-align: right;
     text-decoration: none;
@@ -448,43 +449,43 @@ tr {
     padding: 10px 12px;
 }
 
-.read table tbody tr td.actions .trash {
+table tbody tr td.actions .trash {
     background-color: #b73737;
 }
 
-.read table tbody tr td.actions .trash:hover {
+table tbody tr td.actions .trash:hover {
     background-color: #a33131;
 }
 
-.read table tbody tr td.actions .edit {
+table tbody tr td.actions .edit {
     background-color: #ff9800;
 }
 
-.read table tbody tr td.actions .edit:hover {
+table tbody tr td.actions .edit:hover {
     background-color: coral;
 }
 
-.read table tbody tr td.actions .view {
+table tbody tr td.actions .view {
     background-color: green;
 }
 
-.read table tbody tr td.actions .view:hover {
+table tbody tr td.actions .view:hover {
     background-color: darkgreen;
 }
 
-.read table tbody tr td.actions .convert {
+table tbody tr td.actions .convert {
     background-color: green;
 }
 
-.read table tbody tr td.actions .convert:hover {
+table tbody tr td.actions .convert:hover {
     background-color: darkgreen;
 }
 
-.read table tbody tr td.actions .task {
+table tbody tr td.actions .task {
     background-color: rgb(0, 110, 255);
 }
 
-.read table tbody tr td.actions .task:hover {
+table tbody tr td.actions .task:hover {
     background-color: rgb(0, 81, 255);
 }
 
@@ -676,23 +677,24 @@ body.loggedin {
     background-color: #f3f4f7;
 }
 
-.content {
-    width: 1500px;
-    margin: 10px auto
+.w3-content {
+    width: 1680px;
+    margin-top: 10px;
+    margin-left: 240px;
 }
-.content>p table td,
-.content>div table td {
+.w3-content>p table td,
+.w3-content>div table td {
     padding: 5px;
 }
 
-.content>p table td:first-child,
-.content>div table td:first-child {
+.w3-content>p table td:first-child,
+.w3-content>div table td:first-child {
     font-weight: bold;
     color: rgba(21, 123, 198, 0.93);
-    padding-right: 15px;
+    padding-right: 10px;
 }
 
-.content>div p {
+.w3-content>div p {
     padding: 5px;
     margin: 0 0 10px 0;
 }
