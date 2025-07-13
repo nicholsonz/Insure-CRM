@@ -35,8 +35,8 @@ $rowchk = mysqli_fetch_assoc($chkres);
 			<meta charset="utf-8">
       <?php function template_header($title) {echo "<title>" . $title . "</title>";}?>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-			<link rel="stylesheet" href="../fontawesome/css/all.css">
+			<link rel="stylesheet" href="./css/bootstrap.min.css">
+			<link rel="stylesheet" href="./css/fontawesome/all.min.css">
 			<link rel="stylesheet" href="./css/w3.css">
 			<link rel="stylesheet" href="./css/style.css">
 			<!-- <link rel="stylesheet" href="./css/bootstrap.mod.css"> -->
@@ -45,7 +45,7 @@ $rowchk = mysqli_fetch_assoc($chkres);
 			<script src="./js/jquery-3.7.1.min.js"></script>
 			<script src="./js/chart.min.js"></script>
 			<script src="./js/alertify/alertify.min.js"></script>
-			<script src="../bootstrap/js/bootstrap.min.js"></script>
+			<script src="./js/bootstrap.min.js"></script>
 		</head>
 <body>
 <?php

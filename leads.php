@@ -78,9 +78,9 @@ if($rowchk['acct_type'] == "Admin"){
                   <td><?=$row['email']?></td>
                   <td><?=date("m-d-Y", strtotime($row['created']));?></td>
                   <td class="actions">
-                      <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task tooltip"><i class="fas fa-tasks fa-xs"></i><span class="tooltiptext">Schedule Task</span></a>
-                      <a href="convertlead.php?name=<?=$row['name']?>" class="convert tooltip"><i class="fas fa-archive fa-xs"></i><span class="tooltiptext">Convert Lead</span></a>
-                      <a href="updatelead.php?name=<?=$row['name']?>" class="edit tooltip"><i class="fas fa-edit fa-xs"></i><span class="tooltiptext">Edit Lead</span></a>
+                      <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Lead";?>" class="task"><i class="fas fa-tasks fa-xs"></i></a>
+                      <a href="convertlead.php?name=<?=$row['name']?>" class="convert"><i class="fas fa-archive fa-xs"></i></a>
+                      <a href="updatelead.php?name=<?=$row['name']?>" class="edit"><i class="fas fa-edit fa-xs"></i></a>
                       <button type="button" value="<?=$row['name'];?>" class="w3-btn delLead trash"><i class="fas fa-trash-alt fa-xs"></i></button>
                   </td>
                 </tr>

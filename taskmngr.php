@@ -148,8 +148,8 @@ if($rowchk['acct_type'] == "Admin"){
                 <td><?= date("m-d-Y h:i A", strtotime($row['deadline'])) ?></td>
                 <td><?= htmlspecialchars($row['type']) ?></td>
                 <td class="actions">
-                    <!-- <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a> -->
-                    <button type="button" value="<?=$row['task_id'];?>" class="editTaskBtn w3-btn edit"><i class="fas fa-edit fa-xs"></i></button>
+                    <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a>
+                    <!-- <button type="button" value="<?=$row['task_id'];?>" class="editTaskBtn w3-btn edit"><i class="fas fa-edit fa-xs"></i></button> -->
                     <button type="button" value="<?=$row['task_id'];?>" class="w3-btn delTask trash"><i class="fas fa-trash fa-xs"></i></button>
 
                 </td>
