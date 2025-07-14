@@ -29,11 +29,11 @@ if($rowchk['acct_type'] == "Admin"){
                     <div class="col-md-4">
                         <label for="acct_id">Account</label>
                         <?php 
-                                    echo "<select class='form-select' name='acct_id' id='acct_id'>";  
+                                    echo "<select class='form-select' name='acct_id' id='acct_id'>"; 
                         if($rowchk['acct_type'] == "Admin"){ 
-                            while($row = $res_user->FETCH_ASSOC()){                      
+                            while($row = $res_user->FETCH_ASSOC()){ 
                                 echo "<option value='" . htmlspecialchars($row['acct_id']) . "'>" . htmlspecialchars($row['username']) . "</option>";
-                            } 
+                            }
                         }else {
                             while($row = $res_acctid->FETCH_ASSOC()) {
                                 if($row['acct_id'] = $acct_id){

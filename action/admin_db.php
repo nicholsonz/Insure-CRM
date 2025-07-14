@@ -1,6 +1,5 @@
 <?php
 
-
 // Get the total number of records.
 $total_pages = $con->query("SELECT COUNT(*) FROM tasks")->fetch_row()[0];
 
@@ -24,21 +23,19 @@ $records_per_page = 10;
 	// Get the results...
 	$result = $stmt->get_result();
 	$stmt->close();
+    while($row = $result->FETCH_ASSOC()) {
+        $task_id = $row['task_id'];
+    }
+    $result->data_seek(0);
 
-// MYSQL statement for edit modal Username list selection
-$user_stmt = $con->prepare("SELECT a.username
-                              FROM accounts AS a
-                              ORDER BY a.username DESC");
+
+// MYSQL statement for the Username of the Task ID selected
+$user_stmt = $con->prepare("SELECT UNIQUE(a.username), t.acct_id as acct_id
+                            FROM accounts AS a
+                            LEFT JOIN tasks AS t on t.acct_id = a.id");
 $user_stmt->execute();
 $res_user = $user_stmt->get_result();
 $user_stmt->close();
 
-// // MYSQL stmt to match username to acct_id
-// $taskid_stmt = $con->prepare("SELECT a.username, t.task_id FROM accounts AS a
-//                               LEFT JOIN tasks AS t ON t.acct_id = a.id
-//                               WHERE t.task_id = ?");
-// $taskid_stmt->execute([$task_id]);
-// $res_taskid = $taskid_stmt->get_result();
-// $taskid_stmt->close();
 
 ?>
