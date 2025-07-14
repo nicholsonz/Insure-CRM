@@ -3,49 +3,12 @@
 
 
 if($rowchk['acct_type'] == "Admin"){   
-// Get the total number of records.
-$total_pages = $con->query("SELECT COUNT(*) FROM tasks")->fetch_row()[0];
+    include('./action/admin_db.php');
 } else {
-// Get the total number of records.
-$total_pages = $con->query("SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id'")->fetch_row()[0];
-}
-
-// Check if the page number is specified and check if it's a number, if not return the default page number which is 1.
-$page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
-
-// Number of results to show on each page.
-$records_per_page = 10;
-
-
-if($rowchk['acct_type'] == "Admin"){   
-    $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.task_name, t.details, t.name, t.list_id, t.priority, 
-                            DATE_FORMAT(t.deadline, '%b %d, %y %h:%i %p') AS deadline, t.type, tl.list_name
-                           FROM tasks as t
-                           LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-                           ORDER BY t.deadline ASC -- LIMIT ?,?");
-	// Calculate the page to get the results we need from our table.
-	// $calc_page = ($page - 1) * $records_per_page;
-	// $stmt->bind_param('ii', $calc_page, $records_per_page);
-	$stmt->execute();
-	// Get the results...
-	$result = $stmt->get_result();
-	$stmt->close();
-} else {       
-    $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.task_name, t.details, t.name, t.list_id, t.priority, 
-                            DATE_FORMAT(t.deadline, '%b %d, %y %h:%i %p') AS deadline, t.type, tl.list_name
-                           FROM tasks as t
-                           LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
-                           WHERE t.acct_id = ?
-                           ORDER BY t.deadline ASC -- LIMIT ?,?");
-	// Calculate the page to get the results we need from our table.
-	// $calc_page = ($page - 1) * $records_per_page;
-	// $stmt->bind_param('ii', $calc_page, $records_per_page);
-	$stmt->execute([$acct_id]);
-	// Get the results...
-	$result = $stmt->get_result();
-	$stmt->close();
+    include('./action/tasklist_db.php');
 }
 // Home Page template below.
+
 ?>
 
 <?=template_header('Task Mngr')?>
@@ -64,8 +27,22 @@ if($rowchk['acct_type'] == "Admin"){
                 <input type="hidden" name="task_id" id="task_id" > 
                 <div class="row">                    
                     <div class="col-md-4">
-                        <label for="acct_id">Account ID</label>
-                        <input type="number" name="acct_id" id="acct_id" class="form-control" />
+                        <label for="acct_id">Account</label>
+                        <?php 
+                                    echo "<select class='form-select' name='acct_id' id='acct_id'>";  
+                        if($rowchk['acct_type'] == "Admin"){ 
+                            while($row = $res_user->FETCH_ASSOC()){                      
+                                echo "<option value='" . htmlspecialchars($row['acct_id']) . "'>" . htmlspecialchars($row['username']) . "</option>";
+                            } 
+                        }else {
+                            while($row = $res_acctid->FETCH_ASSOC()) {
+                                if($row['acct_id'] = $acct_id){
+                                echo "<option value='" . htmlspecialchars($row['acct_id']) . "'>" . htmlspecialchars($row['username']) . "</option>";
+                                }
+                            }
+                        }
+                            echo "</select>"
+                        ?>
                     </div>
                     <div class="col-md-4">
                         <label for="task_name">Task</label>
@@ -136,12 +113,8 @@ if($rowchk['acct_type'] == "Admin"){
             <?php while ($row = $result->FETCH_ASSOC()): ?>
 
             <tr>
-                <td><a href="./update-task.php?task_id=<?= $row['task_id'] ?>"><?= $row['task_name'] ?></a></td>
-                <?php if($row['type'] == 'Lead'): ?>
-                    <td><a href="./updatelead.php?name=<?= $row['name']; ?>"><?= $row['name'] ?></a></td>
-                <?php else: ?>
-                    <td><a href="./updateclient.php?name=<?= $row['name']; ?>"><?= $row['name'] ?></a></td>
-                <?php endif; ?>
+                <td><?= htmlspecialchars($row['task_name']) ?></td>
+                <td><?= htmlspecialchars($row['name']) ?></td>
                 <td><?= htmlspecialchars($row['details']) ?></td>
                 <td><?= htmlspecialchars($row['list_name']) ?></td>
                 <td><?= htmlspecialchars($row['priority']) ?></td>
