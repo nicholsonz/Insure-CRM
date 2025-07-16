@@ -25,25 +25,15 @@ if(isset($_POST['update_task']))
         return;
     }
 
-    $upd_task = mysqli_prepare($con, "UPDATE tasks SET
-                acct_id = '?',
-                task_name = '?',
-                name = '?',
-                details = '?',
-                list_id = '?',
-                priority = '?',
-                deadline = '?',
-                type = '?'
-                WHERE acct_id = '?'
-                AND task_id = '?'");
-      mysqli_stmt_bind_param($upd_task, "isssisdsii", $acct_id, $task_name, $name, $details, $list_id, $priority, $deadline, $type, $acct_id, $task_id);
+    $upd_task = mysqli_prepare($con, "UPDATE tasks SET acct_id = '?', task_name = '?', name = '?', details = '?', list_id = '?', priority = '?', deadline = '?', type = '?' WHERE task_id = '?'");
+      mysqli_stmt_bind_param($upd_task, "isssisssi", $acct_id, $task_name, $name, $details, $list_id, $priority, $deadline, $type, $task_id);
     $upd_task->execute();
 
     if($upd_task)
     {
         $res = [
             'status' => 200,
-            'message' => 'Income Updated Successfully'
+            'message' => 'Task Updated Successfully'
         ];
         echo json_encode($res);
         return;
@@ -52,7 +42,7 @@ if(isset($_POST['update_task']))
     {
         $res = [
             'status' => 500,
-            'message' => 'Income Not Updated'
+            'message' => 'Task Not Updated'
         ];
         echo json_encode($res);
         return;

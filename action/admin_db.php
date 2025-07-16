@@ -37,5 +37,41 @@ $user_stmt->execute();
 $res_user = $user_stmt->get_result();
 $user_stmt->close();
 
+// MYSQL statement for getting the List name for the List ID
+$list_name = $con->prepare("SELECT UNIQUE(t.list_id), tl.id, tl.list_name
+                            FROM tasks AS t
+                            LEFT JOIN task_lists AS tl ON tl.id = t.list_id");
+$list_name->execute();
+$res_listnm = $list_name->get_result();
+$list_name->close();
+
+
+// MYSQL statement for getting Priority enum list for task  
+$table_name = "tasks";
+$column_prty = "priority";
+
+
+$query_prty = "SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_NAME = '$table_name' AND COLUMN_NAME = '$column_prty'
+        ORDER BY '$column_prty' ASC";
+$res = mysqli_query($con, $query_prty);
+
+$row = mysqli_fetch_array($res);
+
+$enumPrty = explode(",", str_replace("'", "", substr($row['COLUMN_TYPE'], 5, (strlen($row['COLUMN_TYPE'])-6))));
+
+// MYSQL statement for getting Type enum list for task 
+$table_name = "tasks";
+$column_type = "type";
+
+
+$query_type = "SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_NAME = '$table_name' AND COLUMN_NAME = '$column_type'
+        ORDER BY '$column_type' ASC";
+$res = mysqli_query($con, $query_type);
+
+$row = mysqli_fetch_array($res);
+
+$enumType = explode(",", str_replace("'", "", substr($row['COLUMN_TYPE'], 5, (strlen($row['COLUMN_TYPE'])-6))));
 
 ?>

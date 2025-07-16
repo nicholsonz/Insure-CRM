@@ -27,7 +27,7 @@ if($rowchk['acct_type'] == "Admin"){
                 <input type="hidden" name="task_id" id="task_id" > 
                 <div class="row">                    
                     <div class="col-md-4">
-                        <label for="acct_id">Account</label>
+                        <label for="acct_id">User</label>
                         <?php 
                                     echo "<select class='form-select' name='acct_id' id='acct_id'>"; 
                         if($rowchk['acct_type'] == "Admin"){ 
@@ -45,7 +45,7 @@ if($rowchk['acct_type'] == "Admin"){
                         ?>
                     </div>
                     <div class="col-md-4">
-                        <label for="task_name">Task</label>
+                        <label for="task_name">Task Name</label>
                         <input type="text" name="task_name" id="task_name" class="form-control" />
                     </div>
                     <div class="col-md4">
@@ -56,24 +56,62 @@ if($rowchk['acct_type'] == "Admin"){
                 <div class="row">
                     <div class="col-md-12">
                         <label for="details">Details</label>
-                        <input type="text" name="details" id="details" class="form-control" />
+                        <textarea rows="20" cols="30" name="details" id="details" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="list_id">List ID</label>
-                    <input type="number" name="list_id" id="list_id" class="form-control" />
+                        <?php 
+                                    echo "<select class='form-select' name='list_id' id='list_id'>"; 
+                        if($rowchk['acct_type'] == "Admin"){ 
+                            while($row = $res_listnm->FETCH_ASSOC()){ 
+                                echo "<option value='" . htmlspecialchars($row['list_id']) . "'>" . htmlspecialchars($row['list_name']) . "</option>";
+                            }
+                        }else {
+                            while($row = $res_listnm->FETCH_ASSOC()) {
+                                if($row['acct_id'] == $acct_id){
+                                echo "<option value='" . htmlspecialchars($row['list_id']) . "'>" . htmlspecialchars($row['list_name']) . "</option>";
+                                }
+                            }
+                        }
+                            echo "</select>"
+                        ?>
                 </div>
                 <div class="mb-3">
                     <label for="priority">Priority</label>
-                    <input type="text" name="priority" id="priority" class="form-control" />
+                        <?php 
+                                    echo "<select class='form-select' name='$column_prty' id='$column_prty'>"; 
+                        if($rowchk['acct_type'] == "Admin"){ 
+                            foreach($enumPrty as $prty) {
+                                echo "<option value='$prty'>$prty</option>";
+                             } 
+                            }else {
+                            foreach($enumPrty as $prty) {
+                                echo "<option value='$prty'>$prty</option>";
+                                }
+                            }
+                            echo "</select>"
+                        ?>
                 </div>
                 <div class="mb-3">
                     <label for="deadline">Deadline</label>
-                    <input type="date" name="deadline" id="deadline" class="form-control" />
+                    <input type="datetime-local" name="deadline" id="deadline" class="form-control" />
                 </div>
                 <div class="mb-3">
                     <label for="type">Type</label>
-                    <input type="text" name="type" id="type" class="form-control" />
+                        <?php 
+                                    echo "<select class='form-select' name='$column_type' id='$column_type'>"; 
+                        if($rowchk['acct_type'] == "Admin"){ 
+                            foreach($enumType as $type) {
+                                echo "<option value='$type'>$type</option>";
+                             } 
+                            }else {
+                            foreach($enumType as $type) {
+                                echo "<option value='$type'>$type</option>";
+                                }
+                            }
+                            echo "</select>"
+                        ?>
                 </div>                
             </div>
             <div class="modal-footer">
@@ -121,8 +159,8 @@ if($rowchk['acct_type'] == "Admin"){
                 <td><?= date("m-d-Y h:i A", strtotime($row['deadline'])) ?></td>
                 <td><?= htmlspecialchars($row['type']) ?></td>
                 <td class="actions">
-                    <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a>
-                    <!-- <button type="button" value="<?=$row['task_id'];?>" class="editTaskBtn w3-btn edit"><i class="fas fa-edit fa-xs"></i></button> -->
+                    <!-- <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a> -->
+                    <button type="button" value="<?=$row['task_id'];?>" class="editTaskBtn w3-btn edit"><i class="fas fa-edit fa-xs"></i></button>
                     <button type="button" value="<?=$row['task_id'];?>" class="w3-btn delTask trash"><i class="fas fa-trash fa-xs"></i></button>
 
                 </td>
