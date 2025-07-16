@@ -26,7 +26,7 @@ if(isset($_POST['update_task']))
     }
 
     $upd_task = mysqli_prepare($con, "UPDATE tasks SET acct_id = '?', task_name = '?', name = '?', details = '?', list_id = '?', priority = '?', deadline = '?', type = '?' WHERE task_id = '?'");
-      mysqli_stmt_bind_param($upd_task, "isssisssi", $acct_id, $task_name, $name, $details, $list_id, $priority, $deadline, $type, $task_id);
+      mysqli_stmt_bind_param($upd_task, "isssisbsi", $acct_id, $task_name, $name, $details, $list_id, $priority, $deadline, $type, $task_id);
     $upd_task->execute();
 
     if($upd_task)
