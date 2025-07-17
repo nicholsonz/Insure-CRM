@@ -1023,6 +1023,13 @@ a {
     .w3-modal {
         padding-top: 50px
     }
+    .w3-sidebar {
+        display: none;
+    }
+    .w3-collapse {
+        display: block;
+    }
+
 }
 
 @media (min-width:1451px) {

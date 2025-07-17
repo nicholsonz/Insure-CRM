@@ -24,7 +24,7 @@ while($row=mysqli_fetch_assoc($res)){
 ?>
 
 <?=template_header('Home')?>
-<div class="w3-content">
+<div class="w3-content w3-mobile">
   <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
     <table>
       <tr>
@@ -50,7 +50,7 @@ while($row=mysqli_fetch_assoc($res)){
     </table>
   </div>
 </div>
-<div class="w3-content">
+<div class="w3-content w3-mobile">
   <!-- <h1><?= date("l - F d Y");?></h1> -->
 
    		<div class="w3-col s12 m3 l3 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
@@ -218,7 +218,7 @@ while($row=mysqli_fetch_assoc($res)){
           //Create SQL Query to Get Data from Databse
             $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.type = 'Client'
               ORDER BY deadline");
             $stmt->execute();
@@ -226,7 +226,7 @@ while($row=mysqli_fetch_assoc($res)){
               //Create SQL Query to Get Data from Databse
             $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
               ORDER BY deadline");
             $stmt->execute();
@@ -238,14 +238,14 @@ while($row=mysqli_fetch_assoc($res)){
               $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
               // Get the total number of clients, this is so we can determine whether there should be a next and previous button
               $num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Client'")->fetchColumn();
             } else {
               // Fetch the records so we can display them in our template.
               $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
               // Get the total number of clients, this is so we can determine whether there should be a next and previous button
               $num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.type = 'Client'")->fetchColumn();
             }
             
@@ -257,14 +257,14 @@ while($row=mysqli_fetch_assoc($res)){
               //Create SQL Query to Get DAta from Databse
               $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.type = 'Client'
               ORDER BY deadline";
             } else {              
               //Create SQL Query to Get DAta from Databse
               $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
               ORDER BY deadline";
             }
@@ -332,7 +332,7 @@ while($row=mysqli_fetch_assoc($res)){
             // Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
             $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
                     FROM tasks AS t
-                    LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+                    LEFT JOIN task_lists AS tl ON t.list_id = tl.id
                     WHERE t.type = 'Lead'
                     ORDER BY deadline");
             $stmt->execute();
@@ -340,7 +340,7 @@ while($row=mysqli_fetch_assoc($res)){
             // Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
             $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
                     FROM tasks AS t
-                    LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+                    LEFT JOIN task_lists AS tl ON t.list_id = tl.id
                     WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
                     ORDER BY deadline");
             $stmt->execute();
@@ -350,14 +350,14 @@ while($row=mysqli_fetch_assoc($res)){
               $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
               // Get the total number of clients, this is so we can determine whether there should be a next and previous button
               $num_leads = $pdo->query("SELECT COUNT(*) FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.type = 'Lead'")->fetchColumn();
             } else {                   
               // Fetch the records so we can display them in our template.
               $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
               // Get the total number of clients, this is so we can determine whether there should be a next and previous button
               $num_leads = $pdo->query("SELECT COUNT(*) FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'")->fetchColumn();
             }
 
@@ -368,14 +368,14 @@ while($row=mysqli_fetch_assoc($res)){
               //Create SQL Query to Get DAta from Databse
               $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.type = 'Lead'
               ORDER BY deadline";
             } else {              
               //Create SQL Query to Get DAta from Databse
               $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
               ORDER BY deadline";
             }
@@ -447,14 +447,14 @@ while($row=mysqli_fetch_assoc($res)){
               //Create SQL Query to Get DAta from Databse
               $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.type = 'Other'
               ORDER BY deadline";
             } else {
               //Create SQL Query to Get DAta from Databse
               $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.list_id
+              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Other'
               ORDER BY deadline";
 

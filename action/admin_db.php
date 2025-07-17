@@ -11,7 +11,7 @@ $records_per_page = 10;
 
 
  $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.task_name, t.details, t.name, t.list_id, t.priority, 
-                            DATE_FORMAT(t.deadline, '%b %d, %y %h:%i %p') AS deadline, t.type, tl.list_name, a.username
+                            t.deadline AS deadline, t.type, tl.list_name, a.username
                            FROM tasks as t
                            LEFT JOIN task_lists AS tl ON t.list_id = tl.id
                            LEFT JOIN accounts AS a ON a.id = t.acct_id

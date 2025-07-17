@@ -311,14 +311,14 @@ tr {
 .w3-content>p,
 .w3-content>div {
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
-    margin: 25px 0;
-    padding: 25px;
+    margin: 5px auto;
+    padding: 5px;
     color: whitesmoke;
 }
 
 .w3-content>p table td,
 .w3-content>div table td {
-    padding: 5px;
+    padding: 8px;
 }
 
 .w3-content>p table td:first-child,
@@ -676,28 +676,6 @@ table tbody tr td.actions .task:hover {
 
 body.loggedin {
     background-color: #f3f4f7;
-}
-
-.w3-content {
-    width: 1680px;
-    margin-top: 10px;
-    margin-left: 240px;
-}
-.w3-content>p table td,
-.w3-content>div table td {
-    padding: 5px;
-}
-
-.w3-content>p table td:first-child,
-.w3-content>div table td:first-child {
-    font-weight: bold;
-    color: rgba(21, 123, 198, 0.93);
-    padding-right: 10px;
-}
-
-.w3-content>div p {
-    padding: 5px;
-    margin: 0 0 10px 0;
 }
 
 * {

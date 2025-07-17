@@ -122,7 +122,7 @@ if($rowchk['acct_type'] == "Admin"){
         </div>
     </div>
 </div>
-<div class="w3-content">
+<div class="w3-content w3-mobile">
     <h1>TASK MANAGER</h1>
 	<div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
     <div class="task-mngr">
@@ -156,7 +156,7 @@ if($rowchk['acct_type'] == "Admin"){
                 <td><?= htmlspecialchars($row['details']) ?></td>
                 <td><?= htmlspecialchars($row['list_name']) ?></td>
                 <td><?= htmlspecialchars($row['priority']) ?></td>
-                <td><?= date("m-d-Y h:i A", strtotime($row['deadline'])) ?></td>
+                <td><?= date($row['deadline']) ?></td>
                 <td><?= htmlspecialchars($row['type']) ?></td>
                 <td class="actions">
                     <!-- <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a> -->
