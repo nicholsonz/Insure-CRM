@@ -2,16 +2,16 @@
     require_once('./require/header.php');
 
     //Get the Current Values of Selected List
-    if(isset($_GET['list_id']))
+    if(isset($_GET['id']))
     {
         //Get the List ID value
-        $list_id = $_GET['list_id'];
+        $id = $_GET['id'];
 
         //SElect DAtabase
         $db_select = mysqli_select_db($con, DB_NAME) or die();
 
         //Query to Get the Values from Database
-        $sql = "SELECT * FROM task_lists WHERE acct_id = '$acct_id' AND list_id=$list_id";
+        $sql = "SELECT * FROM task_lists WHERE acct_id = '$acct_id' AND id=$id";
 
         //Execute Query
         $res = mysqli_query($con, $sql);
@@ -53,7 +53,7 @@
         $sql2 = "UPDATE task_lists SET
                 list_name = '$list_name',
                 list_description = '$list_description'
-                WHERE acct_id = '$acct_id' AND list_id = '$list_id'";
+                WHERE acct_id = '$acct_id' AND id = '$id'";
 
         //Execute the Query
         $res2 = mysqli_query($con, $sql2);
@@ -74,7 +74,7 @@
             //SEt Session Message
             $_SESSION['update_fail'] = "Failed to Update List";
             //Redirect to the Update List PAge
-            header('location: ./update-list.php?list_id='.$list_id);
+            header('location: ./update-list.php?id='.$id);
         }
 
     }
@@ -82,19 +82,14 @@
 
 <?=template_header('Task Mngr')?>
 
-
-        <div class="w3-content">
-
-        <h1>UPDATE TASK LIST</h1>
-        <hr></hr>
-            <!-- Menu Starts Here -->
+<div class="w3-content w3-mobile">
+    <h1>UPDATE TASK LIST</h1>
+    <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
         <div class="task-mngr">
-
             <a href="./manage-list.php">Manage Lists</a>
         </div>
         <br />
-            <!-- Menu Ends Here -->
-        <div class="">
+
             <?php
                 //Check whether the session is set or not
                 if(isset($_SESSION['update_fail']))

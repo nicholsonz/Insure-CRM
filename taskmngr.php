@@ -26,7 +26,7 @@ if($rowchk['acct_type'] == "Admin"){
                 </div>
                 <input type="hidden" name="task_id" id="task_id" > 
                 <div class="row">                    
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <label for="acct_id">User</label>
                         <?php 
                                     echo "<select class='form-select' name='acct_id' id='acct_id'>"; 
@@ -43,24 +43,8 @@ if($rowchk['acct_type'] == "Admin"){
                         }
                             echo "</select>"
                         ?>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="task_name">Task Name</label>
-                        <input type="text" name="task_name" id="task_name" class="form-control" />
-                    </div>
-                    <div class="col-md4">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" class="form-control" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for="details">Details</label>
-                        <textarea rows="20" cols="30" name="details" id="details" class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="list_id">List ID</label>
+                    </div> <div class="col-md-6">
+                    <label for="list_id">Task</label>
                         <?php 
                                     echo "<select class='form-select' name='list_id' id='list_id'>"; 
                         if($rowchk['acct_type'] == "Admin"){ 
@@ -77,17 +61,28 @@ if($rowchk['acct_type'] == "Admin"){
                             echo "</select>"
                         ?>
                 </div>
+                    <div class="col-md6">
+                        <label for="object">Name/Object</label>
+                        <input type="text" name="object" id="object" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-11">
+                        <label for="details">Details</label>
+                        <textarea rows="20" cols="30" name="details" id="details" class="form-control"></textarea>
+                    </div>
+                </div>               
                 <div class="mb-3">
                     <label for="priority">Priority</label>
                         <?php 
                                     echo "<select class='form-select' name='$column_prty' id='$column_prty'>"; 
                         if($rowchk['acct_type'] == "Admin"){ 
                             foreach($enumPrty as $prty) {
-                                echo "<option value='$prty'>$prty</option>";
+                                echo "<option value='$prty'>" . $prty . "</option>";
                              } 
                             }else {
                             foreach($enumPrty as $prty) {
-                                echo "<option value='$prty'>$prty</option>";
+                                echo "<option value='$prty'>" . $prty . "</option>";
                                 }
                             }
                             echo "</select>"
@@ -103,11 +98,11 @@ if($rowchk['acct_type'] == "Admin"){
                                     echo "<select class='form-select' name='$column_type' id='$column_type'>"; 
                         if($rowchk['acct_type'] == "Admin"){ 
                             foreach($enumType as $type) {
-                                echo "<option value='$type'>$type</option>";
+                                echo "<option value='$type'>" . $type . "</option>";
                              } 
                             }else {
                             foreach($enumType as $type) {
-                                echo "<option value='$type'>$type</option>";
+                                echo "<option value='$type'>" . $type . "</option>";
                                 }
                             }
                             echo "</select>"
@@ -138,12 +133,11 @@ if($rowchk['acct_type'] == "Admin"){
             <tr>
                 <!-- <th>S.N.</th> -->
                 <th><a href="javascript:SortTable(0,'T');">Task <i class="fa fa-sort"></th>
-                <th><a href="javascript:SortTable(1,'T');">Name <i class="fa fa-sort"></th>
+                <th><a href="javascript:SortTable(1,'T');">Name/Object <i class="fa fa-sort"></th>
                 <th>Details</th>
-                <th><a href="javascript:SortTable(4,'T');">Task List <i class="fa fa-sort"></a></th>
                 <th>Priority</th>
-                <th><a href="javascript:SortTable(6,'D','dmyy');">Deadline <i class="fa fa-sort"></a></th>
-                <th><a href="javascript:SortTable(7,'T');">Type <i class="fa fa-sort"></a></th>
+                <th><a href="javascript:SortTable(5,'D','dmyy');">Deadline <i class="fa fa-sort"></a></th>
+                <th><a href="javascript:SortTable(6,'T');">Type <i class="fa fa-sort"></a></th>
                 <th></th>
             </tr>
          </thead>
@@ -151,16 +145,15 @@ if($rowchk['acct_type'] == "Admin"){
             <?php while ($row = $result->FETCH_ASSOC()): ?>
 
             <tr>
-                <td><?= htmlspecialchars($row['task_name']) ?></td>
-                <td><?= htmlspecialchars($row['name']) ?></td>
-                <td><?= htmlspecialchars($row['details']) ?></td>
                 <td><?= htmlspecialchars($row['list_name']) ?></td>
+                <td><?= htmlspecialchars($row['object']) ?></td>
+                <td><?= htmlspecialchars($row['details']) ?></td>
                 <td><?= htmlspecialchars($row['priority']) ?></td>
-                <td><?= date($row['deadline']) ?></td>
+                <td><?= date('m-d-Y H:i A', strtotime($row['deadline'])) ?></td>
                 <td><?= htmlspecialchars($row['type']) ?></td>
                 <td class="actions">
-                    <!-- <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a> -->
-                    <button type="button" value="<?=$row['task_id'];?>" class="editTaskBtn w3-btn edit"><i class="fas fa-edit fa-xs"></i></button>
+                    <a href="./update-task.php?task_id=<?= $row['task_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a>
+                    <!-- <button type="button" value="<?=$row['task_id'];?>" class="editTaskBtn w3-btn edit"><i class="fas fa-edit fa-xs"></i></button> -->
                     <button type="button" value="<?=$row['task_id'];?>" class="w3-btn delTask trash"><i class="fas fa-trash fa-xs"></i></button>
 
                 </td>

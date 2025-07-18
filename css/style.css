@@ -491,7 +491,7 @@ table tbody tr td.actions .task:hover {
 }
 
 .update form {
-    padding: 15px 0;
+    padding: 15px 10px;
     display: flex;
     flex-flow: column wrap;
     flex: 200px;

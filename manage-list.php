@@ -25,7 +25,7 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
 
 <?=template_header('Task Mngr')?>
 
-    <div class="w3-content">
+    <div class="w3-content w3-mobile">
 
         <h1>TASK LIST MANAGER</h1>
   <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
@@ -49,11 +49,11 @@ if ($stmt = $con->prepare("SELECT * FROM task_lists WHERE acct_id = '$acct_id' O
              <tbody id="tblSrch">
                 <?php while ($row = $result->FETCH_ASSOC()): ?>
                     <tr>
-                        <td><a href="./update-list.php?list_id=<?= $row['list_id']; ?>"><?= $row['list_name'] ?></a></td>
+                        <td><a href="./update-list.php?id=<?= $row['id']; ?>"><?= $row['list_name'] ?></a></td>
                         <td><?= $row['list_description'] ?></td>
                         <td class="actions">
-                          <a href="./update-list.php?list_id=<?= $row['list_id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a>
-                          <button type="button" value="<?=$row['list_id'];?>" class="w3-btn delList trash"><i class="fas fa-trash-alt fa-xs"></i></button>
+                          <a href="./update-list.php?id=<?= $row['id'] ?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a>
+                          <button type="button" value="<?=$row['id'];?>" class="w3-btn delList trash"><i class="fas fa-trash-alt fa-xs"></i></button>
 
                         </td>
                     </tr>

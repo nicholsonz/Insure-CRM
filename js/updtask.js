@@ -10,8 +10,7 @@
           : 200 == a.status &&
           ($("#task_id").val(a.data.task_id),
             $("#acct_id").val(a.data.acct_id),
-            $("#task_name").val(a.data.task_name),
-            $("#name").val(a.data.name),
+            $("#object").val(a.data.object),
             $("#details").val(a.data.details),
             $("#list_id").val(a.data.list_id),
             $("#priority").val(a.data.priority),

@@ -1,19 +1,13 @@
 <?php
   require_once('./require/header.php');
 
-if($rowchk['acct_type'] == "Admin"){      
-$sql = "SELECT COUNT(*) as clients,
-  (SELECT COUNT(*) FROM tasks WHERE type = 'Lead') as leads,
-  (SELECT COUNT(*) FROM tasks WHERE type = 'Other') as other
-  FROM tasks
-  WHERE type = 'Client'";
-} else {
+// Get count of all policies
 $sql = "SELECT COUNT(*) as clients,
   (SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Lead') as leads,
   (SELECT COUNT(*) FROM tasks WHERE acct_id = '$acct_id' AND type = 'Other') as other
   FROM tasks
   WHERE acct_id = '$acct_id' AND type = 'Client'";
-}
+
 $res = mysqli_query($con, $sql);
 while($row=mysqli_fetch_assoc($res)){
   $clients = $row['clients'];
@@ -29,15 +23,6 @@ while($row=mysqli_fetch_assoc($res)){
     <table>
       <tr>
         <?php
-          if($rowchk['acct_type'] == "Admin"){      
-            $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients GROUP BY policy";
-            $result = mysqli_query($con, $sqlpol);
-            
-            echo "<td>" . "Policies" . "</td>";
-            while($row = mysqli_fetch_assoc($result)){
-              echo  "<td>" . $row['policy'] . "&nbsp; - " . $row['counted'] . "</td>";
-            }
-          } else {
           $sqlpol = "SELECT policy, COUNT(policy) as counted FROM clients WHERE acct_id = '$acct_id' GROUP BY policy";
           $result = mysqli_query($con, $sqlpol);
 
@@ -45,7 +30,7 @@ while($row=mysqli_fetch_assoc($res)){
           while($row = mysqli_fetch_assoc($result)){
               echo  "<td>" . $row['policy'] . "&nbsp; - " . $row['counted'] . "</td>";
           }
-          }?>
+          ?>
       </tr>
     </table>
   </div>
@@ -57,16 +42,10 @@ while($row=mysqli_fetch_assoc($res)){
 			<h2><?php echo date('F'); ?> Activity</h2>
       <br />
 			<?php
-      // Test whether the user is Admin
-        if($rowchk['acct_type'] == "Admin"){      
-          $pdo = pdo_connect_mysql();
-          $newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE YEAR(created) = YEAR(NOW()) AND MONTH(created) = MONTH(now())")->fetchColumn();
-          $convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE YEAR(created) = YEAR(NOW()) AND MONTH(created) = MONTH(now())")->fetchColumn();
-        } else {
           $pdo = pdo_connect_mysql();
           $newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(NOW()) AND MONTH(created) = MONTH(now())")->fetchColumn();
           $convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(NOW()) AND MONTH(created) = MONTH(now())")->fetchColumn();
-        }
+        
 				if($convleads == "0"){
 					$convperc = "0";
 				}elseif($newleads == "0" && $convleads > "0"){
@@ -98,15 +77,10 @@ while($row=mysqli_fetch_assoc($res)){
       <br />
 			<?php
       // Test whether the user is Admin
-        if($rowchk['acct_type'] == "Admin"){      
-          $pdo = pdo_connect_mysql();
-          $newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE YEAR(created) = YEAR(now())")->fetchColumn();
-          $convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE YEAR(created) = YEAR(now())")->fetchColumn();
-        } else {
           $pdo = pdo_connect_mysql();
           $newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
           $convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
-        }
+        
 				if($convleads == "0"){
 					$convperc = "0";
 				}elseif($newleads == "0" && $convleads > "0"){
@@ -182,15 +156,10 @@ while($row=mysqli_fetch_assoc($res)){
 			<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
       // Test whether the user is Admin
-        if($rowchk['acct_type'] == "Admin"){      
-				$pdo = pdo_connect_mysql();
-				$mnthleads = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as leadnum FROM leads WHERE YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
-				$mnthclients = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as clientnum FROM clients WHERE YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
-        } else {    
 				$pdo = pdo_connect_mysql();
 				$mnthleads = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as leadnum FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
 			  $mnthclients = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as clientnum FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
-        }
+        
 			?>
 <!-- Activity chart -------------------------------------------------------------------->
 			<canvas id="activityChart" class="chart-style"></canvas>
@@ -214,60 +183,33 @@ while($row=mysqli_fetch_assoc($res)){
           //Select Database
           $db_select = mysqli_select_db($con, DB_NAME) or die();
           
-            if($rowchk['acct_type'] == "Admin"){      
-          //Create SQL Query to Get Data from Databse
-            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
-              FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
-              WHERE t.type = 'Client'
-              ORDER BY deadline");
-            $stmt->execute();
-            } else {
               //Create SQL Query to Get Data from Databse
-            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+            $stmt = $pdo->prepare("SELECT task_id, object, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
               ORDER BY deadline");
             $stmt->execute();
-            }
 
             
-            if($rowchk['acct_type'] == "Admin"){      
-              // Fetch the records so we can display them in our template.
-              $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
-              // Get the total number of clients, this is so we can determine whether there should be a next and previous button
-              $num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
-              WHERE t.acct_id = '$acct_id' AND t.type = 'Client'")->fetchColumn();
-            } else {
               // Fetch the records so we can display them in our template.
               $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
               // Get the total number of clients, this is so we can determine whether there should be a next and previous button
               $num_clients = $pdo->query("SELECT COUNT(*) FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.type = 'Client'")->fetchColumn();
-            }
-            
+          
             // Test whether the user is Admin
             $admchk = "SELECT acct_type FROM accounts WHERE id = '$acct_id'";
             $chkres = mysqli_query($con, $admchk);
             $row = mysqli_fetch_assoc($chkres);
-            if($rowchk['acct_type'] == "Admin"){      
               //Create SQL Query to Get DAta from Databse
-              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
-              FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
-              WHERE t.type = 'Client'
-              ORDER BY deadline";
-            } else {              
-              //Create SQL Query to Get DAta from Databse
-              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+              $sql = "SELECT task_id, object, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Client'
               ORDER BY deadline";
-            }
+            
             //Execute Query
             $res = mysqli_query($con, $sql);
 
@@ -290,8 +232,8 @@ while($row=mysqli_fetch_assoc($res)){
             <?php foreach ($clients as $client): ?>
             <tr>
             <!-- <td><?php echo $sn++; ?></td> -->
-            <td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['task_name'];?></a></td>
-            <td><a href="./updateclient.php?name=<?= $client['name']; ?>"><?= $client['name']; ?></a></td>
+            <td><a href="./update-task.php?task_id=<?= $client['task_id']; ?>"><?= $client['object'];?></a></td>
+            <td><a href="./updateclient.php?object=<?= $client['object']; ?>"><?= $client['object']; ?></a></td>
             <td><?= $client['priority']; ?></td>
             <td><?= $client['deadline']; ?></td>
             </tr>
@@ -328,57 +270,31 @@ while($row=mysqli_fetch_assoc($res)){
           </tr>
         </thead>
           <?php
-            if($rowchk['acct_type'] == "Admin"){      
             // Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
-            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
-                    FROM tasks AS t
-                    LEFT JOIN task_lists AS tl ON t.list_id = tl.id
-                    WHERE t.type = 'Lead'
-                    ORDER BY deadline");
-            $stmt->execute();
-            } else {              
-            // Prepare the SQL statement and get records from our clients table, LIMIT will determine the page
-            $stmt = $pdo->prepare("SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+            $stmt = $pdo->prepare("SELECT task_id, object, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
                     FROM tasks AS t
                     LEFT JOIN task_lists AS tl ON t.list_id = tl.id
                     WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
                     ORDER BY deadline");
             $stmt->execute();
-            }
-            if($rowchk['acct_type'] == "Admin"){      
-              // Fetch the records so we can display them in our template.
-              $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
-              // Get the total number of clients, this is so we can determine whether there should be a next and previous button
-              $num_leads = $pdo->query("SELECT COUNT(*) FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
-              WHERE t.type = 'Lead'")->fetchColumn();
-            } else {                   
+            
               // Fetch the records so we can display them in our template.
               $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
               // Get the total number of clients, this is so we can determine whether there should be a next and previous button
               $num_leads = $pdo->query("SELECT COUNT(*) FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'")->fetchColumn();
-            }
 
           //Select Database
           $db_select = mysqli_select_db($con, DB_NAME) or die();
           
-            if($rowchk['acct_type'] == "Admin"){
               //Create SQL Query to Get DAta from Databse
-              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
-              FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
-              WHERE t.type = 'Lead'
-              ORDER BY deadline";
-            } else {              
-              //Create SQL Query to Get DAta from Databse
-              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+              $sql = "SELECT task_id, object, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Lead'
               ORDER BY deadline";
-            }
+            
 
           //Execute Query
           $res = mysqli_query($con, $sql);
@@ -402,8 +318,8 @@ while($row=mysqli_fetch_assoc($res)){
           <?php foreach ($leads as $lead): ?>
           <tr>
           <!-- <td><?php echo $sn++; ?></td> -->
-          <td><a href="./update-task.php?task_id=<?= $lead['task_id']; ?>"><?= $lead['task_name'];?></a></td>
-          <td><a href="./updatelead.php?name=<?= $lead['name']; ?>"><?= $lead['name']; ?></a></td>
+          <td><a href="./update-task.php?task_id=<?= $lead['task_id']; ?>"><?= $lead['object'];?></a></td>
+          <td><a href="./updatelead.php?object=<?= $lead['object']; ?>"><?= $lead['object']; ?></a></td>
           <td><?= $lead['priority']; ?></td>
           <td><?= $lead['deadline']; ?></td>
           </tr>
@@ -434,7 +350,7 @@ while($row=mysqli_fetch_assoc($res)){
           <tr>
           <!-- <th>#</th> -->
           <th>Task</th>
-          <th>Name</th>
+          <th>Object</th>
           <th>Priority</th>
           <th>Deadline</th>
           </tr>
@@ -443,22 +359,14 @@ while($row=mysqli_fetch_assoc($res)){
 
           //Select Database
           $db_select = mysqli_select_db($con, DB_NAME) or die();
-            if($rowchk['acct_type'] == "Admin"){
               //Create SQL Query to Get DAta from Databse
-              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
-              FROM tasks AS t
-              LEFT JOIN task_lists AS tl ON t.list_id = tl.id
-              WHERE t.type = 'Other'
-              ORDER BY deadline";
-            } else {
-              //Create SQL Query to Get DAta from Databse
-              $sql = "SELECT task_id, task_name, name, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
+              $sql = "SELECT task_id, object, priority, list_name, DATE_FORMAT(deadline, '%b %d, %y %h:%i %p') AS deadline, tl.list_name
               FROM tasks AS t
               LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.acct_id = '$acct_id' AND t.type = 'Other'
               ORDER BY deadline";
 
-            }
+            
 
 
           //Execute Query
@@ -481,23 +389,22 @@ while($row=mysqli_fetch_assoc($res)){
               while($row=mysqli_fetch_assoc($res))
               {
               $task_id = $row['task_id'];
-              $task_name = $row['task_name'];
-              $name = $row['name'];
+              $object = $row['object'];
               $priority = $row['priority'];
               // $list_name = $row['list_name'];
               $deadline = $row['deadline'];
 
 
-              $sql2 = "SELECT name FROM clients WHERE name LIKE '$name%'";
+              $sql2 = "SELECT name FROM clients WHERE name LIKE '$object%'";
               $result = mysqli_query($con, $sql2);
               while($row=mysqli_fetch_assoc($result)){
-                $name = $row['name'];
+                $object = $row['name'];
               }
           ?>
           <tr>
           <!-- <td><?php echo $sn++; ?></td> -->
-          <td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $task_name;?></a></td>
-          <td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $name; ?></a></td>
+          <td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $object;?></a></td>
+          <td><a href="./update-task.php?task_id=<?= $task_id; ?>"><?php echo $object; ?></a></td>
           <td><?php echo $priority; ?></td>
           <td><?php echo $deadline; ?></td>
           </tr>

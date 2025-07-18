@@ -10,8 +10,6 @@
 
         //Select Database
         $db_select = mysqli_select_db($con, DB_NAME) or die();
-
-        //SQL Query to Get the detail of selected task
         $sql = "SELECT * FROM tasks WHERE acct_id = '$acct_id' AND task_id = '$task_id'";
 
         //Execute Query
@@ -24,8 +22,7 @@
             $row = mysqli_fetch_assoc($res);
 
             //Get the Individual Value
-            $task_name = $row['task_name'];
-            $name = $row['name'];
+            $object = $row['object'];
             $details = $row['details'];
             $list_id = $row['list_id'];
             $priority = $row['priority'];
@@ -46,8 +43,7 @@
         //echo "Clicked";
 
         //Get the values from Form
-        $task_name = htmlspecialchars($_POST['task_name']);
-        $name = htmlspecialchars($_POST['name']);
+        $object = htmlspecialchars($_POST['object']);
         $details = htmlspecialchars($_POST['details']);
         $list_id = htmlspecialchars($_POST['list_id']);
         $priority = htmlspecialchars($_POST['priority']);
@@ -59,8 +55,7 @@
 
         //CREATE SQL QUery to Update TAsk
         $sql3 = "UPDATE tasks SET
-                task_name = '$task_name',
-                name = '$name',
+                object = '$object',
                 details = '$details',
                 list_id = '$list_id',
                 priority = '$priority',
@@ -101,14 +96,12 @@
     <div class="w3-content">
 
         <h1>UPDATE TASK</h1>
-        <hr></hr>
+            <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
             <!-- Menu Starts Here -->
             <div class="task-mngr">
                 <a href="./taskmngr.php">Tasks</a>
             </div>
             <br />
-            <div class="">
-            <!-- Menu Ends Here -->
             <?php
                 if(isset($_SESSION['update_fail']))
                 {
@@ -122,11 +115,11 @@
                 <table class="">
                     <tr>
                         <td>Task: </td>
-                        <td><input type="text" name="task_name" value="<?php echo $task_name; ?>" required="required" /></td>
+                        <td><input type="text" name="object" value="<?php echo $object; ?>" required="required" /></td>
                     </tr>
                     <tr>
-                        <td>Lead/Client/Other: </td>
-                        <td><input type="text" name="name" value="<?php echo $name; ?>" /></td>
+                        <td>Name/Object: </td>
+                        <td><input type="text" name="object" value="<?php echo $object; ?>" /></td>
                     </tr>
 
                     <tr>
@@ -164,7 +157,7 @@
                                             while($row2=mysqli_fetch_assoc($res2))
                                             {
                                                 //Get individual value
-                                                $list_id_db = $row2['list_id'];
+                                                $list_id_db = $row2['id'];
                                                 $list_name = $row2['list_name'];
                                                 ?>
 

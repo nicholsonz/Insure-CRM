@@ -20,7 +20,7 @@ $stmt->close();
 ?>
 
 <?=template_header('Administrator')?>
-		<div class="w3-content">
+		<div class="w3-content w3-mobile">
 			<h1>Administrator</h1>
 			<div class="w3-col s12 m5 l5 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
       			<div class="table-viewer tableFixHead" id="clientTable">
@@ -49,4 +49,4 @@ $stmt->close();
 			</div>
 		</div>
 
-<?php require_once('./require/footer.php');?>
+<?php require_once('../require/footer.php');?>

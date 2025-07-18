@@ -76,12 +76,12 @@ if(isset($_POST['delete_file'])) {
     if(isset($_POST['delete_list']))
     {
 
-        //Get the list_id value from URL or Get Method
-        $list_id = mysqli_real_escape_string($con, $_POST['list_id']);
+        //Get the id value from URL or Get Method
+        $id = mysqli_real_escape_string($con, $_POST['id']);
 
         //Write the Query to DELETE List from DAtabase
-        $sql = mysqli_prepare($con, "DELETE FROM task_lists WHERE list_id=?");
-          mysqli_stmt_bind_param($sql, "i", $list_id);
+        $sql = mysqli_prepare($con, "DELETE FROM task_lists WHERE id=?");
+          mysqli_stmt_bind_param($sql, "i", $id);
         $sql->execute();
 
         if($sql) {
@@ -105,7 +105,7 @@ if(isset($_POST['delete_file'])) {
     {
         //Delete the List from database
 
-        //Get the list_id value from URL or Get Method
+        //Get the id value from URL or Get Method
         $name = mysqli_real_escape_string($con, $_POST['name']);
 
         //Write the Query to DELETE List from DAtabase
@@ -134,7 +134,7 @@ if(isset($_POST['delete_file'])) {
         {
             //Delete the List from database
 
-            //Get the list_id value from URL or Get Method
+            //Get the id value from URL or Get Method
             $name = mysqli_real_escape_string($con, $_POST['name']);
 
 

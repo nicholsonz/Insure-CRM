@@ -19,13 +19,20 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION['loggedin'] !== $_SESSION['DoubleC
 $acct_id = $_SESSION['id'];
 
 
-// Connect to MySQL database
+// Assign variable to PDO connect function in config.php
 $pdo = pdo_connect_mysql();
 
-// SQL statement to test whether the user is Admin
+// SQL statement used to test whether the user is Admin
 $admchk = "SELECT acct_type FROM accounts WHERE id = '$acct_id'";
 $chkres = mysqli_query($con, $admchk);
 $rowchk = mysqli_fetch_assoc($chkres);
+
+// Check if user is Admin 
+if($rowchk['acct_type'] == "Admin"){   
+    include('./admnstr/admin_sql.php');
+} else {
+    include('./action/user_sql.php');
+}
 
 ?>
 
@@ -48,12 +55,7 @@ $rowchk = mysqli_fetch_assoc($chkres);
 			<script src="./js/bootstrap.min.js"></script>
 		</head>
 <body>
-<?php
-// Check which account belongs to user and grant specific access
-$sqlchk = "SELECT acct_type FROM accounts WHERE id = '$acct_id'";
-$chkres = mysqli_query($con, $sqlchk);
-while($row = mysqli_fetch_assoc($chkres)){
-if($row['acct_type'] == "Admin"){ ?>
+<?php if($rowchk['acct_type'] == "Admin"): ?>
 
     <div class="w3-sidebar w3-bar-block w3-collapse w3-card-4 w3-animate-left w3-custom-blue" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large w3-hide-large" id="w3close">Close &times;</button>
@@ -69,15 +71,6 @@ if($row['acct_type'] == "Admin"){ ?>
 			<div class="w3-dropdown-hover">
 				<a href="" class="task-mngr w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
 				<?php
-				$sql_tasks = "SELECT * FROM tasks WHERE (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 8 DAY) AND DATE(deadline)) ORDER BY deadline ASC";
-				$res = mysqli_query($con, $sql_tasks);
-				$num_tasks = mysqli_num_rows($res);
-
-
-
-				$sql_tasks2 = "SELECT * FROM tasks WHERE DATE(NOW()) >= DATE(deadline) ORDER BY deadline ASC";
-				$res2 = mysqli_query($con, $sql_tasks2);
-				$num_tasks2 = mysqli_num_rows($res2);
 
 				if($num_tasks >= 1 && $num_tasks2 >= 1){
 					echo "<span class='badgecur'>". number_format($num_tasks) ."</span>";
@@ -95,22 +88,22 @@ if($row['acct_type'] == "Admin"){ ?>
 					<table class="w3-table">
 						 <?php
 							while($row = mysqli_fetch_assoc($res)){
-								$names = $row['name'];
+								$objects = $row['object'];
 								$task_id = $row['task_id'];
 
 								echo "<tr>";
 								echo "<td>";
-								echo "<a href='update-task.php?task_id=$task_id'>" . $names . "</a>";
+								echo "<a href='update-task.php?task_id=$task_id'>" . $objects . "</a>";
 								echo "</td>";
 								echo "</tr>";
 							}
 							while($row2 = mysqli_fetch_assoc($res2)){
-								$names2 = $row2['name'];
+								$objects2 = $row2['object'];
 								$task_id2 = $row2['task_id'];
 
 								echo "<tr>";
 								echo "<td>";
-								echo "<a href='update-task.php?task_id=$task_id2'>" . $names2 . "</a>";
+								echo "<a href='update-task.php?task_id=$task_id2'>" . $objects2 . "</a>";
 								echo "</td>";
 								echo "</tr>";
 							}
@@ -118,8 +111,8 @@ if($row['acct_type'] == "Admin"){ ?>
 					 }else{
 						echo "<div></div>";
 					 }
-?>
-<?php }else{ ?>
+				?>
+<?php else: ?>
 	</div>
 </div>
 	<div class="w3-sidebar w3-bar-block w3-collapse w3-card-4 w3-animate-left w3-custom-blue" id="mySidebar">
@@ -135,16 +128,6 @@ if($row['acct_type'] == "Admin"){ ?>
       		<div class="w3-dropdown-hover">
 				<a href="" class="task-mngr w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
 				<?php
-				$sql_tasks = "SELECT * FROM tasks WHERE (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 8 DAY) AND DATE(deadline)) ORDER BY deadline ASC";
-				$res = mysqli_query($con, $sql_tasks);
-				$num_tasks = mysqli_num_rows($res);
-
-
-
-				$sql_tasks2 = "SELECT * FROM tasks WHERE DATE(NOW()) >= DATE(deadline) ORDER BY deadline ASC";
-				$res2 = mysqli_query($con, $sql_tasks2);
-				$num_tasks2 = mysqli_num_rows($res2);
-
 				if($num_tasks >= 1 && $num_tasks2 >= 1){
 					echo "<span class='badgecur'>". number_format($num_tasks) ."</span>";
 					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></a>";
@@ -161,22 +144,22 @@ if($row['acct_type'] == "Admin"){ ?>
 					<table class="w3-table">
 						 <?php
 							while($row = mysqli_fetch_assoc($res)){
-								$names = $row['name'];
+								$objects = $row['object'];
 								$task_id = $row['task_id'];
 
 								echo "<tr>";
 								echo "<td>";
-								echo "<a href='update-task.php?task_id=$task_id'>" . $names . "</a>";
+								echo "<a href='update-task.php?task_id=$task_id'>" . $objects . "</a>";
 								echo "</td>";
 								echo "</tr>";
 							}
 							while($row2 = mysqli_fetch_assoc($res2)){
-								$names2 = $row2['name'];
+								$objects2 = $row2['object'];
 								$task_id2 = $row2['task_id'];
 
 								echo "<tr>";
 								echo "<td>";
-								echo "<a href='update-task.php?task_id=$task_id2'>" . $names2 . "</a>";
+								echo "<a href='update-task.php?task_id=$task_id2'>" . $objects2 . "</a>";
 								echo "</td>";
 								echo "</tr>";
 							}
@@ -185,8 +168,8 @@ if($row['acct_type'] == "Admin"){ ?>
 						echo "<div></div>";
 					 }
 
-  } } ?>
-
+				?>
+<?php endif;?>
 					</table>
 			</div>
 		</div>

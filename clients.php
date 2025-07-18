@@ -12,25 +12,15 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 8;
 
 
-if($rowchk['acct_type'] == "Admin"){   
-    $stmt = $con->prepare("SELECT * FROM clients ORDER BY name -- LIMIT ?,?");
-	// Calculate the page to get the results we need from our table.
-	// $calc_page = ($page - 1) * $records_per_page;
-	// $stmt->bind_param('ii', $calc_page, $records_per_page);
-	$stmt->execute();
-	// Get the results...
-	$result = $stmt->get_result();
+$stmt = $con->prepare("SELECT * FROM clients WHERE acct_id = ? ORDER BY name -- LIMIT ?,?");
+// Calculate the page to get the results we need from our table.
+// $calc_page = ($page - 1) * $records_per_page;
+// $stmt->bind_param('ii', $calc_page, $records_per_page);
+$stmt->bind_param('i', $acct_id);
+$stmt->execute();
+// Get the results...
+$result = $stmt->get_result();
 
-} else {
-    $stmt = $con->prepare("SELECT * FROM clients WHERE acct_id = ? ORDER BY name -- LIMIT ?,?");
-	// Calculate the page to get the results we need from our table.
-	// $calc_page = ($page - 1) * $records_per_page;
-	// $stmt->bind_param('ii', $calc_page, $records_per_page);
-	$stmt->execute([$acct_id]);
-	// Get the results...
-	$result = $stmt->get_result();
-
-}
 ?>
 
 <?=template_header('Clients')?>

@@ -1,24 +1,7 @@
 <?php
- include('./include/config.php');
+ require('./require/header.php');
 
- // We need to use sessions, so you should always start sessions using the below code.
- if (session_status() === PHP_SESSION_NONE) {
-    session_start();
 
-    $key = hash('sha256', $_SERVER['REMOTE_ADDR']);
-   $_SESSION['DoubleCheck'] = $key;
- }
-
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION['loggedin'] !== $_SESSION['DoubleCheck']){
-   header("Location: index.php");
- exit();
-  }
-
-// Set some global variables
-$acct_id = $_SESSION['id'];
-// Connect to MySQL database
-$pdo = pdo_connect_mysql();
 
 // Check existence of id parameter before processing further
 if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
@@ -91,62 +74,57 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 
 </head>
 <body>
-    <div class="w3-contentview">
-        <div>
+    <div class="w3-content w3-mobile">
+        <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
                     <h1 class=""><?php echo $row["name"]; ?></h1>
-                    <table>
-                        <tr>
-                         <td colspan="2"><b><label>Name & Address</label></b><br />
+
+                         <div class="w3-col l5 m5 s8">
+                            <b><label>Name & Address</label></b><br />
                              <p><?php echo $row["name"]; ?>
                              <p><?php echo $row["address"]; ?>
                              <p><?php echo $row["city"]; ?> <?php echo $row["state"]; ?>  <?php echo $row["zip"]; ?></p>
-                         </td>
-                         <td><b><label>County</label></b><br />
+                         </div>
+                         <div><b><label>County</label></b><br />
                              <p><?php echo $row["county"]; ?></p>
-                         </td>
-                        </tr>
-                        <tr>
-                         <td><b><label>Primary Phone</label></b><br />
+                         </div>
+                       <div><b><label>Primary Phone</label></b><br />
                              <p><?php echo $row["phone"]; ?></p>
-                         </td>
-                         <td>
+                         </div>
+                         <div>
                              <b><label>Secondary Phone</label></b><br />
                              <p><?php echo $row["phone_sec"]; ?></p>
-                         </td>
-                         <td>
+                         </div>
+                         <div>
                              <b><label>Email</label></b><br />
                              <p><?php echo $row["email"]; ?></p>
-                         </td>
-                         <td><b><label>Birth Date</label></b><br />
+                         </div>
+                         <div><b><label>Birth Date</label></b><br />
                              <p><?php echo $row["birthdate"]; ?></p>
-                         </td>
-                        </tr>
-                        <tr>
-                         <td><b><label>Part A</label></b><br />
+                         </div>
+                       <div><b><label>Part A</label></b><br />
                              <p><?php echo $row["partA_date"]; ?></p>
                              <b><label>Part B</label></b><br />
                              <p><?php echo $row["partB_date"]; ?></p>
-                         </td>
-                         <td><b><label>Medicare Number</label></b><br />
+                         </div>
+                         <div><b><label>Medicare Number</label></b><br />
                              <p><?php echo $row["medicare_number"]; ?></p>
-                         </td>
-                         <td><b><label>Policy</label></b><br />
+                         </div>
+                         <div><b><label>Policy</label></b><br />
                              <p><?php echo $row["policy"]; ?></p>
-                         <td><b><label>Insurer</label></b><br />
+                         <div><b><label>Insurer</label></b><br />
                              <p><?php echo $row["insurer"]; ?></p>
-                         </td>
-                         <td><b><label>App Status</label></b><br />
+                         </div>
+                         <div><b><label>App Status</label></b><br />
                              <p><?php echo $row["appstatus"]; ?></p>
-                         </td>
-                        </tr>
-                        <tr>
-                         <td colspan="3"><b><label>Notes</label></b><br />
+                         </div>
+                       <div class="w3-col l5 m5 s8">
+                            <b><label>Notes</label></b><br />
                              <textarea><?php echo $row["notes"]; ?></textarea>
-                         </td>
-                         <td><b><label>Created</label></b><br />
+                         </div>
+                         <div><b><label>Created</label></b><br />
                              <p><?php echo $row["created"]; ?></p>
-                         </td>
-                        </tr>
+                         </div>
+                        
                     </table>
 
                 </div>

@@ -95,7 +95,7 @@ $(document).on("click", ".delList", function (e) {
         $.ajax({
           type: "POST",
           url: "./action/delall.php",
-          data: { delete_list: !0, list_id: e },
+          data: { delete_list: !0, id: e },
           success: function (e) {
             let a = jQuery.parseJSON(e);
             500 == a.status

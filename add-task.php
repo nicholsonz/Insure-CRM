@@ -1,15 +1,10 @@
 <?php
     require_once('./require/header.php');
 
-    if (isset($_GET['task_name'])) {
-        $name = ($_GET['task_name']);
+    if (isset($_GET['object'])) {
+        $object = ($_GET['object']);
     }else{
-        $task_name = "";
-    }
-    if (isset($_GET['name'])) {
-        $name = ($_GET['name']);
-    }else{
-        $name = "";
+        $object = "";
     }
     if(isset($_GET['type'])){
         $type = ($_GET['type']);
@@ -22,8 +17,7 @@ if(isset($_POST['submit']))
 {
     //echo "Button Clicked";
     //Get all the Values from Form
-    $task_name = mysqli_real_escape_string($con, $_POST['task_name']);
-    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $object = mysqli_real_escape_string($con, $_POST['object']);
     $details = mysqli_real_escape_string($con, $_POST['details']);
     $list_id = mysqli_real_escape_string($con, $_POST['list_id']);
     $priority = mysqli_real_escape_string($con, $_POST['priority']);
@@ -37,8 +31,8 @@ if(isset($_POST['submit']))
     $db_select2 = mysqli_select_db($conn2, DB_NAME) or die();
 
     //CReate SQL Query to INSERT DATA into DAtabase
-    $sql_ins = mysqli_prepare($con, "INSERT INTO tasks SET acct_id = ?, task_name = ?, name = ?, details = ?, list_id = ?, priority = ?, deadline = ?, type = ?");
-      mysqli_stmt_bind_param($sql_ins, "isssisss", $acct_id, $task_name, $name, $details, $list_id, $priority, $deadline, $type);
+    $sql_ins = mysqli_prepare($con, "INSERT INTO tasks SET acct_id = ?, object = ?, details = ?, list_id = ?, priority = ?, deadline = ?, type = ?");
+      mysqli_stmt_bind_param($sql_ins, "isssisss", $acct_id, $object, $details, $list_id, $priority, $deadline, $type);
     $sql_ins->execute();
 
     if($sql_ins)
@@ -64,19 +58,13 @@ if(isset($_POST['submit']))
 
 <?=template_header('Task Mngr')?>
 
-        <div class="w3-content">
-
-        <h1>ADD TASK</h1>
-        <hr></hr>
-
-            <!-- Menu Starts Here -->
+<div class="w3-content w3-mobile">
+   <h1>ADD TASK</h1>
+    <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
         <div class="task-mngr">
             <a href="./taskmngr.php">Tasks</a>
         </div>
         <br />
-        <div class="">
-
-<!-- Menu Ends Here -->
 
             <?php
                 if(isset($_SESSION['add_fail']))
@@ -91,7 +79,7 @@ if(isset($_POST['submit']))
             <table>
                 <tr>
                     <td>Task: </td>
-                    <td><input type="text" name="task_name" placeholder="Task" required="required" value="<?= $task_name;?>"/></td>
+                    <td><input type="text" name="object" placeholder="Task" required="required" value="<?= $object;?>"/></td>
                 </tr>
                 <tr>
                     <td>Lead/Client/Other: </td>

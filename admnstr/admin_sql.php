@@ -1,5 +1,16 @@
 <?php
 
+///////////////////////////// Home Page ///////////////////////////////////////////
+// Get Tasks Due number for home page
+$sql_tasks = "SELECT * FROM tasks WHERE (NOW() BETWEEN DATE_SUB(DATE(deadline), INTERVAL 8 DAY) AND DATE(deadline)) AND acct_id = '$acct_id' ORDER BY deadline ASC";
+$res = mysqli_query($con, $sql_tasks);
+$num_tasks = mysqli_num_rows($res);
+
+$sql_tasks2 = "SELECT * FROM tasks WHERE DATE(NOW()) >= DATE(deadline) AND acct_id = '$acct_id' ORDER BY deadline ASC";
+$res2 = mysqli_query($con, $sql_tasks2);
+$num_tasks2 = mysqli_num_rows($res2);
+
+///////////////////////////// Tasks Page //////////////////////////////////////////
 // Get the total number of records.
 $total_pages = $con->query("SELECT COUNT(*) FROM tasks")->fetch_row()[0];
 
@@ -10,7 +21,7 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 $records_per_page = 10;
 
 
- $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.task_name, t.details, t.name, t.list_id, t.priority, 
+ $stmt = $con->prepare("SELECT t.task_id, t.acct_id, t.details, t.object, t.list_id, t.priority, 
                             t.deadline AS deadline, t.type, tl.list_name, a.username
                            FROM tasks as t
                            LEFT JOIN task_lists AS tl ON t.list_id = tl.id
@@ -49,29 +60,20 @@ $list_name->close();
 // MYSQL statement for getting Priority enum list for task  
 $table_name = "tasks";
 $column_prty = "priority";
-
-
 $query_prty = "SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE TABLE_NAME = '$table_name' AND COLUMN_NAME = '$column_prty'
-        ORDER BY '$column_prty' ASC";
-$res = mysqli_query($con, $query_prty);
+        WHERE TABLE_NAME = '$table_name' AND COLUMN_NAME = '$column_prty'";
+$res_prty = mysqli_query($con, $query_prty);
+$row_prty = mysqli_fetch_array($res_prty);
+$enumPrty = explode(",", str_replace("'", "", substr($row_prty['COLUMN_TYPE'], 5, (strlen($row_prty['COLUMN_TYPE'])-6))));
 
-$row = mysqli_fetch_array($res);
-
-$enumPrty = explode(",", str_replace("'", "", substr($row['COLUMN_TYPE'], 5, (strlen($row['COLUMN_TYPE'])-6))));
 
 // MYSQL statement for getting Type enum list for task 
 $table_name = "tasks";
 $column_type = "type";
-
-
 $query_type = "SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE TABLE_NAME = '$table_name' AND COLUMN_NAME = '$column_type'
-        ORDER BY '$column_type' ASC";
-$res = mysqli_query($con, $query_type);
-
-$row = mysqli_fetch_array($res);
-
-$enumType = explode(",", str_replace("'", "", substr($row['COLUMN_TYPE'], 5, (strlen($row['COLUMN_TYPE'])-6))));
+        WHERE TABLE_NAME = '$table_name' AND COLUMN_NAME = '$column_type'";
+$res_type = mysqli_query($con, $query_type);
+$row_type = mysqli_fetch_array($res_type);
+$enumType = explode(",", str_replace("'", "", substr($row_type['COLUMN_TYPE'], 5, (strlen($row_type['COLUMN_TYPE'])-6))));
 
 ?>
