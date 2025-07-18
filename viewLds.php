@@ -98,12 +98,12 @@ if(isset($_GET["name"]) && !empty(trim($_GET["name"]))){
                             <?php echo $row["insurer"]; ?>
                             <h3>App Status</h3>
                             <?php echo $row["appstatus"]; ?>
+                            <h3>Created</h3>
+                            <?php echo $row["created"]; ?>
                         </div>
                         <div class="w3-col l5 m5 s12 w3-margin w3-padding">
                             <h3>Notes</h3>
                             <textarea><?php echo $row["notes"]; ?></textarea>
-                            <h3>Created</h3>
-                            <?php echo $row["created"]; ?>
                         </div>
                     </div>  
                     </table>
