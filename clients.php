@@ -1,6 +1,5 @@
 <?php
-    require_once('./require/header.php');
-
+require_once('./require/header.php');
 
 // Get the total number of clients.
 $total_pages = $con->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id'")->fetch_row()[0];
@@ -10,7 +9,6 @@ $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
 
 // Number of results to show on each page.
 $records_per_page = 8;
-
 
 $stmt = $con->prepare("SELECT * FROM clients WHERE acct_id = ? ORDER BY name -- LIMIT ?,?");
 // Calculate the page to get the results we need from our table.

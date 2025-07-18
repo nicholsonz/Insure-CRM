@@ -89,7 +89,7 @@
 
     }
 
-    ?>
+?>
 
 <?=template_header('Task Mngr')?>
 

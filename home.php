@@ -18,6 +18,7 @@ while($row=mysqli_fetch_assoc($res)){
 ?>
 
 <?=template_header('Home')?>
+
 <div class="w3-content w3-mobile">
   <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
     <table>
@@ -55,28 +56,29 @@ while($row=mysqli_fetch_assoc($res)){
 				}
 			?>
 			<table class="w3-table">
-				<tr>
-					<td class="w3-xlarge">Leads</td>
-					<td class="w3-xlarge"><?= $newleads?></td>
-				</tr>
-				<tr>
-					<td class="w3-xlarge">Clients</td>
-					<td class="w3-xlarge"><?= $convleads?></td>
-				</tr>
-        <tr>
-          <td><br /></td>
-        </tr>
-				<tr>
-					<td class="w3-xlarge">Conversion</td>
-					<td class="w3-xlarge">&nbsp; <?= number_format($convperc * 100); ?> %</td>
-				</tr>
+        <tbody>
+          <tr>
+            <td class="w3-xlarge">Leads</td>
+            <td class="w3-xlarge"><?= $newleads?></td>
+          </tr>
+          <tr>
+            <td class="w3-xlarge">Clients</td>
+            <td class="w3-xlarge"><?= $convleads?></td>
+          </tr>
+          <tr>
+            <td><br /></td>
+          </tr>
+          <tr>
+            <td class="w3-xlarge">Conversion</td>
+            <td class="w3-xlarge">&nbsp; <?= number_format($convperc * 100); ?> %</td>
+          </tr>
+        </tbody>
 			</table>
     </div>
 		<div class="w3-col s12 m3 l3 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
       <br />
 			<?php
-      // Test whether the user is Admin
           $pdo = pdo_connect_mysql();
           $newleads = $pdo->query("SELECT COUNT(*) FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
           $convleads = $pdo->query("SELECT COUNT(*) FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now())")->fetchColumn();
@@ -155,7 +157,6 @@ while($row=mysqli_fetch_assoc($res)){
 		<div class="w3-col s12 m6-6 l6-6 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
 			<?php
-      // Test whether the user is Admin
 				$pdo = pdo_connect_mysql();
 				$mnthleads = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as leadnum FROM leads WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
 			  $mnthclients = $pdo->query("SELECT DATE_FORMAT(created, '%b') as monthname, COUNT(*) as clientnum FROM clients WHERE acct_id = '$acct_id' AND YEAR(created) = YEAR(now()) GROUP BY monthname")->fetchAll(PDO::FETCH_OBJ);
@@ -199,7 +200,6 @@ while($row=mysqli_fetch_assoc($res)){
               LEFT JOIN task_lists AS tl ON t.list_id = tl.id
               WHERE t.type = 'Client'")->fetchColumn();
           
-            // Test whether the user is Admin
             $admchk = "SELECT acct_type FROM accounts WHERE id = '$acct_id'";
             $chkres = mysqli_query($con, $admchk);
             $row = mysqli_fetch_assoc($chkres);
@@ -324,11 +324,7 @@ while($row=mysqli_fetch_assoc($res)){
           <td><?= $lead['deadline']; ?></td>
           </tr>
           <?php endforeach; ?>
-          <?php
-
-            }
-            else
-            {
+          <?php }else {
             //No data in Database
           ?>
           <tr>

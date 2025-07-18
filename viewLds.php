@@ -1,25 +1,5 @@
 <?php
- include('./include/config.php');
-
- // We need to use sessions, so you should always start sessions using the below code.
- if (session_status() === PHP_SESSION_NONE) {
-     session_start();
-
-     $key = hash('sha256', $_SERVER['REMOTE_ADDR']);
-    $_SESSION['DoubleCheck'] = $key;
-  }
-
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION['loggedin'] !== $_SESSION['DoubleCheck']){
-	header("Location: index.php");
-  exit();
-   }
-
-// Set some global variables
-$acct_id = $_SESSION['id'];
-
-// Connect to MySQL database
-$pdo = pdo_connect_mysql();
+ require('./require/header.php');
 
 // Check existence of name parameter before processing further
 if(isset($_GET["name"]) && !empty(trim($_GET["name"]))){
@@ -84,73 +64,50 @@ if(isset($_GET["name"]) && !empty(trim($_GET["name"]))){
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>View Record</title>
+<?=template_header('View Client')?>
 
-</head>
-<body>
-    <div class="w3-contentview">
-        <div class="">
+    <div class="w3-content w3-mobile">
+        <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
                     <h1 class=""><?php echo $row["name"]; ?></h1>
-                    <table>
-                        <tr>
-                         <td colspan="2"><b><label>Name & Address</label></b><br />
-                             <p><?php echo $row["name"]; ?>
-                             <p><?php echo $row["address"]; ?>
-                             <p><?php echo $row["city"]; ?> <?php echo $row["state"]; ?>  <?php echo $row["zip"]; ?></p>
-                         </td>
-                         <td><b><label>County</label></b><br />
-                             <p><?php echo $row["county"]; ?></p>
-                         </td>
-                        </tr>
-                        <tr>
-                         <td><b><label>Primary Phone</label></b><br />
-                             <p><?php echo $row["phone"]; ?></p>
-                         </td>
-                         <td>
-                             <b><label>Secondary Phone</label></b><br />
-                             <p><?php echo $row["phone_sec"]; ?></p>
-                         </td>
-                         <td>
-                             <b><label>Email</label></b><br />
-                             <p><?php echo $row["email"]; ?></p>
-                         </td>
-                         <td><b><label>Birth Date</label></b><br />
-                             <p><?php echo $row["birthdate"]; ?></p>
-                         </td>
-                        </tr>
-                        <tr>
-                         <td><b><label>Part A</label></b><br />
-                             <p><?php echo $row["partA_date"]; ?></p>
-                             <b><label>Part B</label></b><br />
-                             <p><?php echo $row["partB_date"]; ?></p>
-                         </td>
-                         <td><b><label>Medicare Number</label></b><br />
-                             <p><?php echo $row["medicare_number"]; ?></p>
-                         </td>
-                         <td><b><label>Policy</label></b><br />
-                             <p><?php echo $row["policy"]; ?></p>
-                         <td><b><label>Insurer</label></b><br />
-                             <p><?php echo $row["insurer"]; ?></p>
-                         </td>
-                         <td><b><label>App Status</label></b><br />
-                             <p><?php echo $row["appstatus"]; ?></p>
-                         </td>
-                        </tr>
-                        <tr>
-                         <td colspan="3"><b><label>Notes</label></b><br />
-                             <textarea><?php echo $row["notes"]; ?></textarea>
-                         </td>
-                         <td><b><label>Created</label></b><br />
-                             <p><?php echo $row["created"]; ?></p>
-                         </td>
-                        </tr>
+                    <div class="w3-row">
+                        <div class="w3-col l5 m5 s12 w3-margin w3-padding">
+                             <h3>Contact Info</h3>
+                             <address>
+                                <?php echo $row["address"]; ?><br>
+                                <?php echo $row["city"]; ?>, <?php echo $row["state"]; ?>  <?php echo $row["zip"]; ?>
+                             </address>
+                            <?php echo "<b>County: </b>" .  $row["county"]; ?><br>
+                            <?php echo "<b>Phone #: </b>" . $row["phone"]; ?><br>
+                            <?php echo "<b>Other #: </b>" . $row["phone_sec"]; ?><br>
+                            <?php echo "<b>Email: </b>" . $row["email"]; ?><br>
+                            <?php echo "<b>Birthdate: </b>" . $row['birthdate']; ?><br>
+                        </div>  
+                        <div class="w3-col l5 m5 s12 w3-margin w3-padding"> 
+                            <h3>Part A</h3>
+                            <?php echo $row["partA_date"]; ?>
+                            <h3>Part B</h3>
+                            <?php echo $row["partB_date"]; ?>
+                            <h3>Medicare Number</h3>
+                            <?php echo $row["medicare_number"]; ?>
+                        </div>
+                    <div class="w3-row">
+                        <div class="w3-col l5 m5 s12 w3-margin w3-padding">
+                            <h3>Policy</h3>
+                            <?php echo $row["policy"]; ?>
+                            <h3>Insurer</h3>
+                            <?php echo $row["insurer"]; ?>
+                            <h3>App Status</h3>
+                            <?php echo $row["appstatus"]; ?>
+                        </div>
+                        <div class="w3-col l5 m5 s12 w3-margin w3-padding">
+                            <h3>Notes</h3>
+                            <textarea><?php echo $row["notes"]; ?></textarea>
+                            <h3>Created</h3>
+                            <?php echo $row["created"]; ?>
+                        </div>
+                    </div>  
                     </table>
 
                 </div>
            </div>
-    </body>
-</html>
+<?php require_once('./require/footer.php');?>

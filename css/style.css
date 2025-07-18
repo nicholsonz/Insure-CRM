@@ -412,18 +412,6 @@ table tbody tr:nth-child(even) {
     background-color: #202020;
 }
 
-table tbody tr:hover {
-    background-color: #164d72;
-}
-
-table tbody tr:hover td {
-    color: #8dc2e6;
-}
-
-table tbody tr:hover td:nth-child(1) {
-    color: #19bee7;
-}
-
 table tbody tr td {
     padding: 10px;
     color: whitesmoke;

@@ -1,8 +1,6 @@
 <?php
  require('./require/header.php');
 
-
-
 // Check existence of id parameter before processing further
 if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 
@@ -66,68 +64,51 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>View Record</title>
+<?=template_header('View Client')?>
 
-</head>
 <body>
     <div class="w3-content w3-mobile">
         <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
                     <h1 class=""><?php echo $row["name"]; ?></h1>
-
-                         <div class="w3-col l5 m5 s8">
-                            <b><label>Name & Address</label></b><br />
-                             <p><?php echo $row["name"]; ?>
-                             <p><?php echo $row["address"]; ?>
-                             <p><?php echo $row["city"]; ?> <?php echo $row["state"]; ?>  <?php echo $row["zip"]; ?></p>
-                         </div>
-                         <div><b><label>County</label></b><br />
-                             <p><?php echo $row["county"]; ?></p>
-                         </div>
-                       <div><b><label>Primary Phone</label></b><br />
-                             <p><?php echo $row["phone"]; ?></p>
-                         </div>
-                         <div>
-                             <b><label>Secondary Phone</label></b><br />
-                             <p><?php echo $row["phone_sec"]; ?></p>
-                         </div>
-                         <div>
-                             <b><label>Email</label></b><br />
-                             <p><?php echo $row["email"]; ?></p>
-                         </div>
-                         <div><b><label>Birth Date</label></b><br />
-                             <p><?php echo $row["birthdate"]; ?></p>
-                         </div>
-                       <div><b><label>Part A</label></b><br />
-                             <p><?php echo $row["partA_date"]; ?></p>
-                             <b><label>Part B</label></b><br />
-                             <p><?php echo $row["partB_date"]; ?></p>
-                         </div>
-                         <div><b><label>Medicare Number</label></b><br />
-                             <p><?php echo $row["medicare_number"]; ?></p>
-                         </div>
-                         <div><b><label>Policy</label></b><br />
-                             <p><?php echo $row["policy"]; ?></p>
-                         <div><b><label>Insurer</label></b><br />
-                             <p><?php echo $row["insurer"]; ?></p>
-                         </div>
-                         <div><b><label>App Status</label></b><br />
-                             <p><?php echo $row["appstatus"]; ?></p>
-                         </div>
-                       <div class="w3-col l5 m5 s8">
-                            <b><label>Notes</label></b><br />
-                             <textarea><?php echo $row["notes"]; ?></textarea>
-                         </div>
-                         <div><b><label>Created</label></b><br />
-                             <p><?php echo $row["created"]; ?></p>
-                         </div>
-                        
+                    <div class="w3-row">
+                        <div class="w3-col l5 m5 s12 w3-margin w3-padding">
+                             <h3>Contact Info</h3>
+                             <address>
+                                <?php echo $row["address"]; ?><br>
+                                <?php echo $row["city"]; ?>, <?php echo $row["state"]; ?>  <?php echo $row["zip"]; ?>
+                             </address>
+                            <?php echo "<b>County: </b>" .  $row["county"]; ?><br>
+                            <?php echo "<b>Phone #: </b>" . $row["phone"]; ?><br>
+                            <?php echo "<b>Other #: </b>" . $row["phone_sec"]; ?><br>
+                            <?php echo "<b>Email: </b>" . $row["email"]; ?><br>
+                            <?php echo "<b>Birthdate: </b>" . $row['birthdate']; ?><br>
+                        </div>  
+                        <div class="w3-col l5 m5 s12 w3-margin w3-padding"> 
+                            <h3>Part A</h3>
+                            <?php echo $row["partA_date"]; ?>
+                            <h3>Part B</h3>
+                            <?php echo $row["partB_date"]; ?>
+                            <h3>Medicare Number</h3>
+                            <?php echo $row["medicare_number"]; ?>
+                        </div>
+                    <div class="w3-row">
+                        <div class="w3-col l5 m5 s12 w3-margin w3-padding">
+                            <h3>Policy</h3>
+                            <?php echo $row["policy"]; ?>
+                            <h3>Insurer</h3>
+                            <?php echo $row["insurer"]; ?>
+                            <h3>App Status</h3>
+                            <?php echo $row["appstatus"]; ?>
+                        </div>
+                        <div class="w3-col l5 m5 s12 w3-margin w3-padding">
+                            <h3>Notes</h3>
+                            <textarea><?php echo $row["notes"]; ?></textarea>
+                            <h3>Created</h3>
+                            <?php echo $row["created"]; ?>
+                        </div>
+                    </div>  
                     </table>
 
                 </div>
            </div>
-    </body>
-</html>
+<?php require_once('./require/footer.php');?>

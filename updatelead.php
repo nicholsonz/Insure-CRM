@@ -53,8 +53,8 @@ if (isset($_GET['name'])) {
 <?=template_header('Read')?>
 
 <div class="w3-content update w3-mobile">
-<h1><?=$lead['name']?></h1>
-    <div>
+	<h1><?=$lead['name']?></h1>
+    <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
       <div class="w3-row">
         <div class="w3-col s12 m5 l5 w3-text-white">
         <form action="./action/upld.php?lead=<?=$lead['name']?>" method="post" enctype="multipart/form-data">
