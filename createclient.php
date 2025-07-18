@@ -37,10 +37,10 @@ if (!empty($_POST)) {
 
 <?=template_header('Create')?>
 
-<div class="w3-content update">
+<div class="w3-content update w3-mobile">
 	<h1>Create Client</h1>
   <hr></hr>
-    <div class="">
+    <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
 <!-- Client file upload needs editing to produce specific folders for each client with appropriate access rights
             <form action="upld.php" method="post" enctype="multipart/form-data">
             Select file to upload:

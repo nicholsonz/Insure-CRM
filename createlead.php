@@ -34,10 +34,10 @@ if (!empty($_POST)) {
 }
 ?>
 <?php template_header('Create'); ?>
-<div class="w3-content update">
+<div class="w3-content update w3-mobile">
 	<h1>Create Lead</h1>
   <hr></hr>
-    <div class="">
+    <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
     <form action="createlead.php" method="post">
     <div class="w3-row">
             <div class="w3-col s12 m5 l5" colspan="3">
