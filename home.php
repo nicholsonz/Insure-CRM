@@ -55,7 +55,7 @@ while($row=mysqli_fetch_assoc($res)){
 				$convperc = $convleads / $newleads;
 				}
 			?>
-			<table class="w3-table">
+			<table>
         <tbody>
           <tr>
             <td class="w3-xlarge">Leads</td>
