@@ -93,7 +93,7 @@
 
 <?=template_header('Task Mngr')?>
 
-    <div class="w3-content">
+    <div class="w3-content w3-mobile update">
 
         <h1>UPDATE TASK</h1>
             <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
@@ -201,13 +201,15 @@
                         <br />
                       </td>
                     </tr>
-                    <tr>
-                        <td><input class="w3-button" type="submit" name="submit" value="UPDATE" /></td>
-                        <td><a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a></td>
-                    </tr>
-
                 </table>
-
+                    <div class="w3-row">
+                        <div class="w3-col s12 m12 l3 w3-margin-right">
+                            <input type="submit" name="submit" value="UPDATE" />
+                        </div>
+                        <div class="w3-col s12 m12 l3 w3-margin-right w3-margin">
+                            <a href="./taskmngr.php" class="w3-button w3-orange w3-hover-amber">Cancel</a>
+                        </div>
+                    </div>
             </form>
         </div>
     </div>
