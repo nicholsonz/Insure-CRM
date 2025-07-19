@@ -39,7 +39,7 @@ while($row=mysqli_fetch_assoc($res)){
 <div class="w3-content w3-mobile">
   <!-- <h1><?= date("l - F d Y");?></h1> -->
 
-   		<div class="w3-col s12 m3 l3 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
+   		<div class="w3-col s12 m5 l3 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-card-4">
 			<h2><?php echo date('F'); ?> Activity</h2>
       <br />
 			<?php
@@ -75,7 +75,7 @@ while($row=mysqli_fetch_assoc($res)){
         </tbody>
 			</table>
     </div>
-		<div class="w3-col s12 m3 l3 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
+		<div class="w3-col s12 m5 l3 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
 			<h2><?php echo date('Y'); ?> Activity</h2>
       <br />
 			<?php

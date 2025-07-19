@@ -3,9 +3,9 @@
 
 
 if($rowchk['acct_type'] == "Admin"){   
-    include('./action/admin_db.php');
+    include('./admnstr/admin_sql.php');
 } else {
-    include('./action/tasklist_db.php');
+    include('./action/user_sql.php');
 }
 // Home Page template below.
 

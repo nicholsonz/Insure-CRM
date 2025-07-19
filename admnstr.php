@@ -49,4 +49,4 @@ $stmt->close();
 			</div>
 		</div>
 
-<?php require_once('../require/footer.php');?>
+<?php require_once('./require/footer.php');?>

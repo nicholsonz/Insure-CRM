@@ -68,12 +68,10 @@
 
 <?=template_header('Task Mngr')?>
 
-<div class="w3-content">
+<div class="w3-content w3-mobile">
 
         <h1>ADD TASK LIST</h1>
-        <hr></hr>
-
-        <!-- Menu Starts Here -->
+    <div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
         <div class="task-mngr">
             <a href="./manage-list.php">Manage Lists</a>
         </div>
@@ -97,7 +95,7 @@
 
         <form method="POST" action="">
 
-            <table class="">
+            <table class="w3-table">
                 <tr>
                     <td>List Name: </td>
                     <td><input type="text" name="list_name" placeholder="Type list name here" required="required" /></td>
@@ -124,8 +122,8 @@
             </table>
 
         </form>
-
         <!-- Form to Add List Ends Here -->
         </div>
     </div>
+</div>
 <?php require('./require/footer.php');?>

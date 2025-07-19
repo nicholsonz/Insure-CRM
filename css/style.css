@@ -24,8 +24,21 @@ body {
 }
 a {
     margin: 1px;
+    text-decoration: none;
 }
-
+.w3-col.m6-6 {
+    width: 52%
+}
+.w3-col-l6-6 {
+    width: 52%
+}
+.w3-dropdown-content {
+    background-color: #272e36;
+    color: whitesmoke;
+}
+.w3-dropdown-content table tr td:hover {
+    background-color: #021c319a;
+}
 /* Tooltip container */
 .tooltip {
  position: relative;
@@ -87,7 +100,15 @@ a {
     z-index: 1;
     background-color: #203c53;
 }
-
+.w3-content {
+    max-width: 1640px;
+    margin-left: 240px;
+}
+@media (max-width:960px){
+    .w3-content {
+        margin-left: auto;
+    }
+}
 .w3-content .table-viewer {
     width: 100%;
     height: 600px;
@@ -266,7 +287,7 @@ table {
 
 tr {
     text-align: left;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     color: white
 }
 
@@ -283,6 +304,7 @@ tr {
     padding: 15px 0;
     font-size: 22px;
     color: #4accec;
+    text-align: center;
 }
 
 .w3-content h3 {
@@ -324,7 +346,7 @@ tr {
 .w3-content>p table td:first-child,
 .w3-content>div table td:first-child {
     font-weight: bold;
-    color: #097baf;
+    /* color: #097baf; */
     padding-right: 15px;
 }
 
@@ -391,6 +413,9 @@ table {
     border-collapse: collapse;
 }
 
+.w3-table tbody tr:hover {
+    background-color: #203c53;
+}
 table thead {
     background-color: #203c53;
     border-bottom: 1px solid #d3dae0;
@@ -402,14 +427,6 @@ table thead td {
     font-weight: bold;
     color: #34d6d6;
     font-size: 14px;
-}
-
-table tbody tr {
-    border-bottom: 1px solid #0c0d0ffb;
-}
-
-table tbody tr:nth-child(even) {
-    background-color: #202020;
 }
 
 table tbody tr td {

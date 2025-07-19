@@ -111,27 +111,11 @@
             ?>
 
             <form method="POST" action="">
-
                 <table class="">
-                    <tr>
-                        <td>Task: </td>
-                        <td><input type="text" name="object" value="<?php echo $object; ?>" required="required" /></td>
-                    </tr>
-                    <tr>
-                        <td>Name/Object: </td>
-                        <td><input type="text" name="object" value="<?php echo $object; ?>" /></td>
-                    </tr>
-
-                    <tr>
-                        <td>Task Description: </td>
-                        <td><textarea  type="text" name="details"><?=$details; ?></textarea></td>
-                    </tr>
-
                     <tr>
                         <td>Task List: </td>
                         <td>
                             <select name="list_id">
-
                                 <?php
 
                                     //SElect Database
@@ -176,22 +160,28 @@
                                         }
                                     }
                                 ?>
-
                             </select>
                         </td>
+                    </tr>
+                    <tr>
+                        <td>Name/Object: </td>
+                        <td><input type="text" name="object" value="<?php echo $object; ?>" /></td>
                     </tr>
 
                     <tr>
-                        <td>Priority: </td>
-                        <td>
-                            <select name="priority">
-                                <option <?php if($priority=="High"){echo "selected='selected'";} ?> value="High">High</option>
-                                <option <?php if($priority=="Medium"){echo "selected='selected'";} ?> value="Medium">Medium</option>
-                                <option <?php if($priority=="Low"){echo "selected='selected'";} ?> value="Low">Low</option>
-                            </select>
-                        </td>
+                        <td>Task Description: </td>
+                        <td><textarea  type="text" name="details"><?=$details; ?></textarea></td>
                     </tr>
-
+                    <tr>
+                    <td>Priority: </td>
+                    <td>
+                        <select name="priority">
+                            <option <?php if($type=="High"){echo "selected='selected'";} ?> value="High">High</option>
+                            <option <?php if($type=="Medium"){echo "selected='selected'";} ?> value="Medium">Medium</option>
+                            <option <?php if($type=="Low"){echo "selected='selected'";} ?> value="Low">Low</option>
+                        </select>
+                    </td>
+                    </tr>
                     <tr>
                         <td>Deadline: </td>
                         <td><input type="datetime-local" name="deadline" value="<?php echo $deadline; ?>" /></td>

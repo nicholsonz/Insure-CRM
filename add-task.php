@@ -1,8 +1,8 @@
 <?php
     require_once('./require/header.php');
 
-    if (isset($_GET['object'])) {
-        $object = ($_GET['object']);
+    if (isset($_GET['name'])) {
+        $object = ($_GET['name']);
     }else{
         $object = "";
     }
@@ -17,6 +17,7 @@ if(isset($_POST['submit']))
 {
     //echo "Button Clicked";
     //Get all the Values from Form
+    $acct_id = mysqli_real_escape_string($con, $_POST['acct_id']);
     $object = mysqli_real_escape_string($con, $_POST['object']);
     $details = mysqli_real_escape_string($con, $_POST['details']);
     $list_id = mysqli_real_escape_string($con, $_POST['list_id']);
@@ -32,7 +33,7 @@ if(isset($_POST['submit']))
 
     //CReate SQL Query to INSERT DATA into DAtabase
     $sql_ins = mysqli_prepare($con, "INSERT INTO tasks SET acct_id = ?, object = ?, details = ?, list_id = ?, priority = ?, deadline = ?, type = ?");
-      mysqli_stmt_bind_param($sql_ins, "isssisss", $acct_id, $object, $details, $list_id, $priority, $deadline, $type);
+      mysqli_stmt_bind_param($sql_ins, "ississs", $acct_id, $object, $details, $list_id, $priority, $deadline, $type);
     $sql_ins->execute();
 
     if($sql_ins)
@@ -55,7 +56,6 @@ if(isset($_POST['submit']))
 
 ?>
 
-
 <?=template_header('Task Mngr')?>
 
 <div class="w3-content w3-mobile">
@@ -75,29 +75,12 @@ if(isset($_POST['submit']))
             ?>
 
         <form method="POST" action="add-task.php">
-
+                <input type="hidden" name="acct_id" value="<?=$acct_id?>">
             <table>
-                <tr>
                     <td>Task: </td>
-                    <td><input type="text" name="object" placeholder="Task" required="required" value="<?= $object;?>"/></td>
-                </tr>
-                <tr>
-                    <td>Lead/Client/Other: </td>
-                    <td><input type="text" name="name" placeholder="Lead/Client/Other" value="<?= $name;?>"/></td>
-                </tr>
-
-                <tr>
-                    <td>Task Description: </td>
-                    <td><textarea type="text" name="details" placeholder="Type Task Description"></textarea></td>
-                </tr>
-
-                <tr>
-                    <td>Task List: </td>
                     <td>
                         <select name="list_id">
-
                             <?php
-
                                 //Connect Database
                                 $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die();
 
@@ -122,7 +105,7 @@ if(isset($_POST['submit']))
                                         //display all lists on dropdown from database
                                         while($row=mysqli_fetch_assoc($res))
                                         {
-                                            $list_id = $row['list_id'];
+                                            $list_id = $row['id'];
                                             $list_name = $row['list_name'];
                                             ?>
                                             <option value="<?php echo $list_id ?>"><?php echo $list_name; ?></option>
@@ -139,23 +122,28 @@ if(isset($_POST['submit']))
 
                                 }
                             ?>
-
-
                         </select>
                     </td>
                 </tr>
+                <tr>
+                    <td>Name/Object: </td>
+                    <td><input type="text" name="object" placeholder="Lead/Client/Other" value="<?= $object;?>"/></td>
+                </tr>
 
+                <tr>
+                    <td>Task Description: </td>
+                    <td><textarea type="text" name="details" placeholder="Type Task Description"></textarea></td>
+                </tr>
                 <tr>
                     <td>Priority: </td>
                     <td>
                         <select name="priority">
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
+                            <option <?php if($type=="High"){echo "selected='selected'";} ?> value="High">High</option>
+                            <option <?php if($type=="Medium"){echo "selected='selected'";} ?> value="Medium">Medium</option>
+                            <option <?php if($type=="Low"){echo "selected='selected'";} ?> value="Low">Low</option>
                         </select>
                     </td>
                 </tr>
-
                 <tr>
                     <td>Deadline: </td>
                     <td><input type="datetime-local" name="deadline" /></td>
