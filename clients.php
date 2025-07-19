@@ -56,7 +56,7 @@ $result = $stmt->get_result();
                   <td><?=date("m-d-Y", strtotime($row['created']));?></td>
                   <td class="actions">
                       <a href="add-task.php?name=<?=$row['name']?>&&type=<?="Client";?>" class="w3-btn task"><i class="fas fa-tasks fa-xs"></i></a>
-                      <a href="viewCls.php?id=<?=$row['id']?>" class="w3-btn view" target="_blank"><i class="fas fa-eye fa-xs"></i></a>
+                      <a href="viewCls.php?id=<?=$row['id']?>" class="w3-btn view"><i class="fas fa-eye fa-xs"></i></a>
                       <a href="updateclient.php?id=<?=$row['id']?>" class="w3-btn edit"><i class="fas fa-edit fa-xs"></i></a>
                       <button type="button" value="<?=$row['name'];?>" class="w3-btn delClient trash"><i class="fas fa-trash-alt fa-xs"></i></button>
                   </td>
