@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1deb1
+-- version 5.2.1deb1+deb12u1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jan 25, 2025 at 11:26 AM
--- Server version: 10.11.6-MariaDB-0+deb12u1-log
--- PHP Version: 8.2.26
+-- Host: localhost
+-- Generation Time: Jul 18, 2025 at 09:52 PM
+-- Server version: 10.11.11-MariaDB-0+deb12u1-log
+-- PHP Version: 8.2.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `clientdb`
 --
-CREATE DATABASE IF NOT EXISTS `clientdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `clientdb`;
 
 -- --------------------------------------------------------
 
@@ -120,11 +118,10 @@ CREATE TABLE `tasks` (
   `lead_id` int(11) DEFAULT NULL,
   `task_id` int(10) UNSIGNED NOT NULL,
   `acct_id` int(11) NOT NULL,
-  `task_name` varchar(150) NOT NULL,
-  `name` varchar(75) DEFAULT NULL,
+  `object` varchar(75) DEFAULT NULL,
   `details` text NOT NULL,
-  `list_id` int(11) NOT NULL,
-  `priority` varchar(10) NOT NULL,
+  `list_id` int(11) UNSIGNED NOT NULL,
+  `priority` enum('High','Medium','Low') NOT NULL,
   `deadline` datetime NOT NULL,
   `type` enum('Lead','Client','Other') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -136,7 +133,7 @@ CREATE TABLE `tasks` (
 --
 
 CREATE TABLE `task_lists` (
-  `list_id` int(10) UNSIGNED NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `acct_id` int(11) NOT NULL,
   `list_name` varchar(50) NOT NULL,
   `list_description` varchar(150) DEFAULT NULL
@@ -188,7 +185,7 @@ ALTER TABLE `tasks`
 -- Indexes for table `task_lists`
 --
 ALTER TABLE `task_lists`
-  ADD PRIMARY KEY (`list_id`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `acct_id` (`acct_id`);
 
 --
@@ -229,7 +226,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `task_lists`
 --
 ALTER TABLE `task_lists`
-  MODIFY `list_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -253,7 +250,8 @@ ALTER TABLE `leads`
 ALTER TABLE `tasks`
   ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`acct_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`lead_id`) REFERENCES `leads` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tasks_ibfk_3` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tasks_ibfk_3` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tasks_ibfk_4` FOREIGN KEY (`list_id`) REFERENCES `task_lists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `task_lists`
