@@ -84,18 +84,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 
 <?=template_header('Leads')?>
-<div class="w3-content read">
+<div class="w3-content w3-mobile">
+	<div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
   <?php
   if(!empty($file_err)){
     echo '<div class="alert">' . $file_err .'</div>';
   } elseif(!empty($file_suc)){
     echo '<div class="success">' . $file_suc .'</div>';
   } else{
-      echo '<div></div>';
+      
   }
   ?>
   <div class="w3-row">
-    <div class="w3-col l12 w3-margin w3-padding" id="importFrm">
+    <div class="w3-col l4 m4 s12 w3-margin w3-padding" id="importFrm">
         <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
             <input type="file" id="file" class="file-upload" name="file" />
             <input type="submit" class="w3-btn" name="importSubmit" value="IMPORT">
@@ -103,10 +104,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div>
   </div>
   <div class="w3-row">
-    <div class="w3-col l12 w3-margin w3-padding w3-text-white">
+    <div class="w3-col l4 m4 s12 w3-margin w3-padding w3-text-white">
       <p><a href="./db/impLeads.csv" class="w3-btn w3-blue" download>Download</a> csv template file for upload.</p>
     </div>
  </div>
+</div>
 </div>
 
  <?php require_once('./require/footer.php');?>
