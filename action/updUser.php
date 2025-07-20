@@ -9,7 +9,6 @@ if(isset($_POST['update_user']))
     $email = $_POST['email'];
     $acct_type = $_POST['acct_type'];
 
-
     if($username == NULL || $email = NULL || $acct_type = NULL)
     {
         $res = [
@@ -20,7 +19,7 @@ if(isset($_POST['update_user']))
         return;
     }
     
-    $upd_user = mysqli_prepare($con, 'UPDATE accounts SET username=?, email=?, acct_type=? WHERE id=?');
+    $upd_user = mysqli_prepare($con, "UPDATE accounts SET username=?, email=?, acct_type=? WHERE id=?");
       mysqli_stmt_bind_param($upd_user, "sssi", $username, $email, $acct_type, $id);
     $upd_user->execute();
 
@@ -45,12 +44,12 @@ if(isset($_POST['update_user']))
 }
 
 
-if(isset($_GET['task_id']))
+if(isset($_GET['id']))
 {
-    $id = $_GET['task_id'];
+    $id = $_GET['id'];
 
 
-    $get_id = mysqli_prepare($con, "SELECT * FROM tasks WHERE task_id=?");
+    $get_id = mysqli_prepare($con, "SELECT * FROM accounts WHERE id=?");
       mysqli_stmt_bind_param($get_id, "i", $id);
     $get_id->execute();
     $result = $get_id->get_result();

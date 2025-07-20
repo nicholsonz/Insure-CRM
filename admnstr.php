@@ -14,8 +14,7 @@ if($rowchk['acct_type'] !== "Admin"){
 	// 						FROM accounts AS a
 	// 						LEFT JOIN clients AS c ON a.id = c.acct_id
 	// 						GROUP BY a.id"); 
-	
-	
+		
 $stmt->execute();
 // Get the results...
 $result = $stmt->get_result();
@@ -29,18 +28,18 @@ $stmt->close();
 <div class="modal fade" id="userEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form id="updateUser">
-            <div class="modal-body">
-                <div id="errorMessageUpdate" class="alert alert-warning d-none">
-                </div>
-                <input type="hidden" name="id" id="id" > 
-                    <div class="col-md6">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username" class="form-control" />						
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form id="updateUser">
+				<div class="modal-body">
+					<div id="errorMessageUpdate" class="alert alert-warning d-none">
+					</div>
+						<input type="hidden" name="id" id="id" > 
+					<div class="col-md6">
+						<label for="username">Username</label>
+						<input type="text" name="username" id="username" class="form-control" />						
 					</div>					
 					<div class="col-md-11">
 						<label for="email">Email</label>
@@ -48,21 +47,26 @@ $stmt->close();
 					</div>        
 					<div class="mb-3">
 						<label for="acct_type">Account Type</label>
-                        <input type="text" name="acct_type" id="acct_type" class="form-control" />                        
+							<select class="form-select" id="acct_type" name="acct_type">
+								<option value="Admin">Admin</option>
+								<option value="Agent">Agent</option>
+								<option value="Support">Support</option>
+								<option value="Other">Other</option>
+							</select>                    
 					</div>                              
-            	</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
-        </form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Update</button>
+				</div>
+			</form>
         </div>
     </div>
 </div>
 <div class="w3-content w3-mobile">
 	<h1>Administrator</h1>
 	<div class="w3-col s12 m10 l6 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
-		<div class="tableFixHead" id="clientTable">
+		<div class="tableFixHead" id="userTable">
 			<h2>User Accounts</h2>
 				<table class="w3-table" id="srtTable">
 					<thead>

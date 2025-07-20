@@ -1,5 +1,6 @@
  $(document).on("click", ".editUserBtn", function() {
     let e = $(this).val();
+        console.log(e); 
     $.ajax({
       type: "GET",
       url: "action/updUser.php?id=" + e,
