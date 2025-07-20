@@ -113,17 +113,6 @@ a {
     height: 600px;
     overflow: scroll;
 }
-
-.today {
-    background-color: rgba(226, 213, 213, 0.733);
-    color: black;
-    border-radius: 5%;
-    font-weight: bold;
-}
-.cal-table {
-    width: 100%;
-    align-content: center;
-}
 .tallbox {
     height: 600px;
 }
@@ -405,7 +394,17 @@ tr {
 .center {
     text-align: center;
 }
-
+/* Table mods ----------------------------------------------*/
+table tbody tr td:nth-child(1).today {
+    background-color: rgba(226, 213, 213, 0.733);
+    color: black;
+    border-radius: 5%;
+    font-weight: bold;
+}
+.cal-table {
+    width: 100%;
+    align-content: center;
+}
 table {
     width: 100%;
     padding-top: 30px;
