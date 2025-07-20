@@ -25,7 +25,7 @@ $stmt->close();
 <?=template_header('Administrator')?>
 
 <!-- Edit User Modal -->
-<div class="modal fade" id="userEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="userEditModal" tabindex="-1" aria-labelledby="User Edit Modal">
     <div class="modal-dialog">
         <div class="modal-content">
 			<div class="modal-header">
