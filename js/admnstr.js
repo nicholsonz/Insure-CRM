@@ -20,7 +20,7 @@
   $(document).on("submit", "#updateUser", function(e) {
     e.preventDefault();
     let a = new FormData(this);
-    // console.log(a);
+    console.log(a);
     a.append("update_user", !0),
       $.ajax({
         type: "POST",

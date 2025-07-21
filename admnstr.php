@@ -6,8 +6,7 @@ if($rowchk['acct_type'] !== "Admin"){
 	header("Location: home.php");
 } else {
 	// Fetch all accounts
-	$stmt = $con->prepare("SELECT id, username, email, acct_type
-							FROM accounts"); 
+	$stmt = $con->prepare("SELECT *	FROM accounts"); 
 	}
 	// Count policies for each user
 	// $stmt = $con->prepare("SELECT a.id, a.username, a.email, a.acct_type, COUNT(c.policy) as policies 

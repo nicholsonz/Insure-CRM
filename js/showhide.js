@@ -1,5 +1,5 @@
 
-// Onclick show/hide tables
+// Onclick show/hide tables /////////////////////////////////////////////////////////////
 let btn = document.getElementById("showhide");
 btn.onclick = function myFunction() {
   let t = document.getElementById("show");
@@ -23,4 +23,3 @@ btn3.onclick = function myFunction() {
     ? (t.className += " w3-show")
     : (t.className = t.className.replace(" w3-show", ""));
 }
-

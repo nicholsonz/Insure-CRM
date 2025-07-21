@@ -6,7 +6,7 @@ if(isset($_GET['id']))
 {
     $id = $_GET['id'];
 
-    $get_id = mysqli_prepare($con, "SELECT * FROM accounts WHERE id=?");
+    $get_id = mysqli_prepare($con, "SELECT id, username, email, acct_type FROM accounts WHERE id=?");
       mysqli_stmt_bind_param($get_id, "i", $id);
     $get_id->execute();
     $result = $get_id->get_result();
@@ -37,10 +37,10 @@ if(isset($_GET['id']))
 
 if(isset($_POST['update_user']))
 {     
-    $id = ($_POST['id']);
-    $username = ($_POST['username']);
-    $email = ($_POST['email']);
-    $acct_type = ($_POST['acct_type']);
+    $id = $_POST['id'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $acct_type = $_POST['acct_type'];
 
     if($username == NULL || $email = NULL || $acct_type = NULL)
     {

@@ -69,13 +69,13 @@ if($rowchk['acct_type'] == "Admin"){
 				<a href="admnstr.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-user-circle w3-margin-right"></i> Admin</a>
 				<a href="./action/logout.php" class="w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-sign-out-alt w3-margin-right"></i> Logout</a>
 				<hr></hr>
-			<div class="w3-dropdown-hover">
-				<a href="" class="task-mngr w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-bell w3-margin-right"></i> Tasks Due
+			<div class="w3-dropdown-hover base">
+				<a href="" class="task-mngr w3-bar-item w3-larger w3-hover-text-blue"><i class="fas fa-bell w3-margin-right"></i>Tasks Due
 				<?php
 
 				if($num_tasks >= 1 && $num_tasks2 >= 1){
-					echo "<span class='badgecur'>". number_format($num_tasks) ."</span>";
-					echo "<span class='badgepas'>". number_format($num_tasks2) ."</span></a>";
+					echo "<span class='badgecur'>". number_format($num_tasks) . "</span>";
+					echo "<span class='badgepas'>". number_format($num_tasks2) . "</span></a>";
 				}elseif($num_tasks >= 1 && $num_tasks2 < 1){
 					echo "<span class='badgecur'>". number_format($num_tasks) ."</span></a>";
 				}elseif($num_tasks2 >= 1 && $num_tasks < 1){
