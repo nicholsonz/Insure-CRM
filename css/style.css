@@ -853,6 +853,9 @@ body.loggedin {
 .pagination .currentpage a:hover {
     background-color: rgb(145, 224, 238);
 }
+.custom-blue {
+    background-color: #202325;
+}
 
 /* CSS pagination styling
 /* .pagination {
