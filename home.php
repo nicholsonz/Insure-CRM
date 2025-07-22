@@ -167,7 +167,7 @@ while($row=mysqli_fetch_assoc($res)){
 		</div>
     <div class="w3-col s12 m5 l5  w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
     <button id="showhide" class="w3-btn w3-border w3-round w3-block custom-blue w3-border-blue-grey w3-margin-bottom w3-padding"><h3>Tasks | &nbsp;Clients <?= number_format($clients);?></h3></button>
-      <div id="show" class="w3-hide">
+      <div id="show" class="w3-hide w3-card-4 w3-border-blue-grey w3-border">
         <div class="tableFixHead">
         <table class="w3-table w3-hoverable">
         <thead>
@@ -257,7 +257,7 @@ while($row=mysqli_fetch_assoc($res)){
         </div>
       </div>
       <button id="showhide2" class="w3-btn w3-border w3-round w3-block custom-blue w3-border-blue-grey w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | &nbsp;Leads <?= number_format($leads);?></h3></button>
-      <div id="show2" class="w3-hide">
+      <div id="show2" class="w3-hide w3-card-4 w3-border-blue-grey w3-border">
       <div class="tableFixHead">
         <table class="w3-table" id="srtTable">
         <thead>
@@ -339,7 +339,7 @@ while($row=mysqli_fetch_assoc($res)){
         </div>
       </div>
       <button id="showhide3" class="w3-btn w3-border w3-round w3-block custom-blue w3-border-blue-grey w3-margin-bottom w3-margin-top w3-padding"><h3>Tasks | &nbsp;Other <?= number_format($other);?></h3></button>
-      <div id="show3" class="w3-hide">
+      <div id="show3" class="w3-hide w3-card-4 w3-border-blue-grey w3-border">
         <div class="tableFixHead">
         <table class="w3-table w3-hoverable">
         <thead>
