@@ -47,7 +47,6 @@ if($rowchk['acct_type'] == "Admin"){
 			<link rel="stylesheet" href="./css/fontawesome/all.min.css">
 			<link rel="stylesheet" href="./css/w3.css">
 			<link rel="stylesheet" href="./css/style.css">
-			<!-- <link rel="stylesheet" href="./css/bootstrap.mod.css"> -->
       		<link rel="icon" href="./favicon.ico">
 			<!-- Load Javascript files -->
 			<script src="./js/chart.min.js"></script>
