@@ -20,7 +20,6 @@
   $(document).on("submit", "#updateUser", function(e) {
     e.preventDefault();
     let a = new FormData(this);
-    console.log(a);
     a.append("update_user", !0),
       $.ajax({
         type: "POST",
@@ -46,7 +45,7 @@
               : 500 == a.status && alertify.error(a.message);
         },
       });
-  })
+  }),
   // Populate modal with correct info
  $(document).on("click", ".editPolBtn", function() {
     let e = $(this).val();
@@ -95,7 +94,7 @@
               : 500 == a.status && alertify.error(a.message);
         },
       });
-  })
+  }),
   // Add new policy from modal
   $(document).on("submit", "#addPol", function(e) {
     e.preventDefault();

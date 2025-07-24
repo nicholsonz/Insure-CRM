@@ -27,9 +27,15 @@ $result = $stmt->get_result();
 	<h1>CLIENTS</h1>
 	<div class="w3-col s12 m12 l12 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
       <a href="./createclient.php" class="create-contact">Create Client</a>
-      <div class="w3-right w3-padding">
-          <input id="tableSrch" type="text" placeholder="Filter..">
-      </div>
+    	<a href="impclients.php" class="create-contact">Import Clients</a>        
+            <div class="w3-row"> 
+                <div class="w3-left">           
+                    <button type="button" value="" id="delete" class="w3-button w3-small w3-round w3-border w3-red w3-text-black"> DELETE</button>
+                </div>
+                <div class="w3-right w3-padding">
+                    <input id="tableSrch" type="text" placeholder="Filter..">
+                </div>
+            </div>
       <div class="table-viewer tableFixHead" id="clientTable">
       <table class="w3-table w3-hoverable" id="srtTable">
           <thead>

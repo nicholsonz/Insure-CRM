@@ -23,6 +23,7 @@ $stmt->close();
 $pol_stmt = $con->prepare("SELECT * FROM policies");
 $pol_stmt->execute();
 $pol_res = $pol_stmt->get_result();
+$pol_stmt->close();
 ?>
 
 <?=template_header('Administrator')?>
@@ -108,7 +109,7 @@ $pol_res = $pol_stmt->get_result();
         <div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<button type="button" class="btn-close"data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<form id="addPol">
 				<div class="modal-body">
@@ -168,6 +169,9 @@ $pol_res = $pol_stmt->get_result();
 	<div class="w3-col s12 m10 l5 w3-camo-fade w3-margin w3-border w3-round w3-border-blue-grey w3-pannel w3-card-4">
 		<div class="tableFixHead" id="polTable">
 			<h2>Policies</h2>
+			<div class="w3-right-align">
+			 <button type="button" value="" class="addPol w3-btn add"  data-bs-toggal="modal" data-bs-target="#polAddModal"><i class="fas fa-add fa-xs"></i> Policy</button>
+			</div>
 				<table class="w3-table" id="srtTable">
 					<thead>
 					<tr>						
@@ -185,7 +189,6 @@ $pol_res = $pol_stmt->get_result();
 						<td><?=htmlspecialchars($row['other'])?></td>
 						<td class="w3-center">
 							<button type="button" value="<?=$row['id'];?>" class="editPolBtn w3-btn edit"><i class="fas fa-edit fa-xs"></i></button>
-							<button type="button" value="<?=$row['id'];?>" class="addPolBtn w3-btn add"><i class="fas fa-add fa-xs"></i></button>
 						</td>
 					</tr>
 				<?php endwhile; ?>
