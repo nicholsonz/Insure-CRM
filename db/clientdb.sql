@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 19, 2025 at 07:06 PM
+-- Generation Time: Jul 24, 2025 at 05:47 PM
 -- Server version: 10.11.11-MariaDB-0+deb12u1-log
 -- PHP Version: 8.2.28
 
@@ -32,8 +32,8 @@ CREATE TABLE `accounts` (
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `activation_code` varchar(50) DEFAULT '',
-  `acct_type` varchar(75) NOT NULL
+  `acct_type` varchar(75) NOT NULL,
+  `activation_code` varchar(50) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -92,6 +92,19 @@ CREATE TABLE `leads` (
   `appstatus` varchar(20) DEFAULT NULL,
   `notes` text DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `policies`
+--
+
+CREATE TABLE `policies` (
+  `id` int(11) NOT NULL,
+  `policy` varchar(55) NOT NULL,
+  `descr` varchar(250) NOT NULL,
+  `other` varchar(55) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -165,6 +178,12 @@ ALTER TABLE `leads`
   ADD KEY `acct_id` (`acct_id`);
 
 --
+-- Indexes for table `policies`
+--
+ALTER TABLE `policies`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tally`
 --
 ALTER TABLE `tally`
@@ -208,6 +227,12 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `policies`
+--
+ALTER TABLE `policies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
